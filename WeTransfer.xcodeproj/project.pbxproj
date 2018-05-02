@@ -7,10 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E579B212092194F008DFFD2 /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3E579B202092194F008DFFD2 /* image.jpg */; };
 		3E80E0A72091D0E700114711 /* WeTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E80E0A62091D0E700114711 /* WeTransfer.swift */; };
 		3E80E0AA2091D12B00114711 /* Transfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E80E0A92091D12B00114711 /* Transfer.swift */; };
 		3E80E0AC2091D14E00114711 /* Indentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E80E0AB2091D14E00114711 /* Indentifiable.swift */; };
 		3E80E0AE2091D16E00114711 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E80E0AD2091D16E00114711 /* Result.swift */; };
+		3E9413BD2098BC25003A42D1 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413BC2098BC25003A42D1 /* APIClient.swift */; };
+		3E9413BF2098BF5A003A42D1 /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413BE2098BF5A003A42D1 /* APIEndpoints.swift */; };
+		3E9413C22098C132003A42D1 /* Authorize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413C12098C132003A42D1 /* Authorize.swift */; };
+		3E9413C42099D78A003A42D1 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413C32099D78A003A42D1 /* Request.swift */; };
+		3E9413C62099D823003A42D1 /* CreateTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413C52099D823003A42D1 /* CreateTransfer.swift */; };
+		3E9413C82099D89E003A42D1 /* AddFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413C72099D89E003A42D1 /* AddFiles.swift */; };
+		3E9413CA2099DB05003A42D1 /* Send.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413C92099DB05003A42D1 /* Send.swift */; };
+		3E9413CC2099E390003A42D1 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413CB2099E390003A42D1 /* File.swift */; };
+		3E9413CE2099E3F5003A42D1 /* Chunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413CD2099E3F5003A42D1 /* Chunk.swift */; };
 		3EE2596D2091CF8800DC5A97 /* WeTransfer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE259632091CF8800DC5A97 /* WeTransfer.framework */; };
 		3EE259722091CF8800DC5A97 /* WeTransferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE259712091CF8800DC5A97 /* WeTransferTests.swift */; };
 		3EE259742091CF8800DC5A97 /* WeTransfer_Swift.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE259662091CF8800DC5A97 /* WeTransfer_Swift.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -27,10 +37,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3E579B202092194F008DFFD2 /* image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image.jpg; sourceTree = "<group>"; };
 		3E80E0A62091D0E700114711 /* WeTransfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeTransfer.swift; sourceTree = "<group>"; };
 		3E80E0A92091D12B00114711 /* Transfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transfer.swift; sourceTree = "<group>"; };
 		3E80E0AB2091D14E00114711 /* Indentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Indentifiable.swift; sourceTree = "<group>"; };
 		3E80E0AD2091D16E00114711 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		3E9413BC2098BC25003A42D1 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		3E9413BE2098BF5A003A42D1 /* APIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
+		3E9413C12098C132003A42D1 /* Authorize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authorize.swift; sourceTree = "<group>"; };
+		3E9413C32099D78A003A42D1 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		3E9413C52099D823003A42D1 /* CreateTransfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTransfer.swift; sourceTree = "<group>"; };
+		3E9413C72099D89E003A42D1 /* AddFiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFiles.swift; sourceTree = "<group>"; };
+		3E9413C92099DB05003A42D1 /* Send.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Send.swift; sourceTree = "<group>"; };
+		3E9413CB2099E390003A42D1 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		3E9413CD2099E3F5003A42D1 /* Chunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chunk.swift; sourceTree = "<group>"; };
 		3EE259632091CF8800DC5A97 /* WeTransfer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WeTransfer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EE259662091CF8800DC5A97 /* WeTransfer_Swift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeTransfer_Swift.h; sourceTree = "<group>"; };
 		3EE259672091CF8800DC5A97 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -61,8 +81,10 @@
 		3E80E0A82091D11300114711 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				3E80E0A92091D12B00114711 /* Transfer.swift */,
 				3E80E0AB2091D14E00114711 /* Indentifiable.swift */,
+				3E80E0A92091D12B00114711 /* Transfer.swift */,
+				3E9413CB2099E390003A42D1 /* File.swift */,
+				3E9413CD2099E3F5003A42D1 /* Chunk.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -70,9 +92,24 @@
 		3E80E0AF2091D17E00114711 /* Server */ = {
 			isa = PBXGroup;
 			children = (
+				3E9413C02098C121003A42D1 /* Methods */,
 				3E80E0AD2091D16E00114711 /* Result.swift */,
+				3E9413BC2098BC25003A42D1 /* APIClient.swift */,
+				3E9413BE2098BF5A003A42D1 /* APIEndpoints.swift */,
 			);
 			path = Server;
+			sourceTree = "<group>";
+		};
+		3E9413C02098C121003A42D1 /* Methods */ = {
+			isa = PBXGroup;
+			children = (
+				3E9413C32099D78A003A42D1 /* Request.swift */,
+				3E9413C12098C132003A42D1 /* Authorize.swift */,
+				3E9413C52099D823003A42D1 /* CreateTransfer.swift */,
+				3E9413C72099D89E003A42D1 /* AddFiles.swift */,
+				3E9413C92099DB05003A42D1 /* Send.swift */,
+			);
+			path = Methods;
 			sourceTree = "<group>";
 		};
 		3EE259592091CF8800DC5A97 = {
@@ -96,10 +133,10 @@
 		3EE259652091CF8800DC5A97 /* WeTransfer */ = {
 			isa = PBXGroup;
 			children = (
-				3EE259662091CF8800DC5A97 /* WeTransfer_Swift.h */,
 				3E80E0A62091D0E700114711 /* WeTransfer.swift */,
 				3E80E0A82091D11300114711 /* Models */,
 				3E80E0AF2091D17E00114711 /* Server */,
+				3EE259662091CF8800DC5A97 /* WeTransfer_Swift.h */,
 				3EE259672091CF8800DC5A97 /* Info.plist */,
 			);
 			path = WeTransfer;
@@ -108,6 +145,7 @@
 		3EE259702091CF8800DC5A97 /* WeTransferTests */ = {
 			isa = PBXGroup;
 			children = (
+				3E579B202092194F008DFFD2 /* image.jpg */,
 				3EE259712091CF8800DC5A97 /* WeTransferTests.swift */,
 				3EE259732091CF8800DC5A97 /* Info.plist */,
 			);
@@ -213,6 +251,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E579B212092194F008DFFD2 /* image.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,9 +263,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E80E0AA2091D12B00114711 /* Transfer.swift in Sources */,
+				3E9413BF2098BF5A003A42D1 /* APIEndpoints.swift in Sources */,
 				3E80E0A72091D0E700114711 /* WeTransfer.swift in Sources */,
 				3E80E0AE2091D16E00114711 /* Result.swift in Sources */,
+				3E9413CA2099DB05003A42D1 /* Send.swift in Sources */,
+				3E9413C82099D89E003A42D1 /* AddFiles.swift in Sources */,
+				3E9413C62099D823003A42D1 /* CreateTransfer.swift in Sources */,
+				3E9413CE2099E3F5003A42D1 /* Chunk.swift in Sources */,
 				3E80E0AC2091D14E00114711 /* Indentifiable.swift in Sources */,
+				3E9413C22098C132003A42D1 /* Authorize.swift in Sources */,
+				3E9413C42099D78A003A42D1 /* Request.swift in Sources */,
+				3E9413BD2098BC25003A42D1 /* APIClient.swift in Sources */,
+				3E9413CC2099E390003A42D1 /* File.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
