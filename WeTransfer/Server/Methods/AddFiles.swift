@@ -94,7 +94,7 @@ extension WeTransfer {
 			throw Error.transferNotYetCreated
 		}
 		
-		for file in transfer.files {
+		for (fileIndex, file) in transfer.files.enumerated() {
 			guard let numberOfChunks = file.numberOfChunks,
 				let fileIdenifier = file.identifier,
 				let multipartUploadIdentifier = file.multipartUploadIdentifier else {
@@ -114,6 +114,7 @@ extension WeTransfer {
 					switch result {
 					case .success(let uploadUrlResponse):
 						succeededTasks.append(endpoint.url.path)
+						let file = transfer.files[fileIndex]
 						transfer.updateFile(file, with: uploadUrlResponse)
 						if tasksInProgress.isEmpty {
 							completion(.success(transfer))
