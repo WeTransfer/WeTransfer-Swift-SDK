@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct WeTransfer {
+public class WeTransfer {
 	
 	static var client: APIClient = APIClient(baseURL: URL(string: "https://dev.wetransfer.com/v1/")!)
 }
@@ -36,17 +36,27 @@ extension WeTransfer {
 
 extension WeTransfer {
 	
-	public static func sendTransfer(named name: String, files urls: [URL], stateChanged: @escaping (State) -> Void) throws {
+	@discardableResult
+	public static func sendTransfer(named name: String, files urls: [URL], stateChanged: @escaping (State) -> Void) -> Transfer? {
 	
 		// Create transfer
 		let files = urls.compactMap { url in
 			return File(url: url)
 		}
 		let transfer = Transfer(name: name, description: nil, files: files)
-		try createTransfer(with: transfer) { result in
-			
+		do {
+			try createTransfer(with: transfer) { result in
+				switch result {
+				case .failure(let error):
+					stateChanged(.failed(error))
+				case .success(let transfer):
+					send(transfer, stateChanged: stateChanged)
+				}
+			}
+		} catch {
+			stateChanged(.failed(error))
+			return nil
 		}
-		
-		try send(transfer, stateChanged: stateChanged)
+		return transfer
 	}
 }
