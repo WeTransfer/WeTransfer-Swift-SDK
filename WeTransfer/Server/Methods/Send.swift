@@ -8,8 +8,6 @@
 
 import Foundation
 
-
-
 extension WeTransfer {
 	
 	public enum State {
@@ -23,13 +21,15 @@ extension WeTransfer {
 		case failed(Swift.Error)
 	}
 	
-	public static func send(_ transfer: Transfer, stateChanged: @escaping (State) -> Void) throws {
+	public static func send(_ transfer: Transfer, stateChanged: @escaping (State) -> Void) {
 		
 		guard let _ = transfer.identifier else {
-			throw Error.transferNotYetCreated
+			stateChanged(.failed(Error.transferNotYetCreated))
+			return
 		}
 		
 		let progress = Progress(totalUnitCount: Int64(transfer.files.reduce(0, { $0 + $1.filesize })))
+		
 		stateChanged(.started(progress))
 		
 		stateChanged(.created(transfer))
@@ -39,71 +39,79 @@ extension WeTransfer {
 		
 		for file in transfer.files {
 			
-			guard let fileIdentifier = file.identifier else {
+			guard let fileIdentifier = file.identifier, !file.chunks.isEmpty else {
+				if file.identifier == nil {
+					print("file has no identifier")
+				}
+				if file.chunks.isEmpty {
+					print("file has no chunks")
+				}
 				continue
 			}
+			
 			runningFileUploadIdentifiers.append(fileIdentifier)
 			
-			var runningChunkUploadIdentifiers = [String]()
-			
-			for chunk in file.chunks {
-				guard let data = try? chunk.data() else {
-					return
-				}
-				runningChunkUploadIdentifiers.append(chunk.uploadIdentifier)
-				let endpoint: APIEndpoint = .upload(url: chunk.uploadURL)
-				var urlRequest = URLRequest(url: endpoint.url)
-				urlRequest.httpMethod = endpoint.method.rawValue
-				let uploadTask = client.urlSession.uploadTask(with: urlRequest, from: data) { (data, urlResponse, error) in
-					if let chunkIndex = runningChunkUploadIdentifiers.index(of: chunk.uploadIdentifier) {
-						runningChunkUploadIdentifiers.remove(at: chunkIndex)
-					}
-					if runningChunkUploadIdentifiers.isEmpty {
-						do {
-							try complete(file, completion: { (result) in
-								if let fileIndex = runningFileUploadIdentifiers.index(of: fileIdentifier) {
-									runningFileUploadIdentifiers.remove(at: fileIndex)
-								}
-								switch result {
-								case .success: //.success(let file)
-									if runningFileUploadIdentifiers.isEmpty {
-										if let error = failedUploadErrors.last {
-											stateChanged(.failed(error))
-										} else {
-											stateChanged(.completed(transfer))
-										}
-									}
-								case .failure(let error):
-									failedUploadErrors.append(error)
-									if runningFileUploadIdentifiers.isEmpty {
+			let fileUploader = FileUploader(with: file)
+			fileUploader.upload(with: { (_, totalBytesSent, _) in
+				progress.completedUnitCount = totalBytesSent
+			}) { (result) in
+				switch result {
+				case .success(let file):
+					// THIS IS HORRIBLE AND SHOULD NEVER BE COMMITTED
+					do {
+						try complete(file, completion: { (result) in
+							if let fileIndex = runningFileUploadIdentifiers.index(of: fileIdentifier) {
+								runningFileUploadIdentifiers.remove(at: fileIndex)
+							}
+							switch result {
+							case .success:
+								if runningFileUploadIdentifiers.isEmpty {
+									if let error = failedUploadErrors.first {
 										stateChanged(.failed(error))
+									} else {
+										stateChanged(.completed(transfer))
 									}
 								}
-							})
-						} catch {
+							case .failure(let error):
+								if runningFileUploadIdentifiers.isEmpty {
+									stateChanged(.failed(error))
+								}
+							}
+						})
+					} catch {
+						if let fileIndex = runningFileUploadIdentifiers.index(of: fileIdentifier) {
+							runningFileUploadIdentifiers.remove(at: fileIndex)
+						}
+						failedUploadErrors.append(error)
+						if runningFileUploadIdentifiers.isEmpty {
 							stateChanged(.failed(error))
 						}
 					}
+				case .failure(let error):
+					if let fileIndex = runningFileUploadIdentifiers.index(of: fileIdentifier) {
+						runningFileUploadIdentifiers.remove(at: fileIndex)
+					}
+					failedUploadErrors.append(error)
+					if runningFileUploadIdentifiers.isEmpty {
+						stateChanged(.failed(error))
+					}
 				}
-				progress.addChild(uploadTask.progress, withPendingUnitCount: Int64(chunk.chunkSize))
-				uploadTask.resume()
 			}
 		}
 	}
 	
-	internal struct CompleteTransferResponse: Decodable {
+	struct CompleteTransferResponse: Decodable {
 		let ok: Bool
 		let message: String
 	}
 	
-	public static func complete(_ file: File, completion: @escaping (Result<File>) -> Void) throws {
+	static func complete(_ file: File, completion: @escaping (Result<File>) -> Void) throws {
 		guard let identifier = file.identifier else {
 			throw Error.transferNotYetCreated
 		}
 		try request(.completeUpload(fileIdentifier: identifier), completion: { (result: Result<CompleteTransferResponse>) in
 			switch result {
 			case .success(let completeResponse):
-				print("HUZZAH: \(completeResponse)")
 				completion(.success(file))
 			case .failure(let error):
 				completion(.failure(error))
