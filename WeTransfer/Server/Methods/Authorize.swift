@@ -38,7 +38,8 @@ extension WeTransfer {
 				}
 				
 			} catch {
-				completion(.failure(error))
+				let serverError = parseErrorResponse(data) ?? error
+				completion(.failure(serverError))
 			}
 		}
 		task.resume()

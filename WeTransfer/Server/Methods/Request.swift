@@ -17,9 +17,15 @@ extension WeTransfer {
 	}
 	
 	struct ErrorResponse: Decodable {
-		let success: Bool
+		let success: Bool?
 		let message: String
-		let payload: String?
+	}
+	
+	static func parseErrorResponse(_ data: Data?) -> Swift.Error? {
+		guard let data = data, let errorResponse = try? client.decoder.decode(ErrorResponse.self, from: data), errorResponse.success != true else {
+			return nil
+		}
+		return RequestError.serverError(errorMessage: errorResponse.message)
 	}
 	
 	static func request<T: Decodable>(_ endpoint: APIEndpoint, data: Data? = nil, needsToken: Bool = true, completion: @escaping (Result<T>) -> Void) throws {
@@ -48,11 +54,11 @@ extension WeTransfer {
 					let response = try client.decoder.decode(T.self, from: data)
 					completion(.success(response))
 				} catch {
-					if let data = data, let errorResponse = try? client.decoder.decode(ErrorResponse.self, from: data), !errorResponse.success {
-						completion(.failure(RequestError.serverError(errorMessage: errorResponse.message)))
-					} else {
-						completion(.failure(error))
+					if let data = data, let string = String(data: data, encoding: .utf8) {
+						print("Error body: \(string)")
 					}
+					let serverError = parseErrorResponse(data) ?? error
+					completion(.failure(serverError))
 				}
 			})
 			task.resume()
