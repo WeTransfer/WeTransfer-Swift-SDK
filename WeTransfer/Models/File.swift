@@ -62,7 +62,7 @@ extension File {
 		let chunkOffset = Bytes(chunkIndex) * Chunk.defaultChunkSize
 		let chunk = Chunk(chunkNumber: chunkResponse.partNumber, fileURL: url, uploadURL: chunkResponse.uploadUrl, uploadIdentifier: chunkResponse.uploadId, chunkSize: chunkSize, byteOffset: chunkOffset)
 		file.chunks.append(chunk)
-		file.chunks.sort(by: { $0.chunkNumber > $1.chunkNumber })
+		file.chunks.sort(by: { $0.chunkNumber < $1.chunkNumber })
 		return file
 	}
 }
