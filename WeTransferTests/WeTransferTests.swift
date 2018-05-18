@@ -22,6 +22,46 @@ class WeTransferTests: XCTestCase {
         super.tearDown()
     }
 	
+	func testSimpleTransfer() {
+		
+		guard let fileURL = Bundle(for: self.classForCoder).url(forResource: "image", withExtension: "jpg") else {
+			XCTFail("Test image not found")
+			return
+		}
+		
+		let expectation = self.expectation(description: "Transfer has been sent")
+		var updatedTransfer: Transfer?
+		var timer: Timer?
+		
+		WeTransfer.sendTransfer(named: "Test Transfer", files: [fileURL]) { state in
+			switch state {
+			case .created(let transfer):
+				print("Transfer created: \(transfer)")
+			case .started(let progress):
+				print("Transfer started...")
+				timer = Timer(timeInterval: 1/30, repeats: true, block: { timer in
+					print("Progress: \(progress.fractionCompleted)")
+				})
+				RunLoop.main.add(timer!, forMode: .commonModes)
+			case .completed(let transfer):
+				timer?.invalidate()
+				timer = nil
+				print("Transfer sent: \(String(describing: transfer.shortURL))")
+				updatedTransfer = transfer
+				expectation.fulfill()
+			case .failed(let error):
+				timer?.invalidate()
+				timer = nil
+				XCTFail("Transfer failed: \(error)")
+				expectation.fulfill()
+			}
+		}
+		
+		waitForExpectations(timeout: 60) { (error) in
+			XCTAssertNotNil(updatedTransfer, "Transfer was not completed")
+		}
+	}
+	
 	func testAuthorization() {
 		let expectation = self.expectation(description: "Authorization should succeed")
 		var receivedToken: String?
