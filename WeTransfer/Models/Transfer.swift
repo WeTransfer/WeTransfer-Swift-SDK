@@ -37,7 +37,11 @@ extension Transfer {
 	}
 	
 	internal func addFiles(_ files: [File]) {
-		self.files.append(contentsOf: files)
+		for file in files {
+			if !self.files.contains(where: {$0.localIdentifier == file.localIdentifier }) {
+				self.files.append(file)
+			}
+		}
 	}
 	
 	internal func updateFiles(with responseFiles: [WeTransfer.AddFilesResponse]) {
