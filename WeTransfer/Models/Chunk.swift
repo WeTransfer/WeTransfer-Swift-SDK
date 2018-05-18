@@ -11,7 +11,7 @@ import Foundation
 public struct Chunk: Encodable {
 	
 	public let chunkNumber: Int
-	static let defaultChunkSize: Bytes = (5 * 1024 * 1024)
+	static let defaultChunkSize: Bytes = (6 * 1024 * 1024)
 	
 	let fileURL: URL
 	let uploadURL: URL
