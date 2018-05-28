@@ -65,6 +65,7 @@ extension WeTransfer {
 							}
 							switch result {
 							case .success:
+								transfer.setFileUploaded(file, uploaded: true)
 								if runningFileUploadIdentifiers.isEmpty {
 									if let error = failedUploadErrors.first {
 										stateChanged(.failed(error))
@@ -112,6 +113,10 @@ extension WeTransfer {
 		try request(.completeUpload(fileIdentifier: identifier), completion: { (result: Result<CompleteTransferResponse>) in
 			switch result {
 			case .success(let completeResponse):
+                guard completeResponse.ok else {
+                    completion(.failure(RequestError.serverError(errorMessage: completeResponse.message)))
+                    return
+                }
 				completion(.success(file))
 			case .failure(let error):
 				completion(.failure(error))

@@ -11,7 +11,7 @@ import Foundation
 extension WeTransfer {
 	
 	struct AddFilesRequestParameters: Encodable {
-		internal struct Item: Encodable {
+		struct Item: Encodable {
 			let filename: String
 			let filesize: UInt64
 			let contentIdentifier: String
@@ -35,7 +35,7 @@ extension WeTransfer {
 	
 	struct AddFilesResponse: Decodable {
 		
-		internal struct Meta: Decodable {
+		struct Meta: Decodable {
 			let multipartParts: Int
 			let multipartUploadId: String
 		}
@@ -50,7 +50,7 @@ extension WeTransfer {
 		let uploadExpiresAt: TimeInterval
 	}
 	
-	public static func addFiles(_ files: [File], to transfer: Transfer, completion: @escaping (Result<Transfer>) -> Void) throws {
+	static func onlyAddFiles(_ files: [File], to transfer: Transfer, completion: @escaping (Result<Transfer>) -> Void) throws {
 		guard let identifier = transfer.identifier else {
 			throw Error.transferNotYetCreated
 		}
@@ -64,22 +64,31 @@ extension WeTransfer {
 			switch result {
 			case .success(let addedItemResponse):
 				transfer.updateFiles(with: addedItemResponse)
-				do {
-					try addUploadUrls(to: transfer, completion: { (result) in
-						switch result {
-						case .success(let transfer):
-							completion(.success(transfer))
-						case .failure(let error):
-							completion(.failure(error))
-						}
-					})
-				} catch {
-					completion(.failure(error))
-				}
+				completion(.success(transfer))
 			case .failure(let error):
 				completion(.failure(error))
 			}
 		}
+		
+	}
+	
+	public static func addFiles(_ files: [File], to transfer: Transfer, completion: @escaping (Result<Transfer>) -> Void) throws {
+		
+		try onlyAddFiles(files, to: transfer, completion: { (result) in
+			do {
+				try addUploadUrls(to: transfer, completion: { (result) in
+					switch result {
+					case .success(let transfer):
+						completion(.success(transfer))
+					case .failure(let error):
+						completion(.failure(error))
+					}
+				})
+			} catch {
+				completion(.failure(error))
+			}
+		})
+		
 	}
 	
 	struct AddUploadURLResponse: Decodable {
@@ -89,7 +98,7 @@ extension WeTransfer {
 		let uploadExpiresAt: TimeInterval
 	}
 	
-	internal static func addUploadUrls(to transfer: Transfer, completion: @escaping (Result<Transfer>) -> Void) throws {
+	static func addUploadUrls(to transfer: Transfer, completion: @escaping (Result<Transfer>) -> Void) throws {
 		guard let _ = transfer.identifier else {
 			throw Error.transferNotYetCreated
 		}

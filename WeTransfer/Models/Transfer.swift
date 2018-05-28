@@ -38,7 +38,7 @@ extension Transfer {
 	
 	internal func addFiles(_ files: [File]) {
 		for file in files {
-			if !self.files.contains(where: {$0.localIdentifier == file.localIdentifier }) {
+			if !self.files.contains(file) {
 				self.files.append(file)
 			}
 		}
@@ -58,5 +58,12 @@ extension Transfer {
 			return
 		}
 		files[fileIndex] = file.updated(with: chunkResponse)
+	}
+	
+	func setFileUploaded(_ file: File, uploaded: Bool) {
+		guard let index = files.index(of: file) else {
+			return
+		}
+		files[index].uploaded = uploaded
 	}
 }

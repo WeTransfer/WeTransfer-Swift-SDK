@@ -16,7 +16,6 @@ public struct Chunk: Encodable {
 	let fileURL: URL
 	let uploadURL: URL
 	let uploadIdentifier: String
-	let uploaded: Bool = false
 	
 	public let chunkSize: Bytes
 	public let byteOffset: Bytes

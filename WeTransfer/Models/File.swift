@@ -13,7 +13,7 @@ public typealias Bytes = UInt64
 public struct File: Identifiable, Encodable {
 	public let url: URL
 	public private(set) var identifier: String?
-	public private(set) var uploaded: Bool = false
+	public internal(set) var uploaded: Bool = false
 	
 	public let filename: String
 	public let filesize: Bytes
@@ -33,6 +33,12 @@ public struct File: Identifiable, Encodable {
 		} else {
 			return nil
 		}
+	}
+}
+
+extension File: Equatable {
+	public static func == (lhs: File, rhs: File) -> Bool {
+		return lhs.url == rhs.url && lhs.localIdentifier == rhs.localIdentifier
 	}
 }
 
