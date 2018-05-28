@@ -9,25 +9,27 @@
 import Foundation
 
 extension WeTransfer {
-	
+
 	public enum RequestError: Swift.Error {
 		case invalidResponseData
 		case authorizationFailed
 		case serverError(errorMessage: String)
 	}
-	
+
 	struct ErrorResponse: Decodable {
 		let success: Bool?
 		let message: String
 	}
-	
+
 	static func parseErrorResponse(_ data: Data?) -> Swift.Error? {
-		guard let data = data, let errorResponse = try? client.decoder.decode(ErrorResponse.self, from: data), errorResponse.success != true else {
-			return nil
+		guard let data = data,
+			let errorResponse = try? client.decoder.decode(ErrorResponse.self, from: data),
+			errorResponse.success != true else {
+				return nil
 		}
 		return RequestError.serverError(errorMessage: errorResponse.message)
 	}
-	
+
 	static func request<T: Decodable>(_ endpoint: APIEndpoint, data: Data? = nil, needsToken: Bool = true, completion: @escaping (Result<T>) -> Void) throws {
 		try authorize { (result) in
 			if let error = result.error {
@@ -41,7 +43,7 @@ extension WeTransfer {
 				completion(.failure(error))
 				return
 			}
-			
+
 			let task = client.urlSession.dataTask(with: request, completionHandler: { (data, _, error) in
 				do {
 					if let error = error {

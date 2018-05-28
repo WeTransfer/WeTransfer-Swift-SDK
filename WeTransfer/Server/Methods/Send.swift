@@ -9,7 +9,7 @@
 import Foundation
 
 extension WeTransfer {
-	
+
 	public enum State {
 		// Upload has started, track progress with progress object
 		case started(Progress)
@@ -20,31 +20,31 @@ extension WeTransfer {
 		// Transfer failed due to provided error
 		case failed(Swift.Error)
 	}
-	
+
 	public static func send(_ transfer: Transfer, stateChanged: @escaping (State) -> Void) {
-		
+
 		guard transfer.identifier != nil else {
 			stateChanged(.failed(Error.transferNotYetCreated))
 			return
 		}
-		
+
 		let progress = Progress(totalUnitCount: Int64(transfer.files.reduce(0, { $0 + $1.filesize })))
-		
+
 		stateChanged(.started(progress))
-		
+
 		stateChanged(.created(transfer))
-		
+
 		var runningFileUploadIdentifiers = [String]()
 		var failedUploadErrors = [Swift.Error]()
-		
+
 		for file in transfer.files {
-			
+
 			guard let fileIdentifier = file.identifier, !file.chunks.isEmpty else {
 				continue
 			}
-			
+
 			runningFileUploadIdentifiers.append(fileIdentifier)
-			
+
 			let fileUploader = FileUploader(with: file)
 			fileUploader.upload(with: { (_, totalBytesSent, _) in
 				progress.completedUnitCount = totalBytesSent
@@ -94,12 +94,12 @@ extension WeTransfer {
 			}
 		}
 	}
-	
+
 	struct CompleteTransferResponse: Decodable {
-		let ok: Bool
+		let ok: Bool // swiftlint:disable:this identifier_name
 		let message: String
 	}
-	
+
 	static func complete(_ file: File, completion: @escaping (Result<File>) -> Void) throws {
 		guard let identifier = file.identifier else {
 			throw Error.transferNotYetCreated

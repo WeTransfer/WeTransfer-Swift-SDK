@@ -10,28 +10,28 @@ import XCTest
 @testable import WeTransfer
 
 class SimpleTransferTests: XCTestCase {
-	
+
 	override func setUp() {
 		super.setUp()
 		TestConfiguration.configure(environment: .live)
 	}
-	
+
 	override func tearDown() {
 		super.tearDown()
 		TestConfiguration.resetConfiguration()
 	}
-	
+
 	func testSimpleTransfer() {
-		
+
 		guard let fileURL = Bundle(for: classForCoder).url(forResource: "image", withExtension: "jpg") else {
 			XCTFail("Test image not found")
 			return
 		}
-		
+
 		let simpleTransferExpectation = expectation(description: "Transfer has been sent")
 		var updatedTransfer: Transfer?
 		var timer: Timer?
-		
+
 		WeTransfer.sendTransfer(named: "Test Transfer", files: [fileURL]) { state in
 			switch state {
 			case .created(let transfer):
@@ -55,10 +55,10 @@ class SimpleTransferTests: XCTestCase {
 				simpleTransferExpectation.fulfill()
 			}
 		}
-		
+
 		waitForExpectations(timeout: 60) { _ in
 			XCTAssertNotNil(updatedTransfer, "Transfer was not completed")
 		}
 	}
-	
+
 }

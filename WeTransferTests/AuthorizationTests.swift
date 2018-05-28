@@ -10,17 +10,17 @@ import XCTest
 @testable import WeTransfer
 
 class AuthorizationTests: XCTestCase {
-	
+
 	override func setUp() {
 		super.setUp()
 		TestConfiguration.configure(environment: .live)
 	}
-	
+
 	override func tearDown() {
 		super.tearDown()
 		TestConfiguration.resetConfiguration()
 	}
-	
+
 	func testUnauthorized() {
 		do {
 			_ = try WeTransfer.client.createRequest(.createTransfer())
@@ -28,7 +28,7 @@ class AuthorizationTests: XCTestCase {
 			XCTAssertEqual(error.localizedDescription, APIClient.Error.notAuthorized.localizedDescription)
 		}
 	}
-	
+
 	func testAuthorization() {
 		let authorizedExpectation = expectation(description: "Authorization should succeed")
 		var receivedToken: String?
@@ -46,10 +46,10 @@ class AuthorizationTests: XCTestCase {
 			XCTFail("Authorization failed: \(error)")
 			authorizedExpectation.fulfill()
 		}
-		
+
 		waitForExpectations(timeout: 10) { error in
 			XCTAssert(receivedToken != nil, "No token received from authorization call \(String(describing: error))")
 		}
 	}
-	
+
 }

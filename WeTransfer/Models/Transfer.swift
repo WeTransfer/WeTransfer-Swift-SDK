@@ -15,14 +15,14 @@ import Cocoa
 
 public class Transfer: Identifiable, Encodable {
 	public private(set) var identifier: String?
-	
+
 	public let name: String
 	public let description: String?
-	
+
 	public private(set) var files: [File] = []
-	
+
 	public private(set) var shortURL: URL?
-	
+
 	public init(name: String, description: String?, files: [File] = []) {
 		self.name = name
 		self.description = description
@@ -35,7 +35,7 @@ extension Transfer {
 		identifier = "\(response.id)"
 		shortURL = response.shortenedUrl
 	}
-	
+
 	internal func addFiles(_ files: [File]) {
 		for file in files {
 			if !self.files.contains(file) {
@@ -43,7 +43,7 @@ extension Transfer {
 			}
 		}
 	}
-	
+
 	internal func updateFiles(with responseFiles: [WeTransfer.AddFilesResponse]) {
 		files = files.map { file in
 			guard let responseFile = responseFiles.first(where: { $0.localIdentifier == file.localIdentifier }) else {
@@ -52,14 +52,14 @@ extension Transfer {
 			return file.updated(with: responseFile)
 		}
 	}
-	
+
 	internal func updateFile(_ file: File, with chunkResponse: WeTransfer.AddUploadURLResponse) {
 		guard let fileIndex = files.index(where: { $0.localIdentifier == file.localIdentifier }) else {
 			return
 		}
 		files[fileIndex] = file.updated(with: chunkResponse)
 	}
-	
+
 	func setFileUploaded(_ file: File, uploaded: Bool) {
 		guard let index = files.index(of: file) else {
 			return

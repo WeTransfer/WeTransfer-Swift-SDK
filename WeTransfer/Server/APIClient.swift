@@ -12,18 +12,18 @@ public class APIClient {
 	internal(set) var apiKey: String?
 	internal(set) var baseURL: URL?
 	var authenticationBearer: String?
-	
+
 	let urlSession: URLSession = {
 		let session = URLSession(configuration: .default, delegate: nil, delegateQueue: nil)
 		return session
 	}()
-	
+
 	let decoder: JSONDecoder = {
 		let decoder = JSONDecoder()
 		decoder.keyDecodingStrategy = .convertFromSnakeCase
 		return decoder
 	}()
-	
+
 	let encoder: JSONEncoder = {
 		let encoder = JSONEncoder()
 		encoder.keyEncodingStrategy = .convertToSnakeCase
@@ -32,14 +32,14 @@ public class APIClient {
 }
 
 extension APIClient {
-	
+
 	public enum Error: Swift.Error {
 		case notConfigured
 		case notAuthorized
 		case transferAlreadyCreated
 		case transferNotYetCreated
 	}
-	
+
 	func createRequest(_ endpoint: APIEndpoint, data: Data? = nil, needsToken: Bool = true) throws -> URLRequest {
 		// Check auth
 		guard let apiKey = apiKey else {
@@ -62,5 +62,5 @@ extension APIClient {
 		}
 		return request
 	}
-	
+
 }

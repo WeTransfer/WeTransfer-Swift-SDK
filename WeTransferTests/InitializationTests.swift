@@ -10,12 +10,12 @@ import XCTest
 @testable import WeTransfer
 
 class InitializationTests: XCTestCase {
-	
+
 	override func tearDown() {
 		super.tearDown()
 		TestConfiguration.resetConfiguration()
 	}
-	
+
 	func testNotConfigured() {
 		do {
 			_ = try WeTransfer.client.createRequest(.createTransfer())
@@ -24,7 +24,7 @@ class InitializationTests: XCTestCase {
 			XCTAssertEqual(error.localizedDescription, APIClient.Error.notConfigured.localizedDescription)
 		}
 	}
-	
+
 	func testConfigure() {
 		TestConfiguration.configure(environment: .live)
 		XCTAssertNotNil(WeTransfer.client.apiKey, "APIKey needs to be set")

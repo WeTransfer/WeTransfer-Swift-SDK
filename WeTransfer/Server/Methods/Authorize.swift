@@ -9,12 +9,12 @@
 import Foundation
 
 extension WeTransfer {
-	
+
 	private struct AuthorizeResponse: Decodable {
 		let success: Bool
 		let token: String?
 	}
-	
+
 	public static func authorize(completion: @escaping (Result<String>) -> Void) throws {
 		if let bearer = client.authenticationBearer {
 			completion(.success(bearer))
@@ -36,7 +36,7 @@ extension WeTransfer {
 				} else {
 					throw RequestError.authorizationFailed
 				}
-				
+
 			} catch {
 				let serverError = parseErrorResponse(data) ?? error
 				completion(.failure(serverError))

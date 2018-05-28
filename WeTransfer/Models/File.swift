@@ -14,16 +14,16 @@ public struct File: Identifiable, Encodable {
 	public let url: URL
 	public private(set) var identifier: String?
 	public internal(set) var uploaded: Bool = false
-	
+
 	public let filename: String
 	public let filesize: Bytes
 	let contentIdentifier: String = "file"
 	let localIdentifier = UUID().uuidString
-	
+
 	public private(set) var numberOfChunks: Int?
 	public private(set) var chunks: [Chunk] = []
 	private(set) var multipartUploadIdentifier: String?
-	
+
 	public init?(url: URL) {
 		self.url = url
 		filename = url.lastPathComponent
@@ -43,7 +43,7 @@ extension File: Equatable {
 }
 
 extension File {
-	
+
 	func updated(with response: WeTransfer.AddFilesResponse) -> File {
 		var file = self
 		file.identifier = response.id
@@ -51,7 +51,7 @@ extension File {
 		file.multipartUploadIdentifier = response.meta.multipartUploadId
 		return file
 	}
-	
+
 	func updated(with chunkResponse: WeTransfer.AddUploadURLResponse) -> File {
 		guard let numberOfChunks = numberOfChunks else {
 			return self
@@ -66,7 +66,12 @@ extension File {
 			chunkSize = file.filesize.remainderReportingOverflow(dividingBy: Chunk.defaultChunkSize).partialValue
 		}
 		let chunkOffset = Bytes(chunkIndex) * Chunk.defaultChunkSize
-		let chunk = Chunk(chunkNumber: chunkResponse.partNumber, fileURL: url, uploadURL: chunkResponse.uploadUrl, uploadIdentifier: chunkResponse.uploadId, chunkSize: chunkSize, byteOffset: chunkOffset)
+		let chunk = Chunk(chunkNumber: chunkResponse.partNumber,
+						  fileURL: url,
+						  uploadURL: chunkResponse.uploadUrl,
+						  uploadIdentifier: chunkResponse.uploadId,
+						  chunkSize: chunkSize,
+						  byteOffset: chunkOffset)
 		file.chunks.append(chunk)
 		file.chunks.sort(by: { $0.chunkNumber < $1.chunkNumber })
 		return file

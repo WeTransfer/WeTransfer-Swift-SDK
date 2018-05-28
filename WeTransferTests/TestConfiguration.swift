@@ -10,15 +10,15 @@ import Foundation
 @testable import WeTransfer
 
 class TestConfiguration: NSObject {
-	
+
 	enum Environment {
 		case live
 		case staging
 	}
-	
+
 	static func configure(environment: Environment) {
 		let configuration: WeTransfer.Configuration
-		
+
 		switch environment {
 		case .live:
 			configuration = WeTransfer.Configuration(APIKey: "{YOUR_API_KEY_HERE}")
@@ -27,11 +27,11 @@ class TestConfiguration: NSObject {
 		}
 		WeTransfer.configure(with: configuration)
 	}
-	
+
 	static func fakeAuthorize() {
 		WeTransfer.client.authenticationBearer = UUID().uuidString
 	}
-	
+
 	static func resetConfiguration() {
 		WeTransfer.client.apiKey = nil
 		WeTransfer.client.authenticationBearer = nil
@@ -40,11 +40,11 @@ class TestConfiguration: NSObject {
 
 extension TestConfiguration {
 	static let shared = TestConfiguration()
-	
+
 	class var imageFileURL: URL? {
 		return Bundle(for: self.shared.classForCoder).url(forResource: "image", withExtension: "jpg")
 	}
-	
+
 	class var fileModel: File? {
 		guard let imageFileURL = imageFileURL else {
 			return nil

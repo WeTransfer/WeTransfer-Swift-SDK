@@ -10,27 +10,27 @@ import XCTest
 @testable import WeTransfer
 
 class UploadTests: XCTestCase {
-	
+
 	override func setUp() {
 		super.setUp()
 		TestConfiguration.configure(environment: .live)
 	}
-	
+
 	override func tearDown() {
 		super.tearDown()
 		TestConfiguration.resetConfiguration()
 	}
-	
+
 	func testFileUpload() {
-		
+
 		guard let file = TestConfiguration.fileModel else {
 			XCTFail("File not available")
 			return
 		}
-		
+
 		let transferSentExpectation = expectation(description: "Transfer is sent")
 		let transfer = Transfer(name: "Test transfer", description: nil, files: [file])
-		
+
 		try? WeTransfer.createTransfer(with: transfer, completion: { (result) in
 			if case .failure(let error) = result {
 				XCTFail(error.localizedDescription)
@@ -48,7 +48,7 @@ class UploadTests: XCTestCase {
 				}
 			})
 		})
-		
+
 		waitForExpectations(timeout: 60) { _ in
 			if let url = transfer.shortURL {
 				print("Transfer uploaded: \(url)")
@@ -59,5 +59,5 @@ class UploadTests: XCTestCase {
 			}
 		}
 	}
-	
+
 }

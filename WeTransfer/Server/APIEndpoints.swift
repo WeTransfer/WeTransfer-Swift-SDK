@@ -16,11 +16,11 @@ public enum HTTPMethod: String {
 }
 
 public struct APIEndpoint {
-	
+
 	let method: HTTPMethod
 	let path: String?
 	let url: URL?
-	
+
 	func url(with baseURL: URL?) -> URL? {
 		if let url = url {
 			return url
@@ -30,39 +30,39 @@ public struct APIEndpoint {
 		}
 		return baseURL?.appendingPathComponent(path)
 	}
-	
+
 	init(method: HTTPMethod = .post, path: String) {
 		self.method = method
 		self.path = path
 		self.url = nil
 	}
-	
+
 	init(method: HTTPMethod = .post, url: URL) {
 		self.method = method
 		self.url = url
 		self.path = nil
 	}
-	
+
 	static func authorize() -> APIEndpoint {
 		return APIEndpoint(path: "authorize")
 	}
-	
+
 	static func createTransfer() -> APIEndpoint {
 		return APIEndpoint(path: "transfers")
 	}
-	
+
 	static func addItems(transferIdentifier: String) -> APIEndpoint {
 		return APIEndpoint(path: "transfers/\(transferIdentifier)/items")
 	}
-	
+
 	static func requestUploadURL(fileIdentifier: String, chunkIndex: Int, multipartIdentifier: String) -> APIEndpoint {
 		return APIEndpoint(method: .get, path: "files/\(fileIdentifier)/uploads/\(chunkIndex + 1)/\(multipartIdentifier)")
 	}
-	
+
 	static func upload(url: URL) -> APIEndpoint {
 		return APIEndpoint(method: .put, url: url)
 	}
-	
+
 	static func completeUpload(fileIdentifier: String) -> APIEndpoint {
 		return APIEndpoint(path: "files/\(fileIdentifier)/uploads/complete")
 	}
