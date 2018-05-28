@@ -10,12 +10,8 @@ import Foundation
 
 public class APIClient {
 	internal(set) var apiKey: String?
-	let baseURL: URL
+	internal(set) var baseURL: URL?
 	var authenticationBearer: String?
-	
-	init(baseURL: URL) {
-		self.baseURL = baseURL
-	}
 	
 	let urlSession: URLSession = {
 		let session = URLSession(configuration: .default, delegate: nil, delegateQueue: nil)
@@ -52,7 +48,10 @@ extension APIClient {
 		guard !needsToken || authenticationBearer != nil else {
 			throw Error.notAuthorized
 		}
-		var request = URLRequest(url: endpoint.url)
+		guard let url = endpoint.url(with: baseURL) else {
+			throw Error.notConfigured
+		}
+		var request = URLRequest(url: url)
 		request.httpMethod = endpoint.method.rawValue
 		request.addValue(apiKey, forHTTPHeaderField: "x-api-key")
 		if let token = authenticationBearer {

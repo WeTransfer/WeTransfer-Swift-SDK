@@ -43,7 +43,7 @@ class FileUploader: NSObject {
 			}
 			
 			let endpoint: APIEndpoint = .upload(url: chunk.uploadURL)
-			var urlRequest = URLRequest(url: endpoint.url)
+			var urlRequest = URLRequest(url: chunk.uploadURL)
 			urlRequest.httpMethod = endpoint.method.rawValue
 			
 			let task = urlSession.uploadTask(with: urlRequest, from: data, completionHandler: { (data, urlResponse, error) in

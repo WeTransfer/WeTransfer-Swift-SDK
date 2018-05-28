@@ -110,19 +110,19 @@ extension WeTransfer {
 					continue
 			}
 			
-			var tasksInProgress = [String]()
-			var succeededTasks = [String]()
+			var tasksInProgress = [APIEndpoint]()
+			var succeededTasks = [APIEndpoint]()
 			
 			for chunkIndex in 0..<numberOfChunks {
 				let endpoint: APIEndpoint = .requestUploadURL(fileIdentifier: fileIdenifier, chunkIndex: chunkIndex, multipartIdentifier: multipartUploadIdentifier)
-				tasksInProgress.append(endpoint.url.path)
+				tasksInProgress.append(endpoint)
 				try request(endpoint, completion: { (result: Result<AddUploadURLResponse>) in
-					if let index = tasksInProgress.index(of: endpoint.url.path) {
+					if let index = tasksInProgress.index(of: endpoint) {
 						tasksInProgress.remove(at: index)
 					}
 					switch result {
 					case .success(let uploadUrlResponse):
-						succeededTasks.append(endpoint.url.path)
+						succeededTasks.append(endpoint)
 						let file = transfer.files[fileIndex]
 						transfer.updateFile(file, with: uploadUrlResponse)
 						if tasksInProgress.isEmpty {

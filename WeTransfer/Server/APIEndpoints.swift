@@ -17,19 +17,30 @@ public enum HTTPMethod: String {
 
 public struct APIEndpoint {
 	
-	private let baseURL = URL(string: "https://dev.wetransfer.com/v1/")!
-	
 	let method: HTTPMethod
-	let url: URL
+	let path: String?
+	let url: URL?
+	
+	func url(with baseURL: URL?) -> URL? {
+		if let url = url {
+			return url
+		}
+		guard let path = path else {
+			return nil
+		}
+		return baseURL?.appendingPathComponent(path)
+	}
 	
 	init(method: HTTPMethod = .post, path: String) {
 		self.method = method
-		self.url = baseURL.appendingPathComponent(path)
+		self.path = path
+		self.url = nil
 	}
 	
 	init(method: HTTPMethod = .post, url: URL) {
 		self.method = method
 		self.url = url
+		self.path = nil
 	}
 	
 	static func authorize() -> APIEndpoint {
@@ -54,5 +65,11 @@ public struct APIEndpoint {
 	
 	static func completeUpload(fileIdentifier: String) -> APIEndpoint {
 		return APIEndpoint(path: "files/\(fileIdentifier)/uploads/complete")
+	}
+}
+
+extension APIEndpoint: Equatable {
+	public static func == (lhs: APIEndpoint, rhs: APIEndpoint) -> Bool {
+		return lhs.method == rhs.method && lhs.path == rhs.path && lhs.url == rhs.url
 	}
 }

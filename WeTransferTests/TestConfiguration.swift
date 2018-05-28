@@ -16,11 +16,15 @@ class TestConfiguration: NSObject {
     }
     
     static func configure(environment: Environment) {
-        switch environment {
-        case .live:
-            let configuration = WeTransfer.Configuration(APIKey: "{YOUR_API_KEY_HERE}")
-            WeTransfer.configure(with: configuration)
-        }
+		let configuration: WeTransfer.Configuration
+		
+		switch environment {
+		case .live:
+			configuration = WeTransfer.Configuration(APIKey: "{YOUR_API_KEY_HERE}")
+		case .staging:
+			configuration = WeTransfer.Configuration(APIKey: "{YOUR_API_KEY_HERE}", baseURL: URL("https://developers.wetransferbeta.com/v1"))
+		}
+		WeTransfer.configure(with: configuration)
     }
 	
 	static func fakeAuthorize() {

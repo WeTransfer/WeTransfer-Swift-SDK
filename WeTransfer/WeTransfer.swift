@@ -10,7 +10,7 @@ import Foundation
 
 public class WeTransfer {
 	
-	static var client: APIClient = APIClient(baseURL: URL(string: "https://dev.wetransfer.com/v1/")!)
+	static var client: APIClient = APIClient()
 }
 
 extension WeTransfer {
@@ -24,13 +24,17 @@ extension WeTransfer {
 	
 	public struct Configuration {
 		public let APIKey: String
-		public init(APIKey: String) {
+		public let baseURL: URL
+		
+		public init(APIKey: String, baseURL: URL? = nil) {
+			self.baseURL = baseURL ?? URL(string: "https://dev.wetransfer.com/v1/")! // swiftlint:disable:this force_unwrapping
 			self.APIKey = APIKey
 		}
 	}
 	
 	public static func configure(with configuration: Configuration) {
 		client.apiKey = configuration.APIKey
+		client.baseURL = configuration.baseURL
 	}
 }
 
