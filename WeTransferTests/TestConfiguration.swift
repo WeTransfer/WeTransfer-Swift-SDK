@@ -10,12 +10,13 @@ import Foundation
 @testable import WeTransfer
 
 class TestConfiguration: NSObject {
-    
-    enum Environment {
-        case live
-    }
-    
-    static func configure(environment: Environment) {
+	
+	enum Environment {
+		case live
+		case staging
+	}
+	
+	static func configure(environment: Environment) {
 		let configuration: WeTransfer.Configuration
 		
 		switch environment {
@@ -25,7 +26,7 @@ class TestConfiguration: NSObject {
 			configuration = WeTransfer.Configuration(APIKey: "{YOUR_API_KEY_HERE}", baseURL: URL("https://developers.wetransferbeta.com/v1"))
 		}
 		WeTransfer.configure(with: configuration)
-    }
+	}
 	
 	static func fakeAuthorize() {
 		WeTransfer.client.authenticationBearer = UUID().uuidString
