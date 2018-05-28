@@ -85,7 +85,7 @@ class AddFilesTests: XCTestCase {
 			}
 		})
 		
-		waitForExpectations(timeout: 10) {
+		waitForExpectations(timeout: 10) { _ in
 			XCTAssertFalse(transfer.files.isEmpty)
 			for file in transfer.files {
 				XCTAssertNotNil(file.identifier)

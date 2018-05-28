@@ -61,7 +61,7 @@ class ChunksTests: XCTestCase {
 			})
 		})
 		
-		waitForExpectations(timeout: 10) {
+		waitForExpectations(timeout: 10) { _ in
 			guard let file = updatedFile else {
 				XCTFail("File not updated")
 				return

@@ -23,7 +23,7 @@ class TestConfiguration: NSObject {
 		case .live:
 			configuration = WeTransfer.Configuration(APIKey: "{YOUR_API_KEY_HERE}")
 		case .staging:
-			configuration = WeTransfer.Configuration(APIKey: "{YOUR_API_KEY_HERE}", baseURL: URL("https://developers.wetransferbeta.com/v1"))
+			configuration = WeTransfer.Configuration(APIKey: "{YOUR_API_KEY_HERE}", baseURL: URL(string: "https://developers.wetransferbeta.com/v1"))
 		}
 		WeTransfer.configure(with: configuration)
 	}

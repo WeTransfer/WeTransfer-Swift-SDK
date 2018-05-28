@@ -38,7 +38,7 @@ class SimpleTransferTests: XCTestCase {
 				print("Transfer created: \(transfer)")
 			case .started(let progress):
 				print("Transfer started...")
-				timer = Timer(timeInterval: 1 / 30, repeats: true, block: {
+				timer = Timer(timeInterval: 1 / 30, repeats: true, block: { _ in
 					print("Progress: \(progress.fractionCompleted)")
 				})
 				RunLoop.main.add(timer!, forMode: .commonModes)
@@ -56,7 +56,7 @@ class SimpleTransferTests: XCTestCase {
 			}
 		}
 		
-		waitForExpectations(timeout: 60) {
+		waitForExpectations(timeout: 60) { _ in
 			XCTAssertNotNil(updatedTransfer, "Transfer was not completed")
 		}
 	}
