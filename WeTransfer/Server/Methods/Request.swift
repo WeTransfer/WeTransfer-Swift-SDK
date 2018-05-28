@@ -42,10 +42,9 @@ extension WeTransfer {
 				return
 			}
 			
-			let task = client.urlSession.dataTask(with: request, completionHandler: { (data, urlResponse, error) in
+			let task = client.urlSession.dataTask(with: request, completionHandler: { (data, _, error) in
 				do {
 					if let error = error {
-						print("error with request: \(endpoint.url)")
 						throw error
 					}
 					guard let data = data else {
@@ -54,9 +53,6 @@ extension WeTransfer {
 					let response = try client.decoder.decode(T.self, from: data)
 					completion(.success(response))
 				} catch {
-					if let data = data, let string = String(data: data, encoding: .utf8) {
-						print("Error body: \(string)")
-					}
 					let serverError = parseErrorResponse(data) ?? error
 					completion(.failure(serverError))
 				}

@@ -51,7 +51,7 @@ class RequestTests: XCTestCase {
 	
 	func testUnconfiguredRequestCreation() {
 		do {
-			let _ = try WeTransfer.client.createRequest(.createTransfer())
+			_ = try WeTransfer.client.createRequest(.createTransfer())
 			XCTFail("Request creation should have failed with 'not configured' error")
 		} catch {
 			XCTAssertEqual(error.localizedDescription, APIClient.Error.notConfigured.localizedDescription)
@@ -61,7 +61,7 @@ class RequestTests: XCTestCase {
 	func testUnauthorizedRequestCreation() {
 		TestConfiguration.configure(environment: .live)
 		do {
-			let _ = try WeTransfer.client.createRequest(.createTransfer())
+			_ = try WeTransfer.client.createRequest(.createTransfer())
 			XCTFail("Request creation should have failed with 'not authorized' error")
 		} catch {
 			XCTAssertEqual(error.localizedDescription, APIClient.Error.notAuthorized.localizedDescription)
@@ -73,7 +73,7 @@ class RequestTests: XCTestCase {
 		TestConfiguration.fakeAuthorize()
 		let client = WeTransfer.client
 		do {
-			let _ = try client.createRequest(.createTransfer())
+			_ = try client.createRequest(.createTransfer())
 		} catch {
 			XCTFail(error.localizedDescription)
 		}

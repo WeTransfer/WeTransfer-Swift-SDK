@@ -11,7 +11,8 @@ import Foundation
 extension WeTransfer {
 	
 	struct AddFilesRequestParameters: Encodable {
-		struct Item: Encodable {
+		
+		struct Item: Encodable { // swiftlint:disable:this nesting
 			let filename: String
 			let filesize: UInt64
 			let contentIdentifier: String
@@ -24,6 +25,7 @@ extension WeTransfer {
 				localIdentifier = file.localIdentifier
 			}
 		}
+		
 		let items: [Item]
 		
 		init(with files: [File]) {
@@ -35,7 +37,7 @@ extension WeTransfer {
 	
 	struct AddFilesResponse: Decodable {
 		
-		struct Meta: Decodable {
+		struct Meta: Decodable { // swiftlint:disable:this nesting
 			let multipartParts: Int
 			let multipartUploadId: String
 		}
@@ -99,7 +101,7 @@ extension WeTransfer {
 	}
 	
 	static func addUploadUrls(to transfer: Transfer, completion: @escaping (Result<Transfer>) -> Void) throws {
-		guard let _ = transfer.identifier else {
+		guard transfer.identifier != nil else {
 			throw Error.transferNotYetCreated
 		}
 		

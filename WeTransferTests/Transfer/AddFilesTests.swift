@@ -37,7 +37,7 @@ class AddFilesTests: XCTestCase {
 	}
 	
 	func testFileModel() {
-		guard let _ = TestConfiguration.imageFileURL else {
+		guard TestConfiguration.imageFileURL != nil else {
 			XCTFail("Test image not found")
 			return
 		}
@@ -85,7 +85,7 @@ class AddFilesTests: XCTestCase {
 			}
 		})
 		
-		waitForExpectations(timeout: 10) { (error) in
+		waitForExpectations(timeout: 10) {
 			XCTAssertFalse(transfer.files.isEmpty)
 			for file in transfer.files {
 				XCTAssertNotNil(file.identifier)

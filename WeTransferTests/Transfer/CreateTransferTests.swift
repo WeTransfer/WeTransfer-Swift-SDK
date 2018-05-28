@@ -44,7 +44,7 @@ class CreateTransferTests: XCTestCase {
 			XCTFail(error.localizedDescription)
 			createdTransferExpectation.fulfill()
 		}
-		waitForExpectations(timeout: 10) { (error) in
+		waitForExpectations(timeout: 10) {
 			XCTAssertNotNil(transfer.identifier)
 			XCTAssertNotNil(transfer.shortURL)
 		}
@@ -72,7 +72,7 @@ class CreateTransferTests: XCTestCase {
 			createdTransferExpectation.fulfill()
 		}
 		
-		waitForExpectations(timeout: 10) { (error) in
+		waitForExpectations(timeout: 10) {
 			XCTAssertNotNil(transfer.identifier)
 			XCTAssertNotNil(transfer.shortURL)
 			XCTAssertFalse(transfer.files.isEmpty)

@@ -23,7 +23,7 @@ class AuthorizationTests: XCTestCase {
 	
 	func testUnauthorized() {
 		do {
-			let _ = try WeTransfer.client.createRequest(.createTransfer())
+			_ = try WeTransfer.client.createRequest(.createTransfer())
 		} catch {
 			XCTAssertEqual(error.localizedDescription, APIClient.Error.notAuthorized.localizedDescription)
 		}
@@ -47,9 +47,9 @@ class AuthorizationTests: XCTestCase {
 			authorizedExpectation.fulfill()
 		}
 		
-		waitForExpectations(timeout: 10) { (error) in
-			XCTAssert(receivedToken != nil, "No token received from authorization call \(String(describing:error))")
-		}        
+		waitForExpectations(timeout: 10) { error in
+			XCTAssert(receivedToken != nil, "No token received from authorization call \(String(describing: error))")
+		}
 	}
 	
 }

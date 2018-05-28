@@ -33,7 +33,7 @@ class FileUploader: NSObject {
 	
 	func upload(with progress: UploadProgressHandler?, completion: @escaping (Result<File>) -> Void) {
 		progressHandler = progress
-		guard let _ = file.identifier, !file.chunks.isEmpty else {
+		guard file.identifier != nil, !file.chunks.isEmpty else {
 			completion(.failure(FileUploaderError.fileNotPublic))
 			return
 		}
@@ -46,14 +46,22 @@ class FileUploader: NSObject {
 			var urlRequest = URLRequest(url: chunk.uploadURL)
 			urlRequest.httpMethod = endpoint.method.rawValue
 			
-			let task = urlSession.uploadTask(with: urlRequest, from: data, completionHandler: { (data, urlResponse, error) in
+			var uploadErrors = [Error]()
+			
+			let task = urlSession.uploadTask(with: urlRequest, from: data, completionHandler: { (_, _, error) in
+				if let error = error {
+					uploadErrors.append(error)
+				}
 				if let taskIndex = self.tasks.index(where: { $0.originalRequest == urlRequest }) {
 					self.tasks.remove(at: taskIndex)
 				}
 				
 				if self.tasks.isEmpty {
-					// Last task
-					completion(.success(self.file))
+					if let error = uploadErrors.last {
+						completion(.failure(error))
+					} else {
+						completion(.success(self.file))
+					}
 				}
 			})
 			tasks.append(task)

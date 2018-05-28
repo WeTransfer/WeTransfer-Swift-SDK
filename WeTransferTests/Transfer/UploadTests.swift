@@ -49,7 +49,7 @@ class UploadTests: XCTestCase {
 			})
 		})
 		
-		waitForExpectations(timeout: 60) { (error) in
+		waitForExpectations(timeout: 60) {
 			if let url = transfer.shortURL {
 				print("Transfer uploaded: \(url)")
 			}

@@ -23,7 +23,7 @@ extension WeTransfer {
 	
 	public static func send(_ transfer: Transfer, stateChanged: @escaping (State) -> Void) {
 		
-		guard let _ = transfer.identifier else {
+		guard transfer.identifier != nil else {
 			stateChanged(.failed(Error.transferNotYetCreated))
 			return
 		}
@@ -40,12 +40,6 @@ extension WeTransfer {
 		for file in transfer.files {
 			
 			guard let fileIdentifier = file.identifier, !file.chunks.isEmpty else {
-				if file.identifier == nil {
-					print("file has no identifier")
-				}
-				if file.chunks.isEmpty {
-					print("file has no chunks")
-				}
 				continue
 			}
 			

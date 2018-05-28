@@ -21,7 +21,7 @@ extension WeTransfer {
 			return
 		}
 		let request = try client.createRequest(.authorize(), needsToken: false)
-		let task = client.urlSession.dataTask(with: request) { (data, urlResponse, error) in
+		let task = client.urlSession.dataTask(with: request) { (data, _, error) in
 			do {
 				if let error = error {
 					throw error

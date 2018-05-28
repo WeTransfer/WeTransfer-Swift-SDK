@@ -18,7 +18,7 @@ class InitializationTests: XCTestCase {
 	
 	func testNotConfigured() {
 		do {
-			let _ = try WeTransfer.client.createRequest(.createTransfer())
+			_ = try WeTransfer.client.createRequest(.createTransfer())
 			XCTFail("Creation of request should've failed")
 		} catch {
 			XCTAssertEqual(error.localizedDescription, APIClient.Error.notConfigured.localizedDescription)
