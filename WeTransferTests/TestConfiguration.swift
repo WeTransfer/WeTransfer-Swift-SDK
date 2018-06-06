@@ -29,7 +29,7 @@ class TestConfiguration: NSObject {
 	}
 
 	static func fakeAuthorize() {
-		WeTransfer.client.authenticationBearer = UUID().uuidString
+		WeTransfer.client.authenticationBearer = "Fake.Tokens.Gonna-Fake"
 	}
 
 	static func resetConfiguration() {

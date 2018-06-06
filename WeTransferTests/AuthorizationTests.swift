@@ -39,7 +39,20 @@ class AuthorizationTests: XCTestCase {
 		}
 
 		waitForExpectations(timeout: 10) { _ in }
+	}
+	
+	func testWrongJWTKey() {
+		let authFailExpectation = expectation(description: "Request should failed")
+		TestConfiguration.fakeAuthorize()
+		let transfer = Transfer(name: "Bad Transfer", description: nil)
+		WeTransfer.createTransfer(with: transfer) { result in
+			if case .success = result {
+				XCTFail("Request did not fail (like it should)")
+			}
+			authFailExpectation.fulfill()
 		}
+		
+		waitForExpectations(timeout: 10) { _ in	}
 	}
 
 }
