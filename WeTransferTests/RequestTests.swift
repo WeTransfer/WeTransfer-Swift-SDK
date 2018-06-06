@@ -55,7 +55,7 @@ class RequestTests: XCTestCase {
 			_ = try WeTransfer.client.createRequest(.createTransfer())
 			XCTFail("Request creation should have failed with 'not configured' error")
 		} catch {
-			XCTAssertEqual(error.localizedDescription, APIClient.Error.notConfigured.localizedDescription)
+			XCTAssertEqual(error.localizedDescription, WeTransfer.Error.notConfigured.localizedDescription)
 		}
 	}
 
@@ -65,7 +65,7 @@ class RequestTests: XCTestCase {
 			_ = try WeTransfer.client.createRequest(.createTransfer())
 			XCTFail("Request creation should have failed with 'not authorized' error")
 		} catch {
-			XCTAssertEqual(error.localizedDescription, APIClient.Error.notAuthorized.localizedDescription)
+			XCTAssertEqual(error.localizedDescription, WeTransfer.Error.notAuthorized.localizedDescription)
 		}
 	}
 

@@ -25,7 +25,7 @@ class AuthorizationTests: XCTestCase {
 		do {
 			_ = try WeTransfer.client.createRequest(.createTransfer())
 		} catch {
-			XCTAssertEqual(error.localizedDescription, APIClient.Error.notAuthorized.localizedDescription)
+			XCTAssertEqual(error.localizedDescription, WeTransfer.Error.notAuthorized.localizedDescription)
 		}
 	}
 

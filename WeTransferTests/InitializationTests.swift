@@ -21,7 +21,7 @@ class InitializationTests: XCTestCase {
 			_ = try WeTransfer.client.createRequest(.createTransfer())
 			XCTFail("Creation of request should've failed")
 		} catch {
-			XCTAssertEqual(error.localizedDescription, APIClient.Error.notConfigured.localizedDescription)
+			XCTAssertEqual(error.localizedDescription, WeTransfer.Error.notConfigured.localizedDescription)
 		}
 	}
 

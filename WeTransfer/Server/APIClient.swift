@@ -37,22 +37,16 @@ public class APIClient {
 }
 
 extension APIClient {
-
-	public enum Error: Swift.Error {
-		case notConfigured
-		case notAuthorized
-	}
-
 	func createRequest(_ endpoint: APIEndpoint, data: Data? = nil) throws -> URLRequest {
 		// Check auth
 		guard let apiKey = apiKey else {
-			throw Error.notConfigured
+			throw WeTransfer.Error.notConfigured
 		}
 		guard !endpoint.requiresAuthentication || authenticationBearer != nil else {
-			throw Error.notAuthorized
+			throw WeTransfer.Error.notAuthorized
 		}
 		guard let url = endpoint.url(with: baseURL) else {
-			throw Error.notConfigured
+			throw WeTransfer.Error.notConfigured
 		}
 		
 		var request = URLRequest(url: url)
