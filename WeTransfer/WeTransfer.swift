@@ -8,25 +8,46 @@
 
 import Foundation
 
-public class WeTransfer {
+/// Main struct exposing all entrypoints for the API.
+/// Configure the client with `WeTransfer.configure()` after which all request are available.
+/// - Use `WeTransfer.sendTransfer()` to send a transfer right away
+/// - Use `WeTransfer.createTransfer()` to manually create a transfer on the server and `WeTransfer.send()` to upload the transfer when you're ready
+public struct WeTransfer {
 
+	/// The client used for all requests. Stores the authenticated state and creates and manages all requests
 	static var client: APIClient = APIClient()
+	
+	private init() {}
 }
 
 extension WeTransfer {
 
+	/// Possible errors thrown from multiple points in the transfer progress
 	public enum Error: Swift.Error {
+		/// WeTransfer client not configured yet, make sure to call `WeTransfer.configure(with configuration:)`
 		case notConfigured
+		/// Authorization failed when performing request
 		case notAuthorized
+		/// Transfer is already created so create transfer request should not be called again
 		case transferAlreadyCreated
+		/// Transfer is not yet created so other request regarding the transfer will fail
 		case transferNotYetCreated
+		/// Transfer has no files to share as no files are added yet or all files are already uploaded
 		case noFilesAvailable
 	}
 
+	/// Configuration of the API client
 	public struct Configuration {
 		public let APIKey: String
 		public let baseURL: URL
 
+		let transfer = WeTransfer()
+		
+		/// Initializes the configuration struct with a request API key and optionally a baseURL for when you're pointing to a different server
+		///
+		/// - Parameters:
+		///   - APIKey: Key required to make use of the API. Visit https://developers.wetransfer.com to get a key
+		///   - baseURL: Defaults to the standard API, but can be used to point to a different server
 		public init(APIKey: String, baseURL: URL? = nil) {
 			// swiftlint:disable force_unwrapping
 			self.baseURL = baseURL ?? URL(string: "https://dev.wetransfer.com/v1/")!
@@ -34,6 +55,9 @@ extension WeTransfer {
 		}
 	}
 
+	/// Configures the API client with the provided configuration
+	///
+	/// - Parameter configuration: Configuration struct to configure the API client with
 	public static func configure(with configuration: Configuration) {
 		client.apiKey = configuration.APIKey
 		client.baseURL = configuration.baseURL
@@ -42,13 +66,20 @@ extension WeTransfer {
 
 extension WeTransfer {
 
+	/// Immediately sends a transfer with the provided file URLs. Returns the transfer object used to handle the transfer proces.
+	///
+	/// - Parameters:
+	///   - name: Name of the transfer, shown when user opens the resulting link
+	///   - urls: Array of URLs pointing to files to be added to the transfer
+	///   - stateChanged: Closure that will be called for state updates.
+	///   - state: Enum describing the current transfer's state. See the `State` enum description for more details for each state
+	/// - Returns: Transfer object used to handle the transfer process.
 	@discardableResult
-	public static func sendTransfer(named name: String, files urls: [URL], stateChanged: @escaping (State) -> Void) -> Transfer? {
+	public static func sendTransfer(named name: String, files urls: [URL], stateChanged: @escaping (_ state: State) -> Void) -> Transfer {
 		
 		// Create the transfer model
-		let files = urls.compactMap { url in
-			return File(url: url)
-		}
+		let files = urls.compactMap { url in File(url: url) }
+		
 		let transfer = Transfer(name: name, description: nil, files: files)
 		
 		// Create transfer on server
@@ -78,6 +109,7 @@ extension WeTransfer {
 		let operations = [creationOperation, addFilesOperation, uploadFilesOperation].chained()
 		client.operationQueue.addOperations(operations, waitUntilFinished: false)
 		
+		// Handle the result of the very last operation that's executed
 		uploadFilesOperation.onResult = { result in
 			switch result {
 			case .failure(let error):

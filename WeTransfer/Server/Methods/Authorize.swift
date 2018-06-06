@@ -15,6 +15,10 @@ extension WeTransfer {
 		let token: String?
 	}
 	
+	/// Authorizes the current user with the configured API key
+	///
+	/// - Parameter completion: Executes when either succeeded or failed
+	/// - Parameter result: Result with empty value when succeeded, or error when failed
 	public static func authorize(completion: @escaping (_ result: Result<Void>) -> Void) {
 		if client.authenticationBearer != nil {
 			completion(.success(()))

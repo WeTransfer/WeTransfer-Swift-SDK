@@ -8,8 +8,11 @@
 
 import Foundation
 
+/// Enum with either a value when succeeded or an error when failed
 public enum Result<Value> {
+	/// The operation has succeeded and requested value is available
 	case success(Value)
+	/// The operation has failed with the provided error
 	case failure(Error)
 
 	public var error: Error? {
