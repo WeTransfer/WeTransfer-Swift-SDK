@@ -13,7 +13,7 @@ class CreateTransferTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-		TestConfiguration.configure(environment: .live)
+		TestConfiguration.configure(environment: .production)
     }
     
     override func tearDown() {
@@ -32,16 +32,11 @@ class CreateTransferTests: XCTestCase {
 	func testCreateTransferRequest() {
 		let transfer = Transfer(name: "Test Transfer", description: nil)
 		let createdTransferExpectation = expectation(description: "Transfer is created")
-		do {
-			try WeTransfer.createTransfer(with: transfer) { (result) in
-				if case .failure(let error) = result {
-					XCTFail(error.localizedDescription)
-					return
-				}
-				createdTransferExpectation.fulfill()
+		WeTransfer.createTransfer(with: transfer) { (result) in
+			if case .failure(let error) = result {
+				XCTFail(error.localizedDescription)
+				return
 			}
-		} catch {
-			XCTFail(error.localizedDescription)
 			createdTransferExpectation.fulfill()
 		}
 		waitForExpectations(timeout: 10) { _ in
@@ -50,7 +45,7 @@ class CreateTransferTests: XCTestCase {
 		}
 	}
 
-	func testTransforCreationWithFiles() {
+	func testTransferCreationWithFiles() {
 		guard let file = TestConfiguration.fileModel else {
 			XCTFail("File not available")
 			return
@@ -59,20 +54,14 @@ class CreateTransferTests: XCTestCase {
 		let createdTransferExpectation = expectation(description: "Transfer is created with files")
 
 		let transfer = Transfer(name: "Test Transfer", description: nil, files: [file])
-		do {
-			try WeTransfer.createTransfer(with: transfer, completion: { (result) in
-				if case .failure(let error) = result {
-					XCTFail(error.localizedDescription)
-					return
-				}
-				createdTransferExpectation.fulfill()
-			})
-		} catch {
-			XCTFail(error.localizedDescription)
+		WeTransfer.createTransfer(with: transfer, completion: { (result) in
+			if case .failure(let error) = result {
+				XCTFail("Create transfer failed: \(error)")
+			}
 			createdTransferExpectation.fulfill()
-		}
+		})
 
-		waitForExpectations(timeout: 10) { _ in
+		waitForExpectations(timeout: 20) { _ in
 			XCTAssertNotNil(transfer.identifier)
 			XCTAssertNotNil(transfer.shortURL)
 			XCTAssertFalse(transfer.files.isEmpty)
@@ -80,6 +69,7 @@ class CreateTransferTests: XCTestCase {
 			for file in transfer.files {
 				XCTAssertNotNil(file.identifier)
 				XCTAssertFalse(file.uploaded)
+				XCTAssertNotNil(file.numberOfChunks)
 			}
 		}
 	}

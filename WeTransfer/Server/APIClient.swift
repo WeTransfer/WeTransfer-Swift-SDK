@@ -17,6 +17,11 @@ public class APIClient {
 		let session = URLSession(configuration: .default, delegate: nil, delegateQueue: nil)
 		return session
 	}()
+	
+	let operationQueue: OperationQueue = {
+		let queue = OperationQueue()
+		return queue
+	}()
 
 	let decoder: JSONDecoder = {
 		let decoder = JSONDecoder()
@@ -36,24 +41,24 @@ extension APIClient {
 	public enum Error: Swift.Error {
 		case notConfigured
 		case notAuthorized
-		case transferAlreadyCreated
-		case transferNotYetCreated
 	}
 
-	func createRequest(_ endpoint: APIEndpoint, data: Data? = nil, needsToken: Bool = true) throws -> URLRequest {
+	func createRequest(_ endpoint: APIEndpoint, data: Data? = nil) throws -> URLRequest {
 		// Check auth
 		guard let apiKey = apiKey else {
 			throw Error.notConfigured
 		}
-		guard !needsToken || authenticationBearer != nil else {
+		guard !endpoint.requiresAuthentication || authenticationBearer != nil else {
 			throw Error.notAuthorized
 		}
 		guard let url = endpoint.url(with: baseURL) else {
 			throw Error.notConfigured
 		}
+		
 		var request = URLRequest(url: url)
 		request.httpMethod = endpoint.method.rawValue
 		request.addValue(apiKey, forHTTPHeaderField: "x-api-key")
+		
 		if let token = authenticationBearer {
 			request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
 		}

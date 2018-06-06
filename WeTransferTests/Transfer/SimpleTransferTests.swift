@@ -13,7 +13,7 @@ class SimpleTransferTests: XCTestCase {
 
 	override func setUp() {
 		super.setUp()
-		TestConfiguration.configure(environment: .live)
+		TestConfiguration.configure(environment: .production)
 	}
 
 	override func tearDown() {
@@ -23,7 +23,7 @@ class SimpleTransferTests: XCTestCase {
 
 	func testSimpleTransfer() {
 
-		guard let fileURL = Bundle(for: classForCoder).url(forResource: "image", withExtension: "jpg") else {
+		guard let fileURL = Bundle(for: classForCoder).url(forResource: "zelda", withExtension: "jpg") else {
 			XCTFail("Test image not found")
 			return
 		}

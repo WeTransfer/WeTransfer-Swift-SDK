@@ -22,7 +22,17 @@ public struct Chunk: Encodable {
 }
 
 extension Chunk {
+	init(file: File, response: AddUploadURLResponse) {
+		chunkNumber = response.partNumber - 1
+		fileURL = file.url
+		uploadURL = response.uploadUrl
+		uploadIdentifier = response.uploadId
+		byteOffset = Chunk.defaultChunkSize * Bytes(chunkNumber)
+		chunkSize = min(file.filesize - byteOffset, Chunk.defaultChunkSize)
+	}
+}
 
+extension Chunk {
 	func data() throws -> Data? {
 		guard let file = try? FileHandle(forReadingFrom: fileURL) else {
 			return nil

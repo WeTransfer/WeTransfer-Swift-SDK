@@ -13,7 +13,7 @@ import UIKit
 import Cocoa
 #endif
 
-public class Transfer: Identifiable, Encodable {
+public class Transfer: Encodable {
 	public private(set) var identifier: String?
 
 	public let name: String
@@ -31,12 +31,12 @@ public class Transfer: Identifiable, Encodable {
 }
 
 extension Transfer {
-	internal func update(with response: WeTransfer.CreateTransferResponse) {
+	func update(with response: CreateTransferResponse) {
 		identifier = "\(response.id)"
 		shortURL = response.shortenedUrl
 	}
 
-	internal func addFiles(_ files: [File]) {
+	func addFiles(_ files: [File]) {
 		for file in files {
 			if !self.files.contains(file) {
 				self.files.append(file)
@@ -44,7 +44,7 @@ extension Transfer {
 		}
 	}
 
-	internal func updateFiles(with responseFiles: [WeTransfer.AddFilesResponse]) {
+	func updateFiles(with responseFiles: [AddFilesResponse]) {
 		files = files.map { file in
 			guard let responseFile = responseFiles.first(where: { $0.localIdentifier == file.localIdentifier }) else {
 				return file
@@ -53,17 +53,10 @@ extension Transfer {
 		}
 	}
 
-	internal func updateFile(_ file: File, with chunkResponse: WeTransfer.AddUploadURLResponse) {
-		guard let fileIndex = files.index(where: { $0.localIdentifier == file.localIdentifier }) else {
-			return
-		}
-		files[fileIndex] = file.updated(with: chunkResponse)
-	}
-
-	func setFileUploaded(_ file: File, uploaded: Bool) {
+	func setFileUploaded(_ file: File) {
 		guard let index = files.index(of: file) else {
 			return
 		}
-		files[index].uploaded = uploaded
+		files[index].uploaded = true
 	}
 }

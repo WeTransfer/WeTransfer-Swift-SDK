@@ -13,13 +13,15 @@ class UploadTests: XCTestCase {
 
 	override func setUp() {
 		super.setUp()
-		TestConfiguration.configure(environment: .live)
+		TestConfiguration.configure(environment: .production)
 	}
 
 	override func tearDown() {
 		super.tearDown()
 		TestConfiguration.resetConfiguration()
 	}
+	
+	var observation: NSKeyValueObservation?
 
 	func testFileUpload() {
 
@@ -30,26 +32,38 @@ class UploadTests: XCTestCase {
 
 		let transferSentExpectation = expectation(description: "Transfer is sent")
 		let transfer = Transfer(name: "Test transfer", description: nil, files: [file])
-
-		try? WeTransfer.createTransfer(with: transfer, completion: { (result) in
+		
+		WeTransfer.createTransfer(with: transfer, completion: { (result) in
 			if case .failure(let error) = result {
-				XCTFail(error.localizedDescription)
+				XCTFail("Transfer creation failed: \(error)")
+				transferSentExpectation.fulfill()
 				return
 			}
 			WeTransfer.send(transfer, stateChanged: { (state) in
 				switch state {
+				case .created(let transfer):
+					print("Transfer created: \(String(describing: transfer.identifier))")
+				case .started(let progress):
+					print("Upload started")
+					var percentage = 0.0
+					self.observation = progress.observe(\.fractionCompleted, changeHandler: { (progress, _) in
+						let newPercentage = (progress.fractionCompleted * 100).rounded(FloatingPointRoundingRule.up)
+						if newPercentage != percentage {
+							percentage = newPercentage
+							print("PROGRESS: \(newPercentage)% (\(progress.completedUnitCount) bytes)")
+						}
+					})
 				case .failed(let error):
-					XCTFail(error.localizedDescription)
+					XCTFail("Sending transfer failed: \(error)")
 					transferSentExpectation.fulfill()
 				case .completed:
 					transferSentExpectation.fulfill()
-				default:
-					break
 				}
 			})
 		})
 
 		waitForExpectations(timeout: 60) { _ in
+			self.observation = nil
 			if let url = transfer.shortURL {
 				print("Transfer uploaded: \(url)")
 			}

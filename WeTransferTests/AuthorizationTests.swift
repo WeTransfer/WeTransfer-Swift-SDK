@@ -13,7 +13,7 @@ class AuthorizationTests: XCTestCase {
 
 	override func setUp() {
 		super.setUp()
-		TestConfiguration.configure(environment: .live)
+		TestConfiguration.configure(environment: .production)
 	}
 
 	override func tearDown() {
@@ -32,18 +32,13 @@ class AuthorizationTests: XCTestCase {
 	func testAuthorization() {
 		let authorizedExpectation = expectation(description: "Authorization should succeed")
 		var receivedToken: String?
-		do {
-			try WeTransfer.authorize { (result) in
-				switch result {
-				case .success(let token):
-					receivedToken = token
-				case .failure(let error):
-					XCTFail("Authorization failed: \(error)")
-				}
-				authorizedExpectation.fulfill()
+		WeTransfer.authorize { (result) in
+			switch result {
+			case .success(let token):
+				receivedToken = token
+			case .failure(let error):
+				XCTFail("Authorization failed: \(error)")
 			}
-		} catch {
-			XCTFail("Authorization failed: \(error)")
 			authorizedExpectation.fulfill()
 		}
 

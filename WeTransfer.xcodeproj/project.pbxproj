@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E0EEBA820BEE918009E6B2D /* AsynchronousDependencyResultOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEBA720BEE918009E6B2D /* AsynchronousDependencyResultOperation.swift */; };
+		3E0EEBB020C1444C009E6B2D /* ChainedAsynchronousResultOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEBAF20C1444C009E6B2D /* ChainedAsynchronousResultOperation.swift */; };
+		3E0EEBB220C17264009E6B2D /* CreateTransferOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEBB120C17264009E6B2D /* CreateTransferOperation.swift */; };
+		3E0EEBB420C175D0009E6B2D /* AddFilesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEBB320C175D0009E6B2D /* AddFilesOperation.swift */; };
+		3E0EEBB620C177FE009E6B2D /* CreateChunkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEBB520C177FE009E6B2D /* CreateChunkOperation.swift */; };
+		3E0EEBBA20C18FA5009E6B2D /* UploadFilesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEBB920C18FA5009E6B2D /* UploadFilesOperation.swift */; };
+		3E0EEBBC20C19004009E6B2D /* UploadChunkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEBBB20C19004009E6B2D /* UploadChunkOperation.swift */; };
+		3E0EEBBE20C19037009E6B2D /* CompleteUploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEBBD20C19037009E6B2D /* CompleteUploadOperation.swift */; };
+		3E0EEBC020C19074009E6B2D /* UploadFileOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEBBF20C19074009E6B2D /* UploadFileOperation.swift */; };
 		3E579B212092194F008DFFD2 /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3E579B202092194F008DFFD2 /* image.jpg */; };
 		3E7348BE20B4040D009B41D0 /* TestConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348BD20B4040D009B41D0 /* TestConfiguration.swift */; };
 		3E7348C020B41895009B41D0 /* InitializationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348BF20B41895009B41D0 /* InitializationTests.swift */; };
@@ -15,7 +24,6 @@
 		3E7348C620B41EC0009B41D0 /* RequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348C520B41EC0009B41D0 /* RequestTests.swift */; };
 		3E80E0A72091D0E700114711 /* WeTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E80E0A62091D0E700114711 /* WeTransfer.swift */; };
 		3E80E0AA2091D12B00114711 /* Transfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E80E0A92091D12B00114711 /* Transfer.swift */; };
-		3E80E0AC2091D14E00114711 /* Indentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E80E0AB2091D14E00114711 /* Indentifiable.swift */; };
 		3E80E0AE2091D16E00114711 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E80E0AD2091D16E00114711 /* Result.swift */; };
 		3E90734720BBEF3700AE3605 /* ChunksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E90734620BBEF3700AE3605 /* ChunksTests.swift */; };
 		3E90734920BBFE5600AE3605 /* UploadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E90734820BBFE5600AE3605 /* UploadTests.swift */; };
@@ -28,7 +36,9 @@
 		3E9413CA2099DB05003A42D1 /* Send.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413C92099DB05003A42D1 /* Send.swift */; };
 		3E9413CC2099E390003A42D1 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413CB2099E390003A42D1 /* File.swift */; };
 		3E9413CE2099E3F5003A42D1 /* Chunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413CD2099E3F5003A42D1 /* Chunk.swift */; };
-		3E950E5E209B48DB00FA09D6 /* FileUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E950E5D209B48DB00FA09D6 /* FileUploader.swift */; };
+		3EA0EFBA20BD4D90009E4BB1 /* AsynchronousOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA0EFB920BD4D90009E4BB1 /* AsynchronousOperation.swift */; };
+		3EA0EFCE20BD7743009E4BB1 /* AsynchronousResultOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA0EFCD20BD7743009E4BB1 /* AsynchronousResultOperation.swift */; };
+		3ECCF26120C583A100F2B59B /* MutableProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECCF26020C583A100F2B59B /* MutableProgress.swift */; };
 		3ED1C0A320B43E980045D8B3 /* CreateTransferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED1C0A220B43E980045D8B3 /* CreateTransferTests.swift */; };
 		3ED1C0A520B442F70045D8B3 /* AddFilesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED1C0A420B442F70045D8B3 /* AddFilesTests.swift */; };
 		3EE2596D2091CF8800DC5A97 /* WeTransfer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE259632091CF8800DC5A97 /* WeTransfer.framework */; };
@@ -46,6 +56,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3E0EEBA720BEE918009E6B2D /* AsynchronousDependencyResultOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsynchronousDependencyResultOperation.swift; sourceTree = "<group>"; };
+		3E0EEBAF20C1444C009E6B2D /* ChainedAsynchronousResultOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainedAsynchronousResultOperation.swift; sourceTree = "<group>"; };
+		3E0EEBB120C17264009E6B2D /* CreateTransferOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTransferOperation.swift; sourceTree = "<group>"; };
+		3E0EEBB320C175D0009E6B2D /* AddFilesOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFilesOperation.swift; sourceTree = "<group>"; };
+		3E0EEBB520C177FE009E6B2D /* CreateChunkOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateChunkOperation.swift; sourceTree = "<group>"; };
+		3E0EEBB920C18FA5009E6B2D /* UploadFilesOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadFilesOperation.swift; sourceTree = "<group>"; };
+		3E0EEBBB20C19004009E6B2D /* UploadChunkOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadChunkOperation.swift; sourceTree = "<group>"; };
+		3E0EEBBD20C19037009E6B2D /* CompleteUploadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteUploadOperation.swift; sourceTree = "<group>"; };
+		3E0EEBBF20C19074009E6B2D /* UploadFileOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadFileOperation.swift; sourceTree = "<group>"; };
 		3E579B202092194F008DFFD2 /* image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image.jpg; sourceTree = "<group>"; };
 		3E7348BD20B4040D009B41D0 /* TestConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestConfiguration.swift; sourceTree = "<group>"; };
 		3E7348BF20B41895009B41D0 /* InitializationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitializationTests.swift; sourceTree = "<group>"; };
@@ -54,7 +73,6 @@
 		3E7348C520B41EC0009B41D0 /* RequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestTests.swift; sourceTree = "<group>"; usesTabs = 1; };
 		3E80E0A62091D0E700114711 /* WeTransfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeTransfer.swift; sourceTree = "<group>"; };
 		3E80E0A92091D12B00114711 /* Transfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transfer.swift; sourceTree = "<group>"; };
-		3E80E0AB2091D14E00114711 /* Indentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Indentifiable.swift; sourceTree = "<group>"; };
 		3E80E0AD2091D16E00114711 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		3E90734620BBEF3700AE3605 /* ChunksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChunksTests.swift; sourceTree = "<group>"; };
 		3E90734820BBFE5600AE3605 /* UploadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadTests.swift; sourceTree = "<group>"; };
@@ -67,7 +85,10 @@
 		3E9413C92099DB05003A42D1 /* Send.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Send.swift; sourceTree = "<group>"; };
 		3E9413CB2099E390003A42D1 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		3E9413CD2099E3F5003A42D1 /* Chunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chunk.swift; sourceTree = "<group>"; };
-		3E950E5D209B48DB00FA09D6 /* FileUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUploader.swift; sourceTree = "<group>"; };
+		3EA0EFB920BD4D90009E4BB1 /* AsynchronousOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsynchronousOperation.swift; sourceTree = "<group>"; };
+		3EA0EFCD20BD7743009E4BB1 /* AsynchronousResultOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsynchronousResultOperation.swift; sourceTree = "<group>"; };
+		3ECCF25620C5355C00F2B59B /* zelda.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = zelda.jpg; sourceTree = "<group>"; };
+		3ECCF26020C583A100F2B59B /* MutableProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutableProgress.swift; sourceTree = "<group>"; };
 		3ED1C0A220B43E980045D8B3 /* CreateTransferTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTransferTests.swift; sourceTree = "<group>"; };
 		3ED1C0A420B442F70045D8B3 /* AddFilesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFilesTests.swift; sourceTree = "<group>"; };
 		3EE259632091CF8800DC5A97 /* WeTransfer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WeTransfer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,10 +117,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3E0EEBAE20C13F20009E6B2D /* Abstract */ = {
+			isa = PBXGroup;
+			children = (
+				3EA0EFB920BD4D90009E4BB1 /* AsynchronousOperation.swift */,
+				3EA0EFCD20BD7743009E4BB1 /* AsynchronousResultOperation.swift */,
+				3E0EEBAF20C1444C009E6B2D /* ChainedAsynchronousResultOperation.swift */,
+				3E0EEBA720BEE918009E6B2D /* AsynchronousDependencyResultOperation.swift */,
+			);
+			path = Abstract;
+			sourceTree = "<group>";
+		};
 		3E80E0A82091D11300114711 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				3E80E0AB2091D14E00114711 /* Indentifiable.swift */,
 				3E80E0A92091D12B00114711 /* Transfer.swift */,
 				3E9413CB2099E390003A42D1 /* File.swift */,
 				3E9413CD2099E3F5003A42D1 /* Chunk.swift */,
@@ -111,10 +142,9 @@
 			isa = PBXGroup;
 			children = (
 				3E9413C02098C121003A42D1 /* Methods */,
-				3E80E0AD2091D16E00114711 /* Result.swift */,
+				3EA0EFC720BD503D009E4BB1 /* Operations */,
 				3E9413BC2098BC25003A42D1 /* APIClient.swift */,
 				3E9413BE2098BF5A003A42D1 /* APIEndpoints.swift */,
-				3E950E5D209B48DB00FA09D6 /* FileUploader.swift */,
 			);
 			path = Server;
 			sourceTree = "<group>";
@@ -129,6 +159,31 @@
 				3E9413C92099DB05003A42D1 /* Send.swift */,
 			);
 			path = Methods;
+			sourceTree = "<group>";
+		};
+		3EA0EFC720BD503D009E4BB1 /* Operations */ = {
+			isa = PBXGroup;
+			children = (
+				3ECCF25F20C5838C00F2B59B /* Helpers */,
+				3E0EEBAE20C13F20009E6B2D /* Abstract */,
+				3E0EEBB120C17264009E6B2D /* CreateTransferOperation.swift */,
+				3E0EEBB320C175D0009E6B2D /* AddFilesOperation.swift */,
+				3E0EEBB920C18FA5009E6B2D /* UploadFilesOperation.swift */,
+				3E0EEBB520C177FE009E6B2D /* CreateChunkOperation.swift */,
+				3E0EEBBF20C19074009E6B2D /* UploadFileOperation.swift */,
+				3E0EEBBB20C19004009E6B2D /* UploadChunkOperation.swift */,
+				3E0EEBBD20C19037009E6B2D /* CompleteUploadOperation.swift */,
+			);
+			path = Operations;
+			sourceTree = "<group>";
+		};
+		3ECCF25F20C5838C00F2B59B /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				3E80E0AD2091D16E00114711 /* Result.swift */,
+				3ECCF26020C583A100F2B59B /* MutableProgress.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		3ED1C0A120B43E780045D8B3 /* Transfer */ = {
@@ -177,6 +232,7 @@
 			isa = PBXGroup;
 			children = (
 				3E7348BD20B4040D009B41D0 /* TestConfiguration.swift */,
+				3ECCF25620C5355C00F2B59B /* zelda.jpg */,
 				3E579B202092194F008DFFD2 /* image.jpg */,
 				3E7348BF20B41895009B41D0 /* InitializationTests.swift */,
 				3E7348C520B41EC0009B41D0 /* RequestTests.swift */,
@@ -315,18 +371,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E0EEBA820BEE918009E6B2D /* AsynchronousDependencyResultOperation.swift in Sources */,
 				3E80E0AA2091D12B00114711 /* Transfer.swift in Sources */,
-				3E950E5E209B48DB00FA09D6 /* FileUploader.swift in Sources */,
+				3E0EEBB220C17264009E6B2D /* CreateTransferOperation.swift in Sources */,
+				3E0EEBBC20C19004009E6B2D /* UploadChunkOperation.swift in Sources */,
 				3E9413BF2098BF5A003A42D1 /* APIEndpoints.swift in Sources */,
+				3E0EEBB420C175D0009E6B2D /* AddFilesOperation.swift in Sources */,
 				3E80E0A72091D0E700114711 /* WeTransfer.swift in Sources */,
 				3E80E0AE2091D16E00114711 /* Result.swift in Sources */,
 				3E9413CA2099DB05003A42D1 /* Send.swift in Sources */,
+				3E0EEBC020C19074009E6B2D /* UploadFileOperation.swift in Sources */,
+				3E0EEBB620C177FE009E6B2D /* CreateChunkOperation.swift in Sources */,
 				3E9413C82099D89E003A42D1 /* AddFiles.swift in Sources */,
 				3E9413C62099D823003A42D1 /* CreateTransfer.swift in Sources */,
+				3ECCF26120C583A100F2B59B /* MutableProgress.swift in Sources */,
+				3EA0EFCE20BD7743009E4BB1 /* AsynchronousResultOperation.swift in Sources */,
+				3E0EEBBA20C18FA5009E6B2D /* UploadFilesOperation.swift in Sources */,
 				3E9413CE2099E3F5003A42D1 /* Chunk.swift in Sources */,
-				3E80E0AC2091D14E00114711 /* Indentifiable.swift in Sources */,
 				3E9413C22098C132003A42D1 /* Authorize.swift in Sources */,
 				3E9413C42099D78A003A42D1 /* Request.swift in Sources */,
+				3E0EEBBE20C19037009E6B2D /* CompleteUploadOperation.swift in Sources */,
+				3E0EEBB020C1444C009E6B2D /* ChainedAsynchronousResultOperation.swift in Sources */,
+				3EA0EFBA20BD4D90009E4BB1 /* AsynchronousOperation.swift in Sources */,
 				3E9413BD2098BC25003A42D1 /* APIClient.swift in Sources */,
 				3E9413CC2099E390003A42D1 /* File.swift in Sources */,
 			);

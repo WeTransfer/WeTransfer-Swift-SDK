@@ -14,14 +14,22 @@ extension WeTransfer {
 		let success: Bool
 		let token: String?
 	}
-
-	public static func authorize(completion: @escaping (Result<String>) -> Void) throws {
+	
+	public static func authorize(completion: @escaping (Result<String>) -> Void) {
 		if let bearer = client.authenticationBearer {
 			completion(.success(bearer))
 			return
 		}
-		let request = try client.createRequest(.authorize(), needsToken: false)
-		let task = client.urlSession.dataTask(with: request) { (data, _, error) in
+		
+		let request: URLRequest
+		do {
+			request = try client.createRequest(.authorize())
+		} catch {
+			completion(.failure(error))
+			return
+		}
+		
+		let task = client.urlSession.dataTask(with: request) { (data, urlResponse, error) in
 			do {
 				if let error = error {
 					throw error
@@ -36,9 +44,8 @@ extension WeTransfer {
 				} else {
 					throw RequestError.authorizationFailed
 				}
-
 			} catch {
-				let serverError = parseErrorResponse(data) ?? error
+				let serverError = parseErrorResponse(data, urlResponse: urlResponse as? HTTPURLResponse) ?? error
 				completion(.failure(serverError))
 			}
 		}

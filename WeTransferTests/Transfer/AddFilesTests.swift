@@ -13,7 +13,7 @@ class AddFilesTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-		TestConfiguration.configure(environment: .live)
+		TestConfiguration.configure(environment: .production)
     }
     
     override func tearDown() {
@@ -50,7 +50,6 @@ class AddFilesTests: XCTestCase {
 		XCTAssertNil(file.identifier)
 		XCTAssertFalse(file.uploaded)
 		XCTAssertNil(file.numberOfChunks)
-		XCTAssert(file.chunks.isEmpty)
 		XCTAssertNil(file.multipartUploadIdentifier)
 		XCTAssertEqual(file.filesize, 1200480, "File size not equal")
 	}
@@ -65,24 +64,19 @@ class AddFilesTests: XCTestCase {
 
 		let addedFilesExpectation = expectation(description: "Files are added")
 
-		try? WeTransfer.createTransfer(with: transfer, completion: { (result) in
+		WeTransfer.createTransfer(with: transfer, completion: { (result) in
 			if case .failure(let error) = result {
 				XCTFail(error.localizedDescription)
 				return
 			}
 
-			do {
-				try WeTransfer.onlyAddFiles([file], to: transfer, completion: { (result) in
-					if case .failure(let error) = result {
-						XCTFail(error.localizedDescription)
-						return
-					}
-					addedFilesExpectation.fulfill()
-				})
-			} catch {
-				XCTFail(error.localizedDescription)
+			WeTransfer.addFiles([file], to: transfer, completion: { (result) in
+				if case .failure(let error) = result {
+					XCTFail(error.localizedDescription)
+					return
+				}
 				addedFilesExpectation.fulfill()
-			}
+			})
 		})
 
 		waitForExpectations(timeout: 10) { _ in

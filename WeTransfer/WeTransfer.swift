@@ -20,6 +20,7 @@ extension WeTransfer {
 		case notAuthorized
 		case transferAlreadyCreated
 		case transferNotYetCreated
+		case noFilesAvailable
 	}
 
 	public struct Configuration {
@@ -27,7 +28,8 @@ extension WeTransfer {
 		public let baseURL: URL
 
 		public init(APIKey: String, baseURL: URL? = nil) {
-			self.baseURL = baseURL ?? URL(string: "https://dev.wetransfer.com/v1/")! // swiftlint:disable:this force_unwrapping
+			// swiftlint:disable force_unwrapping
+			self.baseURL = baseURL ?? URL(string: "https://dev.wetransfer.com/v1/")!
 			self.APIKey = APIKey
 		}
 	}
@@ -42,25 +44,49 @@ extension WeTransfer {
 
 	@discardableResult
 	public static func sendTransfer(named name: String, files urls: [URL], stateChanged: @escaping (State) -> Void) -> Transfer? {
-
-		// Create transfer
+		
+		// Create the transfer model
 		let files = urls.compactMap { url in
 			return File(url: url)
 		}
 		let transfer = Transfer(name: name, description: nil, files: files)
-		do {
-			try createTransfer(with: transfer) { result in
-				switch result {
-				case .failure(let error):
-					stateChanged(.failed(error))
-				case .success(let transfer):
-					send(transfer, stateChanged: stateChanged)
-				}
+		
+		// Create transfer on server
+		let creationOperation = CreateTransferOperation(transfer: transfer)
+		
+		// Add files to the transfer
+		let addFilesOperation = AddFilesOperation()
+		
+		// Upload all files from the chunks
+		let uploadFilesOperation = UploadFilesOperation()
+		
+		// Handle transfer created result
+		creationOperation.onResult = { result in
+			if case .success(let transfer) = result {
+				stateChanged(.created(transfer))
 			}
-		} catch {
-			stateChanged(.failed(error))
-			return nil
 		}
+		
+		// When all files are ready for upload
+		addFilesOperation.onResult = { result in
+			if case .success = result {
+				stateChanged(.started(uploadFilesOperation.progress))
+			}
+		}
+		
+		// Perform all operations in a chain
+		let operations = [creationOperation, addFilesOperation, uploadFilesOperation].chained()
+		client.operationQueue.addOperations(operations, waitUntilFinished: false)
+		
+		uploadFilesOperation.onResult = { result in
+			switch result {
+			case .failure(let error):
+				stateChanged(.failed(error))
+			case .success(let transfer):
+				stateChanged(.completed(transfer))
+			}
+		}
+		
 		return transfer
 	}
 }

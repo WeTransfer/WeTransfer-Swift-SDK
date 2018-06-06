@@ -10,45 +10,23 @@ import Foundation
 
 extension WeTransfer {
 
-	struct CreateTransferRequestParameters: Encodable {
-		let name: String
-		let description: String?
+	@discardableResult public static func createTransfer(with transfer: Transfer, completion: @escaping (Result<Transfer>) -> Void) -> Operation {
 
-		init(with transfer: Transfer) {
-			name = transfer.name
-			description = transfer.description
+		let creationOperation = CreateTransferOperation(transfer: transfer)
+		
+		guard !transfer.files.isEmpty else {
+			creationOperation.onResult = completion
+			client.operationQueue.addOperation(creationOperation)
+			return creationOperation
 		}
-	}
-
-	struct CreateTransferResponse: Decodable {
-		let id: String // swiftlint:disable:this identifier_name
-		let shortenedUrl: URL
-	}
-
-	public static func createTransfer(with transfer: Transfer, completion: @escaping (Result<Transfer>) -> Void) throws {
-		guard transfer.identifier == nil else {
-			throw Error.transferAlreadyCreated
-		}
-
-		let requestParameters = CreateTransferRequestParameters(with: transfer)
-		let data = try client.encoder.encode(requestParameters)
-
-		try request(.createTransfer(), data: data) { (result: Result<CreateTransferResponse>) in
-			switch result {
-			case .success(let createdTransferResponse):
-				transfer.update(with: createdTransferResponse)
-				if transfer.files.isEmpty {
-					completion(.success(transfer))
-				} else {
-					do {
-						try addFiles(transfer.files, to: transfer, completion: completion)
-					} catch {
-						completion(.failure(error))
-					}
-				}
-			case .failure(let error):
-				completion(.failure(error))
-			}
-		}
+		
+		let addFilesOperation = AddFilesOperation()
+//		let uploadURLsOperation = AddUploadURLsOperation()
+		addFilesOperation.onResult = completion
+		let operations = [creationOperation, addFilesOperation].chained()
+		
+		client.operationQueue.addOperations(operations, waitUntilFinished: false)
+		
+		return creationOperation
 	}
 }

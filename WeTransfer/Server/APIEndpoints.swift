@@ -18,6 +18,7 @@ public enum HTTPMethod: String {
 public struct APIEndpoint {
 
 	let method: HTTPMethod
+	let requiresAuthentication: Bool
 	let path: String?
 	let url: URL?
 
@@ -31,20 +32,23 @@ public struct APIEndpoint {
 		return baseURL?.appendingPathComponent(path)
 	}
 
-	init(method: HTTPMethod = .post, path: String) {
+	init(method: HTTPMethod = .post, path: String, requiresAuthentication: Bool = true) {
 		self.method = method
 		self.path = path
 		self.url = nil
+		self.requiresAuthentication = requiresAuthentication
 	}
 
-	init(method: HTTPMethod = .post, url: URL) {
+	init(method: HTTPMethod = .post, url: URL, requiresAuthentication: Bool = true) {
 		self.method = method
 		self.url = url
 		self.path = nil
+		self.requiresAuthentication = requiresAuthentication
 	}
 
 	static func authorize() -> APIEndpoint {
-		return APIEndpoint(path: "authorize")
+		// Only request that doesn't require a jwt token to be set
+		return APIEndpoint(path: "authorize", requiresAuthentication: false)
 	}
 
 	static func createTransfer() -> APIEndpoint {

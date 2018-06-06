@@ -26,7 +26,7 @@ class InitializationTests: XCTestCase {
 	}
 
 	func testConfigure() {
-		TestConfiguration.configure(environment: .live)
+		TestConfiguration.configure(environment: .production)
 		XCTAssertNotNil(WeTransfer.client.apiKey, "APIKey needs to be set")
 	}
 }

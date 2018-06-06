@@ -12,7 +12,7 @@ import Foundation
 class TestConfiguration: NSObject {
 
 	enum Environment {
-		case live
+		case production
 		case staging
 	}
 
@@ -20,8 +20,8 @@ class TestConfiguration: NSObject {
 		let configuration: WeTransfer.Configuration
 
 		switch environment {
-		case .live:
 			configuration = WeTransfer.Configuration(APIKey: "{YOUR_API_KEY_HERE}")
+		case .production:
 		case .staging:
 			configuration = WeTransfer.Configuration(APIKey: "{YOUR_API_KEY_HERE}", baseURL: URL(string: "https://developers.wetransferbeta.com/v1"))
 		}
