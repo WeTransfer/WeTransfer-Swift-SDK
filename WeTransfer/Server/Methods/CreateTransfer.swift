@@ -10,23 +10,20 @@ import Foundation
 
 extension WeTransfer {
 
-	@discardableResult public static func createTransfer(with transfer: Transfer, completion: @escaping (Result<Transfer>) -> Void) -> Operation {
+	public static func createTransfer(with transfer: Transfer, completion: @escaping (Result<Transfer>) -> Void) {
 
 		let creationOperation = CreateTransferOperation(transfer: transfer)
 		
 		guard !transfer.files.isEmpty else {
 			creationOperation.onResult = completion
 			client.operationQueue.addOperation(creationOperation)
-			return creationOperation
+			return
 		}
 		
 		let addFilesOperation = AddFilesOperation()
-//		let uploadURLsOperation = AddUploadURLsOperation()
 		addFilesOperation.onResult = completion
 		let operations = [creationOperation, addFilesOperation].chained()
 		
 		client.operationQueue.addOperations(operations, waitUntilFinished: false)
-		
-		return creationOperation
 	}
 }

@@ -21,7 +21,7 @@ extension WeTransfer {
 		case failed(Swift.Error)
 	}
 
-	@discardableResult public static func send(_ transfer: Transfer, stateChanged: @escaping (State) -> Void) -> Operation {
+	public static func send(_ transfer: Transfer, stateChanged: @escaping (State) -> Void) {
 		let operation = UploadFilesOperation(input: transfer)
 		if transfer.identifier != nil {
 			stateChanged(.created(transfer))
@@ -36,6 +36,5 @@ extension WeTransfer {
 			}
 		}
 		client.operationQueue.addOperation(operation)
-		return operation
 	}
 }

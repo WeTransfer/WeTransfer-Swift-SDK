@@ -10,11 +10,10 @@ import Foundation
 
 extension WeTransfer {
 	
-	@discardableResult public static func addFiles(_ files: [File], to transfer: Transfer, completion: @escaping (Result<Transfer>) -> Void) -> Operation {
+	public static func addFiles(_ files: [File], to transfer: Transfer, completion: @escaping (Result<Transfer>) -> Void) {
 		transfer.addFiles(files)
 		let operation = AddFilesOperation(input: transfer)
 		operation.onResult = completion
 		client.operationQueue.addOperation(operation)
-		return operation
 	}
 }
