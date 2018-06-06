@@ -31,19 +31,14 @@ class AuthorizationTests: XCTestCase {
 
 	func testAuthorization() {
 		let authorizedExpectation = expectation(description: "Authorization should succeed")
-		var receivedToken: String?
 		WeTransfer.authorize { (result) in
-			switch result {
-			case .success(let token):
-				receivedToken = token
-			case .failure(let error):
+			if case .failure(let error) = result {
 				XCTFail("Authorization failed: \(error)")
 			}
 			authorizedExpectation.fulfill()
 		}
 
-		waitForExpectations(timeout: 10) { error in
-			XCTAssert(receivedToken != nil, "No token received from authorization call \(String(describing: error))")
+		waitForExpectations(timeout: 10) { _ in }
 		}
 	}
 
