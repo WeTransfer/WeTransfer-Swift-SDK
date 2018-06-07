@@ -23,7 +23,7 @@ class SimpleTransferTests: XCTestCase {
 
 	func testSimpleTransfer() {
 
-		guard let fileURL = Bundle(for: classForCoder).url(forResource: "zelda", withExtension: "jpg") else {
+		guard let fileURL = TestConfiguration.imageFileURL else {
 			XCTFail("Test image not found")
 			return
 		}
