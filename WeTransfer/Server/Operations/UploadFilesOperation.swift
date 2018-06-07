@@ -29,14 +29,19 @@ class UploadFilesOperation: ChainedAsynchronousResultOperation<Transfer, Transfe
 		}
 		
 		totalBytes = files.reduce(0, { $0 + $1.filesize })
+
+		// Each seperate files are handled in a queue
+		let fileOperationQueue = OperationQueue()
 		
 		// OperationQueue that handles all chunks concurrently
-		let fileOperationQueue = OperationQueue()
 		let chunkOperationQueue = OperationQueue()
 		chunkOperationQueue.maxConcurrentOperationCount = 5
+		
+		// Seperate URLSession that handles the actual uploading and reports the upload progress
 		let uploadSession = URLSession(configuration: .ephemeral, delegate: self, delegateQueue: nil)
 		progress.totalUnitCount = Int64(self.totalBytes)
 		
+		// Use the queue of the uploadSession to handle the progress
 		uploadSession.delegateQueue.underlyingQueue?.async {
 			self.progress.becomeCurrent(withPendingUnitCount: Int64(self.totalBytes))
 		}
