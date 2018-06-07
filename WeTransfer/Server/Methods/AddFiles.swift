@@ -20,7 +20,11 @@ extension WeTransfer {
 	public static func addFiles(_ files: [File], to transfer: Transfer, completion: @escaping (_ result: Result<Transfer>) -> Void) {
 		transfer.addFiles(files)
 		let operation = AddFilesOperation(input: transfer)
-		operation.onResult = completion
+		operation.onResult = { result in
+			DispatchQueue.main.async {
+				completion(result)
+			}
+		}
 		client.operationQueue.addOperation(operation)
 	}
 }

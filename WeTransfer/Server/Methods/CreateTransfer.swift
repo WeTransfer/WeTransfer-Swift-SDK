@@ -18,17 +18,23 @@ extension WeTransfer {
 	///   - completion: Closure that will be executed when the request or requests have finished
 	///   - result: Result with either the updated transfer object or an error when something went wrong
 	public static func createTransfer(with transfer: Transfer, completion: @escaping (_ result: Result<Transfer>) -> Void) {
+		
+		let callCompletion = { result in
+			DispatchQueue.main.async {
+				completion(result)
+			}
+		}
 
 		let creationOperation = CreateTransferOperation(transfer: transfer)
 		
 		guard !transfer.files.isEmpty else {
-			creationOperation.onResult = completion
+			creationOperation.onResult = callCompletion
 			client.operationQueue.addOperation(creationOperation)
 			return
 		}
 		
 		let addFilesOperation = AddFilesOperation()
-		addFilesOperation.onResult = completion
+		addFilesOperation.onResult = callCompletion
 		let operations = [creationOperation, addFilesOperation].chained()
 		
 		client.operationQueue.addOperations(operations, waitUntilFinished: false)

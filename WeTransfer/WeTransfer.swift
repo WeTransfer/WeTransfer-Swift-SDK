@@ -77,6 +77,13 @@ extension WeTransfer {
 	@discardableResult
 	public static func sendTransfer(named name: String, files urls: [URL], stateChanged: @escaping (_ state: State) -> Void) -> Transfer {
 		
+		// Make sure stateChanges closure is called on the main thread
+		let changeState = { state in
+			DispatchQueue.main.async {
+				stateChanged(state)
+			}
+		}
+		
 		// Create the transfer model
 		let files = urls.compactMap { url in File(url: url) }
 		
@@ -94,14 +101,14 @@ extension WeTransfer {
 		// Handle transfer created result
 		creationOperation.onResult = { result in
 			if case .success(let transfer) = result {
-				stateChanged(.created(transfer))
+				changeState(.created(transfer))
 			}
 		}
 		
 		// When all files are ready for upload
 		addFilesOperation.onResult = { result in
 			if case .success = result {
-				stateChanged(.started(uploadFilesOperation.progress))
+				changeState(.started(uploadFilesOperation.progress))
 			}
 		}
 		
@@ -113,9 +120,9 @@ extension WeTransfer {
 		uploadFilesOperation.onResult = { result in
 			switch result {
 			case .failure(let error):
-				stateChanged(.failed(error))
+				changeState(.failed(error))
 			case .success(let transfer):
-				stateChanged(.completed(transfer))
+				changeState(.completed(transfer))
 			}
 		}
 		

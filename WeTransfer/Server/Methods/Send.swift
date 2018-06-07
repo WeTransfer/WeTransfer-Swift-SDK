@@ -28,17 +28,24 @@ extension WeTransfer {
 	///   - transfer: The Transfer object to be sent
 	///   - stateChanged: Enum describing the current transfer's state. See the `State` enum description for more details for each state
 	public static func send(_ transfer: Transfer, stateChanged: @escaping (State) -> Void) {
+		
+		let changeState = { result in
+			DispatchQueue.main.async {
+				stateChanged(result)
+			}
+		}
+		
 		let operation = UploadFilesOperation(input: transfer)
 		if transfer.identifier != nil {
-			stateChanged(.created(transfer))
-			stateChanged(.started(operation.progress))
+			changeState(.created(transfer))
+			changeState(.started(operation.progress))
 		}
 		operation.onResult = { result in
 			switch result {
 			case .failure(let error):
-				stateChanged(.failed(error))
+				changeState(.failed(error))
 			case .success(let transfer):
-				stateChanged(.completed(transfer))
+				changeState(.completed(transfer))
 			}
 		}
 		client.operationQueue.addOperation(operation)
