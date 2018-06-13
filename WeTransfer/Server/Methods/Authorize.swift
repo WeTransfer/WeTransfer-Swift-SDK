@@ -27,7 +27,7 @@ extension WeTransfer {
 			}
 		}
 		
-		if client.authenticationBearer != nil {
+		guard client.authenticationBearer == nil else {
 			callCompletion(.success(()))
 			return
 		}
