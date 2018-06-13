@@ -8,9 +8,10 @@
 
 import Foundation
 
-public struct Chunk: Encodable {
+/// Represents a chunk of data from a file in a transfer. Used only in the uploading proces
+struct Chunk: Encodable {
 
-	public let chunkNumber: Int
+	public let chunkIndex: Int
 	static let defaultChunkSize: Bytes = (6 * 1024 * 1024)
 
 	let fileURL: URL
@@ -23,11 +24,11 @@ public struct Chunk: Encodable {
 
 extension Chunk {
 	init(file: File, response: AddUploadURLResponse) {
-		chunkNumber = response.partNumber - 1
+		chunkIndex = response.partNumber - 1
 		fileURL = file.url
 		uploadURL = response.uploadUrl
 		uploadIdentifier = response.uploadId
-		byteOffset = Chunk.defaultChunkSize * Bytes(chunkNumber)
+		byteOffset = Chunk.defaultChunkSize * Bytes(chunkIndex)
 		chunkSize = min(file.filesize - byteOffset, Chunk.defaultChunkSize)
 	}
 }
