@@ -8,16 +8,28 @@
 
 import Foundation
 
+/// Amount of bytes in a file or chunk
 public typealias Bytes = UInt64
 
+/// A file used in a Transfer object. Should be initialized with a URL pointing to a local file
 public struct File: Encodable {
+	
+	/// Location of the file on disk
 	public let url: URL
+	
+	/// Server-side identifier when file is added to the transfer on the server
 	public private(set) var identifier: String?
+	
+	/// Will be set to yes when all chunks of the file have been uploaded
 	public internal(set) var uploaded: Bool = false
 
+	/// Name of the file. Should be the last path component of the url
 	public let filename: String
+	
+	/// Size of the file in Bytes
 	public let filesize: Bytes
-	let contentIdentifier: String = "file"
+	
+	/// Unique identifier to keep track of files locally
 	let localIdentifier = UUID().uuidString
 
 	public private(set) var numberOfChunks: Int?

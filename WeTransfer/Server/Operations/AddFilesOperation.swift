@@ -19,7 +19,7 @@ struct AddFilesParameters: Encodable {
 		init(with file: File) {
 			filename = file.filename
 			filesize = file.filesize
-			contentIdentifier = file.contentIdentifier
+			contentIdentifier = "file"
 			localIdentifier = file.localIdentifier
 		}
 	}
