@@ -66,13 +66,13 @@ class AddFilesTests: XCTestCase {
 
 		WeTransfer.createTransfer(with: transfer, completion: { (result) in
 			if case .failure(let error) = result {
-				XCTFail(error.localizedDescription)
+				XCTFail("Create transfer failed: \(error)")
 				return
 			}
 
 			WeTransfer.addFiles([file], to: transfer, completion: { (result) in
 				if case .failure(let error) = result {
-					XCTFail(error.localizedDescription)
+					XCTFail("Add files to transfer failed: \(error)")
 					return
 				}
 				addedFilesExpectation.fulfill()
