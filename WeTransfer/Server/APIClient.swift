@@ -9,7 +9,6 @@
 import Foundation
 
 class APIClient {
-	
 	internal(set) var apiKey: String?
 	internal(set) var baseURL: URL?
 	var authenticationBearer: String?
@@ -44,7 +43,7 @@ extension APIClient {
 	/// - Parameters:
 	///   - endpoint: Endpoint describing the url and HTTP method
 	///   - data: Optional data to add to the request body
-	/// - Returns: URLRequest pointing
+	/// - Returns: URLRequest pointing to URL with appropriate HTTP method set
 	/// - Throws: `WeTransfer.Error` when not configured or not authorized
 	func createRequest(_ endpoint: APIEndpoint, data: Data? = nil) throws -> URLRequest {
 		// Check auth
