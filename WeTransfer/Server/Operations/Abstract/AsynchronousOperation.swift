@@ -76,11 +76,11 @@ open class AsynchronousOperation: Operation {
 			}
 		}
 		set {
-			willChangeValue(for: \.isExecuting)
+			willChangeValue(forKey: "isExecuting")
 			stateQueue.sync(flags: [.barrier]) {
 				rawState.executing = newValue
 			}
-			didChangeValue(for: \.isExecuting)
+			didChangeValue(forKey: "isExecuting")
 		}
 	}
 	
@@ -92,11 +92,11 @@ open class AsynchronousOperation: Operation {
 			}
 		}
 		set {
-			willChangeValue(for: \.isFinished)
+			willChangeValue(forKey: "isFinished")
 			stateQueue.sync(flags: [.barrier]) {
 				rawState.finished = newValue
 			}
-			didChangeValue(for: \.isFinished)
+			didChangeValue(forKey: "isFinished")
 		}
 	}
 	
@@ -108,11 +108,11 @@ open class AsynchronousOperation: Operation {
 			}
 		}
 		set {
-			willChangeValue(for: \.isCancelled)
+			willChangeValue(forKey: "isCancelled")
 			stateQueue.sync(flags: [.barrier]) {
 				rawState.cancelled = newValue
 			}
-			didChangeValue(for: \.isCancelled)
+			didChangeValue(forKey: "isCancelled")
 		}
 	}
 	
