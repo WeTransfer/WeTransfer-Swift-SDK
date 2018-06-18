@@ -63,6 +63,12 @@ class UploadFilesOperation: ChainedAsynchronousResultOperation<Transfer, Transfe
 			return operation
 		}
 		
+		guard !fileOperations.isEmpty else {
+			// No files to upload, fail
+			self.finish(with: .failure(WeTransfer.Error.noFilesAvailable))
+			return
+		}
+		
 		filesResultOperation.onResult = { result in
 			uploadSession.delegateQueue.underlyingQueue?.async {
 				self.progress.resignCurrent()
