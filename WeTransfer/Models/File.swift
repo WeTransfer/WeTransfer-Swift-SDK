@@ -53,6 +53,8 @@ public struct File: Encodable {
 }
 
 extension File: Equatable {
+	/// Only compares the url and localIdentifier of the File
+	/// Note: Disregards any state, so the `uploaded` property is ignored
 	public static func == (lhs: File, rhs: File) -> Bool {
 		return lhs.url == rhs.url && lhs.localIdentifier == rhs.localIdentifier
 	}
