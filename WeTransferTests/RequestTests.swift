@@ -18,7 +18,7 @@ class RequestTests: XCTestCase {
 
 	func testEndpoints() {
 		let baseURLString = "https://dev.wetransfer.com/v1/"
-		let baseURL = URL(string: baseURLString)
+		let baseURL = URL(string: baseURLString)!
 
 		let authorizeEndpoint = APIEndpoint.authorize()
 		XCTAssertEqual(authorizeEndpoint.method, .post)

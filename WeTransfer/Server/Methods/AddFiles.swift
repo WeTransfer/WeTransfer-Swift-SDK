@@ -18,7 +18,7 @@ extension WeTransfer {
 	///   - completion: Closure to be executed when request has completed
 	///   - result: Result with either the updated transfer object or an error when something went wrong
 	public static func addFiles(_ files: [File], to transfer: Transfer, completion: @escaping (_ result: Result<Transfer>) -> Void) {
-		transfer.add(files: files)
+		transfer.add(files)
 		let operation = AddFilesOperation(input: transfer)
 		operation.onResult = { result in
 			DispatchQueue.main.async {
