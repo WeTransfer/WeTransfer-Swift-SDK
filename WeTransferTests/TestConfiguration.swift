@@ -22,11 +22,13 @@ class TestConfiguration: NSObject {
 		switch environment {
 		case .production:
 			configuration = WeTransfer.Configuration(apiKey: "{YOUR_API_KEY_HERE}",
-													 clientIdentifier: "WeTransfer-Swift-Tests")
+													 clientIdentifier: "WeTransfer-UnitTests",
+													 userIdentifier: UUID().uuidString)
 		case .staging:
 			configuration = WeTransfer.Configuration(apiKey: "{YOUR_API_KEY_HERE}",
 													 baseURL: URL(string: "https://customwetransferapi.com/"),
-													 clientIdentifier: "WeTransfer-Swift-Tests-Staging")
+													 clientIdentifier: "WeTransfer-UnitTests-Staging",
+													 userIdentifier: UUID().uuidString)
 		}
 		WeTransfer.configure(with: configuration)
 	}

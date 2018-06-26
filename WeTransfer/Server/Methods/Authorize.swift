@@ -10,6 +10,11 @@ import Foundation
 
 extension WeTransfer {
 
+	private struct AuthorizeParameters: Encodable {
+		let user_agent: String?
+		let user_identifier: String?
+	}
+	
 	private struct AuthorizeResponse: Decodable {
 		let success: Bool
 		let token: String?
@@ -32,7 +37,9 @@ extension WeTransfer {
 			return
 		}
 		
-		WeTransfer.request(.authorize()) { (result: Result<AuthorizeResponse>) in
+		let parameters = AuthorizeParameters(user_agent: client.configuration?.clientIdentifier, user_identifier: client.configuration?.userIdentifier)
+		
+		WeTransfer.request(.authorize(), parameters: parameters) { (result: Result<AuthorizeResponse>) in
 			switch result {
 			case .failure(let error):
 				callCompletion(.failure(error))
