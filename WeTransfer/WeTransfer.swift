@@ -75,7 +75,7 @@ extension WeTransfer {
 	///   - state: Enum describing the current transfer's state. See the `State` enum description for more details for each state
 	/// - Returns: Transfer object used to handle the transfer process.
 	@discardableResult
-	public static func sendTransfer(named name: String, files urls: [URL], stateChanged: @escaping (_ state: State) -> Void) -> Transfer {
+	public static func sendTransfer(named name: String, files urls: [URL], stateChanged: @escaping (_ state: State) -> Void) -> Transfer? {
 		
 		// Make sure stateChanges closure is called on the main thread
 		let changeState = { state in
@@ -85,8 +85,13 @@ extension WeTransfer {
 		}
 		
 		// Create the transfer model
-		let files = urls.compactMap { url in File(url: url) }
-		
+		let files: [File]
+		do {
+			files = try urls.compactMap { url in try File(url: url) }
+		} catch {
+			changeState(.failed(error))
+			return nil
+		}
 		let transfer = Transfer(name: name, description: nil, files: files)
 		
 		// Create transfer on server

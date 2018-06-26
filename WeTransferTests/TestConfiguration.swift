@@ -50,6 +50,6 @@ extension TestConfiguration {
 		guard let imageFileURL = imageFileURL else {
 			return nil
 		}
-		return File(url: imageFileURL)
+		return try? File(url: imageFileURL)
 	}
 }

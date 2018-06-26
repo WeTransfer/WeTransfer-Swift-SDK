@@ -14,6 +14,10 @@ public typealias Bytes = UInt64
 /// A file used in a Transfer object. Should be initialized with a URL pointing to a local file
 public struct File: Encodable {
 	
+	public enum Error: Swift.Error {
+		case fileSizeUnavailable
+	}
+	
 	/// Location of the file on disk
 	public let url: URL
 	
@@ -35,15 +39,15 @@ public struct File: Encodable {
 	public private(set) var numberOfChunks: Int?
 	private(set) var multipartUploadIdentifier: String?
 
-	public init?(url: URL) {
+	public init(url: URL) throws {
 		self.url = url
 		filename = url.lastPathComponent
-		if let fileAttributes = try? FileManager.default.attributesOfItem(atPath: url.path),
-			let filesizeAttribute = fileAttributes[.size] as? UInt64 {
-			self.filesize = filesizeAttribute
-		} else {
-			return nil
+		
+		let fileAttributes = try FileManager.default.attributesOfItem(atPath: url.path)
+		guard let filesizeAttribute = fileAttributes[.size] as? UInt64 else {
+			throw Error.fileSizeUnavailable
 		}
+		self.filesize = filesizeAttribute
 	}
 }
 
