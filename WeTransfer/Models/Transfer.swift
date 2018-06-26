@@ -39,11 +39,9 @@ extension Transfer {
 		shortURL = response.shortenedUrl
 	}
 
-	func addFiles(_ files: [File]) {
-		for file in files {
-			if !self.files.contains(file) {
-				self.files.append(file)
-			}
+	func add(files: [File]) {
+		for file in files where !self.files.contains(file) {
+			self.files.append(file)
 		}
 	}
 

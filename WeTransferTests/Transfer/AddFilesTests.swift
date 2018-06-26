@@ -28,11 +28,11 @@ class AddFilesTests: XCTestCase {
 			return
 		}
 
-		transfer.addFiles([file])
+		transfer.add([file])
 		XCTAssertTrue(transfer.files.contains(file))
 		XCTAssertEqual(transfer.files.count, 1)
 
-		transfer.addFiles([file])
+		transfer.add([file])
 		XCTAssertEqual(transfer.files.count, 1)
 	}
 
@@ -48,7 +48,7 @@ class AddFilesTests: XCTestCase {
 		}
 
 		XCTAssertNil(file.identifier)
-		XCTAssertFalse(file.uploaded)
+		XCTAssertFalse(file.isUploaded)
 		XCTAssertNil(file.numberOfChunks)
 		XCTAssertNil(file.multipartUploadIdentifier)
 		XCTAssertEqual(file.filesize, 1200480, "File size not equal")
