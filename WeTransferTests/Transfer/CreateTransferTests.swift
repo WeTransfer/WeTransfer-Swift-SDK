@@ -68,7 +68,7 @@ class CreateTransferTests: XCTestCase {
 
 			for file in transfer.files {
 				XCTAssertNotNil(file.identifier)
-				XCTAssertFalse(file.uploaded)
+				XCTAssertFalse(file.isUploaded)
 				XCTAssertNotNil(file.numberOfChunks)
 			}
 		}

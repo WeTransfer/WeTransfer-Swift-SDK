@@ -21,7 +21,7 @@ class UploadFilesOperation: ChainedAsynchronousResultOperation<Transfer, Transfe
 			return
 		}
 		
-		let files = transfer.files.filter({ $0.uploaded == false })
+		let files = transfer.files.filter({ $0.isUploaded == false })
 		
 		guard !files.isEmpty else {
 			self.finish(with: .failure(WeTransfer.Error.noFilesAvailable))

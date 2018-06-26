@@ -69,7 +69,7 @@ class UploadTests: XCTestCase {
 			}
 			XCTAssertNotNil(transfer.shortURL)
 			for file in transfer.files {
-				XCTAssertTrue(file.uploaded)
+				XCTAssertTrue(file.isUploaded)
 			}
 		}
 	}

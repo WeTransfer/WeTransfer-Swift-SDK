@@ -57,6 +57,6 @@ extension Transfer {
 		guard let index = files.index(of: file) else {
 			return
 		}
-		files[index].uploaded = true
+		files[index].isUploaded = true
 	}
 }

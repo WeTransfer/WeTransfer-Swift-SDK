@@ -25,7 +25,7 @@ public struct File: Encodable {
 	public private(set) var identifier: String?
 	
 	/// Will be set to yes when all chunks of the file have been uploaded
-	public internal(set) var uploaded: Bool = false
+	public internal(set) var isUploaded: Bool = false
 
 	/// Name of the file. Should be the last path component of the url
 	public let filename: String

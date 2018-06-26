@@ -83,7 +83,7 @@ class AddFilesTests: XCTestCase {
 			XCTAssertFalse(transfer.files.isEmpty)
 			for file in transfer.files {
 				XCTAssertNotNil(file.identifier)
-				XCTAssertFalse(file.uploaded)
+				XCTAssertFalse(file.isUploaded)
 			}
 		}
 	}
