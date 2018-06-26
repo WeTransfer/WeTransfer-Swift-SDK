@@ -18,7 +18,7 @@ struct Chunk: Encodable {
 	let uploadURL: URL
 	let uploadIdentifier: String
 
-	public let chunkSize: Bytes
+	public let size: Bytes
 	public let byteOffset: Bytes
 }
 
@@ -29,16 +29,14 @@ extension Chunk {
 		uploadURL = response.uploadUrl
 		uploadIdentifier = response.uploadId
 		byteOffset = Chunk.defaultChunkSize * Bytes(chunkIndex)
-		chunkSize = min(file.filesize - byteOffset, Chunk.defaultChunkSize)
+		size = min(file.filesize - byteOffset, Chunk.defaultChunkSize)
 	}
 }
 
-extension Chunk {
-	func data() throws -> Data? {
-		guard let file = try? FileHandle(forReadingFrom: fileURL) else {
-			return nil
-		}
-		file.seek(toFileOffset: UInt64(byteOffset))
-		return file.readData(ofLength: Int(chunkSize))
+extension Data {
+	init(from chunk: Chunk) throws {
+		let file = try FileHandle(forReadingFrom: chunk.fileURL)
+		file.seek(toFileOffset: UInt64(chunk.byteOffset))
+		self = file.readData(ofLength: Int(chunk.size))
 	}
 }
