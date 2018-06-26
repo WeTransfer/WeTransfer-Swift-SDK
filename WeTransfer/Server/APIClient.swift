@@ -9,8 +9,10 @@
 import Foundation
 
 class APIClient {
-	internal(set) var apiKey: String?
-	internal(set) var baseURL: URL?
+	
+	/// The current configuration for parameters like the API key and base URL
+	var configuration: WeTransfer.Configuration?
+	
 	var authenticationBearer: String?
 	
 	let urlSession: URLSession = {
@@ -47,13 +49,13 @@ extension APIClient {
 	/// - Throws: `WeTransfer.Error` when not configured or not authorized
 	func createRequest(_ endpoint: APIEndpoint, data: Data? = nil) throws -> URLRequest {
 		// Check auth
-		guard let apiKey = apiKey else {
+		guard let apiKey = configuration?.apiKey else {
 			throw WeTransfer.Error.notConfigured
 		}
 		guard !endpoint.requiresAuthentication || authenticationBearer != nil else {
 			throw WeTransfer.Error.notAuthorized
 		}
-		guard let url = endpoint.url(with: baseURL) else {
+		guard let url = endpoint.url(with: configuration?.baseURL) else {
 			throw WeTransfer.Error.notConfigured
 		}
 		

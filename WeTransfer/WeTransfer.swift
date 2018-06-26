@@ -38,20 +38,30 @@ extension WeTransfer {
 
 	/// Configuration of the API client
 	public struct Configuration {
-		public let APIKey: String
+		/// Key required to make use of the API. Visit https://developers.wetransfer.com to create a key
+		public let apiKey: String
+		/// Defaults to the standard API, but can be used to point to a different server
 		public let baseURL: URL
+		/// Identifier of the application accessing the SDK
+		public let clientIdentifier: String?
+		/// Unique identifier of the current user
+		public let userIdentifier: String?
 
 		let transfer = WeTransfer()
 		
 		/// Initializes the configuration struct with a request API key and optionally a baseURL for when you're pointing to a different server
 		///
 		/// - Parameters:
-		///   - APIKey: Key required to make use of the API. Visit https://developers.wetransfer.com to get a key
+		///   - apiKey: Key required to make use of the API. Visit https://developers.wetransfer.com to create a key
 		///   - baseURL: Defaults to the standard API, but can be used to point to a different server
-		public init(APIKey: String, baseURL: URL? = nil) {
+		///   - clientIdentifier: Identifier of the application accessing the SDK
+		///   - userIdentifier: Unique identifier of the current user
+		public init(apiKey: String, baseURL: URL? = nil, clientIdentifier: String? = nil, userIdentifier: String? = nil) {
 			// swiftlint:disable force_unwrapping
 			self.baseURL = baseURL ?? URL(string: "https://dev.wetransfer.com/v1/")!
-			self.APIKey = APIKey
+			self.apiKey = apiKey
+			self.clientIdentifier = clientIdentifier
+			self.userIdentifier = userIdentifier
 		}
 	}
 
@@ -59,8 +69,7 @@ extension WeTransfer {
 	///
 	/// - Parameter configuration: Configuration struct to configure the API client with
 	public static func configure(with configuration: Configuration) {
-		client.apiKey = configuration.APIKey
-		client.baseURL = configuration.baseURL
+		client.configuration = configuration
 	}
 }
 
