@@ -13,7 +13,9 @@ import UIKit
 import Cocoa
 #endif
 
-public class Transfer: Encodable {
+/// Desribes a single transfer to be created, updated and sent. Used as an identifier between each request to be made and a local representation of the server-side transfer.
+/// Can be initialized with files or these can be added later via `WeTransfer.addFiles(files: to transfer:)`
+final public class Transfer: Encodable {
 	public private(set) var identifier: String?
 
 	public let name: String
@@ -30,6 +32,7 @@ public class Transfer: Encodable {
 	}
 }
 
+// MARK: - Private updating methods
 extension Transfer {
 	func update(with response: CreateTransferResponse) {
 		identifier = "\(response.id)"
