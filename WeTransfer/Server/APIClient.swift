@@ -8,20 +8,14 @@
 
 import Foundation
 
-class APIClient {
+final class APIClient {
 	internal(set) var apiKey: String?
 	internal(set) var baseURL: URL?
 	var authenticationBearer: String?
 	
-	let urlSession: URLSession = {
-		let session = URLSession(configuration: .default, delegate: nil, delegateQueue: nil)
-		return session
-	}()
+	let urlSession: URLSession = URLSession(configuration: .default, delegate: nil, delegateQueue: nil)
 	
-	let operationQueue: OperationQueue = {
-		let queue = OperationQueue()
-		return queue
-	}()
+	let operationQueue: OperationQueue = OperationQueue()
 	
 	let decoder: JSONDecoder = {
 		let decoder = JSONDecoder()
