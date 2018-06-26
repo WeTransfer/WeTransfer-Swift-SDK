@@ -47,7 +47,7 @@ extension APIClient {
 		guard !endpoint.requiresAuthentication || authenticationBearer != nil else {
 			throw WeTransfer.Error.notAuthorized
 		}
-		guard let url = endpoint.url(with: baseURL) else {
+		guard let baseURL = baseURL, let url = endpoint.url(with: baseURL) else {
 			throw WeTransfer.Error.notConfigured
 		}
 		
