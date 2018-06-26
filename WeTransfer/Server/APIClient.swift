@@ -61,6 +61,8 @@ extension APIClient {
 		
 		var request = URLRequest(url: url)
 		request.httpMethod = endpoint.method.rawValue
+		request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+		request.setValue("application/json", forHTTPHeaderField: "Accept")
 		request.addValue(apiKey, forHTTPHeaderField: "x-api-key")
 		
 		if let token = authenticationBearer {
