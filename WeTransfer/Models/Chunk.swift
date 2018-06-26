@@ -18,8 +18,8 @@ struct Chunk: Encodable {
 	let uploadURL: URL
 	let uploadIdentifier: String
 
-	public let size: Bytes
-	public let byteOffset: Bytes
+	let size: Bytes
+	let byteOffset: Bytes
 }
 
 extension Chunk {
