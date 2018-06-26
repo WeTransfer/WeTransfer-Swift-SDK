@@ -28,7 +28,9 @@ public struct File: Encodable {
 	public internal(set) var isUploaded: Bool = false
 
 	/// Name of the file. Should be the last path component of the url
-	public let filename: String
+	public var filename: String {
+		return url.lastPathComponent
+	}
 	
 	/// Size of the file in Bytes
 	public let filesize: Bytes
@@ -41,7 +43,6 @@ public struct File: Encodable {
 
 	public init(url: URL) throws {
 		self.url = url
-		filename = url.lastPathComponent
 		
 		let fileAttributes = try FileManager.default.attributesOfItem(atPath: url.path)
 		guard let filesizeAttribute = fileAttributes[.size] as? UInt64 else {
