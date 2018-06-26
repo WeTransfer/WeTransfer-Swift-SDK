@@ -21,9 +21,10 @@ class TestConfiguration: NSObject {
 
 		switch environment {
 		case .production:
-			configuration = WeTransfer.Configuration(APIKey: "{YOUR_API_KEY_HERE}")
+			configuration = WeTransfer.Configuration(apiKey: "{YOUR_API_KEY_HERE}")
 		case .staging:
-			configuration = WeTransfer.Configuration(APIKey: "{YOUR_API_KEY_HERE}", baseURL: URL(string: "https://customwetransferapi.com/"))
+			configuration = WeTransfer.Configuration(apiKey: "{YOUR_API_KEY_HERE}",
+													 baseURL: URL(string: "https://customwetransferapi.com/"))
 		}
 		WeTransfer.configure(with: configuration)
 	}
