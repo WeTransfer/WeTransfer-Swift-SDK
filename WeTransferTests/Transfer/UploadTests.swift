@@ -43,7 +43,7 @@ class UploadTests: XCTestCase {
 				switch state {
 				case .created(let transfer):
 					print("Transfer created: \(String(describing: transfer.identifier))")
-				case .started(let progress):
+				case .inProgress(let progress):
 					print("Upload started")
 					var percentage = 0.0
 					self.observation = progress.observe(\.fractionCompleted, changeHandler: { (progress, _) in

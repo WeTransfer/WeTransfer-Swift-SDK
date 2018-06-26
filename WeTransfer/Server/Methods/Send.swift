@@ -15,7 +15,7 @@ extension WeTransfer {
 		/// Transfer is created server side, share url is now available
 		case created(Transfer)
 		/// Upload has started, track progress with progress object
-		case started(Progress)
+		case inProgress(Progress)
 		/// Transfer is completed
 		case completed(Transfer)
 		/// Transfer failed due to provided error
@@ -38,7 +38,7 @@ extension WeTransfer {
 		let operation = UploadFilesOperation(input: transfer)
 		if transfer.identifier != nil {
 			changeState(.created(transfer))
-			changeState(.started(operation.progress))
+			changeState(.inProgress(operation.progress))
 		}
 		operation.onResult = { result in
 			switch result {

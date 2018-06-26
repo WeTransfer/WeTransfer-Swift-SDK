@@ -12,7 +12,7 @@ import Foundation
 /// Configure the client with `WeTransfer.configure()` after which all request are available.
 /// - Use `WeTransfer.sendTransfer()` to send a transfer right away
 /// - Use `WeTransfer.createTransfer()` to manually create a transfer on the server and `WeTransfer.send()` to upload the transfer when you're ready
-public struct WeTransfer {
+public class WeTransfer {
 
 	/// The client used for all requests. Stores the authenticated state and creates and manages all requests
 	static var client: APIClient = APIClient()
@@ -108,7 +108,7 @@ extension WeTransfer {
 		// When all files are ready for upload
 		addFilesOperation.onResult = { result in
 			if case .success = result {
-				changeState(.started(uploadFilesOperation.progress))
+				changeState(.inProgress(uploadFilesOperation.progress))
 			}
 		}
 		

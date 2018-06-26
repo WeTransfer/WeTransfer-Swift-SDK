@@ -36,7 +36,7 @@ class SimpleTransferTests: XCTestCase {
 			switch state {
 			case .created(let transfer):
 				print("Transfer created: \(transfer)")
-			case .started(let progress):
+			case .inProgress(let progress):
 				print("Transfer started...")
 				timer = Timer(timeInterval: 1 / 30, repeats: true, block: { _ in
 					print("Progress: \(progress.fractionCompleted)")
