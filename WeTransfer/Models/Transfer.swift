@@ -7,9 +7,9 @@
 //
 
 import Foundation
-#if os(iOS)
+#if canImport(UIKit)
 import UIKit
-#elseif os(macOS)
+#elseif canImport(Cocoa)
 import Cocoa
 #endif
 
