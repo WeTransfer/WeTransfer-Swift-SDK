@@ -15,7 +15,7 @@ import Cocoa
 
 /// Desribes a single transfer to be created, updated and sent. Used as an identifier between each request to be made and a local representation of the server-side transfer.
 /// Can be initialized with files or these can be added later through the add files function
-final public class Transfer: Encodable {
+final public class Transfer {
 	public private(set) var identifier: String?
 
 	public let name: String
