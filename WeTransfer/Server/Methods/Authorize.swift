@@ -27,7 +27,7 @@ extension WeTransfer {
 			}
 		}
 		
-		guard client.authenticationBearer == nil else {
+		guard client.authenticator.bearer != nil else {
 			callCompletion(.success(()))
 			return
 		}
@@ -38,7 +38,7 @@ extension WeTransfer {
 				callCompletion(.failure(error))
 			case .success(let response):
 				if let token = response.token, response.success {
-					client.authenticationBearer = token
+					client.authenticator.bearer = token
 					callCompletion(.success(()))
 				} else {
 					callCompletion(.failure(RequestError.authorizationFailed))

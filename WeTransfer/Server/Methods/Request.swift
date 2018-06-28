@@ -81,7 +81,7 @@ extension WeTransfer {
 	///   - result: Result with either the decoded Response or and error describing where the request went wrong
 	static func request<Response: Decodable>(_ endpoint: APIEndpoint, data: Data? = nil, completion: @escaping (_ result: Result<Response>) -> Void) {
 		
-		guard !endpoint.requiresAuthentication || client.authenticationBearer != nil else {
+		guard !endpoint.requiresAuthentication || client.authenticator.bearer != nil else {
 			// Try to authenticate once, after which the authenticationBearer *should* be set
 			authorize { result in
 				if case .failure(let error) = result {
@@ -89,7 +89,7 @@ extension WeTransfer {
 					return
 				}
 				// Just in case the authenticationBearer isn't set, make sure the authorize request doesn't happen endlessly
-				if client.authenticationBearer == nil {
+				if client.authenticator.bearer == nil {
 					completion(.failure(Error.notAuthorized))
 					return
 				}

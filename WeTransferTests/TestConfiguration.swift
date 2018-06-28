@@ -30,12 +30,12 @@ class TestConfiguration: NSObject {
 	}
 
 	static func fakeAuthorize() {
-		WeTransfer.client.authenticationBearer = "Fake.Tokens.Gonna-Fake"
+		WeTransfer.client.authenticator.bearer = "Fake.Tokens.Gonna-Fake"
 	}
 
 	static func resetConfiguration() {
 		WeTransfer.client.apiKey = nil
-		WeTransfer.client.authenticationBearer = nil
+		WeTransfer.client.authenticator.bearer = nil
 	}
 }
 

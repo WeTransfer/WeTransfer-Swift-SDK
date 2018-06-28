@@ -13,7 +13,8 @@ import Foundation
 final class APIClient {
 	internal(set) var apiKey: String?
 	internal(set) var baseURL: URL?
-	var authenticationBearer: String?
+	
+	let authenticator = Authenticator()
 	
 	let urlSession: URLSession = URLSession(configuration: .default, delegate: nil, delegateQueue: nil)
 	
@@ -46,7 +47,7 @@ extension APIClient {
 		guard let apiKey = apiKey else {
 			throw WeTransfer.Error.notConfigured
 		}
-		guard !endpoint.requiresAuthentication || authenticationBearer != nil else {
+		guard !endpoint.requiresAuthentication || authenticator.bearer != nil else {
 			throw WeTransfer.Error.notAuthorized
 		}
 		guard let baseURL = baseURL, let url = endpoint.url(with: baseURL) else {
@@ -57,9 +58,8 @@ extension APIClient {
 		request.httpMethod = endpoint.method.rawValue
 		request.addValue(apiKey, forHTTPHeaderField: "x-api-key")
 		
-		if let token = authenticationBearer {
-			request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-		}
+		request = authenticator.authenticatedRequest(from: request)
+		
 		if let data = data {
 			request.httpBody = data
 		}
