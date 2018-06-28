@@ -25,12 +25,14 @@ struct Chunk: Encodable {
 
 extension Chunk {
 	init(file: File, response: AddUploadURLResponse) {
-		chunkIndex = response.partNumber - 1
-		fileURL = file.url
-		uploadURL = response.uploadUrl
-		uploadIdentifier = response.uploadId
-		byteOffset = Chunk.defaultChunkSize * Bytes(chunkIndex)
-		size = min(file.filesize - byteOffset, Chunk.defaultChunkSize)
+		let chunkIndex = response.partNumber - 1
+		let byteOffset = Chunk.defaultChunkSize * Bytes(chunkIndex)
+		self.init(chunkIndex: chunkIndex,
+				  fileURL: file.url,
+				  uploadURL: response.uploadUrl,
+				  uploadIdentifier: response.uploadId,
+				  size: min(file.filesize - byteOffset, Chunk.defaultChunkSize),
+				  byteOffset: byteOffset)
 	}
 }
 
