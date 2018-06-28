@@ -8,6 +8,8 @@
 
 import Foundation
 
+/// Holds the local state for communicating with the API
+/// Handles the creation of the appropriate requests, and holds any request-associated classes like the decoder and encoder
 final class APIClient {
 	internal(set) var apiKey: String?
 	internal(set) var baseURL: URL?
