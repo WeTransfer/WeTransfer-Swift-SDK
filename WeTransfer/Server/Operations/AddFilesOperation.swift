@@ -18,7 +18,10 @@ class AddFilesOperation: ChainedAsynchronousResultOperation<Transfer, Transfer> 
 	}
 	
 	override func execute(_ transfer: Transfer) {
-		let files = filesToAdd ?? transfer.files.filter({ $0.identifier == nil })
+		if let newFiles = filesToAdd {
+			transfer.add(newFiles)
+		}
+		let files = transfer.files.filter({ $0.identifier == nil })
 		let parameters = AddFilesParameters(with: files)
 		
 		guard let identifier = transfer.identifier else {

@@ -51,6 +51,7 @@ class ChunksTests: XCTestCase {
 				updatedFile = transfer.files.first
 				guard let file = updatedFile else {
 					XCTFail("File not added to transfer")
+					createdChunksExpectation.fulfill()
 					return
 				}
 				let operation = CreateChunkOperation(file: file, chunkIndex: 0)
