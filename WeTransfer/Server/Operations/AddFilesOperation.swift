@@ -34,10 +34,14 @@ struct AddFilesParameters: Encodable {
 }
 
 struct AddFilesResponse: Decodable {
+	var filesToAdd: [File]?
 	
 	struct Meta: Decodable {
 		let multipartParts: Int
 		let multipartUploadId: String
+	convenience init(transfer: Transfer, files: [File]) {
+		self.init(input: transfer)
+		filesToAdd = files
 	}
 	
 	let id: String
@@ -53,7 +57,7 @@ struct AddFilesResponse: Decodable {
 class AddFilesOperation: ChainedAsynchronousResultOperation<Transfer, Transfer> {
 	
 	override func execute(_ transfer: Transfer) {
-		let files = transfer.files.filter({ $0.identifier == nil })
+		let files = filesToAdd ?? transfer.files.filter({ $0.identifier == nil })
 		let parameters = AddFilesParameters(with: files)
 		
 		guard let identifier = transfer.identifier else {
