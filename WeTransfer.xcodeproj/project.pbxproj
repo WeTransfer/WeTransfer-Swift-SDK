@@ -42,6 +42,8 @@
 		3EA0EFCE20BD7743009E4BB1 /* AsynchronousResultOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA0EFCD20BD7743009E4BB1 /* AsynchronousResultOperation.swift */; };
 		3ED1C0A320B43E980045D8B3 /* CreateTransferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED1C0A220B43E980045D8B3 /* CreateTransferTests.swift */; };
 		3ED1C0A520B442F70045D8B3 /* AddFilesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED1C0A420B442F70045D8B3 /* AddFilesTests.swift */; };
+		3ED6ED3A20EA2AD100130261 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED6ED3920EA2AD100130261 /* Secrets.swift */; };
+		3ED6ED3C20EA2F2100130261 /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3ED6ED3B20EA2F2100130261 /* Secrets.plist */; };
 		3EE259742091CF8800DC5A97 /* WeTransfer_Swift.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE259662091CF8800DC5A97 /* WeTransfer_Swift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
@@ -91,6 +93,8 @@
 		3ECCF25620C5355C00F2B59B /* zelda.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = zelda.jpg; sourceTree = "<group>"; };
 		3ED1C0A220B43E980045D8B3 /* CreateTransferTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTransferTests.swift; sourceTree = "<group>"; };
 		3ED1C0A420B442F70045D8B3 /* AddFilesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFilesTests.swift; sourceTree = "<group>"; };
+		3ED6ED3920EA2AD100130261 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
+		3ED6ED3B20EA2F2100130261 /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Secrets.plist; path = WeTransferTests/Secrets.plist; sourceTree = SOURCE_ROOT; };
 		3EE259632091CF8800DC5A97 /* WeTransfer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WeTransfer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EE259662091CF8800DC5A97 /* WeTransfer_Swift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeTransfer_Swift.h; sourceTree = "<group>"; };
 		3EE259672091CF8800DC5A97 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -247,6 +251,8 @@
 				3E7348C320B41DBA009B41D0 /* AuthorizationTests.swift */,
 				3ED1C0A120B43E780045D8B3 /* Transfer */,
 				3EE259732091CF8800DC5A97 /* Info.plist */,
+				3ED6ED3B20EA2F2100130261 /* Secrets.plist */,
+				3ED6ED3920EA2AD100130261 /* Secrets.swift */,
 			);
 			path = WeTransferTests;
 			sourceTree = "<group>";
@@ -351,6 +357,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3ED6ED3C20EA2F2100130261 /* Secrets.plist in Resources */,
 				3E579B212092194F008DFFD2 /* image.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -419,6 +426,7 @@
 				3ED1C0A520B442F70045D8B3 /* AddFilesTests.swift in Sources */,
 				3E90734920BBFE5600AE3605 /* UploadTests.swift in Sources */,
 				3ED1C0A320B43E980045D8B3 /* CreateTransferTests.swift in Sources */,
+				3ED6ED3A20EA2AD100130261 /* Secrets.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
