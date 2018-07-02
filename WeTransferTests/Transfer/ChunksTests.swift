@@ -41,7 +41,7 @@ class ChunksTests: XCTestCase {
 				return
 			}
 
-			WeTransfer.addFiles([file], to: transfer, completion: { (result) in
+			WeTransfer.add([file], to: transfer, completion: { (result) in
 				if case .failure(let error) = result {
 					XCTFail("Adding files failed: \(error)")
 					createdChunksExpectation.fulfill()

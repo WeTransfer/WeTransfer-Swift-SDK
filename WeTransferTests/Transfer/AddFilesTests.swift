@@ -70,7 +70,7 @@ class AddFilesTests: XCTestCase {
 				return
 			}
 
-			WeTransfer.addFiles([file], to: transfer, completion: { (result) in
+			WeTransfer.add([file], to: transfer, completion: { (result) in
 				if case .failure(let error) = result {
 					XCTFail("Add files to transfer failed: \(error)")
 					return
