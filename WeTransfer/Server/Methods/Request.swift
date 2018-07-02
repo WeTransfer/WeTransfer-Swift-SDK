@@ -22,10 +22,14 @@ extension WeTransfer {
 		case serverError(errorMessage: String, httpCode: Int?)
 		
 		public var errorDescription: String? {
-			if case .serverError(let message, let httpCode) = self {
+			switch self {
+			case .invalidResponseData:
+				return "Invalid response data: Server returned unrecognized response"
+			case .authorizationFailed:
+				return "Authorization failed: Invalid API key used for request"
+			case .serverError(let message, let httpCode):
 				return "Server error \(httpCode ?? 0): \(message)"
 			}
-			return "\(self)"
 		}
 	}
 

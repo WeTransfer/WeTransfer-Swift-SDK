@@ -23,7 +23,7 @@ public class WeTransfer {
 extension WeTransfer {
 
 	/// Possible errors thrown from multiple points in the transfer progress
-	public enum Error: Swift.Error {
+	public enum Error: Swift.Error, LocalizedError {
 		/// WeTransfer client not configured yet, make sure to call `WeTransfer.configure(with configuration:)`
 		case notConfigured
 		/// Authorization failed when performing request
@@ -34,6 +34,21 @@ extension WeTransfer {
 		case transferNotYetCreated
 		/// Transfer has no files to share as no files are added yet or all files are already uploaded
 		case noFilesAvailable
+		
+		public var errorDescription: String? {
+			switch self {
+			case .notConfigured:
+				return "Framework should configured with at least an API key"
+			case .notAuthorized:
+				return "Not authorized: invalid API key used for request"
+			case .transferAlreadyCreated:
+				return "Transfer already created: create transfer request should not be called multiple times for the same transfer"
+			case .noFilesAvailable:
+				return "No files available: add files to the transfer to upload"
+			default:
+				return "\(self)"
+			}
+		}
 	}
 
 	/// Configuration of the API client
