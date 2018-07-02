@@ -31,7 +31,7 @@ class CreateChunkOperation: AsynchronousResultOperation<Chunk> {
 		let endpoint: APIEndpoint = .requestUploadURL(fileIdentifier: fileIdentifier,
 													  chunkIndex: chunkIndex,
 													  multipartIdentifier: uploadIdentifier)
-		WeTransfer.request(endpoint) { (result: Result<AddUploadURLResponse>) in
+		WeTransfer.request(endpoint) { result in
 			switch result {
 			case .failure(let error):
 				self.finish(with: .failure(error))

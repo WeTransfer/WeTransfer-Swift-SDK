@@ -36,7 +36,7 @@ class CompleteUploadOperation: AsynchronousResultOperation<File> {
 			return
 		}
 		
-		WeTransfer.request(.completeUpload(fileIdentifier: fileIdentifier)) { (result: Result<CompleteUploadResponse>) in
+		WeTransfer.request(.completeUpload(fileIdentifier: fileIdentifier)) { result in
 			if case .failure(let error) = result {
 				self.finish(with: .failure(error))
 			} else {

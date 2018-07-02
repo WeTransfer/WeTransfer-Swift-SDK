@@ -24,7 +24,7 @@ class CreateTransferOperation: AsynchronousResultOperation<Transfer> {
 		}
 		
 		let parameters = CreateTransferParameters(with: transfer)
-		WeTransfer.request(.createTransfer(), parameters: parameters) { (result: Result<CreateTransferResponse>) in
+		WeTransfer.request(.createTransfer(), parameters: parameters) { result in
 			switch result {
 			case .success(let response):
 				self.transfer.update(with: response)

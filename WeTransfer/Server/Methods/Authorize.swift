@@ -27,7 +27,7 @@ extension WeTransfer {
 			return
 		}
 		
-		WeTransfer.request(.authorize()) { (result: Result<AuthorizeResponse>) in
+		WeTransfer.request(.authorize()) { result in
 			switch result {
 			case .failure(let error):
 				callCompletion(.failure(error))
