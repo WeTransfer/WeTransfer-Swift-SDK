@@ -8,13 +8,6 @@
 
 import Foundation
 
-struct AddUploadURLResponse: Decodable {
-	let uploadUrl: URL
-	let partNumber: Int
-	let uploadId: String
-	let uploadExpiresAt: TimeInterval
-}
-
 class CreateChunkOperation: AsynchronousResultOperation<Chunk> {
 	
 	enum Error: Swift.Error {
@@ -35,9 +28,9 @@ class CreateChunkOperation: AsynchronousResultOperation<Chunk> {
 			return
 		}
 		
-		let endpoint = APIEndpoint.requestUploadURL(fileIdentifier: fileIdentifier,
-													chunkIndex: chunkIndex,
-													multipartIdentifier: uploadIdentifier)
+		let endpoint: APIEndpoint = .requestUploadURL(fileIdentifier: fileIdentifier,
+													  chunkIndex: chunkIndex,
+													  multipartIdentifier: uploadIdentifier)
 		WeTransfer.request(endpoint) { (result: Result<AddUploadURLResponse>) in
 			switch result {
 			case .failure(let error):

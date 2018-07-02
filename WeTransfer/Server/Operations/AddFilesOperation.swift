@@ -8,53 +8,14 @@
 
 import Foundation
 
-struct AddFilesParameters: Encodable {
+class AddFilesOperation: ChainedAsynchronousResultOperation<Transfer, Transfer> {
 	
-	struct Item: Encodable {
-		let filename: String
-		let filesize: UInt64
-		let contentIdentifier: String
-		let localIdentifier: String
-		
-		init(with file: File) {
-			filename = file.filename
-			filesize = file.filesize
-			contentIdentifier = "file"
-			localIdentifier = file.localIdentifier
-		}
-	}
-	
-	let items: [Item]
-	
-	init(with files: [File]) {
-		items = files.map { file in
-			return Item(with: file)
-		}
-	}
-}
-
-struct AddFilesResponse: Decodable {
 	var filesToAdd: [File]?
 	
-	struct Meta: Decodable {
-		let multipartParts: Int
-		let multipartUploadId: String
 	convenience init(transfer: Transfer, files: [File]) {
 		self.init(input: transfer)
 		filesToAdd = files
 	}
-	
-	let id: String
-	let contentIdentifier: String
-	let localIdentifier: String
-	let meta: Meta
-	let name: String
-	let size: UInt64
-	let uploadId: String
-	let uploadExpiresAt: TimeInterval
-}
-
-class AddFilesOperation: ChainedAsynchronousResultOperation<Transfer, Transfer> {
 	
 	override func execute(_ transfer: Transfer) {
 		let files = filesToAdd ?? transfer.files.filter({ $0.identifier == nil })
@@ -65,7 +26,7 @@ class AddFilesOperation: ChainedAsynchronousResultOperation<Transfer, Transfer> 
 			return
 		}
 		
-		WeTransfer.request(.addItems(transferIdentifier: identifier), parameters: parameters) { (result: Result<[AddFilesResponse]>) in
+		WeTransfer.request(.addItems(transferIdentifier: identifier), parameters: parameters) { result in
 			switch result {
 			case .success(let response):
 				transfer.updateFiles(with: response)

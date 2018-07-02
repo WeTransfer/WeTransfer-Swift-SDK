@@ -8,21 +8,6 @@
 
 import Foundation
 
-struct CreateTransferParameters: Encodable {
-	let name: String
-	let description: String?
-	
-	init(with transfer: Transfer) {
-		name = transfer.name
-		description = transfer.description
-	}
-}
-
-struct CreateTransferResponse: Decodable {
-	let id: String // swiftlint:disable:this identifier_name
-	let shortenedUrl: URL
-}
-
 class CreateTransferOperation: AsynchronousResultOperation<Transfer> {
 	
 	let transfer: Transfer

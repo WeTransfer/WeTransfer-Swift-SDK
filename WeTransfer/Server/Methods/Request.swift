@@ -66,7 +66,7 @@ extension WeTransfer {
 	///   - parameters: Decodable parameters to send along with the request
 	///   - completion: Closure called when either request has failed, or succeeded with the decoded Response type
 	///   - result: Result with either the decoded Response or and error describing where the request went wrong
-	static func request<Parameters: Encodable, Response: Decodable>(_ endpoint: APIEndpoint, parameters: Parameters, completion: @escaping (_ result: Result<Response>) -> Void) {
+	static func request<Parameters: Encodable, Response>(_ endpoint: APIEndpoint<Response>, parameters: Parameters, completion: @escaping (_ result: Result<Response>) -> Void) {
 		do {
 			let encodedData = try client.encoder.encode(parameters)
 			request(endpoint, data: encodedData, completion: completion)
@@ -83,7 +83,7 @@ extension WeTransfer {
 	///   - data: The encoded data to be sent as parameters along with the request
 	///   - completion: Closure called when either request has failed, or succeeded with the decoded Response type
 	///   - result: Result with either the decoded Response or and error describing where the request went wrong
-	static func request<Response: Decodable>(_ endpoint: APIEndpoint, data: Data? = nil, completion: @escaping (_ result: Result<Response>) -> Void) {
+	static func request<Response>(_ endpoint: APIEndpoint<Response>, data: Data? = nil, completion: @escaping (_ result: Result<Response>) -> Void) {
 		
 		guard !endpoint.requiresAuthentication || client.authenticator.bearer != nil else {
 			// Try to authenticate once, after which the authenticationBearer *should* be set
@@ -120,7 +120,7 @@ extension WeTransfer {
 				guard let data = data else {
 					throw RequestError.invalidResponseData
 				}
-				let response = try client.decoder.decode(Response.self, from: data)
+				let response = try client.decoder.decode(endpoint.responseType, from: data)
 				completion(.success(response))
 			} catch {
 				let serverError = parseErrorResponse(data, urlResponse: urlResponse as? HTTPURLResponse) ?? error

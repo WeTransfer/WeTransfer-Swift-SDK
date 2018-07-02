@@ -30,7 +30,7 @@
 		3E90734720BBEF3700AE3605 /* ChunksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E90734620BBEF3700AE3605 /* ChunksTests.swift */; };
 		3E90734920BBFE5600AE3605 /* UploadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E90734820BBFE5600AE3605 /* UploadTests.swift */; };
 		3E9413BD2098BC25003A42D1 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413BC2098BC25003A42D1 /* APIClient.swift */; };
-		3E9413BF2098BF5A003A42D1 /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413BE2098BF5A003A42D1 /* APIEndpoints.swift */; };
+		3E9413BF2098BF5A003A42D1 /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413BE2098BF5A003A42D1 /* Endpoints.swift */; };
 		3E9413C22098C132003A42D1 /* Authorize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413C12098C132003A42D1 /* Authorize.swift */; };
 		3E9413C42099D78A003A42D1 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413C32099D78A003A42D1 /* Request.swift */; };
 		3E9413C62099D823003A42D1 /* CreateTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413C52099D823003A42D1 /* CreateTransfer.swift */; };
@@ -44,6 +44,7 @@
 		3ED1C0A520B442F70045D8B3 /* AddFilesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED1C0A420B442F70045D8B3 /* AddFilesTests.swift */; };
 		3ED6ED3A20EA2AD100130261 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED6ED3920EA2AD100130261 /* Secrets.swift */; };
 		3ED6ED3C20EA2F2100130261 /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3ED6ED3B20EA2F2100130261 /* Secrets.plist */; };
+		3ED6ED4020EA505800130261 /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED6ED3F20EA505800130261 /* APIEndpoint.swift */; };
 		3EE259742091CF8800DC5A97 /* WeTransfer_Swift.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE259662091CF8800DC5A97 /* WeTransfer_Swift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
@@ -80,7 +81,7 @@
 		3E90734620BBEF3700AE3605 /* ChunksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChunksTests.swift; sourceTree = "<group>"; };
 		3E90734820BBFE5600AE3605 /* UploadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadTests.swift; sourceTree = "<group>"; };
 		3E9413BC2098BC25003A42D1 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
-		3E9413BE2098BF5A003A42D1 /* APIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
+		3E9413BE2098BF5A003A42D1 /* Endpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
 		3E9413C12098C132003A42D1 /* Authorize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authorize.swift; sourceTree = "<group>"; };
 		3E9413C32099D78A003A42D1 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		3E9413C52099D823003A42D1 /* CreateTransfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTransfer.swift; sourceTree = "<group>"; };
@@ -95,6 +96,7 @@
 		3ED1C0A420B442F70045D8B3 /* AddFilesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFilesTests.swift; sourceTree = "<group>"; };
 		3ED6ED3920EA2AD100130261 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		3ED6ED3B20EA2F2100130261 /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Secrets.plist; path = WeTransferTests/Secrets.plist; sourceTree = SOURCE_ROOT; };
+		3ED6ED3F20EA505800130261 /* APIEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoint.swift; sourceTree = "<group>"; };
 		3EE259632091CF8800DC5A97 /* WeTransfer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WeTransfer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EE259662091CF8800DC5A97 /* WeTransfer_Swift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeTransfer_Swift.h; sourceTree = "<group>"; };
 		3EE259672091CF8800DC5A97 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -145,11 +147,11 @@
 		3E80E0AF2091D17E00114711 /* Server */ = {
 			isa = PBXGroup;
 			children = (
+				3ED6ED3E20EA504700130261 /* Endpoints */,
 				3E9413C02098C121003A42D1 /* Methods */,
 				3EA0EFC720BD503D009E4BB1 /* Operations */,
 				3E9413BC2098BC25003A42D1 /* APIClient.swift */,
 				3E8EB08B20E503E2002EB5AB /* Authenticator.swift */,
-				3E9413BE2098BF5A003A42D1 /* APIEndpoints.swift */,
 			);
 			path = Server;
 			sourceTree = "<group>";
@@ -207,6 +209,15 @@
 				3E90734820BBFE5600AE3605 /* UploadTests.swift */,
 			);
 			path = Transfer;
+			sourceTree = "<group>";
+		};
+		3ED6ED3E20EA504700130261 /* Endpoints */ = {
+			isa = PBXGroup;
+			children = (
+				3ED6ED3F20EA505800130261 /* APIEndpoint.swift */,
+				3E9413BE2098BF5A003A42D1 /* Endpoints.swift */,
+			);
+			path = Endpoints;
 			sourceTree = "<group>";
 		};
 		3EE259592091CF8800DC5A97 = {
@@ -390,7 +401,7 @@
 				3E80E0AA2091D12B00114711 /* Transfer.swift in Sources */,
 				3E0EEBB220C17264009E6B2D /* CreateTransferOperation.swift in Sources */,
 				3E0EEBBC20C19004009E6B2D /* UploadChunkOperation.swift in Sources */,
-				3E9413BF2098BF5A003A42D1 /* APIEndpoints.swift in Sources */,
+				3E9413BF2098BF5A003A42D1 /* Endpoints.swift in Sources */,
 				3E0EEBB420C175D0009E6B2D /* AddFilesOperation.swift in Sources */,
 				3E80E0A72091D0E700114711 /* WeTransfer.swift in Sources */,
 				3E80E0AE2091D16E00114711 /* Result.swift in Sources */,
@@ -410,6 +421,7 @@
 				3EA0EFBA20BD4D90009E4BB1 /* AsynchronousOperation.swift in Sources */,
 				3E9413BD2098BC25003A42D1 /* APIClient.swift in Sources */,
 				3E9413CC2099E390003A42D1 /* File.swift in Sources */,
+				3ED6ED4020EA505800130261 /* APIEndpoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

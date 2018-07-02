@@ -9,11 +9,6 @@
 import Foundation
 
 extension WeTransfer {
-
-	private struct AuthorizeResponse: Decodable {
-		let success: Bool
-		let token: String?
-	}
 	
 	/// Authorizes the current user with the configured API key
 	///

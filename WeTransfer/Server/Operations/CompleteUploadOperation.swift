@@ -8,11 +8,6 @@
 
 import Foundation
 
-struct CompleteTransferResponse: Decodable {
-	let ok: Bool // swiftlint:disable:this identifier_name
-	let message: String
-}
-
 class CompleteUploadOperation: AsynchronousResultOperation<File> {
 	
 	enum Error: Swift.Error {
@@ -41,7 +36,7 @@ class CompleteUploadOperation: AsynchronousResultOperation<File> {
 			return
 		}
 		
-		WeTransfer.request(.completeUpload(fileIdentifier: fileIdentifier)) { (result: Result<CompleteTransferResponse>) in
+		WeTransfer.request(.completeUpload(fileIdentifier: fileIdentifier)) { (result: Result<CompleteUploadResponse>) in
 			if case .failure(let error) = result {
 				self.finish(with: .failure(error))
 			} else {

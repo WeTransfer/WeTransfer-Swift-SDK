@@ -42,7 +42,7 @@ extension APIClient {
 	///   - data: Optional data to add to the request body
 	/// - Returns: URLRequest pointing to URL with appropriate HTTP method set
 	/// - Throws: `WeTransfer.Error` when not configured or not authorized
-	func createRequest(_ endpoint: APIEndpoint, data: Data? = nil) throws -> URLRequest {
+	func createRequest<Response>(_ endpoint: APIEndpoint<Response>, data: Data? = nil) throws -> URLRequest {
 		// Check auth
 		guard let apiKey = apiKey else {
 			throw WeTransfer.Error.notConfigured
