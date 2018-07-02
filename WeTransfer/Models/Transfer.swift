@@ -40,7 +40,7 @@ extension Transfer {
 	}
 
 	func add(_ files: [File]) {
-		for file in files where !files.contains(file) {
+		for file in files where !self.files.contains(file) {
 			self.files.append(file)
 		}
 	}
