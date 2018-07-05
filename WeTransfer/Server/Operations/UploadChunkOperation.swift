@@ -8,7 +8,7 @@
 
 import Foundation
 
-class UploadChunkOperation: ChainedAsynchronousResultOperation<Chunk, Chunk> {
+final class UploadChunkOperation: ChainedAsynchronousResultOperation<Chunk, Chunk> {
 	
 	enum Error: Swift.Error {
 		case noChunkDataAvailable

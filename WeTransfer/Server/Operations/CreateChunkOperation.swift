@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CreateChunkOperation: AsynchronousResultOperation<Chunk> {
+final class CreateChunkOperation: AsynchronousResultOperation<Chunk> {
 	
 	enum Error: Swift.Error {
 		case fileNotYetAdded

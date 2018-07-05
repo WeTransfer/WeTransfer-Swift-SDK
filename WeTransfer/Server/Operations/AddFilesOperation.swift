@@ -8,7 +8,7 @@
 
 import Foundation
 
-class AddFilesOperation: ChainedAsynchronousResultOperation<Transfer, Transfer> {
+final class AddFilesOperation: ChainedAsynchronousResultOperation<Transfer, Transfer> {
 	
 	var filesToAdd: [File]?
 	

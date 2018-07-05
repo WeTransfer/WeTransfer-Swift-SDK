@@ -8,7 +8,7 @@
 
 import Foundation
 
-class UploadFileOperation: AsynchronousResultOperation<File> {
+final class UploadFileOperation: AsynchronousResultOperation<File> {
 	
 	enum Error: Swift.Error {
 		case noChunksAvailable

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CompleteUploadOperation: AsynchronousResultOperation<File> {
+final class CompleteUploadOperation: AsynchronousResultOperation<File> {
 	
 	enum Error: Swift.Error {
 		case fileNotCreatedYet

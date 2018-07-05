@@ -8,7 +8,7 @@
 
 import Foundation
 
-class UploadFilesOperation: ChainedAsynchronousResultOperation<Transfer, Transfer>, URLSessionTaskDelegate {
+final class UploadFilesOperation: ChainedAsynchronousResultOperation<Transfer, Transfer>, URLSessionTaskDelegate {
 	
 	private var bytesSent: Bytes = 0
 	private var totalBytes: Bytes = 0

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CreateTransferOperation: AsynchronousResultOperation<Transfer> {
+final class CreateTransferOperation: AsynchronousResultOperation<Transfer> {
 	
 	let transfer: Transfer
 	

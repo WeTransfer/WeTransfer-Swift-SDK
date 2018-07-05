@@ -9,7 +9,7 @@
 import Foundation
 
 /// Responsible for adding the appropriate authentication headers to requests
-class Authenticator {
+final class Authenticator {
 	
 	var bearer: String?
 	
