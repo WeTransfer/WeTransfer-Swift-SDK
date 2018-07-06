@@ -30,9 +30,8 @@ final class UploadChunkOperation: ChainedAsynchronousResultOperation<Chunk, Chun
 			return
 		}
 
-		let uploadEndpoint: APIEndpoint = .upload(url: chunk.uploadURL)
 		var urlRequest = URLRequest(url: chunk.uploadURL)
-		urlRequest.httpMethod = uploadEndpoint.method.rawValue
+		urlRequest.httpMethod = "PUT"
 		let task = self.session.uploadTask(with: urlRequest, from: data) { (_, urlResponse, error) in
 			if let error = error {
 				self.finish(with: .failure(error))

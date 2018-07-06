@@ -40,11 +40,6 @@ class RequestTests: XCTestCase {
 		XCTAssertEqual(requestUploadURLEndpoint.method, .get)
 		XCTAssertEqual(requestUploadURLEndpoint.url(with: baseURL)!.absoluteString, baseURLString + "files/\(fileIdentifier)/uploads/\(chunkIndex + 1)/\(multipartIdentifier)")
 
-		let uploadURL = URL(string: baseURLString)!
-		let uploadEndpoint: APIEndpoint = .upload(url: uploadURL)
-		XCTAssertEqual(uploadEndpoint.method, .put)
-		XCTAssertEqual(uploadEndpoint.url(with: baseURL)!.absoluteString, uploadURL.absoluteString)
-
 		let completeUploadEndpoint: APIEndpoint = .completeUpload(fileIdentifier: fileIdentifier)
 		XCTAssertEqual(completeUploadEndpoint.method, .post)
 		XCTAssertEqual(completeUploadEndpoint.url(with: baseURL)!.absoluteString, baseURLString + "files/\(fileIdentifier)/uploads/complete")

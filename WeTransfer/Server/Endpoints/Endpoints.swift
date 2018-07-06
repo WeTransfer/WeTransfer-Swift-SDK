@@ -104,15 +104,6 @@ extension APIEndpoint {
 	}
 }
 
-// MARK: - Upload
-struct Empty: Decodable {}
-
-extension APIEndpoint {
-	static func upload(url: URL) -> APIEndpoint<Empty> {
-		return APIEndpoint<Empty>(method: .put, url: url)
-	}
-}
-
 // MARK: - Complete upload
 struct CompleteUploadResponse: Decodable {
 	let ok: Bool // swiftlint:disable:this identifier_name
