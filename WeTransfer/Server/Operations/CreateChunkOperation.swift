@@ -36,7 +36,7 @@ final class CreateChunkOperation: AsynchronousResultOperation<Chunk> {
 			case .failure(let error):
 				self.finish(with: .failure(error))
 			case .success(let response):
-				let chunk = Chunk(file: self.file, response: response)
+				let chunk = Chunk(file: self.file, chunkIndex: response.partNumber - 1, uploadURL: response.uploadUrl)
 				self.finish(with: .success(chunk))
 			}
 		}

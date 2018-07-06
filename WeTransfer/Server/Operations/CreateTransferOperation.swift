@@ -27,7 +27,7 @@ final class CreateTransferOperation: AsynchronousResultOperation<Transfer> {
 		WeTransfer.request(.createTransfer(), parameters: parameters) { result in
 			switch result {
 			case .success(let response):
-				self.transfer.update(with: response)
+				self.transfer.update(with: response.id, shortURL: response.shortenedUrl)
 				self.finish(with: .success(self.transfer))
 			case .failure(let error):
 				self.finish(with: .failure(error))

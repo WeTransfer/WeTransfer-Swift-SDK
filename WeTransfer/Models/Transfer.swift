@@ -38,9 +38,10 @@ final public class Transfer {
 
 // MARK: - Private updating methods
 extension Transfer {
-	func update(with response: CreateTransferResponse) {
-		identifier = "\(response.id)"
-		shortURL = response.shortenedUrl
+	
+	func update(with identifier: String, shortURL: URL) {
+		self.identifier = identifier
+		self.shortURL = shortURL
 	}
 
 	func add(_ files: [File]) {
@@ -49,12 +50,9 @@ extension Transfer {
 		}
 	}
 
-	func updateFiles(with responseFiles: [AddFilesResponse]) {
+	func updateFiles(_ updater: (File) -> File) {
 		files = files.map { file in
-			guard let responseFile = responseFiles.first(where: { $0.localIdentifier == file.localIdentifier }) else {
-				return file
-			}
-			return file.updated(with: responseFile)
+			return updater(file)
 		}
 	}
 

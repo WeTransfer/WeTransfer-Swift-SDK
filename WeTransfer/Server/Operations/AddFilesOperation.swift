@@ -32,7 +32,12 @@ final class AddFilesOperation: ChainedAsynchronousResultOperation<Transfer, Tran
 		WeTransfer.request(.addItems(transferIdentifier: identifier), parameters: parameters) { result in
 			switch result {
 			case .success(let response):
-				transfer.updateFiles(with: response)
+				transfer.updateFiles({ (file) -> File in
+					guard let responseFile = response.first(where: {$0.localIdentifier == file.localIdentifier}) else {
+						return file
+					}
+					return file.updated(with: responseFile.id, numberOfChunks: responseFile.meta.multipartParts, multipartUploadIdentifier: responseFile.meta.multipartUploadId)
+				})
 				self.finish(with: .success(transfer))
 			case .failure(let error):
 				self.finish(with: .failure(error))
