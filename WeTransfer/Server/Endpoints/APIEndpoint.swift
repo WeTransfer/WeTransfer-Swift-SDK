@@ -25,7 +25,7 @@ struct APIEndpoint<Response: Decodable> {
 	let url: URL?
 	let responseType: Response.Type = Response.self
 	
-	/// Returns the the final URL by either appending the path to the base URL or using the URL property in case the base URL should be ignored.
+	/// Returns the the final URL by either appending the path to the provided base URL or using the URL property in case the base URL should be ignored.
 	///
 	/// - Parameter baseURL: The base URL to append the path property to
 	/// - Returns: URL appropriate for the endpoint
@@ -39,6 +39,12 @@ struct APIEndpoint<Response: Decodable> {
 		return baseURL.appendingPathComponent(path)
 	}
 	
+	/// Creates an APIEndpoint with a path
+	///
+	/// - Parameters:
+	///   - method: HTTPMethod to use for the endpoint
+	///   - path: Relative path to be added to a base URL
+	///   - requiresAuthentication: Whether this endpoint requires authentication headers to be sent
 	init(method: HTTPMethod, path: String, requiresAuthentication: Bool = true) {
 		self.method = method
 		self.path = path
@@ -46,6 +52,12 @@ struct APIEndpoint<Response: Decodable> {
 		self.requiresAuthentication = requiresAuthentication
 	}
 	
+	/// Creates an APIEndpoint with a fixed URL, ignoring any usage of a base URL
+	///
+	/// - Parameters:
+	///   - method: HTTPMethod to use for the endpoint
+	///   - url: Full URL to call the endpoint with. Base URL will be ignored when querying the URL
+	///   - requiresAuthentication: Wheter this endpoint required authentication headers to be sent
 	init(method: HTTPMethod, url: URL, requiresAuthentication: Bool = true) {
 		self.method = method
 		self.url = url
