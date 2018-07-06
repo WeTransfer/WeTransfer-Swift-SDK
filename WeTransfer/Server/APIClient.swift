@@ -11,8 +11,8 @@ import Foundation
 /// Holds the local state for communicating with the API
 /// Handles the creation of the appropriate requests, and holds any request-associated classes like the decoder and encoder
 final class APIClient {
-	internal(set) var apiKey: String?
-	internal(set) var baseURL: URL?
+	var apiKey: String?
+	var baseURL: URL?
 	
 	let authenticator = Authenticator()
 	
@@ -20,12 +20,14 @@ final class APIClient {
 	
 	let operationQueue: OperationQueue = OperationQueue()
 	
+	/// Used to decode all json repsonses
 	let decoder: JSONDecoder = {
 		let decoder = JSONDecoder()
 		decoder.keyDecodingStrategy = .convertFromSnakeCase
 		return decoder
 	}()
 	
+	/// Used to encode all parameters to json
 	let encoder: JSONEncoder = {
 		let encoder = JSONEncoder()
 		encoder.keyEncodingStrategy = .convertToSnakeCase
