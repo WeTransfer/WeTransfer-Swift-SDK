@@ -59,16 +59,6 @@ class RequestTests: XCTestCase {
 		}
 	}
 
-	func testUnauthorizedRequestCreation() {
-		TestConfiguration.configure(environment: .production)
-		do {
-			_ = try WeTransfer.client.createRequest(.createTransfer())
-			XCTFail("Request creation should have failed with 'not authorized' error")
-		} catch {
-			XCTAssertEqual(error.localizedDescription, WeTransfer.Error.notAuthorized.localizedDescription)
-		}
-	}
-
 	func testRequestCreation() {
 		TestConfiguration.configure(environment: .production)
 		TestConfiguration.fakeAuthorize()
