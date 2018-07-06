@@ -18,11 +18,15 @@ import Cocoa
 final public class Transfer {
 	public private(set) var identifier: String?
 
+	/// The name of the transfer. This name will be shown when viewing the transfer on wetransfer.com
 	public let name: String
+	/// Optional description of the transfer. This will be shown when viewing the transfer on wetransfer.com
 	public let description: String?
 
+	/// References to all the files added to the transfer. Add other files with the public method on the WeTransfer struct or add them directly when initializing the transfer object
 	public private(set) var files: [File] = []
 
+	/// Available when the transfer is created on the server
 	public private(set) var shortURL: URL?
 
 	public init(name: String, description: String?, files: [File] = []) {
