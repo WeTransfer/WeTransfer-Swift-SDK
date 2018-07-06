@@ -11,7 +11,15 @@ import Foundation
 /// Responsible for adding the appropriate authentication headers to requests
 final class Authenticator {
 	
-	var bearer: String?
+	private(set) var bearer: String?
+	
+	var isAuthenticated: Bool {
+		return bearer != nil
+	}
+	
+	func updateBearer(_ bearer: String?) {
+		self.bearer = bearer
+	}
 	
 	func authenticatedRequest(from request: URLRequest) -> URLRequest {
 		var request = request
