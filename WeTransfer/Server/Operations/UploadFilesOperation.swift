@@ -69,15 +69,15 @@ final class UploadFilesOperation: ChainedAsynchronousResultOperation<Transfer, T
 			return
 		}
 		
-		filesResultOperation.onResult = { result in
+		filesResultOperation.onResult = { [weak self] result in
 			uploadSession.delegateQueue.underlyingQueue?.async {
-				self.progress.resignCurrent()
+				self?.progress.resignCurrent()
 			}
 			switch result {
 			case .success:
-				self.finish(with: .success(transfer))
+				self?.finish(with: .success(transfer))
 			case .failure(let error):
-				self.finish(with: .failure(error))
+				self?.finish(with: .failure(error))
 			}
 		}
 		

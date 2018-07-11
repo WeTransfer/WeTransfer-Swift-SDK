@@ -32,16 +32,16 @@ final class UploadChunkOperation: ChainedAsynchronousResultOperation<Chunk, Chun
 
 		var urlRequest = URLRequest(url: chunk.uploadURL)
 		urlRequest.httpMethod = "PUT"
-		let task = self.session.uploadTask(with: urlRequest, from: data) { (_, urlResponse, error) in
+		let task = self.session.uploadTask(with: urlRequest, from: data) { [weak self] (_, urlResponse, error) in
 			if let error = error {
-				self.finish(with: .failure(error))
+				self?.finish(with: .failure(error))
 				return
 			}
 			if let response = urlResponse as? HTTPURLResponse, !(200...299).contains(response.statusCode) {
-				self.finish(with: .failure(Error.uploadFailed))
+				self?.finish(with: .failure(Error.uploadFailed))
 				return
 			}
-			self.finish(with: .success(chunk))
+			self?.finish(with: .success(chunk))
 		}
 		task.resume()
 	}

@@ -42,8 +42,8 @@ final class UploadFileOperation: AsynchronousResultOperation<File> {
 			return array + [urlOperation, uploadOperation]
 		})
 		
-		completeOperation.onResult = { result in
-			self.finish(with: result)
+		completeOperation.onResult = { [weak self] result in
+			self?.finish(with: result)
 		}
 		
 		operationQueue.addOperations(chunkOperations + [completeOperation], waitUntilFinished: false)

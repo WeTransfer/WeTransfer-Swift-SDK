@@ -31,13 +31,16 @@ final class CreateChunkOperation: AsynchronousResultOperation<Chunk> {
 		let endpoint: APIEndpoint = .requestUploadURL(fileIdentifier: fileIdentifier,
 													  chunkIndex: chunkIndex,
 													  multipartIdentifier: uploadIdentifier)
-		WeTransfer.request(endpoint) { result in
+		WeTransfer.request(endpoint) { [weak self] result in
 			switch result {
 			case .failure(let error):
-				self.finish(with: .failure(error))
+				self?.finish(with: .failure(error))
 			case .success(let response):
-				let chunk = Chunk(file: self.file, chunkIndex: response.partNumber - 1, uploadURL: response.uploadUrl)
-				self.finish(with: .success(chunk))
+				guard let file = self?.file else {
+					return
+				}
+				let chunk = Chunk(file: file, chunkIndex: response.partNumber - 1, uploadURL: response.uploadUrl)
+				self?.finish(with: .success(chunk))
 			}
 		}
 	}

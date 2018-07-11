@@ -29,7 +29,7 @@ final class AddFilesOperation: ChainedAsynchronousResultOperation<Transfer, Tran
 			return
 		}
 		
-		WeTransfer.request(.addItems(transferIdentifier: identifier), parameters: parameters) { result in
+		WeTransfer.request(.addItems(transferIdentifier: identifier), parameters: parameters) { [weak self] result in
 			switch result {
 			case .success(let response):
 				transfer.updateFiles({ (file) -> File in
@@ -38,9 +38,9 @@ final class AddFilesOperation: ChainedAsynchronousResultOperation<Transfer, Tran
 					}
 					return file.updated(with: responseFile.id, numberOfChunks: responseFile.meta.multipartParts, multipartUploadIdentifier: responseFile.meta.multipartUploadId)
 				})
-				self.finish(with: .success(transfer))
+				self?.finish(with: .success(transfer))
 			case .failure(let error):
-				self.finish(with: .failure(error))
+				self?.finish(with: .failure(error))
 			}
 		}
 	}

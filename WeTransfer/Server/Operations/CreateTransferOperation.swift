@@ -24,13 +24,15 @@ final class CreateTransferOperation: AsynchronousResultOperation<Transfer> {
 		}
 		
 		let parameters = CreateTransferParameters(with: transfer)
-		WeTransfer.request(.createTransfer(), parameters: parameters) { result in
+		WeTransfer.request(.createTransfer(), parameters: parameters) { [weak self] result in
 			switch result {
 			case .success(let response):
-				self.transfer.update(with: response.id, shortURL: response.shortenedUrl)
-				self.finish(with: .success(self.transfer))
+				if let transfer = self?.transfer {
+					transfer.update(with: response.id, shortURL: response.shortenedUrl)
+					self?.finish(with: .success(transfer))
+				}
 			case .failure(let error):
-				self.finish(with: .failure(error))
+				self?.finish(with: .failure(error))
 			}
 		}
 	}
