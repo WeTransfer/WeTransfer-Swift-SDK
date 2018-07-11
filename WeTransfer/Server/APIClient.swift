@@ -45,23 +45,24 @@ extension APIClient {
 	/// - Returns: URLRequest pointing to URL with appropriate HTTP method set
 	/// - Throws: `WeTransfer.Error` when not configured or not authorized
 	func createRequest<Response>(_ endpoint: APIEndpoint<Response>, data: Data? = nil) throws -> URLRequest {
-		// Check auth
-		guard let apiKey = apiKey else {
-			throw WeTransfer.Error.notConfigured
-		}
-		guard let baseURL = baseURL, let url = endpoint.url(with: baseURL) else {
+		guard let apiKey = apiKey, let baseURL = baseURL else {
 			throw WeTransfer.Error.notConfigured
 		}
 		
-		var request = URLRequest(url: url)
-		request.httpMethod = endpoint.method.rawValue
-		request.addValue(apiKey, forHTTPHeaderField: "x-api-key")
-		
+		var request = try URLRequest(endpoint: endpoint, baseURL: baseURL, apiKey: apiKey)
 		request = authenticator.authenticatedRequest(from: request)
 		
 		if let data = data {
 			request.httpBody = data
 		}
 		return request
+	}
+}
+
+fileprivate extension URLRequest {
+	init<Response>(endpoint: APIEndpoint<Response>, baseURL: URL, apiKey: String) throws {
+		self.init(url: endpoint.url(with: baseURL))
+		httpMethod = endpoint.method.rawValue
+		addValue(apiKey, forHTTPHeaderField: "x-api-key")
 	}
 }

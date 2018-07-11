@@ -27,7 +27,7 @@ struct APIEndpoint<Response: Decodable> {
 	///
 	/// - Parameter baseURL: The base URL to append the path property to
 	/// - Returns: URL appropriate for the endpoint
-	func url(with baseURL: URL) -> URL? {
+	func url(with baseURL: URL) -> URL {
 		return baseURL.appendingPathComponent(path)
 	}
 	
