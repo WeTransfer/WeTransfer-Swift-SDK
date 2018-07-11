@@ -11,7 +11,7 @@ import Foundation
 /// Represents a chunk of data from a file in a transfer. Used only in the uploading proces
 struct Chunk: Encodable {
 
-	/// Size of all chunks except the last
+	/// Size of all chunks except the last, as the last chunk holds the remaining data (filesize % defaultChunkSize)
 	static let defaultChunkSize: Bytes = (6 * 1024 * 1024)
 	
 	/// Zero-based index of chunk
