@@ -24,6 +24,10 @@ extension WeTransfer {
 				completion(result)
 			}
 		}
+		// Add the latest AddFilesOperation in the queue as a dependency so all files are added in the correct order
+		if let queuedAddFilesOperation = client.operationQueue.operations.reversed().first(where: { $0 is AddFilesOperation}) {
+			operation.addDependency(queuedAddFilesOperation)
+		}
 		client.operationQueue.addOperation(operation)
 	}
 }

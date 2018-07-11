@@ -51,4 +51,15 @@ extension TestConfiguration {
 		}
 		return try? File(url: imageFileURL)
 	}
+	
+	class var smallImageFileURL: URL? {
+		return Bundle(for: self.shared.classForCoder).url(forResource: "smallImage", withExtension: "jpg")
+	}
+	
+	class var smallFileModel: File? {
+		guard let imageFileURL = smallImageFileURL else {
+			return nil
+		}
+		return try? File(url: imageFileURL)
+	}
 }

@@ -16,6 +16,7 @@
 		3E0EEBBC20C19004009E6B2D /* UploadChunkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEBBB20C19004009E6B2D /* UploadChunkOperation.swift */; };
 		3E0EEBBE20C19037009E6B2D /* CompleteUploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEBBD20C19037009E6B2D /* CompleteUploadOperation.swift */; };
 		3E0EEBC020C19074009E6B2D /* UploadFileOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEBBF20C19074009E6B2D /* UploadFileOperation.swift */; };
+		3E3B9D2820F60F7B0064915C /* smallImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3E3B9D2720F60F7B0064915C /* smallImage.jpg */; };
 		3E579B212092194F008DFFD2 /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3E579B202092194F008DFFD2 /* image.jpg */; };
 		3E7348BE20B4040D009B41D0 /* TestConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348BD20B4040D009B41D0 /* TestConfiguration.swift */; };
 		3E7348C020B41895009B41D0 /* InitializationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348BF20B41895009B41D0 /* InitializationTests.swift */; };
@@ -68,6 +69,7 @@
 		3E0EEBBB20C19004009E6B2D /* UploadChunkOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadChunkOperation.swift; sourceTree = "<group>"; };
 		3E0EEBBD20C19037009E6B2D /* CompleteUploadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteUploadOperation.swift; sourceTree = "<group>"; };
 		3E0EEBBF20C19074009E6B2D /* UploadFileOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadFileOperation.swift; sourceTree = "<group>"; };
+		3E3B9D2720F60F7B0064915C /* smallImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = smallImage.jpg; sourceTree = "<group>"; };
 		3E579B202092194F008DFFD2 /* image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image.jpg; sourceTree = "<group>"; };
 		3E7348BD20B4040D009B41D0 /* TestConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestConfiguration.swift; sourceTree = "<group>"; };
 		3E7348BF20B41895009B41D0 /* InitializationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitializationTests.swift; sourceTree = "<group>"; };
@@ -91,7 +93,6 @@
 		3E9413CD2099E3F5003A42D1 /* Chunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chunk.swift; sourceTree = "<group>"; };
 		3EA0EFB920BD4D90009E4BB1 /* AsynchronousOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsynchronousOperation.swift; sourceTree = "<group>"; };
 		3EA0EFCD20BD7743009E4BB1 /* AsynchronousResultOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsynchronousResultOperation.swift; sourceTree = "<group>"; };
-		3ECCF25620C5355C00F2B59B /* zelda.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = zelda.jpg; sourceTree = "<group>"; };
 		3ED1C0A220B43E980045D8B3 /* CreateTransferTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTransferTests.swift; sourceTree = "<group>"; };
 		3ED1C0A420B442F70045D8B3 /* AddFilesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFilesTests.swift; sourceTree = "<group>"; };
 		3ED6ED3920EA2AD100130261 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
@@ -255,8 +256,8 @@
 			isa = PBXGroup;
 			children = (
 				3E7348BD20B4040D009B41D0 /* TestConfiguration.swift */,
-				3ECCF25620C5355C00F2B59B /* zelda.jpg */,
 				3E579B202092194F008DFFD2 /* image.jpg */,
+				3E3B9D2720F60F7B0064915C /* smallImage.jpg */,
 				3E7348BF20B41895009B41D0 /* InitializationTests.swift */,
 				3E7348C520B41EC0009B41D0 /* RequestTests.swift */,
 				3E7348C320B41DBA009B41D0 /* AuthorizationTests.swift */,
@@ -369,6 +370,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3ED6ED3C20EA2F2100130261 /* Secrets.plist in Resources */,
+				3E3B9D2820F60F7B0064915C /* smallImage.jpg in Resources */,
 				3E579B212092194F008DFFD2 /* image.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
