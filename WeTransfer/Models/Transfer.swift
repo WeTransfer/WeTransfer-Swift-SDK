@@ -50,9 +50,9 @@ extension Transfer {
 		}
 	}
 
-	func updateFiles(_ updater: (File) -> File) {
+	func updateFiles(_ update: (File) -> File) {
 		files = files.map { file in
-			return updater(file)
+			return update(file)
 		}
 	}
 
