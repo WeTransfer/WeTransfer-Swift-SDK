@@ -100,7 +100,8 @@ struct AddUploadURLResponse: Decodable {
 
 extension APIEndpoint {
 	static func requestUploadURL(fileIdentifier: String, chunkIndex: Int, multipartIdentifier: String) -> APIEndpoint<AddUploadURLResponse> {
-		return APIEndpoint<AddUploadURLResponse>(method: .get, path: "files/\(fileIdentifier)/uploads/\(chunkIndex + 1)/\(multipartIdentifier)")
+		let partNumber = chunkIndex + 1
+		return APIEndpoint<AddUploadURLResponse>(method: .get, path: "files/\(fileIdentifier)/uploads/\(partNumber)/\(multipartIdentifier)")
 	}
 }
 

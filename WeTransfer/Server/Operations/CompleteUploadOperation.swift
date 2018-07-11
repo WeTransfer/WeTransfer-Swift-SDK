@@ -8,15 +8,20 @@
 
 import Foundation
 
+/// Completes the upload of each file in a transfer. Typically used in `UploadFileOperation` after all the file's chunks have been uploaded
 final class CompleteUploadOperation: AsynchronousResultOperation<File> {
 	
 	enum Error: Swift.Error {
 		case fileNotCreatedYet
 	}
 	
+	/// File to complete the uploading of
 	let file: File
 	
-	init(file: File) {
+	/// Initializes the operation with a file to complete the upload for
+	///
+	/// - Parameter file: File struct for which to complete the upload for
+	required init(file: File) {
 		self.file = file
 		super.init()
 	}

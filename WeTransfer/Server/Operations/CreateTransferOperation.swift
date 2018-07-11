@@ -8,10 +8,15 @@
 
 import Foundation
 
+/// Operation responsible for creating the transfer on the server and providing the given transfer object with an identifier and URL when succeeded.
+/// This operation does not handle the requests necessary to add files to the server side transfer, which `AddFilesOperation` is responsible for
 final class CreateTransferOperation: AsynchronousResultOperation<Transfer> {
 	
 	let transfer: Transfer
 	
+	/// Initalized the operation with a transfer object
+	///
+	/// - Parameter transfer: Transfer object with optionally some files already added
 	required init(transfer: Transfer) {
 		self.transfer = transfer
 		super.init()

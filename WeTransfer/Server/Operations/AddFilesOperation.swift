@@ -8,10 +8,18 @@
 
 import Foundation
 
+/// Operation responsible for adding files to the provided transfer object and on the server as well. When succeeded the files will be updated with the appropriate data like identifiers and information about the chunks.
+/// - Note: The files will be added to the provided transfer object when the operation has started executing
 final class AddFilesOperation: ChainedAsynchronousResultOperation<Transfer, Transfer> {
 	
+	/// The files to be added to the transfer if added during the initialization
 	var filesToAdd: [File]?
 	
+	/// Initializes the operation with a transfer object and array of files to add. When initalized as part of a chain after `CreateTransferOperation`, this operation can be initialized without any arguments
+	///
+	/// - Parameters:
+	///   - transfer: Transfer object to add the files to
+	///   - files: Files to be added to the transfer
 	convenience init(transfer: Transfer, files: [File]) {
 		self.init(input: transfer)
 		filesToAdd = files

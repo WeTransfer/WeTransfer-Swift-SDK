@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Uploads the chunk that resulted from the dependant `CreateChunkOperation`. The uploading is handled by the provided `URLSession`
 final class UploadChunkOperation: ChainedAsynchronousResultOperation<Chunk, Chunk> {
 	
 	enum Error: Swift.Error {
@@ -16,15 +17,18 @@ final class UploadChunkOperation: ChainedAsynchronousResultOperation<Chunk, Chun
 		case uploadFailed
 	}
 	
+	/// URLSession handling the creation and actual uploading of the chunk
 	let session: URLSession
 	
+	/// Initializes the operation with a session which handles the actual uploading part
+	///
+	/// - Parameter session: `URLSession` that should create and be responsible of the actual uploading part
 	required init(session: URLSession) {
 		self.session = session
 		super.init()
 	}
 	
 	override func execute(_ chunk: Chunk) {
-		
 		guard let data = try? Data(from: chunk) else {
 			self.finish(with: .failure(Error.noChunkDataAvailable))
 			return

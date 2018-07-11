@@ -184,8 +184,8 @@
 				3E0EEBB120C17264009E6B2D /* CreateTransferOperation.swift */,
 				3E0EEBB320C175D0009E6B2D /* AddFilesOperation.swift */,
 				3E0EEBB920C18FA5009E6B2D /* UploadFilesOperation.swift */,
-				3E0EEBB520C177FE009E6B2D /* CreateChunkOperation.swift */,
 				3E0EEBBF20C19074009E6B2D /* UploadFileOperation.swift */,
+				3E0EEBB520C177FE009E6B2D /* CreateChunkOperation.swift */,
 				3E0EEBBB20C19004009E6B2D /* UploadChunkOperation.swift */,
 				3E0EEBBD20C19037009E6B2D /* CompleteUploadOperation.swift */,
 			);
