@@ -44,7 +44,10 @@ final class AddFilesOperation: ChainedAsynchronousResultOperation<Transfer, Tran
 					guard let responseFile = response.first(where: {$0.localIdentifier == file.localIdentifier}) else {
 						return file
 					}
-					return file.updated(with: responseFile.id, numberOfChunks: responseFile.meta.multipartParts, multipartUploadIdentifier: responseFile.meta.multipartUploadId)
+					
+					var file = file
+					file.update(with: responseFile.id, numberOfChunks: responseFile.meta.multipartParts, multipartUploadIdentifier: responseFile.meta.multipartUploadId)
+					return file
 				})
 				self?.finish(with: .success(transfer))
 			case .failure(let error):
