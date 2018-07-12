@@ -8,15 +8,23 @@
 
 import Foundation
 
-class CreateChunkOperation: AsynchronousResultOperation<Chunk> {
+/// Creates a chunk of a file to be uploaded. Designed to be used right before `UploadChunkOperation`
+final class CreateChunkOperation: AsynchronousResultOperation<Chunk> {
 	
 	enum Error: Swift.Error {
 		case fileNotYetAdded
 	}
 	
+	/// File to create chunk from
 	let file: File
+	/// Index of chunk from file
 	let chunkIndex: Int
 	
+	/// Initalizes the operation with a file and an index of the chunk
+	///
+	/// - Parameters:
+	///   - file: File struct of the file to create the chunk from
+	///   - chunkIndex: Index of the chunk to be created
 	required init(file: File, chunkIndex: Int) {
 		self.file = file
 		self.chunkIndex = chunkIndex
@@ -31,13 +39,16 @@ class CreateChunkOperation: AsynchronousResultOperation<Chunk> {
 		let endpoint: APIEndpoint = .requestUploadURL(fileIdentifier: fileIdentifier,
 													  chunkIndex: chunkIndex,
 													  multipartIdentifier: uploadIdentifier)
-		WeTransfer.request(endpoint) { result in
+		WeTransfer.request(endpoint) { [weak self] result in
 			switch result {
 			case .failure(let error):
-				self.finish(with: .failure(error))
+				self?.finish(with: .failure(error))
 			case .success(let response):
-				let chunk = Chunk(file: self.file, response: response)
-				self.finish(with: .success(chunk))
+				guard let file = self?.file else {
+					return
+				}
+				let chunk = Chunk(file: file, chunkIndex: response.partNumber - 1, uploadURL: response.uploadUrl)
+				self?.finish(with: .success(chunk))
 			}
 		}
 	}

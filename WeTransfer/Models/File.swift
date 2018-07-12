@@ -62,11 +62,9 @@ extension File: Equatable {
 }
 
 extension File {
-	func updated(with response: AddFilesResponse) -> File {
-		var file = self
-		file.identifier = response.id
-		file.numberOfChunks = response.meta.multipartParts
-		file.multipartUploadIdentifier = response.meta.multipartUploadId
-		return file
+	mutating func update(with identifier: String, numberOfChunks: Int, multipartUploadIdentifier: String) {
+		self.identifier = identifier
+		self.numberOfChunks = numberOfChunks
+		self.multipartUploadIdentifier = multipartUploadIdentifier
 	}
 }

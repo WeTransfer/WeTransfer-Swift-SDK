@@ -9,7 +9,7 @@
 import Foundation
 @testable import WeTransfer
 
-class TestConfiguration: NSObject {
+final class TestConfiguration: NSObject {
 
 	enum Environment {
 		case production
@@ -29,12 +29,12 @@ class TestConfiguration: NSObject {
 	}
 
 	static func fakeAuthorize() {
-		WeTransfer.client.authenticator.bearer = "Fake.Tokens.Gonna-Fake"
+		WeTransfer.client.authenticator.updateBearer("Fake.Tokens.Gonna-Fake")
 	}
 
 	static func resetConfiguration() {
 		WeTransfer.client.apiKey = nil
-		WeTransfer.client.authenticator.bearer = nil
+		WeTransfer.client.authenticator.updateBearer(nil)
 	}
 }
 
@@ -47,6 +47,17 @@ extension TestConfiguration {
 
 	class var fileModel: File? {
 		guard let imageFileURL = imageFileURL else {
+			return nil
+		}
+		return try? File(url: imageFileURL)
+	}
+	
+	class var smallImageFileURL: URL? {
+		return Bundle(for: self.shared.classForCoder).url(forResource: "smallImage", withExtension: "jpg")
+	}
+	
+	class var smallFileModel: File? {
+		guard let imageFileURL = smallImageFileURL else {
 			return nil
 		}
 		return try? File(url: imageFileURL)

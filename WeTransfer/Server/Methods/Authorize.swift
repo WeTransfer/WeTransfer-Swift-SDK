@@ -22,18 +22,18 @@ extension WeTransfer {
 			}
 		}
 		
-		guard client.authenticator.bearer == nil else {
+		guard !client.authenticator.isAuthenticated else {
 			callCompletion(.success(()))
 			return
 		}
 		
-		WeTransfer.request(.authorize()) { result in
+		request(.authorize()) { result in
 			switch result {
 			case .failure(let error):
 				callCompletion(.failure(error))
 			case .success(let response):
 				if let token = response.token, response.success {
-					client.authenticator.bearer = token
+					client.authenticator.updateBearer(token)
 					callCompletion(.success(()))
 				} else {
 					callCompletion(.failure(RequestError.authorizationFailed))

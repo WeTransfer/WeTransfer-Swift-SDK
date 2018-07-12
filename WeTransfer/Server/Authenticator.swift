@@ -9,10 +9,28 @@
 import Foundation
 
 /// Responsible for adding the appropriate authentication headers to requests
-class Authenticator {
+final class Authenticator {
 	
-	var bearer: String?
+	/// JWT bearer to add to request
+	private(set) var bearer: String?
 	
+	/// Whether a bearer is set and thus the client is authenticated
+	var isAuthenticated: Bool {
+		return bearer != nil
+	}
+	
+	/// Updates the JWT bearer with a new bearer
+	///
+	/// - Parameter bearer: New bearer
+	func updateBearer(_ bearer: String?) {
+		self.bearer = bearer
+	}
+	
+	/// Authenticates the provided request with the correct authorization headers if a bearer is set
+	/// - Note: Can be called regardless of availability of JWT bearer
+	///
+	/// - Parameter request: The request to update
+	/// - Returns: An updated request with the correct authorization headers added
 	func authenticatedRequest(from request: URLRequest) -> URLRequest {
 		var request = request
 		if let bearer = bearer {

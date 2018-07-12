@@ -8,10 +8,15 @@
 
 import Foundation
 
-class CreateTransferOperation: AsynchronousResultOperation<Transfer> {
+/// Operation responsible for creating the transfer on the server and providing the given transfer object with an identifier and URL when succeeded.
+/// This operation does not handle the requests necessary to add files to the server side transfer, which `AddFilesOperation` is responsible for
+final class CreateTransferOperation: AsynchronousResultOperation<Transfer> {
 	
 	let transfer: Transfer
 	
+	/// Initalized the operation with a transfer object
+	///
+	/// - Parameter transfer: Transfer object with optionally some files already added
 	required init(transfer: Transfer) {
 		self.transfer = transfer
 		super.init()
@@ -24,13 +29,15 @@ class CreateTransferOperation: AsynchronousResultOperation<Transfer> {
 		}
 		
 		let parameters = CreateTransferParameters(with: transfer)
-		WeTransfer.request(.createTransfer(), parameters: parameters) { result in
+		WeTransfer.request(.createTransfer(), parameters: parameters) { [weak self] result in
 			switch result {
 			case .success(let response):
-				self.transfer.update(with: response)
-				self.finish(with: .success(self.transfer))
+				if let transfer = self?.transfer {
+					transfer.update(with: response.id, shortURL: response.shortenedUrl)
+					self?.finish(with: .success(transfer))
+				}
 			case .failure(let error):
-				self.finish(with: .failure(error))
+				self?.finish(with: .failure(error))
 			}
 		}
 	}

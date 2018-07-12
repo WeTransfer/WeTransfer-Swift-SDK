@@ -8,12 +8,23 @@
 
 import Foundation
 
-class UploadFilesOperation: ChainedAsynchronousResultOperation<Transfer, Transfer>, URLSessionTaskDelegate {
+/// Handles the uploading of all files -- that are not uploaded yet -- in the provided transfer. Creates an operation queue with an `UploadFileOperation` for each file to be uploaded.
+final class UploadFilesOperation: ChainedAsynchronousResultOperation<Transfer, Transfer>, URLSessionDataDelegate {
 	
+	/// Amount of bytes already sent
 	private var bytesSent: Bytes = 0
+	/// The total amount of bytes to be sent
 	private var totalBytes: Bytes = 0
 	
+	/// The total progress for all files to be uploaded
 	let progress = Progress(totalUnitCount: 1)
+	
+	/// Initializes the operation with a transfer. When initalized as part of a chain after `AddFilesOperation`, this operation can be initialized without any arguments
+	///
+	/// - Parameter transfer: Transfer object to upload files from
+	convenience init(transfer: Transfer) {
+		self.init(input: transfer)
+	}
 	
 	override func execute(_ transfer: Transfer) {
 		guard transfer.identifier != nil else {
@@ -69,21 +80,22 @@ class UploadFilesOperation: ChainedAsynchronousResultOperation<Transfer, Transfe
 			return
 		}
 		
-		filesResultOperation.onResult = { result in
+		filesResultOperation.onResult = { [weak self] result in
 			uploadSession.delegateQueue.underlyingQueue?.async {
-				self.progress.resignCurrent()
+				self?.progress.resignCurrent()
 			}
 			switch result {
 			case .success:
-				self.finish(with: .success(transfer))
+				self?.finish(with: .success(transfer))
 			case .failure(let error):
-				self.finish(with: .failure(error))
+				self?.finish(with: .failure(error))
 			}
 		}
 		
 		fileOperationQueue.addOperations(fileOperations + [filesResultOperation], waitUntilFinished: false)
 	}
 	
+	// Use the didSendBodyData delegate method to update the upload progress
 	func urlSession(_ session: URLSession, task: URLSessionTask, didSendBodyData bytesSent: Int64, totalBytesSent: Int64, totalBytesExpectedToSend: Int64) {
 		self.bytesSent += UInt64(bytesSent)
 		progress.completedUnitCount = Int64(self.bytesSent)

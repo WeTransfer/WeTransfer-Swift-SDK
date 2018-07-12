@@ -18,11 +18,15 @@ import Cocoa
 final public class Transfer {
 	public private(set) var identifier: String?
 
+	/// The name of the transfer. This name will be shown when viewing the transfer on wetransfer.com
 	public let name: String
+	/// Optional description of the transfer. This will be shown when viewing the transfer on wetransfer.com
 	public let description: String?
 
+	/// References to all the files added to the transfer. Add other files with the public method on the WeTransfer struct or add them directly when initializing the transfer object
 	public private(set) var files: [File] = []
 
+	/// Available when the transfer is created on the server
 	public private(set) var shortURL: URL?
 
 	public init(name: String, description: String?, files: [File] = []) {
@@ -34,26 +38,41 @@ final public class Transfer {
 
 // MARK: - Private updating methods
 extension Transfer {
-	func update(with response: CreateTransferResponse) {
-		identifier = "\(response.id)"
-		shortURL = response.shortenedUrl
+	
+	/// Updates the transfer with server-side information
+	///
+	/// - Parameters:
+	///   - identifier: Identifier to point to global transfer
+	///   - shortURL: URL of where the transfer can be found online
+	func update(with identifier: String, shortURL: URL) {
+		self.identifier = identifier
+		self.shortURL = shortURL
 	}
 
+	/// Adds provided files to the transfer locally
+	///
+	/// - Parameter files: Files to be added to the transfer
 	func add(_ files: [File]) {
 		for file in files where !self.files.contains(file) {
 			self.files.append(file)
 		}
 	}
 
-	func updateFiles(with responseFiles: [AddFilesResponse]) {
+	/// Iterates through all files and allows the caller to update each file
+	/// - Note: As the files array is readonly, updating files is only available through methods on the Transfer object.
+	///
+	/// - Parameter update: Closure that expects a file and returns a file, in which the file should be updated
+	func updateFiles(_ update: (File) -> File) {
 		files = files.map { file in
-			guard let responseFile = responseFiles.first(where: { $0.localIdentifier == file.localIdentifier }) else {
-				return file
-			}
-			return file.updated(with: responseFile)
+			return update(file)
 		}
 	}
 
+	/// Updates the provided file and sets its `isUploaded` property to true
+	/// - Note: As the files array is readonly, updating files is only available through methods on the Transfer object.
+	/// This convenience function makes it easier to update the correct file in the array
+	///
+	/// - Parameter file: The file to update
 	func setFileUploaded(_ file: File) {
 		guard let index = files.index(of: file) else {
 			return

@@ -9,7 +9,7 @@
 import XCTest
 @testable import WeTransfer
 
-class CreateTransferTests: XCTestCase {
+final class CreateTransferTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
@@ -66,6 +66,35 @@ class CreateTransferTests: XCTestCase {
 			XCTAssertNotNil(transfer.shortURL)
 			XCTAssertFalse(transfer.files.isEmpty)
 
+			for file in transfer.files {
+				XCTAssertNotNil(file.identifier)
+				XCTAssertFalse(file.isUploaded)
+				XCTAssertNotNil(file.numberOfChunks)
+			}
+		}
+	}
+	
+	func testTransferAlreadyCreatedError() {
+		guard let file = TestConfiguration.fileModel else {
+			XCTFail("File not available")
+			return
+		}
+		
+		let createdTransferExpectation = expectation(description: "Transfer is created with files")
+		
+		let transfer = Transfer(name: "Test Transfer", description: nil, files: [file])
+		WeTransfer.createTransfer(with: transfer, completion: { (result) in
+			if case .failure(let error) = result {
+				XCTFail("Create transfer failed: \(error)")
+			}
+			createdTransferExpectation.fulfill()
+		})
+		
+		waitForExpectations(timeout: 20) { _ in
+			XCTAssertNotNil(transfer.identifier)
+			XCTAssertNotNil(transfer.shortURL)
+			XCTAssertFalse(transfer.files.isEmpty)
+			
 			for file in transfer.files {
 				XCTAssertNotNil(file.identifier)
 				XCTAssertFalse(file.isUploaded)

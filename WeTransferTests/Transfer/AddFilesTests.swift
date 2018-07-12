@@ -9,7 +9,7 @@
 import XCTest
 @testable import WeTransfer
 
-class AddFilesTests: XCTestCase {
+final class AddFilesTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
@@ -79,6 +79,55 @@ class AddFilesTests: XCTestCase {
 			})
 		})
 
+		waitForExpectations(timeout: 10) { _ in
+			XCTAssertFalse(transfer.files.isEmpty)
+			for file in transfer.files {
+				XCTAssertNotNil(file.identifier)
+				XCTAssertFalse(file.isUploaded)
+			}
+		}
+	}
+	
+	func testMulitpleFileRequests() {
+		let transfer = Transfer(name: "Test Transfer", description: nil)
+		
+		guard let file = TestConfiguration.fileModel, let smallFile = TestConfiguration.smallFileModel else {
+			XCTFail("File not available")
+			return
+		}
+		
+		let addedFirstFileExpectation = expectation(description: "First file was added")
+		let addedSecondFileExpectation = expectation(description: "Second file was added")
+		
+		WeTransfer.createTransfer(with: transfer, completion: { (result) in
+			if case .failure(let error) = result {
+				XCTFail("Create transfer failed: \(error)")
+				return
+			}
+			
+			var firstFileCompleted = false
+			
+			WeTransfer.add([file], to: transfer, completion: { (result) in
+				if case .failure(let error) = result {
+					XCTFail("Add files to transfer failed: \(error)")
+					return
+				}
+				firstFileCompleted = true
+				addedFirstFileExpectation.fulfill()
+			})
+			
+			// Do the small file second and expect it to be completed after the first file completes
+			WeTransfer.add([smallFile], to: transfer, completion: { (result) in
+				if case .failure(let error) = result {
+					XCTFail("Add files to transfer failed: \(error)")
+					return
+				}
+				XCTAssertEqual(transfer.files.count, 2)
+				XCTAssertTrue(firstFileCompleted)
+				addedSecondFileExpectation.fulfill()
+			})
+		})
+		
 		waitForExpectations(timeout: 10) { _ in
 			XCTAssertFalse(transfer.files.isEmpty)
 			for file in transfer.files {
