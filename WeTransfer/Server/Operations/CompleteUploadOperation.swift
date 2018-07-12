@@ -42,9 +42,14 @@ final class CompleteUploadOperation: AsynchronousResultOperation<File> {
 		}
 		
 		WeTransfer.request(.completeUpload(fileIdentifier: fileIdentifier)) { [weak self] result in
-			if case .failure(let error) = result {
+			switch result {
+			case .failure(let error):
 				self?.finish(with: .failure(error))
-			} else {
+			case .success(let response):
+				guard response.ok else {
+					self?.finish(with: .failure(WeTransfer.RequestError.serverError(errorMessage: response.message, httpCode: nil)))
+					return
+				}
 				guard let file = self?.file else {
 					return
 				}
