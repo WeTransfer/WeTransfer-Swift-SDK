@@ -53,45 +53,72 @@ extension APIEndpoint {
 }
 
 // MARK: - Authorize
+
+/// Response from authenticate request
 struct AuthorizeResponse: Decodable {
+	/// Whether authorization has succeeded
 	let success: Bool
+	/// The JWT to use in future requests
 	let token: String?
 }
 
 // MARK: - Create transfer
+
+/// Parameters used for the create transfer request
 struct CreateTransferParameters: Encodable {
+	/// Name of the transfer to create
 	let name: String
+	/// Description of the transfer to create
 	let description: String?
 	
+	/// Initializes the parameters with a local transfer object
+	///
+	/// - Parameter transfer: Transfer object to create on the server
 	init(with transfer: Transfer) {
 		name = transfer.name
 		description = transfer.description
 	}
 }
 
+/// Response from create transfer request
 struct CreateTransferResponse: Decodable {
+	/// Server side identifier of the transfer
 	let id: String // swiftlint:disable:this identifier_name
+	/// The URL to where the transfer can be found online
 	let shortenedUrl: URL
 }
 
 // MARK: - Add files
+
+/// Parameters used for the add files request
 struct AddFilesParameters: Encodable {
+	/// Describes a file to be added to the transfer
 	struct Item: Encodable {
+		/// Full name of file (e.g. "photo.jpg")
 		let filename: String
+		/// Filesize in bytes
 		let filesize: UInt64
-		let contentIdentifier: String
+		/// Type of content, currently always "file"
+		let contentIdentifier: String = "file"
+		/// Identifier to uniquely identify file locally
 		let localIdentifier: String
 		
+		/// Initializes Item struct with a File struct
+		///
+		/// - Parameter file: File struct to initialize Item from
 		init(with file: File) {
 			filename = file.filename
 			filesize = file.filesize
-			contentIdentifier = "file"
 			localIdentifier = file.localIdentifier
 		}
 	}
 	
+	/// All items to be added to the transfer
 	let items: [Item]
 	
+	/// Initalizes the parameters with an array of File structs
+	///
+	/// - Parameter files: Array of File structs to be added to the transfer
 	init(with files: [File]) {
 		items = files.map { file in
 			return Item(with: file)
@@ -99,32 +126,40 @@ struct AddFilesParameters: Encodable {
 	}
 }
 
+/// Response from the add files request
 struct AddFilesResponse: Decodable {
+	/// Contains information about the chunks and the upload identifier
 	struct Meta: Decodable {
 		let multipartParts: Int
 		let multipartUploadId: String
 	}
 	
+	/// Identifier of the File on the server
 	let id: String
-	let contentIdentifier: String
+	/// Local identifier of the file to identify the local file with
 	let localIdentifier: String
+	/// Number of multiparts (chunks) and upload identifier for uploading
 	let meta: Meta
-	let name: String
-	let size: UInt64
-	let uploadId: String
-	let uploadExpiresAt: TimeInterval
 }
 
 // MARK: - Request upload URL
+
+/// Response from the add upload url request for chunks
 struct AddUploadURLResponse: Decodable {
+	/// URL to upload the chunk to
 	let uploadUrl: URL
+	/// Number of the chunk
 	let partNumber: Int
-	let uploadId: String
+	/// Time interval when the upload URL is no longer valid and upload URL should be requested again
 	let uploadExpiresAt: TimeInterval
 }
 
 // MARK: - Complete upload
+
+/// Response from complete upload request
 struct CompleteUploadResponse: Decodable {
+	/// Whether the upload of all the chunks has succeeded
 	let ok: Bool // swiftlint:disable:this identifier_name
+	/// Message describing either success or failure of chunk uploads
 	let message: String
 }
