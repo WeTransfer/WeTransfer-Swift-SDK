@@ -8,16 +8,21 @@
 
 import Foundation
 
-/// Holds the local state for communicating with the API
+/// Holds the local state for communicating with the API.
 /// Handles the creation of the appropriate requests, and holds any request-associated classes like the decoder and encoder
 final class APIClient {
+	/// The API key used for each request
 	var apiKey: String?
+	/// URL to point to the server to. Each endpoint appends its path to the base URL
 	var baseURL: URL?
 	
+	/// Handles the storage of the authentication bearer and adds authentication headers to requests
 	let authenticator = Authenticator()
 	
+	/// Main URL session used by for all requests
 	let urlSession: URLSession = URLSession(configuration: .default, delegate: nil, delegateQueue: nil)
 	
+	/// Main operation queue handling all operations concurrently
 	let operationQueue: OperationQueue = OperationQueue()
 	
 	/// Used to decode all json repsonses
@@ -49,7 +54,7 @@ extension APIClient {
 			throw WeTransfer.Error.notConfigured
 		}
 		
-		var request = try URLRequest(endpoint: endpoint, baseURL: baseURL, apiKey: apiKey)
+		var request = URLRequest(endpoint: endpoint, baseURL: baseURL, apiKey: apiKey)
 		request = authenticator.authenticatedRequest(from: request)
 		
 		if let data = data {
@@ -60,7 +65,13 @@ extension APIClient {
 }
 
 fileprivate extension URLRequest {
-	init<Response>(endpoint: APIEndpoint<Response>, baseURL: URL, apiKey: String) throws {
+	/// Initializes a URLRequest instance from and endpoint
+	///
+	/// - Parameters:
+	///   - endpoint: Endpoint describing the url and HTTP method
+	///   - baseURL: URL to append the endpoint's path to
+	///   - apiKey: API key to add to the headers
+	init<Response>(endpoint: APIEndpoint<Response>, baseURL: URL, apiKey: String) {
 		self.init(url: endpoint.url(with: baseURL))
 		httpMethod = endpoint.method.rawValue
 		addValue(apiKey, forHTTPHeaderField: "x-api-key")

@@ -30,6 +30,12 @@ struct Chunk: Encodable {
 }
 
 extension Chunk {
+	/// Initializes a chunk from a File, an index, and a URL to upload it to
+	///
+	/// - Parameters:
+	///   - file: The file for which the chunk should be created
+	///   - chunkIndex: The index of the chunk
+	///   - uploadURL: The URL to where the chunk should be uploaded
 	init(file: File, chunkIndex: Int, uploadURL: URL) {
 		let byteOffset = Chunk.defaultChunkSize * Bytes(chunkIndex)
 		self.init(chunkIndex: chunkIndex,
@@ -41,6 +47,10 @@ extension Chunk {
 }
 
 extension Data {
+	/// Initializes a Data object pointing to the correct bytes in the file of the chunk
+	///
+	/// - Parameter chunk: The chunk with the information about the file, the size and the byte offset
+	/// - Throws: Any error thrown from initializing the FileHandle
 	init(from chunk: Chunk) throws {
 		let file = try FileHandle(forReadingFrom: chunk.fileURL)
 		file.seek(toFileOffset: UInt64(chunk.byteOffset))

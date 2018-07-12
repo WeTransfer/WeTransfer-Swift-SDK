@@ -35,10 +35,14 @@ extension WeTransfer {
 
 	/// Response returned by server when request could not be completed
 	struct ErrorResponse: Decodable {
+		/// Whether the request has succeeded (typically `false`)
 		let success: Bool?
+		/// Message describing the error returned from the API
 		let message: String?
+		/// Actual error message from the server
 		let error: String?
 		
+		/// String using either the message or the error property
 		var errorString: String {
 			return (message ?? error) ?? ""
 		}
