@@ -135,6 +135,15 @@
 			path = Abstract;
 			sourceTree = "<group>";
 		};
+		3E3B9D2C20F7644D0064915C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3E579B202092194F008DFFD2 /* image.jpg */,
+				3E3B9D2720F60F7B0064915C /* smallImage.jpg */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		3E80E0A82091D11300114711 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -255,13 +264,12 @@
 		3EE259702091CF8800DC5A97 /* WeTransferTests */ = {
 			isa = PBXGroup;
 			children = (
+				3E3B9D2C20F7644D0064915C /* Resources */,
+				3ED1C0A120B43E780045D8B3 /* Transfer */,
 				3E7348BD20B4040D009B41D0 /* TestConfiguration.swift */,
-				3E579B202092194F008DFFD2 /* image.jpg */,
-				3E3B9D2720F60F7B0064915C /* smallImage.jpg */,
 				3E7348BF20B41895009B41D0 /* InitializationTests.swift */,
 				3E7348C520B41EC0009B41D0 /* RequestTests.swift */,
 				3E7348C320B41DBA009B41D0 /* AuthorizationTests.swift */,
-				3ED1C0A120B43E780045D8B3 /* Transfer */,
 				3EE259732091CF8800DC5A97 /* Info.plist */,
 				3ED6ED3B20EA2F2100130261 /* Secrets.plist */,
 				3ED6ED3920EA2AD100130261 /* Secrets.swift */,
