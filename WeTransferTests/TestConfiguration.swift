@@ -9,7 +9,7 @@
 import Foundation
 @testable import WeTransfer
 
-class TestConfiguration: NSObject {
+final class TestConfiguration: NSObject {
 
 	enum Environment {
 		case production

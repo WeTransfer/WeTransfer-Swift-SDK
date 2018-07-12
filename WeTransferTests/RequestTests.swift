@@ -9,7 +9,7 @@
 import XCTest
 @testable import WeTransfer
 
-class RequestTests: XCTestCase {
+final class RequestTests: XCTestCase {
 
 	override func tearDown() {
 		super.tearDown()
