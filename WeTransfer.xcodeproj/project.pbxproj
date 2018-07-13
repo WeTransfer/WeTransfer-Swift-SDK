@@ -50,7 +50,6 @@
 		3ED1C0A320B43E980045D8B3 /* CreateTransferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED1C0A220B43E980045D8B3 /* CreateTransferTests.swift */; };
 		3ED1C0A520B442F70045D8B3 /* AddFilesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED1C0A420B442F70045D8B3 /* AddFilesTests.swift */; };
 		3ED6ED3A20EA2AD100130261 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED6ED3920EA2AD100130261 /* Secrets.swift */; };
-		3ED6ED3C20EA2F2100130261 /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3ED6ED3B20EA2F2100130261 /* Secrets.plist */; };
 		3ED6ED4020EA505800130261 /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED6ED3F20EA505800130261 /* APIEndpoint.swift */; };
 		3EE259742091CF8800DC5A97 /* WeTransfer_Swift.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE259662091CF8800DC5A97 /* WeTransfer_Swift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
@@ -110,7 +109,6 @@
 		3ED1C0A220B43E980045D8B3 /* CreateTransferTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTransferTests.swift; sourceTree = "<group>"; };
 		3ED1C0A420B442F70045D8B3 /* AddFilesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFilesTests.swift; sourceTree = "<group>"; };
 		3ED6ED3920EA2AD100130261 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
-		3ED6ED3B20EA2F2100130261 /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Secrets.plist; path = WeTransferTests/Secrets.plist; sourceTree = SOURCE_ROOT; };
 		3ED6ED3F20EA505800130261 /* APIEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoint.swift; sourceTree = "<group>"; };
 		3EE259632091CF8800DC5A97 /* WeTransfer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WeTransfer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EE259662091CF8800DC5A97 /* WeTransfer_Swift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeTransfer_Swift.h; sourceTree = "<group>"; };
@@ -308,7 +306,6 @@
 				3E7348C520B41EC0009B41D0 /* RequestTests.swift */,
 				3E7348C320B41DBA009B41D0 /* AuthorizationTests.swift */,
 				3EE259732091CF8800DC5A97 /* Info.plist */,
-				3ED6ED3B20EA2F2100130261 /* Secrets.plist */,
 				3ED6ED3920EA2AD100130261 /* Secrets.swift */,
 			);
 			path = WeTransferTests;
@@ -371,6 +368,7 @@
 				3EE259682091CF8800DC5A97 /* Sources */,
 				3EE259692091CF8800DC5A97 /* Frameworks */,
 				3EE2596A2091CF8800DC5A97 /* Resources */,
+				3E3B9D3F20F8EE9C0064915C /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -446,7 +444,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3ED6ED3C20EA2F2100130261 /* Secrets.plist in Resources */,
 				3E3B9D2820F60F7B0064915C /* smallImage.jpg in Resources */,
 				3E579B212092194F008DFFD2 /* image.jpg in Resources */,
 			);
@@ -455,6 +452,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3E3B9D3F20F8EE9C0064915C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "filename=\"Secrets.plist\"\nfile=\"${PROJECT_DIR}/${PRODUCT_NAME}/$filename\"\nif [ -f \"$file\" ]; then\n    echo \"[PIM] Copying file $file to ${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.xctest/$filename\"\n    cp -r \"$file\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.xctest/$filename\"\nfi";
+		};
 		3EC0690320BC6088006D131B /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -467,7 +477,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ -z \"$CI\" ]; then\n    if which swiftlint >/dev/null; then\n        swiftlint --config \"${SRCROOT}/Submodules/WeTransfer-iOS-CI/SwiftLint/.swiftlint-source.yml\"\n        swiftlint --config \"${SRCROOT}/Submodules/WeTransfer-iOS-CI/SwiftLint/.swiftlint-tests.yml\"\n    else\n        echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n    fi\nfi";
+			shellScript = "if [ -d \"${SRCROOT}/Submodules/WeTransfer-iOS-CI/SwiftLint\" ] && [ -z \"$CI\" ]; then\n    if which swiftlint >/dev/null; then\n        swiftlint --config \"${SRCROOT}/Submodules/WeTransfer-iOS-CI/SwiftLint/.swiftlint-source.yml\"\n        swiftlint --config \"${SRCROOT}/Submodules/WeTransfer-iOS-CI/SwiftLint/.swiftlint-tests.yml\"\n    else\n        echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n    fi\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 

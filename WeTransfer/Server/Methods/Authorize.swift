@@ -29,8 +29,8 @@ extension WeTransfer {
 		
 		request(.authorize()) { result in
 			switch result {
-			case .failure(let error):
-				callCompletion(.failure(error))
+			case .failure:
+				callCompletion(.failure(WeTransfer.RequestError.authorizationFailed))
 			case .success(let response):
 				if let token = response.token, response.success {
 					client.authenticator.updateBearer(token)

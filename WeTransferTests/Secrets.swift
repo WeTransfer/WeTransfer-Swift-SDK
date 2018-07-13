@@ -16,7 +16,7 @@ struct Secrets {
 		case stagingURL = "staging-url"
 	}
 	
-	// FIXME: This retrieves the API keys from a plist that is used for running test on travis, for local testing, please replace with your own API key
+	// FIXME: This retrieves the API keys from a plist that is used for running tests on travis, for local testing, please manually add Secrets.plist with at least a `production` key or replace the value below with your key
 	static var productionKey: String {
 		return value(for: .productionKey)
 	}
@@ -41,7 +41,7 @@ extension Secrets {
 	private static func value(for secret: SecretName) -> String {
 		guard let url = plistURL, let keysDictionary = NSDictionary(contentsOf: url),
 			let value = keysDictionary[secret.rawValue] as? String else {
-				fatalError("'\(secret.rawValue)' key not available")
+				fatalError("'\(secret.rawValue)' key not available, provide your own Secrets.plist or manually define the keys in the Secrets struct")
 		}
 		return value
 	}
