@@ -55,10 +55,8 @@ extension WeTransfer {
 	public struct Configuration {
 		public let apiKey: String
 		public let baseURL: URL
-
-		let transfer = WeTransfer()
 		
-		/// Initializes the configuration struct with a request API key and optionally a baseURL for when you're pointing to a different server
+		/// Initializes the configuration struct with an API key and optionally a baseURL for when you're pointing to a different server
 		///
 		/// - Parameters:
 		///   - APIKey: Key required to make use of the API. Visit https://developers.wetransfer.com to get a key
