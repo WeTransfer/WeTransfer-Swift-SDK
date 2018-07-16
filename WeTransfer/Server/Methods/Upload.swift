@@ -38,7 +38,7 @@ extension WeTransfer {
 		let operation = UploadFilesOperation(transfer: transfer)
 		if transfer.identifier != nil {
 			changeState(.created(transfer))
-			changeState(.inProgress(operation.progress))
+			changeState(.uploading(operation.progress))
 		}
 		operation.onResult = { result in
 			switch result {

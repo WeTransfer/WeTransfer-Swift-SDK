@@ -126,7 +126,7 @@ extension WeTransfer {
 		// When all files are ready for upload
 		addFilesOperation.onResult = { result in
 			if case .success = result {
-				changeState(.inProgress(uploadFilesOperation.progress))
+				changeState(.uploading(uploadFilesOperation.progress))
 			}
 		}
 		
