@@ -79,16 +79,16 @@ extension WeTransfer {
 
 extension WeTransfer {
 
-	/// Immediately sends a transfer with the provided file URLs. Returns the transfer object used to handle the transfer proces.
+	/// Immediately uploads files to a transfer with the provided name and file URLs
 	///
 	/// - Parameters:
 	///   - name: Name of the transfer, shown when user opens the resulting link
-	///   - urls: Array of URLs pointing to files to be added to the transfer
+	///   - fileURLS: Array of URLs pointing to files to be added to the transfer
 	///   - stateChanged: Closure that will be called for state updates.
 	///   - state: Enum describing the current transfer's state. See the `State` enum description for more details for each state
 	/// - Returns: Transfer object used to handle the transfer process.
 	@discardableResult
-	public static func sendTransfer(named name: String, files urls: [URL], stateChanged: @escaping (_ state: State) -> Void) -> Transfer? {
+	public static func uploadTransfer(named name: String, containing fileURLS: [URL], stateChanged: @escaping (_ state: State) -> Void) -> Transfer? {
 		
 		// Make sure stateChanges closure is called on the main thread
 		let changeState = { state in
@@ -103,14 +103,15 @@ extension WeTransfer {
 			files = try fileURLS.compactMap { url in try File(url: url) }
 		} catch {
 			changeState(.failed(error))
-			return
+			return nil
 		}
+		let transfer = Transfer(name: name, description: nil, files: files)
 		
 		// Create transfer on server
 		let creationOperation = CreateTransferOperation(transfer: transfer)
 		
 		// Add files to the transfer
-		let addFilesOperation = AddFilesOperation(transfer: transfer, files: files)
+		let addFilesOperation = AddFilesOperation()
 		
 		// Upload all files from the chunks
 		let uploadFilesOperation = UploadFilesOperation()
@@ -142,5 +143,7 @@ extension WeTransfer {
 				changeState(.completed(transfer))
 			}
 		}
+		
+		return transfer
 	}
 }

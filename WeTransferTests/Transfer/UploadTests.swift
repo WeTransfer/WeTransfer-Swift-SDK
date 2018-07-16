@@ -39,7 +39,7 @@ final class UploadTests: XCTestCase {
 				transferSentExpectation.fulfill()
 				return
 			}
-			WeTransfer.send(transfer, stateChanged: { (state) in
+			WeTransfer.upload(transfer, stateChanged: { (state) in
 				switch state {
 				case .created(let transfer):
 					print("Transfer created: \(String(describing: transfer.identifier))")

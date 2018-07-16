@@ -31,8 +31,8 @@ final class SimpleTransferTests: XCTestCase {
 		let simpleTransferExpectation = expectation(description: "Transfer has been sent")
 		var updatedTransfer: Transfer?
 		var timer: Timer?
-
-		WeTransfer.sendTransfer(named: "Test Transfer", files: [fileURL]) { state in
+		
+		WeTransfer.uploadTransfer(named: "Test Transfer", containing: [fileURL]) { state in
 			switch state {
 			case .created(let transfer):
 				print("Transfer created: \(transfer)")
