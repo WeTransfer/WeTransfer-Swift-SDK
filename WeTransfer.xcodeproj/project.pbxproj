@@ -609,6 +609,8 @@
 
 /* Begin PBXShellScriptBuildPhase section */
 		3E71177120FC94D600115E55 /* Include Secrets.plist */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
