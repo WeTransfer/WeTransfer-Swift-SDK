@@ -155,8 +155,8 @@
 		3E80E0AF2091D17E00114711 /* Server */ = {
 			isa = PBXGroup;
 			children = (
-				3ED6ED3E20EA504700130261 /* Endpoints */,
 				3E9413C02098C121003A42D1 /* Methods */,
+				3ED6ED3E20EA504700130261 /* Endpoints */,
 				3EA0EFC720BD503D009E4BB1 /* Operations */,
 				3E9413BC2098BC25003A42D1 /* APIClient.swift */,
 				3E8EB08B20E503E2002EB5AB /* Authenticator.swift */,
