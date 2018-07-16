@@ -103,12 +103,12 @@ final class ViewController: UIViewController {
 		
 		guard !selectedMedia.isEmpty else {
 			uploadButton?.isEnabled = false
-			self.statusLabel?.text = "Add media to transfer"
+			statusLabel?.text = "Add media to transfer"
 			return
 		}
 		uploadButton?.isEnabled = true
 		
 		let singularPlural = selectedMedia.count == 1 ? "item" : "items"
-		self.statusLabel?.text = "Added \(selectedMedia.count) \(singularPlural) to transfer"
+		statusLabel?.text = "Added \(selectedMedia.count) \(singularPlural) to transfer"
 	}
 }
