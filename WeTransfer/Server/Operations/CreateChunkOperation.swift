@@ -16,9 +16,9 @@ final class CreateChunkOperation: AsynchronousResultOperation<Chunk> {
 	}
 	
 	/// File to create chunk from
-	let file: File
+	private let file: File
 	/// Index of chunk from file
-	let chunkIndex: Int
+	private let chunkIndex: Int
 	
 	/// Initalizes the operation with a file and an index of the chunk
 	///
