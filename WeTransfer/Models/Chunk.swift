@@ -30,7 +30,7 @@ struct Chunk: Encodable {
 }
 
 extension Chunk {
-	/// Initializes a chunk from a File, an index, and a URL to upload it to
+	/// Initializes a chunk from its File, an index and the URL it should be uploaded to. This struct will be used to upload the file in seperate chunks. For each chunk the size and offset are calculated with the bytes available in the File
 	///
 	/// - Parameters:
 	///   - file: The file for which the chunk should be created

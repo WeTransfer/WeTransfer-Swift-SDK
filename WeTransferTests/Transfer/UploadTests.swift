@@ -39,11 +39,11 @@ final class UploadTests: XCTestCase {
 				transferSentExpectation.fulfill()
 				return
 			}
-			WeTransfer.send(transfer, stateChanged: { (state) in
+			WeTransfer.upload(transfer, stateChanged: { (state) in
 				switch state {
 				case .created(let transfer):
 					print("Transfer created: \(String(describing: transfer.identifier))")
-				case .inProgress(let progress):
+				case .uploading(let progress):
 					print("Upload started")
 					var percentage = 0.0
 					self.observation = progress.observe(\.fractionCompleted, changeHandler: { (progress, _) in

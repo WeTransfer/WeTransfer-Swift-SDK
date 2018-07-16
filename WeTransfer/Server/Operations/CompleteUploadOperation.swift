@@ -11,12 +11,20 @@ import Foundation
 /// Completes the upload of each file in a transfer. Typically used in `UploadFileOperation` after all the file's chunks have been uploaded
 final class CompleteUploadOperation: AsynchronousResultOperation<File> {
 	
-	enum Error: Swift.Error {
-		case fileNotCreatedYet
+	enum Error: Swift.Error, LocalizedError {
+		/// File has not been added to the transfer yet
+		case fileNotYetAdded
+		
+		var localizedDescription: String {
+			switch self {
+			case .fileNotYetAdded:
+				return "File has not been added to the transfer yet"
+			}
+		}
 	}
 	
 	/// File to complete the uploading of
-	let file: File
+	private let file: File
 	
 	/// Initializes the operation with a file to complete the upload for
 	///
@@ -29,7 +37,7 @@ final class CompleteUploadOperation: AsynchronousResultOperation<File> {
 	override func execute() {
 		
 		guard let fileIdentifier = file.identifier else {
-			finish(with: .failure(Error.fileNotCreatedYet))
+			finish(with: .failure(Error.fileNotYetAdded))
 			return
 		}
 		
@@ -42,18 +50,18 @@ final class CompleteUploadOperation: AsynchronousResultOperation<File> {
 		}
 		
 		WeTransfer.request(.completeUpload(fileIdentifier: fileIdentifier)) { [weak self] result in
+			guard let strongSelf = self else {
+				return
+			}
 			switch result {
 			case .failure(let error):
-				self?.finish(with: .failure(error))
+				strongSelf.finish(with: .failure(error))
 			case .success(let response):
 				guard response.ok else {
-					self?.finish(with: .failure(WeTransfer.RequestError.serverError(errorMessage: response.message, httpCode: nil)))
+					strongSelf.finish(with: .failure(WeTransfer.RequestError.serverError(errorMessage: response.message, httpCode: nil)))
 					return
 				}
-				guard let file = self?.file else {
-					return
-				}
-				self?.finish(with: .success(file))
+				strongSelf.finish(with: .success(strongSelf.file))
 			}
 		}
 	}

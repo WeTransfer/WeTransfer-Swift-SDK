@@ -15,8 +15,16 @@ public typealias Bytes = UInt64
 /// As files should be readily available for uploading, only local files accessible by NSFileManager should be used for transfers
 public struct File: Encodable {
 	
-	public enum Error: Swift.Error {
+	public enum Error: Swift.Error, LocalizedError {
+		/// Provided file URL could not be used to get file size information
 		case fileSizeUnavailable
+		
+		public var errorDescription: String? {
+			switch self {
+			case .fileSizeUnavailable:
+				return "No file size information available"
+			}
+		}
 	}
 	
 	/// Location of the file on disk

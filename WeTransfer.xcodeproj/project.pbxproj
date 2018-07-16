@@ -44,7 +44,7 @@
 		3E9413C42099D78A003A42D1 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413C32099D78A003A42D1 /* Request.swift */; };
 		3E9413C62099D823003A42D1 /* CreateTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413C52099D823003A42D1 /* CreateTransfer.swift */; };
 		3E9413C82099D89E003A42D1 /* AddFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413C72099D89E003A42D1 /* AddFiles.swift */; };
-		3E9413CA2099DB05003A42D1 /* Send.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413C92099DB05003A42D1 /* Send.swift */; };
+		3E9413CA2099DB05003A42D1 /* Upload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413C92099DB05003A42D1 /* Upload.swift */; };
 		3E9413CC2099E390003A42D1 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413CB2099E390003A42D1 /* File.swift */; };
 		3E9413CE2099E3F5003A42D1 /* Chunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413CD2099E3F5003A42D1 /* Chunk.swift */; };
 		3EA0EFBA20BD4D90009E4BB1 /* AsynchronousOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA0EFB920BD4D90009E4BB1 /* AsynchronousOperation.swift */; };
@@ -124,7 +124,7 @@
 		3E9413C32099D78A003A42D1 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		3E9413C52099D823003A42D1 /* CreateTransfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTransfer.swift; sourceTree = "<group>"; };
 		3E9413C72099D89E003A42D1 /* AddFiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFiles.swift; sourceTree = "<group>"; };
-		3E9413C92099DB05003A42D1 /* Send.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Send.swift; sourceTree = "<group>"; };
+		3E9413C92099DB05003A42D1 /* Upload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Upload.swift; sourceTree = "<group>"; };
 		3E9413CB2099E390003A42D1 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		3E9413CD2099E3F5003A42D1 /* Chunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chunk.swift; sourceTree = "<group>"; };
 		3EA0EFB920BD4D90009E4BB1 /* AsynchronousOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsynchronousOperation.swift; sourceTree = "<group>"; };
@@ -214,8 +214,8 @@
 		3E80E0AF2091D17E00114711 /* Server */ = {
 			isa = PBXGroup;
 			children = (
-				3ED6ED3E20EA504700130261 /* Endpoints */,
 				3E9413C02098C121003A42D1 /* Methods */,
+				3ED6ED3E20EA504700130261 /* Endpoints */,
 				3EA0EFC720BD503D009E4BB1 /* Operations */,
 				3E9413BC2098BC25003A42D1 /* APIClient.swift */,
 				3E8EB08B20E503E2002EB5AB /* Authenticator.swift */,
@@ -237,7 +237,7 @@
 				3E9413C12098C132003A42D1 /* Authorize.swift */,
 				3E9413C52099D823003A42D1 /* CreateTransfer.swift */,
 				3E9413C72099D89E003A42D1 /* AddFiles.swift */,
-				3E9413C92099DB05003A42D1 /* Send.swift */,
+				3E9413C92099DB05003A42D1 /* Upload.swift */,
 			);
 			path = Methods;
 			sourceTree = "<group>";
@@ -530,7 +530,7 @@
 				3E0EEBB420C175D0009E6B2D /* AddFilesOperation.swift in Sources */,
 				3E80E0A72091D0E700114711 /* WeTransfer.swift in Sources */,
 				3E80E0AE2091D16E00114711 /* Result.swift in Sources */,
-				3E9413CA2099DB05003A42D1 /* Send.swift in Sources */,
+				3E9413CA2099DB05003A42D1 /* Upload.swift in Sources */,
 				3E0EEBC020C19074009E6B2D /* UploadFileOperation.swift in Sources */,
 				3E0EEBB620C177FE009E6B2D /* CreateChunkOperation.swift in Sources */,
 				3E9413C82099D89E003A42D1 /* AddFiles.swift in Sources */,
