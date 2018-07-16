@@ -64,29 +64,29 @@ final class ViewController: UIViewController {
 		uploadButton?.isEnabled = false
 		addButton?.isEnabled = false
 		
-		WeTransfer.sendTransfer(named: "Sample Transfer", files: selectedMedia) { (state) in
+		WeTransfer.sendTransfer(named: "Sample Transfer", files: selectedMedia) { [weak self] (state) in
 			switch state {
 			case .created:
-				self.statusLabel?.text = "Transfer created..."
+				self?.statusLabel?.text = "Transfer created..."
 			case .inProgress(let progress):
-				self.progressView?.observedProgress = progress
-				self.progressObservation = progress.observe(\.fractionCompleted, changeHandler: { (progress, _) in
+				self?.progressView?.observedProgress = progress
+				self?.progressObservation = progress.observe(\.fractionCompleted, changeHandler: { (progress, _) in
 					DispatchQueue.main.async {
-						self.statusLabel?.text = "\(Int(progress.fractionCompleted * 100))% uploaded"
+						self?.statusLabel?.text = "\(Int(progress.fractionCompleted * 100))% uploaded"
 					}
 				})
 			case .failed(let error):
-				self.statusLabel?.textColor = .red
-				self.statusLabel?.text = "Error: \(error.localizedDescription)"
-				self.progressView?.observedProgress = nil
+				self?.statusLabel?.textColor = .red
+				self?.statusLabel?.text = "Error: \(error.localizedDescription)"
+				self?.progressView?.observedProgress = nil
 			case .completed(let transfer):
-				self.progressView?.observedProgress = nil
+				self?.progressView?.observedProgress = nil
 				guard let URL = transfer.shortURL else {
-					self.statusLabel?.text = "Transfer complete but no URL??"
+					self?.statusLabel?.text = "Transfer complete but no URL??"
 					return
 				}
-				self.completedTransfer = transfer
-				self.statusLabel?.text = URL.absoluteString
+				self?.completedTransfer = transfer
+				self?.statusLabel?.text = URL.absoluteString
 			}
 		}
 	}
