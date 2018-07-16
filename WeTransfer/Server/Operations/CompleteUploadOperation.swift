@@ -11,8 +11,16 @@ import Foundation
 /// Completes the upload of each file in a transfer. Typically used in `UploadFileOperation` after all the file's chunks have been uploaded
 final class CompleteUploadOperation: AsynchronousResultOperation<File> {
 	
-	enum Error: Swift.Error {
-		case fileNotCreatedYet
+	enum Error: Swift.Error, LocalizedError {
+		/// File has not been added to the transfer yet
+		case fileNotYetAdded
+		
+		var localizedDescription: String {
+			switch self {
+			case .fileNotYetAdded:
+				return "File has not been added to the transfer yet"
+			}
+		}
 	}
 	
 	/// File to complete the uploading of
@@ -29,7 +37,7 @@ final class CompleteUploadOperation: AsynchronousResultOperation<File> {
 	override func execute() {
 		
 		guard let fileIdentifier = file.identifier else {
-			finish(with: .failure(Error.fileNotCreatedYet))
+			finish(with: .failure(Error.fileNotYetAdded))
 			return
 		}
 		

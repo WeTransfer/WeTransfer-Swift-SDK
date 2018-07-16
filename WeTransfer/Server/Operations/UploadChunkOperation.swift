@@ -11,10 +11,20 @@ import Foundation
 /// Uploads the chunk that resulted from the dependant `CreateChunkOperation`. The uploading is handled by the provided `URLSession`
 final class UploadChunkOperation: ChainedAsynchronousResultOperation<Chunk, Chunk> {
 	
-	enum Error: Swift.Error {
+	enum Error: Swift.Error, LocalizedError {
+		/// No chunk data available. File at URL might be inaccessible
 		case noChunkDataAvailable
-		case fileNotYetAdded
+		/// Upload did not succeed
 		case uploadFailed
+		
+		var localizedDescription: String {
+			switch self {
+			case .noChunkDataAvailable:
+				return "No chunk data available. File at URL might be inaccessible"
+			case .uploadFailed:
+				return "Chunk Upload did not succeed"
+			}
+		}
 	}
 	
 	/// URLSession handling the creation and actual uploading of the chunk

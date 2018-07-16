@@ -11,9 +11,16 @@ import Foundation
 /// Responsible for creating the necessary operations to create and upload chunks for the provided file. Uses the provided operation queue to handle created operations and the actual uploading is done with the provided URLSession
 final class UploadFileOperation: AsynchronousResultOperation<File> {
 	
-	enum Error: Swift.Error {
+	enum Error: Swift.Error, LocalizedError {
+		/// File has no chunks to upload
 		case noChunksAvailable
-		case fileAlreadyUploaded
+		
+		var localizedDescription: String {
+			switch self {
+			case .noChunksAvailable:
+				return "File has no chunks to upload"
+			}
+		}
 	}
 	
 	/// File to upload

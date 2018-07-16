@@ -11,8 +11,16 @@ import Foundation
 /// Creates a chunk of a file to be uploaded. Designed to be used right before `UploadChunkOperation`
 final class CreateChunkOperation: AsynchronousResultOperation<Chunk> {
 	
-	enum Error: Swift.Error {
+	enum Error: Swift.Error, LocalizedError {
+		/// File has not been added to the transfer yet
 		case fileNotYetAdded
+		
+		var localizedDescription: String {
+			switch self {
+			case .fileNotYetAdded:
+				return "File has not been added to the transfer yet"
+			}
+		}
 	}
 	
 	/// File to create chunk from
