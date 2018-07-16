@@ -47,7 +47,9 @@ final class CreateChunkOperation: AsynchronousResultOperation<Chunk> {
 				guard let file = self?.file else {
 					return
 				}
-				let chunk = Chunk(file: file, chunkIndex: response.partNumber - 1, uploadURL: response.uploadUrl)
+				// Chunks are locally referenced in a zero-based index. Subtract 1 from partNumber value
+				let chunkIndex = response.partNumber - 1
+				let chunk = Chunk(file: file, chunkIndex: chunkIndex, uploadURL: response.uploadUrl)
 				self?.finish(with: .success(chunk))
 			}
 		}
