@@ -24,6 +24,8 @@
 		3E5E515120EA816600485FA3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E5E514920EA816600485FA3 /* LaunchScreen.storyboard */; };
 		3E5E515220EA816600485FA3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E5E514B20EA816600485FA3 /* Main.storyboard */; };
 		3E5E515320EA816600485FA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5E514D20EA816600485FA3 /* AppDelegate.swift */; };
+		3E71177720FC9C2E00115E55 /* WeTransfer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE259632091CF8800DC5A97 /* WeTransfer.framework */; };
+		3E71177820FC9C2E00115E55 /* WeTransfer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE259632091CF8800DC5A97 /* WeTransfer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3E7348BE20B4040D009B41D0 /* TestConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348BD20B4040D009B41D0 /* TestConfiguration.swift */; };
 		3E7348C020B41895009B41D0 /* InitializationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348BF20B41895009B41D0 /* InitializationTests.swift */; };
 		3E7348C220B41936009B41D0 /* SimpleTransferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348C120B41936009B41D0 /* SimpleTransferTests.swift */; };
@@ -55,6 +57,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		3E71177920FC9C2E00115E55 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3EE2595A2091CF8800DC5A97 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3EE259622091CF8800DC5A97;
+			remoteInfo = WeTransfer;
+		};
 		3E8EB07F20D7F1AC002EB5AB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3EE2595A2091CF8800DC5A97 /* Project object */;
@@ -63,6 +72,20 @@
 			remoteInfo = WeTransfer;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3E71177B20FC9C2E00115E55 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3E71177820FC9C2E00115E55 /* WeTransfer.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		3E0EEBA720BEE918009E6B2D /* AsynchronousDependencyResultOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsynchronousDependencyResultOperation.swift; sourceTree = "<group>"; };
@@ -122,6 +145,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E71177720FC9C2E00115E55 /* WeTransfer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,10 +356,12 @@
 				3E5E513020EA813D00485FA3 /* Sources */,
 				3E5E513120EA813D00485FA3 /* Frameworks */,
 				3E5E513220EA813D00485FA3 /* Resources */,
+				3E71177B20FC9C2E00115E55 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				3E71177A20FC9C2E00115E55 /* PBXTargetDependency */,
 			);
 			name = "WeTransfer Sample Project";
 			productName = "WeTransfer Sample Project";
@@ -544,6 +570,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		3E71177A20FC9C2E00115E55 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3EE259622091CF8800DC5A97 /* WeTransfer */;
+			targetProxy = 3E71177920FC9C2E00115E55 /* PBXContainerItemProxy */;
+		};
 		3E8EB08020D7F1AC002EB5AB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 3EE259622091CF8800DC5A97 /* WeTransfer */;
@@ -574,8 +605,10 @@
 		3E5E514320EA813E00485FA3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "WeTransfer Sample Project/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -593,8 +626,10 @@
 		3E5E514420EA813E00485FA3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "WeTransfer Sample Project/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -752,7 +787,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wetransfer.WeTransfer-Swift-SDK";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = "";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator appletvos appletvsimulator";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -783,7 +818,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wetransfer.WeTransfer-Swift-SDK";
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = "";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator appletvos appletvsimulator";
 				SWIFT_VERSION = 4.0;
