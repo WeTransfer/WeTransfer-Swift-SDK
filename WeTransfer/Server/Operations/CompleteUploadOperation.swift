@@ -16,7 +16,7 @@ final class CompleteUploadOperation: AsynchronousResultOperation<File> {
 	}
 	
 	/// File to complete the uploading of
-	let file: File
+	private let file: File
 	
 	/// Initializes the operation with a file to complete the upload for
 	///
