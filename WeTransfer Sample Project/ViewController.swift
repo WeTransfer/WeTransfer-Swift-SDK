@@ -35,7 +35,7 @@ final class ViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		updateInterface()
-		WeTransfer.configure(with: .init(apiKey: "{YOUR API KEY HERE}"))
+		WeTransfer.configure(with: WeTransfer.Configuration(apiKey: "{YOUR API KEY HERE}"))
 	}
 	
 	@IBAction func didPressAddButton(_ button: UIButton) {
