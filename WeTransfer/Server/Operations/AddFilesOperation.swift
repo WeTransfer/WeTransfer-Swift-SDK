@@ -33,7 +33,7 @@ final class AddFilesOperation: ChainedAsynchronousResultOperation<Transfer, Tran
 		let parameters = AddFilesParameters(with: files)
 		
 		guard let identifier = transfer.identifier else {
-			self.finish(with: .failure(WeTransfer.Error.transferNotYetCreated))
+			finish(with: .failure(WeTransfer.Error.transferNotYetCreated))
 			return
 		}
 		
