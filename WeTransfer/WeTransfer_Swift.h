@@ -6,7 +6,7 @@
 //  Copyright © 2018 WeTransfer. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 //! Project version number for WeTransfer_Swift.
 FOUNDATION_EXPORT double WeTransfer_SwiftVersionNumber;
