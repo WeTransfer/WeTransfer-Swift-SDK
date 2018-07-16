@@ -44,7 +44,7 @@ extension WeTransfer {
 			case .transferAlreadyCreated:
 				return "Transfer already created: create transfer request should not be called multiple times for the same transfer"
 			case .noFilesAvailable:
-				return "No files available: add files to the transfer to upload"
+				return "No files available or all files have already been uploaded: add files to the transfer to upload"
 			default:
 				return "\(self)"
 			}
@@ -102,18 +102,17 @@ extension WeTransfer {
 		// Create the transfer model
 		let files: [File]
 		do {
-			files = try urls.compactMap { url in try File(url: url) }
+			files = try fileURLS.compactMap { url in try File(url: url) }
 		} catch {
 			changeState(.failed(error))
-			return nil
+			return
 		}
-		let transfer = Transfer(name: name, description: nil, files: files)
 		
 		// Create transfer on server
 		let creationOperation = CreateTransferOperation(transfer: transfer)
 		
 		// Add files to the transfer
-		let addFilesOperation = AddFilesOperation()
+		let addFilesOperation = AddFilesOperation(transfer: transfer, files: files)
 		
 		// Upload all files from the chunks
 		let uploadFilesOperation = UploadFilesOperation()
@@ -145,7 +144,5 @@ extension WeTransfer {
 				changeState(.completed(transfer))
 			}
 		}
-		
-		return transfer
 	}
 }
