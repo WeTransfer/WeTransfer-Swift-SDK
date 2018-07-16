@@ -37,11 +37,6 @@ final class ViewController: UIViewController {
 		updateInterface()
 		WeTransfer.configure(with: .init(apiKey: "{YOUR API KEY HERE}"))
 	}
-
-	override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
-		// Dispose of any resources that can be recreated.
-	}
 	
 	@IBAction func didPressAddButton(_ button: UIButton) {
 		picker.show(from: self) { (items) in
