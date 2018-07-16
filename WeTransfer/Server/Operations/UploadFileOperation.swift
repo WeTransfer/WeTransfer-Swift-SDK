@@ -43,21 +43,34 @@ final class UploadFileOperation: AsynchronousResultOperation<File> {
 		super.init()
 	}
 	
-	override func execute() {
+	/// Creates the necessary operations for each chunk to be created and uploaded, with the create operation being chained to the upload operation so they happen subsequently. All upload operations are then added as a dependency to the provided complete operation.
+	///
+	/// - Parameter completeOperation: Operation depending on all upload operations. Should only be executed when all chunk operations have finished
+	/// - Returns: An array of chunk operations, whith the each pair of create and upload operations being chained
+	private func chainedChunkOperations(with completeOperation: CompleteUploadOperation) -> [Operation] {
 		guard let numberOfChunks = file.numberOfChunks else {
+			return []
+		}
+		var operations = [Operation]()
+		for chunkIndex in 0..<numberOfChunks {
+			let createOperation = CreateChunkOperation(file: file, chunkIndex: chunkIndex)
+			let uploadOperation = UploadChunkOperation(session: session)
+			operations.append(contentsOf: [createOperation, uploadOperation].chained())
+			
+			completeOperation.addDependency(uploadOperation)
+		}
+		return operations
+	}
+	
+	override func execute() {
+		guard file.numberOfChunks != nil else {
 			self.finish(with: .failure(Error.noChunksAvailable))
 			return
 		}
 		
 		let completeOperation = CompleteUploadOperation(file: file)
 
-		let chunkOperations = (0..<numberOfChunks).reduce([Operation](), { (array, chunkIndex) in
-			let urlOperation = CreateChunkOperation(file: file, chunkIndex: chunkIndex)
-			let uploadOperation = UploadChunkOperation(session: session)
-			uploadOperation.addDependency(urlOperation)
-			completeOperation.addDependency(uploadOperation)
-			return array + [urlOperation, uploadOperation]
-		})
+		let chunkOperations = chainedChunkOperations(with: completeOperation)
 		
 		completeOperation.onResult = { [weak self] result in
 			self?.finish(with: result)
