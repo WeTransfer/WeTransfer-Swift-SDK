@@ -64,11 +64,11 @@ final class ViewController: UIViewController {
 		uploadButton?.isEnabled = false
 		addButton?.isEnabled = false
 		
-		WeTransfer.sendTransfer(named: "Sample Transfer", files: selectedMedia) { [weak self] (state) in
+		WeTransfer.uploadTransfer(named: "Sample Transfer", containing: selectedMedia) { [weak self] (state) in
 			switch state {
 			case .created:
 				self?.statusLabel?.text = "Transfer created..."
-			case .inProgress(let progress):
+			case .uploading(let progress):
 				self?.progressView?.observedProgress = progress
 				self?.progressObservation = progress.observe(\.fractionCompleted, changeHandler: { (progress, _) in
 					DispatchQueue.main.async {
