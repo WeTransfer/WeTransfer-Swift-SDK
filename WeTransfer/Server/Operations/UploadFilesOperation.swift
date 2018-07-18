@@ -67,7 +67,7 @@ final class UploadFilesOperation: ChainedAsynchronousResultOperation<Transfer, T
 			let operation = UploadFileOperation(file: file, operationQueue: chunkOperationQueue, session: uploadSession)
 			operation.onResult = { result in
 				if case .success(let file) = result {
-					transfer.setFileUploaded(file)
+					file.isUploaded = true
 				}
 			}
 			filesResultOperation.addDependency(operation)

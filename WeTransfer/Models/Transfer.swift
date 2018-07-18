@@ -57,26 +57,4 @@ extension Transfer {
 			self.files.append(file)
 		}
 	}
-
-	/// Iterates through all files and allows the caller to update each file
-	/// - Note: As the files array is readonly, updating files is only available through methods on the Transfer object.
-	///
-	/// - Parameter update: Closure that expects a file and returns a file, in which the file should be updated
-	func updateFiles(_ update: (File) -> File) {
-		files = files.map { file in
-			return update(file)
-		}
-	}
-
-	/// Updates the provided file and sets its `isUploaded` property to true
-	/// - Note: As the files array is readonly, updating files is only available through methods on the Transfer object.
-	/// This convenience function makes it easier to update the correct file in the array
-	///
-	/// - Parameter file: The file to update
-	func setFileUploaded(_ file: File) {
-		guard let index = files.index(of: file) else {
-			return
-		}
-		files[index].isUploaded = true
-	}
 }

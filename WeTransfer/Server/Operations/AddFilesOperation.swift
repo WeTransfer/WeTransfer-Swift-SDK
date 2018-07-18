@@ -40,14 +40,12 @@ final class AddFilesOperation: ChainedAsynchronousResultOperation<Transfer, Tran
 		WeTransfer.request(.addItems(transferIdentifier: identifier), parameters: parameters) { [weak self] result in
 			switch result {
 			case .success(let response):
-				transfer.updateFiles({ (file) -> File in
+				transfer.files.forEach({ file in
 					guard let responseFile = response.first(where: {$0.localIdentifier == file.localIdentifier}) else {
-						return file
+						return
 					}
 					
-					var file = file
 					file.update(with: responseFile.id, numberOfChunks: responseFile.meta.multipartParts, multipartUploadIdentifier: responseFile.meta.multipartUploadId)
-					return file
 				})
 				self?.finish(with: .success(transfer))
 			case .failure(let error):
