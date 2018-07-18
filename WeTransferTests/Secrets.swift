@@ -42,7 +42,7 @@ struct Secrets {
 
 extension Secrets {
 	private static var plistURL: URL? {
-		return Bundle(for: TestConfiguration.shared.classForCoder).url(forResource: "Secretsu", withExtension: "plist")
+		return Bundle(for: TestConfiguration.shared.classForCoder).url(forResource: "Secrets", withExtension: "plist")
 	}
 	
 	private static func value(for secret: SecretName) -> String? {
