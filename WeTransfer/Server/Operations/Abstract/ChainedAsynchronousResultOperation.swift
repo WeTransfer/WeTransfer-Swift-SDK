@@ -107,8 +107,7 @@ extension ChainedAsynchronousResultOperation {
 
 extension Array where Element == Operation {
 	func chained() -> [Element] {
-		for item in enumerated() {
-			guard item.offset > 0 else { continue }
+		for item in enumerated() where item.offset > 0 {
 			item.element.addDependency(self[item.offset - 1])
 		}
 		return self
