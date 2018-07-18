@@ -7,7 +7,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -19,57 +18,80 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="3Fs-nB-VUk">
-                                <rect key="frame" x="8" y="310" width="359" height="67.5"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="cWH-7h-Bbc">
+                                <rect key="frame" x="10" y="20" width="355" height="647"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add media to transfer" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SVO-sQ-tN8">
-                                        <rect key="frame" x="0.0" y="0.0" width="359" height="19.5"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wAK-FI-vjM">
-                                        <rect key="frame" x="0.0" y="27.5" width="359" height="2"/>
-                                    </progressView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Y8c-yS-Fuu">
-                                        <rect key="frame" x="0.0" y="37.5" width="359" height="30"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kfs-In-m2p">
+                                        <rect key="frame" x="0.0" y="0.0" width="355" height="547"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y0d-IP-kuA">
-                                                <rect key="frame" x="0.0" y="0.0" width="175.5" height="30"/>
-                                                <state key="normal" title="+ Add Media"/>
-                                                <connections>
-                                                    <action selector="didPressAddButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3Ce-3e-raa"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dRA-De-Vgq">
-                                                <rect key="frame" x="183.5" y="0.0" width="175.5" height="30"/>
-                                                <state key="normal" title="Upload 🚀"/>
-                                                <connections>
-                                                    <action selector="didPressUploadButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SxO-Is-qGK"/>
-                                                </connections>
-                                            </button>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="OuE-YZ-tB5">
+                                                <rect key="frame" x="0.0" y="197" width="355" height="154"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Add media to transfer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q7Y-Kn-7tn" userLabel="Title Label">
+                                                        <rect key="frame" x="57.5" y="0.0" width="240" height="31.5"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Pick a photo to send and get a URL to share wherever you want" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fJu-XC-q2H" userLabel="Body Label">
+                                                        <rect key="frame" x="25.5" y="39.5" width="304.5" height="38"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cio-lU-Tq7">
+                                                        <rect key="frame" x="134" y="85.5" width="87" height="30"/>
+                                                        <state key="normal" title="Select photo"/>
+                                                    </button>
+                                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="z4a-iH-FEZ">
+                                                        <rect key="frame" x="102.5" y="123.5" width="150" height="2"/>
+                                                    </progressView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nMh-O8-fZh" userLabel="URL Label">
+                                                        <rect key="frame" x="156.5" y="133.5" width="42" height="20.5"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
-                                    </stackView>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="OuE-YZ-tB5" firstAttribute="leading" secondItem="Kfs-In-m2p" secondAttribute="leading" id="Efg-h6-Yea"/>
+                                            <constraint firstItem="OuE-YZ-tB5" firstAttribute="centerY" secondItem="Kfs-In-m2p" secondAttribute="centerY" id="ho2-1C-msS"/>
+                                            <constraint firstAttribute="trailing" secondItem="OuE-YZ-tB5" secondAttribute="trailing" id="olP-cC-4YO"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OHg-dW-W0G">
+                                        <rect key="frame" x="0.0" y="547" width="355" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="s3H-jp-wtS"/>
+                                        </constraints>
+                                        <state key="normal" title="Share link"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mO0-DH-Bah">
+                                        <rect key="frame" x="0.0" y="597" width="355" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="Oil-jk-v4Y"/>
+                                        </constraints>
+                                        <state key="normal" title="Transfer"/>
+                                    </button>
                                 </subviews>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="urz-U1-Qqg" firstAttribute="trailing" secondItem="3Fs-nB-VUk" secondAttribute="trailing" constant="8" id="ZBr-wL-OiA"/>
-                            <constraint firstItem="3Fs-nB-VUk" firstAttribute="leading" secondItem="urz-U1-Qqg" secondAttribute="leading" constant="8" id="dOa-AW-uBp"/>
-                            <constraint firstItem="3Fs-nB-VUk" firstAttribute="centerY" secondItem="urz-U1-Qqg" secondAttribute="centerY" id="wtH-p7-Bvn"/>
+                            <constraint firstItem="urz-U1-Qqg" firstAttribute="bottom" secondItem="cWH-7h-Bbc" secondAttribute="bottom" id="3rE-vX-j1R"/>
+                            <constraint firstItem="cWH-7h-Bbc" firstAttribute="top" secondItem="urz-U1-Qqg" secondAttribute="top" id="Skl-I7-Hnu"/>
+                            <constraint firstItem="urz-U1-Qqg" firstAttribute="trailing" secondItem="cWH-7h-Bbc" secondAttribute="trailing" constant="10" id="cGx-mw-UPI"/>
+                            <constraint firstItem="cWH-7h-Bbc" firstAttribute="leading" secondItem="urz-U1-Qqg" secondAttribute="leading" constant="10" id="czM-NA-l10"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="urz-U1-Qqg"/>
                     </view>
-                    <connections>
-                        <outlet property="addButton" destination="y0d-IP-kuA" id="TBJ-hv-4tt"/>
-                        <outlet property="progressView" destination="wAK-FI-vjM" id="u1C-Bl-8f7"/>
-                        <outlet property="statusLabel" destination="SVO-sQ-tN8" id="6zD-St-9iF"/>
-                        <outlet property="uploadButton" destination="dRA-De-Vgq" id="lET-Cc-rqg"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="140" y="132.68365817091455"/>
         </scene>
     </scenes>
 </document>
