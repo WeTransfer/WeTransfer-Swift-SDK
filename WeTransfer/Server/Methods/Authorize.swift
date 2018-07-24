@@ -29,7 +29,11 @@ extension WeTransfer {
 		
 		request(.authorize()) { result in
 			switch result {
-			case .failure:
+			case .failure(let error):
+				guard case RequestError.serverError(_, _) = error else {
+					callCompletion(.failure(error))
+					return
+				}
 				callCompletion(.failure(WeTransfer.RequestError.authorizationFailed))
 			case .success(let response):
 				if let token = response.token, response.success {
