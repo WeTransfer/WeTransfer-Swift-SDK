@@ -53,8 +53,11 @@ final class UploadFilesOperation: ChainedAsynchronousResultOperation<Transfer, T
 		progress.totalUnitCount = Int64(self.totalBytes)
 		
 		// Use the queue of the uploadSession to handle the progress
-		uploadSession.delegateQueue.underlyingQueue?.async {
-			self.progress.becomeCurrent(withPendingUnitCount: Int64(self.totalBytes))
+		uploadSession.delegateQueue.underlyingQueue?.async { [weak self] in
+			guard let strongSelf = self else {
+				return
+			}
+			strongSelf.progress.becomeCurrent(withPendingUnitCount: Int64(strongSelf.totalBytes))
 		}
 		
 		let filesResultOperation = AsynchronousDependencyResultOperation<File>()
