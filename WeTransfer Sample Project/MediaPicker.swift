@@ -10,18 +10,23 @@ import Foundation
 import Photos
 
 /// Basic wrapper for UIImagePickerController to handle authorization and configuring and presenting the controller
-final class ImagePicker: NSObject {
+final class MediaPicker: NSObject {
 	
-	typealias ItemHandler = ([URL]?) -> Void
+	struct Media {
+		let url: URL
+		let previewImage: UIImage
+	}
 	
-	private var itemHandler: ItemHandler?
+	typealias PickedMediaHandler = (_ media: Media?) -> Void
+	
+	private var mediaHandler: PickedMediaHandler?
 	private var presentedImagePickerControler: UIImagePickerController?
 	
-	func show(from viewController: UIViewController, itemHandler: @escaping ItemHandler) {
-		guard self.itemHandler == nil else {
+	func show(from viewController: UIViewController, mediaHandler: @escaping PickedMediaHandler) {
+		guard self.mediaHandler == nil else {
 			return
 		}
-		self.itemHandler = itemHandler
+		self.mediaHandler = mediaHandler
 		authorize { [weak self] (succeeded) in
 			guard succeeded, UIImagePickerController.isSourceTypeAvailable(.photoLibrary) else {
 				self?.finish(with: nil)
@@ -59,15 +64,30 @@ final class ImagePicker: NSObject {
 		}
 	}
 	
-	func finish(with items: [URL]?) {
-		itemHandler?(items)
-		itemHandler = nil
+	func finish(with item: URL?) {
+		var pickedMedia: Media?
+		if let url = item {
+			let asset = AVAsset(url: url)
+			if asset.duration.seconds > 0 {
+				let imageGenerator = AVAssetImageGenerator(asset: asset)
+				imageGenerator.appliesPreferredTrackTransform = true
+				if let image = try? imageGenerator.copyCGImage(at: kCMTimeZero, actualTime: nil) {
+					pickedMedia = Media(url: url, previewImage: UIImage(cgImage: image))
+				}
+			} else {
+				if let image = UIImage(contentsOfFile: url.absoluteString) {
+					pickedMedia = Media(url: url, previewImage: image)
+				}
+			}
+		}
+		mediaHandler?(pickedMedia)
+		mediaHandler = nil
 		presentedImagePickerControler?.presentingViewController?.dismiss(animated: true, completion: nil)
 		presentedImagePickerControler = nil
 	}
 }
 
-extension ImagePicker: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension MediaPicker: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 	func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
 		finish(with: nil)
 	}
@@ -77,6 +97,6 @@ extension ImagePicker: UIImagePickerControllerDelegate, UINavigationControllerDe
 			finish(with: nil)
 			return
 		}
-		finish(with: [url])
+		finish(with: url)
 	}
 }

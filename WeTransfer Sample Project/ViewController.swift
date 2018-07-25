@@ -36,7 +36,7 @@ final class ViewController: UIViewController {
 	@IBOutlet private var mainButtonsStackView: UIStackView!
 	@IBOutlet private var contentStackView: UIStackView!
 	
-	let picker = ImagePicker()
+	let picker = MediaPicker()
 	
 	private var viewState: ViewState = .ready {
 		didSet {
@@ -46,15 +46,10 @@ final class ViewController: UIViewController {
 	
 	private var progressObservation: NSKeyValueObservation?
 	
-	private var selectedMedia = [URL]() {
+	private var selectedMedia = [MediaPicker.Media]() {
 		didSet {
-			if let imagePath = selectedMedia.last?.path {
-				DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-					let image = UIImage(contentsOfFile: imagePath)
-					DispatchQueue.main.async {
-						self?.imageView.image = image
-					}
-				}
+			if let image = selectedMedia.last?.previewImage {
+				imageView.image = image
 			}
 		}
 	}
@@ -136,9 +131,9 @@ final class ViewController: UIViewController {
 	}
 	
 	@IBAction private func didPressSelectButton(_ button: UIButton) {
-		picker.show(from: self) { [weak self] (items) in
-			if let media = items, !media.isEmpty {
-				self?.selectedMedia.append(contentsOf: media)
+		picker.show(from: self) { [weak self] (media) in
+			if let media = media {
+				self?.selectedMedia.append(media)
 				self?.viewState = .selectedMedia
 			}
 		}
@@ -149,7 +144,8 @@ final class ViewController: UIViewController {
 			return
 		}
 		viewState = .startedTransfer
-		WeTransfer.uploadTransfer(named: "Sample Transfer", containing: selectedMedia) { [weak self] state in
+		let files = selectedMedia.map({ $0.url })
+		WeTransfer.uploadTransfer(named: "Sample Transfer", containing: files) { [weak self] state in
 			switch state {
 			case .uploading(let progress):
 				self?.viewState = .transferInProgress(progress: progress)
