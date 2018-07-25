@@ -81,7 +81,7 @@ final class MediaPicker: NSObject {
 					pickedMedia = Media(url: url, previewImage: UIImage(cgImage: image))
 				}
 			} else {
-				if let image = UIImage(contentsOfFile: url.absoluteString) {
+				if let image = UIImage(contentsOfFile: url.path) {
 					pickedMedia = Media(url: url, previewImage: image)
 				}
 			}
