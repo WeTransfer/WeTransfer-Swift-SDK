@@ -47,7 +47,7 @@ final class MediaPicker: NSObject {
 		presentedImagePickerControler = imagePickerController
 	}
 	
-	func authorize(with completion: @escaping (Bool) -> Void) {
+	private func authorize(with completion: @escaping (Bool) -> Void) {
 		switch PHPhotoLibrary.authorizationStatus() {
 		case .authorized:
 			completion(true)
@@ -64,11 +64,17 @@ final class MediaPicker: NSObject {
 		}
 	}
 	
-	func finish(with item: URL?) {
-		var pickedMedia: Media?
-		if let url = item {
+	private func finish(with item: URL?) {
+		guard let url = item else {
+			mediaHandler?(nil)
+			dismissPickerController()
+			return
+		}
+		DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+			var pickedMedia: Media?
 			let asset = AVAsset(url: url)
 			if asset.duration.seconds > 0 {
+				// Get first frame if video
 				let imageGenerator = AVAssetImageGenerator(asset: asset)
 				imageGenerator.appliesPreferredTrackTransform = true
 				if let image = try? imageGenerator.copyCGImage(at: kCMTimeZero, actualTime: nil) {
@@ -79,8 +85,14 @@ final class MediaPicker: NSObject {
 					pickedMedia = Media(url: url, previewImage: image)
 				}
 			}
+			DispatchQueue.main.async {
+				self?.mediaHandler?(pickedMedia)
+				self?.dismissPickerController()
+			}
 		}
-		mediaHandler?(pickedMedia)
+	}
+	
+	private func dismissPickerController() {
 		mediaHandler = nil
 		presentedImagePickerControler?.presentingViewController?.dismiss(animated: true, completion: nil)
 		presentedImagePickerControler = nil
