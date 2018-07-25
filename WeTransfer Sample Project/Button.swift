@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// Button with colored background and rounded corners
 final class Button: UIButton {
 	
 	enum Style {
