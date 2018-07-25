@@ -15,7 +15,7 @@ final class ViewController: UIViewController {
 		case ready
 		case selectedMedia
 		case startedTransfer
-		case transferInProgress(progress: Progress)
+		case transferInProgress
 		case failed(error: Error)
 		case transferCompleted(shortURL: URL)
 	}
@@ -101,8 +101,7 @@ final class ViewController: UIViewController {
 			bodyLabel.text = "Preparing transfer..."
 			progressView.progress = 0
 			contentStackView.addArrangedSubview(progressView)
-		case .transferInProgress(let progress):
-			observeUploadProgress(progress)
+		case .transferInProgress:
 			contentStackView.isHidden = false
 			titleLabel.text = "Uploading"
 			contentStackView.addArrangedSubview(progressView)
