@@ -147,7 +147,7 @@ final class ViewController: UIViewController {
 		WeTransfer.uploadTransfer(named: "Sample Transfer", containing: files) { [weak self] state in
 			switch state {
 			case .uploading(let progress):
-				self?.viewState = .transferInProgress(progress: progress)
+				self?.viewState = .transferInProgress
 				self?.observeUploadProgress(progress)
 			case .failed(let error):
 				self?.viewState = .failed(error: error)
