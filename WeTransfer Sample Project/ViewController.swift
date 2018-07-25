@@ -20,21 +20,21 @@ final class ViewController: UIViewController {
 		case transferCompleted(shortURL: URL)
 	}
 
-	@IBOutlet private var titleLabel: UILabel?
-	@IBOutlet private var bodyLabel: UILabel?
-	@IBOutlet private var selectButton: UIButton?
-	@IBOutlet private var progressView: UIProgressView?
-	@IBOutlet private var urlLabel: UILabel?
+	@IBOutlet private var titleLabel: UILabel!
+	@IBOutlet private var bodyLabel: UILabel!
+	@IBOutlet private var selectButton: UIButton!
+	@IBOutlet private var progressView: UIProgressView!
+	@IBOutlet private var urlLabel: UILabel!
 	
-	@IBOutlet private var imageView: UIImageView?
+	@IBOutlet private var imageView: UIImageView!
 	
-	@IBOutlet private var transferButton: UIButton?
-	@IBOutlet private var addMoreButton: Button?
-	@IBOutlet private var shareButton: UIButton?
-	@IBOutlet private var newTransferButton: Button?
+	@IBOutlet private var transferButton: UIButton!
+	@IBOutlet private var addMoreButton: Button!
+	@IBOutlet private var shareButton: UIButton!
+	@IBOutlet private var newTransferButton: Button!
 	
-	@IBOutlet private var mainButtonsStackView: UIStackView?
-	@IBOutlet private var contentStackView: UIStackView?
+	@IBOutlet private var mainButtonsStackView: UIStackView!
+	@IBOutlet private var contentStackView: UIStackView!
 	
 	let picker = ImagePicker()
 	
@@ -52,12 +52,9 @@ final class ViewController: UIViewController {
 				DispatchQueue.global(qos: .userInitiated).async { [weak self] in
 					let image = UIImage(contentsOfFile: imagePath)
 					DispatchQueue.main.async {
-						self?.imageView?.image = image
+						self?.imageView.image = image
 					}
 				}
-			}
-			if !selectedMedia.isEmpty, case .ready = viewState {
-				viewState = .selectedMedia
 			}
 		}
 	}
@@ -66,24 +63,24 @@ final class ViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		newTransferButton.style = .alternative
+		addMoreButton.style = .alternative
 		updateInterface()
-		newTransferButton?.style = .alternative
-		addMoreButton?.style = .alternative
 		WeTransfer.configure(with: WeTransfer.Configuration(apiKey: "{YOUR_API_KEY_HERE}"))
 	}
 	
 	private func resetInterface() {
 		// Remove UI elements that aren't used everywhere
-		[transferButton, addMoreButton, shareButton, newTransferButton].compactMap({ $0 }).forEach({ button in
-			mainButtonsStackView?.removeArrangedSubview(button)
+		[transferButton, addMoreButton, shareButton, newTransferButton].forEach({ (button: UIButton) in
+			mainButtonsStackView.removeArrangedSubview(button)
 			button.removeFromSuperview()
 		})
-		[selectButton, progressView, urlLabel].compactMap({ $0 }).forEach({ element in
-			contentStackView?.removeArrangedSubview(element)
+		
+		[selectButton, progressView, urlLabel].forEach({ (element: UIView) in
+			contentStackView.removeArrangedSubview(element)
 			element.removeFromSuperview()
 		})
-		contentStackView?.isHidden = true
-		imageView?.isHidden = true
+		imageView.isHidden = true
 	}
 	
 	private func updateInterface() {
@@ -91,76 +88,58 @@ final class ViewController: UIViewController {
 		
 		switch viewState {
 		case .ready:
-			if let transferButton = transferButton {
-				mainButtonsStackView?.addArrangedSubview(transferButton)
-				transferButton.isEnabled = false
-			}
-			contentStackView?.isHidden = false
-			titleLabel?.text = "Add media to transfer"
-			bodyLabel?.text = "Pick a photo to send and get a URL to share wherever you want"
-			if let selectButton = selectButton {
-				contentStackView?.addArrangedSubview(selectButton)
-			}
+			transferButton.setTitle("Transfer", for: .normal)
+			mainButtonsStackView.addArrangedSubview(transferButton)
+			transferButton.isEnabled = false
+			titleLabel.text = "Add media to transfer"
+			bodyLabel.text = "Pick a photo to send and get a URL to share wherever you want"
+			contentStackView.addArrangedSubview(selectButton)
 		case .selectedMedia:
-			imageView?.isHidden = false
-			if let addMoreButton = addMoreButton {
-				mainButtonsStackView?.addArrangedSubview(addMoreButton)
-			}
-			if let transferButton = transferButton {
-				mainButtonsStackView?.addArrangedSubview(transferButton)
-				transferButton.isEnabled = true
-			}
+			imageView.isHidden = false
+			titleLabel.text = nil
+			bodyLabel.text = nil
+			mainButtonsStackView.addArrangedSubview(addMoreButton)
+			mainButtonsStackView.addArrangedSubview(transferButton)
+			transferButton.isEnabled = true
 		case .startedTransfer:
-			contentStackView?.isHidden = false
-			titleLabel?.text = "Uploading"
-			bodyLabel?.text = "Preparing transfer..."
-			
-			if let progressView = progressView {
-				progressView.progress = 0
-				contentStackView?.addArrangedSubview(progressView)
-			}
+			titleLabel.text = "Uploading"
+			bodyLabel.text = "Preparing transfer..."
+			progressView.progress = 0
+			contentStackView.addArrangedSubview(progressView)
 		case .transferInProgress(let progress):
-			contentStackView?.isHidden = false
-			titleLabel?.text = "Uploading"
-			
-			self.progressObservation = progress.observe(\.fractionCompleted) { [weak self] (progress, _) in
-				DispatchQueue.main.async {
-					self?.bodyLabel?.text = "\(Int(progress.fractionCompleted * 100))% completed"
-				}
-			}
-			if let progressView = progressView {
-				contentStackView?.addArrangedSubview(progressView)
-				progressView.observedProgress = progress
-			}
+			observeUploadProgress(progress)
+			contentStackView.isHidden = false
+			titleLabel.text = "Uploading"
+			contentStackView.addArrangedSubview(progressView)
 		case .failed(let error):
-			contentStackView?.isHidden = false
-			titleLabel?.text = "Upload failed"
-			bodyLabel?.text = error.localizedDescription
-			if let transferButton = transferButton {
-				mainButtonsStackView?.addArrangedSubview(transferButton)
-			}
+			titleLabel.text = "Upload failed"
+			bodyLabel.text = error.localizedDescription
+			transferButton.setTitle("Retry transfer", for: .normal)
+			mainButtonsStackView.addArrangedSubview(transferButton)
 		case .transferCompleted(let shortURL):
-			contentStackView?.isHidden = false
-			titleLabel?.text = "Transfer completed"
-			bodyLabel?.text = nil
-			
-			if let urlLabel = urlLabel {
-				urlLabel.text = shortURL.absoluteString
-				contentStackView?.addArrangedSubview(urlLabel)
-			}
-			if let shareButton = shareButton {
-				mainButtonsStackView?.addArrangedSubview(shareButton)
-			}
-			if let newTransferButton = newTransferButton {
-				mainButtonsStackView?.addArrangedSubview(newTransferButton)
+			titleLabel.text = "Transfer completed"
+			bodyLabel.text = nil
+			urlLabel.text = shortURL.absoluteString
+			contentStackView.addArrangedSubview(urlLabel)
+			mainButtonsStackView.addArrangedSubview(shareButton)
+			mainButtonsStackView.addArrangedSubview(newTransferButton)
+		}
+	}
+	
+	private func observeUploadProgress(_ progress: Progress) {
+		progressView.observedProgress = progress
+		progressObservation = progress.observe(\.fractionCompleted) { [weak self] (progress, _) in
+			DispatchQueue.main.async {
+				self?.bodyLabel.text = "\(Int(progress.fractionCompleted * 100))% completed"
 			}
 		}
 	}
 	
 	@IBAction private func didPressSelectButton(_ button: UIButton) {
-		picker.show(from: self) { (items) in
-			if let media = items {
-				self.selectedMedia.append(contentsOf: media)
+		picker.show(from: self) { [weak self] (items) in
+			if let media = items, !media.isEmpty {
+				self?.selectedMedia.append(contentsOf: media)
+				self?.viewState = .selectedMedia
 			}
 		}
 	}
@@ -174,6 +153,7 @@ final class ViewController: UIViewController {
 			switch state {
 			case .uploading(let progress):
 				self?.viewState = .transferInProgress(progress: progress)
+				self?.observeUploadProgress(progress)
 			case .failed(let error):
 				self?.viewState = .failed(error: error)
 			case .completed(let transfer):
