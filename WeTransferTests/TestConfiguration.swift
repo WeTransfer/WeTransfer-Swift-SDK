@@ -41,22 +41,22 @@ final class TestConfiguration: NSObject {
 extension TestConfiguration {
 	static let shared = TestConfiguration()
 
-	class var imageFileURL: URL? {
+	final class var imageFileURL: URL? {
 		return Bundle(for: self.shared.classForCoder).url(forResource: "image", withExtension: "jpg")
 	}
 
-	class var fileModel: File? {
+	final class var fileModel: File? {
 		guard let imageFileURL = imageFileURL else {
 			return nil
 		}
 		return try? File(url: imageFileURL)
 	}
 	
-	class var smallImageFileURL: URL? {
+	final class var smallImageFileURL: URL? {
 		return Bundle(for: self.shared.classForCoder).url(forResource: "smallImage", withExtension: "jpg")
 	}
 	
-	class var smallFileModel: File? {
+	final class var smallFileModel: File? {
 		guard let imageFileURL = smallImageFileURL else {
 			return nil
 		}

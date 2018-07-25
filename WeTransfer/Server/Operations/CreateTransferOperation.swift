@@ -12,7 +12,7 @@ import Foundation
 /// This operation does not handle the requests necessary to add files to the server side transfer, which `AddFilesOperation` is responsible for
 final class CreateTransferOperation: AsynchronousResultOperation<Transfer> {
 	
-	let transfer: Transfer
+	private let transfer: Transfer
 	
 	/// Initalized the operation with a transfer object
 	///

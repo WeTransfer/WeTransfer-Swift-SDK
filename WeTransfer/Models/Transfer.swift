@@ -15,7 +15,7 @@ import Cocoa
 
 /// Desribes a single transfer to be created, updated and sent. Used as an identifier between each request to be made and a local representation of the server-side transfer.
 /// Can be initialized with files or these can be added later through the add files function
-final public class Transfer {
+public final class Transfer {
 	public private(set) var identifier: String?
 
 	/// The name of the transfer. This name will be shown when viewing the transfer on wetransfer.com
@@ -56,27 +56,5 @@ extension Transfer {
 		for file in files where !self.files.contains(file) {
 			self.files.append(file)
 		}
-	}
-
-	/// Iterates through all files and allows the caller to update each file
-	/// - Note: As the files array is readonly, updating files is only available through methods on the Transfer object.
-	///
-	/// - Parameter update: Closure that expects a file and returns a file, in which the file should be updated
-	func updateFiles(_ update: (File) -> File) {
-		files = files.map { file in
-			return update(file)
-		}
-	}
-
-	/// Updates the provided file and sets its `isUploaded` property to true
-	/// - Note: As the files array is readonly, updating files is only available through methods on the Transfer object.
-	/// This convenience function makes it easier to update the correct file in the array
-	///
-	/// - Parameter file: The file to update
-	func setFileUploaded(_ file: File) {
-		guard let index = files.index(of: file) else {
-			return
-		}
-		files[index].isUploaded = true
 	}
 }

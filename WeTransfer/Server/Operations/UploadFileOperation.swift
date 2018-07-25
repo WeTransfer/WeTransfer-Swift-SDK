@@ -24,11 +24,11 @@ final class UploadFileOperation: AsynchronousResultOperation<File> {
 	}
 	
 	/// File to upload
-	let file: File
+	private let file: File
 	/// Queue to add the created operations to
-	let operationQueue: OperationQueue
+	private let operationQueue: OperationQueue
 	/// URLSession handling the creation and actual uploading of the chunks
-	let session: URLSession
+	private let session: URLSession
 	
 	/// Initializes the operation with the necessary file, operation queue and session
 	///
