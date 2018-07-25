@@ -9,6 +9,7 @@
 import Foundation
 import Photos
 
+/// Basic wrapper for UIImagePickerController to handle authorization and configuring and presenting the controller
 final class ImagePicker: NSObject {
 	
 	typealias ItemHandler = ([URL]?) -> Void
@@ -34,6 +35,9 @@ final class ImagePicker: NSObject {
 		let imagePickerController = UIImagePickerController()
 		imagePickerController.delegate = self
 		imagePickerController.sourceType = .photoLibrary
+		if let mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary) {
+			imagePickerController.mediaTypes = mediaTypes
+		}
 		viewController.present(imagePickerController, animated: true, completion: nil)
 		presentedImagePickerControler = imagePickerController
 	}
