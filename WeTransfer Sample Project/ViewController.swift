@@ -36,7 +36,7 @@ final class ViewController: UIViewController {
 	@IBOutlet private var mainButtonsStackView: UIStackView?
 	@IBOutlet private var contentStackView: UIStackView?
 	
-	let picker = Picker()
+	let picker = ImagePicker()
 	
 	private var viewState: ViewState = .ready {
 		didSet {

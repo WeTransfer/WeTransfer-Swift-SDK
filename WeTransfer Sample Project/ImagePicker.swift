@@ -9,7 +9,7 @@
 import Foundation
 import Photos
 
-final class Picker: NSObject {
+final class ImagePicker: NSObject {
 	
 	typealias ItemHandler = ([URL]?) -> Void
 	
@@ -63,7 +63,7 @@ final class Picker: NSObject {
 	}
 }
 
-extension Picker: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension ImagePicker: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 	func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
 		finish(with: nil)
 	}
