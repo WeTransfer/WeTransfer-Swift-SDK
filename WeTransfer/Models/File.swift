@@ -13,10 +13,18 @@ public typealias Bytes = UInt64
 
 /// A file used in a Transfer object. Should be initialized with a URL pointing only to a local file
 /// As files should be readily available for uploading, only local files accessible by NSFileManager should be used for transfers
-public struct File: Encodable {
+public final class File: Encodable {
 	
-	public enum Error: Swift.Error {
+	public enum Error: Swift.Error, LocalizedError {
+		/// Provided file URL could not be used to get file size information
 		case fileSizeUnavailable
+		
+		public var errorDescription: String? {
+			switch self {
+			case .fileSizeUnavailable:
+				return "No file size information available"
+			}
+		}
 	}
 	
 	/// Location of the file on disk
@@ -62,7 +70,7 @@ extension File: Equatable {
 }
 
 extension File {
-	mutating func update(with identifier: String, numberOfChunks: Int, multipartUploadIdentifier: String) {
+	func update(with identifier: String, numberOfChunks: Int, multipartUploadIdentifier: String) {
 		self.identifier = identifier
 		self.numberOfChunks = numberOfChunks
 		self.multipartUploadIdentifier = multipartUploadIdentifier

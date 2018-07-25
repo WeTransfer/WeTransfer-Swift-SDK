@@ -14,7 +14,7 @@ extension WeTransfer {
 	///
 	/// - Parameter completion: Executes when either succeeded or failed
 	/// - Parameter result: Result with empty value when succeeded, or error when failed
-	public static func authorize(completion: @escaping (_ result: Result<Void>) -> Void) {
+	static func authorize(completion: @escaping (_ result: Result<Void>) -> Void) {
 		
 		let callCompletion = { result in
 			DispatchQueue.main.async {
@@ -29,7 +29,11 @@ extension WeTransfer {
 		
 		request(.authorize()) { result in
 			switch result {
-			case .failure:
+			case .failure(let error):
+				guard case RequestError.serverError(_, _) = error else {
+					callCompletion(.failure(error))
+					return
+				}
 				callCompletion(.failure(WeTransfer.RequestError.authorizationFailed))
 			case .success(let response):
 				if let token = response.token, response.success {

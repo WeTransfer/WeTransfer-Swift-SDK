@@ -12,7 +12,7 @@ import Foundation
 final class Authenticator {
 	
 	/// JWT bearer to add to request
-	private(set) var bearer: String?
+	private var bearer: String?
 	
 	/// Whether a bearer is set and thus the client is authenticated
 	var isAuthenticated: Bool {

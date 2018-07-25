@@ -13,7 +13,7 @@ import Foundation
 final class AddFilesOperation: ChainedAsynchronousResultOperation<Transfer, Transfer> {
 	
 	/// The files to be added to the transfer if added during the initialization
-	var filesToAdd: [File]?
+	private var filesToAdd: [File]?
 	
 	/// Initializes the operation with a transfer object and array of files to add. When initalized as part of a chain after `CreateTransferOperation`, this operation can be initialized without any arguments
 	///
@@ -33,21 +33,19 @@ final class AddFilesOperation: ChainedAsynchronousResultOperation<Transfer, Tran
 		let parameters = AddFilesParameters(with: files)
 		
 		guard let identifier = transfer.identifier else {
-			self.finish(with: .failure(WeTransfer.Error.transferNotYetCreated))
+			finish(with: .failure(WeTransfer.Error.transferNotYetCreated))
 			return
 		}
 		
 		WeTransfer.request(.addItems(transferIdentifier: identifier), parameters: parameters) { [weak self] result in
 			switch result {
 			case .success(let response):
-				transfer.updateFiles({ (file) -> File in
+				transfer.files.forEach({ file in
 					guard let responseFile = response.first(where: {$0.localIdentifier == file.localIdentifier}) else {
-						return file
+						return
 					}
 					
-					var file = file
 					file.update(with: responseFile.id, numberOfChunks: responseFile.meta.multipartParts, multipartUploadIdentifier: responseFile.meta.multipartUploadId)
-					return file
 				})
 				self?.finish(with: .success(transfer))
 			case .failure(let error):
