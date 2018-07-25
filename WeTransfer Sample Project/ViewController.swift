@@ -60,6 +60,8 @@ final class ViewController: UIViewController {
 		super.viewDidLoad()
 		newTransferButton.style = .alternative
 		addMoreButton.style = .alternative
+		urlLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapURLLabel(_:))))
+		urlLabel.isUserInteractionEnabled = true
 		updateInterface()
 		WeTransfer.configure(with: WeTransfer.Configuration(apiKey: "{YOUR_API_KEY_HERE}"))
 	}
@@ -113,7 +115,9 @@ final class ViewController: UIViewController {
 		case .transferCompleted(let shortURL):
 			titleLabel.text = "Transfer completed"
 			bodyLabel.text = nil
-			urlLabel.text = shortURL.absoluteString
+			let attributes = [NSAttributedStringKey.underlineStyle: NSUnderlineStyle.styleSingle.rawValue]
+			let attributedURLText = NSAttributedString(string: shortURL.absoluteString, attributes: attributes)
+			urlLabel.attributedText = attributedURLText
 			contentStackView.addArrangedSubview(urlLabel)
 			mainButtonsStackView.addArrangedSubview(shareButton)
 			mainButtonsStackView.addArrangedSubview(newTransferButton)
@@ -173,5 +177,12 @@ final class ViewController: UIViewController {
 	@IBAction private func didPressNewTransferButton(_ button: UIButton) {
 		selectedMedia.removeAll()
 		viewState = .ready
+	}
+	
+	@objc private func didTapURLLabel(_ recognizer: UITapGestureRecognizer) {
+		guard let url = transferURL, UIApplication.shared.canOpenURL(url) else {
+			return
+		}
+		UIApplication.shared.open(url)
 	}
 }
