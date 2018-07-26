@@ -49,9 +49,7 @@ final class MainViewController: UIViewController {
 	
 	private var selectedMedia = [MediaPicker.Media]() {
 		didSet {
-			if let image = selectedMedia.last?.previewImage {
-				imageView.image = image
-			}
+			imageView.image = selectedMedia.last?.previewImage
 			if selectedMedia.count > 1 {
 				let image = selectedMedia[selectedMedia.count - 2].previewImage
 				secondImageView.image = image
@@ -82,11 +80,14 @@ final class MainViewController: UIViewController {
 			button.removeFromSuperview()
 		})
 		
+		// Hide views not managed by a UIStackView
+		imageView.isHidden = true
+		secondImageView.isHidden = true
+		
 		[selectButton, progressView, urlButton].forEach({ (element: UIView) in
 			contentStackView.removeArrangedSubview(element)
 			element.removeFromSuperview()
 		})
-		imageView.isHidden = true
 	}
 	
 	private func updateInterface() {
@@ -101,9 +102,10 @@ final class MainViewController: UIViewController {
 			bodyLabel.text = "Pick a photo to send and get a URL to share wherever you want"
 			contentStackView.addArrangedSubview(selectButton)
 		case .selectedMedia:
-			imageView.isHidden = false
 			titleLabel.text = nil
 			bodyLabel.text = nil
+			imageView.isHidden = false
+			secondImageView.isHidden = false
 			mainButtonsStackView.addArrangedSubview(addMoreButton)
 			mainButtonsStackView.addArrangedSubview(transferButton)
 			transferButton.isEnabled = true
@@ -113,7 +115,6 @@ final class MainViewController: UIViewController {
 			progressView.progress = 0
 			contentStackView.addArrangedSubview(progressView)
 		case .transferInProgress:
-			contentStackView.isHidden = false
 			titleLabel.text = "Uploading"
 			contentStackView.addArrangedSubview(progressView)
 		case .failed(let error):
