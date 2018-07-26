@@ -45,10 +45,13 @@ final class RoundedButton: UIButton {
 	}
 	
 	private func updateBackgroundColor() {
-		let enabledColor = UIColor(red: 64 / 255, green: 159 / 255, blue: 255 / 255, alpha: 1)
-		let alternativeColor = UIColor(white: 235 / 255, alpha: 1)
-		let disabledColor = UIColor(red: 165 / 255, green: 168 / 255, blue: 172 / 255, alpha: 1)
-		backgroundColor = isEnabled ? (style == .alternative ? alternativeColor : enabledColor) : disabledColor
+		if isEnabled {
+			let enabledColor = UIColor(red: 64 / 255, green: 159 / 255, blue: 255 / 255, alpha: 1)
+			let alternativeColor = UIColor(white: 235 / 255, alpha: 1)
+			backgroundColor = style == .alternative ? alternativeColor : enabledColor
+		} else {
+			backgroundColor = UIColor(red: 165 / 255, green: 168 / 255, blue: 172 / 255, alpha: 1)
+		}
 		
 	}
 	
