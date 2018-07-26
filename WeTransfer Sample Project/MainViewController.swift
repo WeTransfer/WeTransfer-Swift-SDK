@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MainViewController.swift
 //  WeTransfer Sample Project
 //
 //  Created by Pim Coumans on 02/07/2018.
@@ -9,7 +9,7 @@
 import UIKit
 import WeTransfer
 
-final class ViewController: UIViewController {
+final class MainViewController: UIViewController {
 	
 	enum ViewState {
 		case ready
@@ -63,7 +63,7 @@ final class ViewController: UIViewController {
 		urlLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapURLLabel(_:))))
 		urlLabel.isUserInteractionEnabled = true
 		updateInterface()
-		WeTransfer.configure(with: WeTransfer.Configuration(apiKey: "{YOUR_API_KEY_HERE}"))
+		WeTransfer.configure(with: WeTransfer.Configuration(apiKey: "miKoFL1pcG3NGp8eQxdbw2IaNDGU8ueP3rM23q1v"))
 	}
 	
 	private func resetInterface() {
