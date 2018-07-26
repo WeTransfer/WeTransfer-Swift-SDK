@@ -24,7 +24,7 @@ final class MainViewController: UIViewController {
 	@IBOutlet private var bodyLabel: UILabel!
 	@IBOutlet private var selectButton: UIButton!
 	@IBOutlet private var progressView: UIProgressView!
-	@IBOutlet private var urlLabel: UILabel!
+	@IBOutlet private var urlButton: UIButton!
 	
 	@IBOutlet private var imageView: UIImageView!
 	@IBOutlet private var secondImageView: UIImageView!
@@ -71,8 +71,6 @@ final class MainViewController: UIViewController {
 		let rotation = 2 * (CGFloat.pi / 180)
 		secondImageView.transform = CGAffineTransform(rotationAngle: rotation)
 		
-		urlLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapURLLabel(_:))))
-		urlLabel.isUserInteractionEnabled = true
 		updateInterface()
 		WeTransfer.configure(with: WeTransfer.Configuration(apiKey: "miKoFL1pcG3NGp8eQxdbw2IaNDGU8ueP3rM23q1v"))
 	}
@@ -84,7 +82,7 @@ final class MainViewController: UIViewController {
 			button.removeFromSuperview()
 		})
 		
-		[selectButton, progressView, urlLabel].forEach({ (element: UIView) in
+		[selectButton, progressView, urlButton].forEach({ (element: UIView) in
 			contentStackView.removeArrangedSubview(element)
 			element.removeFromSuperview()
 		})
@@ -126,10 +124,11 @@ final class MainViewController: UIViewController {
 		case .transferCompleted(let shortURL):
 			titleLabel.text = "Transfer completed"
 			bodyLabel.text = nil
-			let attributes = [NSAttributedStringKey.underlineStyle: NSUnderlineStyle.styleSingle.rawValue]
+			let attributes: [NSAttributedStringKey: Any] = [.underlineStyle: NSUnderlineStyle.styleSingle.rawValue,
+															.foregroundColor: urlButton.currentTitleColor]
 			let attributedURLText = NSAttributedString(string: shortURL.absoluteString, attributes: attributes)
-			urlLabel.attributedText = attributedURLText
-			contentStackView.addArrangedSubview(urlLabel)
+			urlButton.setAttributedTitle(attributedURLText, for: .normal)
+			contentStackView.addArrangedSubview(urlButton)
 			mainButtonsStackView.addArrangedSubview(shareButton)
 			mainButtonsStackView.addArrangedSubview(newTransferButton)
 		}
@@ -190,7 +189,7 @@ final class MainViewController: UIViewController {
 		viewState = .ready
 	}
 	
-	@objc private func didTapURLLabel(_ recognizer: UITapGestureRecognizer) {
+	@IBAction private func didPressURLButton(_ button: UIButton) {
 		guard let url = transferURL, UIApplication.shared.canOpenURL(url) else {
 			return
 		}

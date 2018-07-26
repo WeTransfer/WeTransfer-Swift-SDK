@@ -32,7 +32,7 @@
                                                 <rect key="frame" x="8" y="8" width="339" height="423"/>
                                             </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="OuE-YZ-tB5">
-                                                <rect key="frame" x="0.0" y="112.5" width="355" height="215.5"/>
+                                                <rect key="frame" x="0.0" y="115.5" width="355" height="209.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Add media to transfer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q7Y-Kn-7tn" userLabel="Title Label">
                                                         <rect key="frame" x="57.5" y="0.0" width="240" height="31.5"/>
@@ -59,15 +59,18 @@
                                                             <constraint firstAttribute="width" constant="280" id="d3M-No-HH3"/>
                                                         </constraints>
                                                     </progressView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nMh-O8-fZh" userLabel="URL Label">
-                                                        <rect key="frame" x="156.5" y="165.5" width="42" height="50"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ujh-4K-8O7" userLabel="URL Button">
+                                                        <rect key="frame" x="154.5" y="165.5" width="46" height="44"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="50" id="P6j-4j-ZwY"/>
+                                                            <constraint firstAttribute="height" constant="44" id="hHU-JR-KWo"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
+                                                        <state key="normal" title="Button">
+                                                            <color key="titleColor" red="0.35686274509803922" green="0.35686274509803922" blue="0.35686274509803922" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="didPressURLButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bKF-bZ-WIF"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
@@ -151,7 +154,7 @@
                         <outlet property="shareButton" destination="OHg-dW-W0G" id="psl-aK-er5"/>
                         <outlet property="titleLabel" destination="q7Y-Kn-7tn" id="DC1-oY-gSp"/>
                         <outlet property="transferButton" destination="mO0-DH-Bah" id="BKc-n9-4cI"/>
-                        <outlet property="urlLabel" destination="nMh-O8-fZh" id="w5z-d9-5iu"/>
+                        <outlet property="urlButton" destination="ujh-4K-8O7" id="yzi-xu-BHD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
