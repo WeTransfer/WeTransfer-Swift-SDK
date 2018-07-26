@@ -27,6 +27,7 @@ final class MainViewController: UIViewController {
 	@IBOutlet private var urlLabel: UILabel!
 	
 	@IBOutlet private var imageView: UIImageView!
+	@IBOutlet private var secondImageView: UIImageView!
 	
 	@IBOutlet private var transferButton: UIButton!
 	@IBOutlet private var addMoreButton: RoundedButton!
@@ -51,6 +52,12 @@ final class MainViewController: UIViewController {
 			if let image = selectedMedia.last?.previewImage {
 				imageView.image = image
 			}
+			if selectedMedia.count > 1 {
+				let image = selectedMedia[selectedMedia.count - 2].previewImage
+				secondImageView.image = image
+			} else {
+				secondImageView.image = nil
+			}
 		}
 	}
 	
@@ -60,6 +67,10 @@ final class MainViewController: UIViewController {
 		super.viewDidLoad()
 		newTransferButton.style = .alternative
 		addMoreButton.style = .alternative
+		
+		let rotation = 2 * (CGFloat.pi / 180)
+		secondImageView.transform = CGAffineTransform(rotationAngle: rotation)
+		
 		urlLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapURLLabel(_:))))
 		urlLabel.isUserInteractionEnabled = true
 		updateInterface()
