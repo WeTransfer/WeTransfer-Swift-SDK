@@ -16,6 +16,9 @@ final class RoundedButton: UIButton {
 		case alternative
 	}
 	
+	private let horizontalPadding: CGFloat = 22
+	private let minimumHeight: CGFloat = 44
+	
 	var style: Style = .regular {
 		didSet {
 			updateBackgroundColor()
@@ -29,6 +32,9 @@ final class RoundedButton: UIButton {
 		updateBackgroundColor()
 		updateTitleColor()
 		titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+		
+		heightAnchor.constraint(greaterThanOrEqualToConstant: minimumHeight).isActive = true
+		contentEdgeInsets = UIEdgeInsets(top: 0, left: horizontalPadding, bottom: 0, right: horizontalPadding)
 	}
 	
 	override var isEnabled: Bool {
@@ -50,18 +56,6 @@ final class RoundedButton: UIButton {
 		let titleColor = UIColor.white
 		let alternativeTitleColor = UIColor(white: 75 / 255, alpha: 1)
 		setTitleColor(style == .alternative ? alternativeTitleColor : titleColor, for: .normal)
-	}
-	
-	override var intrinsicContentSize: CGSize {
-		var contentSize = super.intrinsicContentSize
-		
-		if contentSize.width == titleRect(forContentRect: bounds).width {
-			// Add horizontal padding if the button is as wide as the title rect
-			contentSize.width += 44
-		}
-		// Fixed height
-		contentSize.height = 44
-		return contentSize
 	}
 	
 }
