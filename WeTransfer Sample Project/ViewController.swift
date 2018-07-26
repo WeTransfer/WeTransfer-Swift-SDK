@@ -29,9 +29,9 @@ final class ViewController: UIViewController {
 	@IBOutlet private var imageView: UIImageView!
 	
 	@IBOutlet private var transferButton: UIButton!
-	@IBOutlet private var addMoreButton: Button!
+	@IBOutlet private var addMoreButton: RoundedButton!
 	@IBOutlet private var shareButton: UIButton!
-	@IBOutlet private var newTransferButton: Button!
+	@IBOutlet private var newTransferButton: RoundedButton!
 	
 	@IBOutlet private var mainButtonsStackView: UIStackView!
 	@IBOutlet private var contentStackView: UIStackView!

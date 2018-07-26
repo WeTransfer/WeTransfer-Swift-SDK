@@ -9,7 +9,7 @@
 import UIKit
 
 /// Button with colored background and rounded corners
-final class Button: UIButton {
+final class RoundedButton: UIButton {
 	
 	enum Style {
 		case regular
@@ -54,9 +54,12 @@ final class Button: UIButton {
 	
 	override var intrinsicContentSize: CGSize {
 		var contentSize = super.intrinsicContentSize
+		
 		if contentSize.width == titleRect(forContentRect: bounds).width {
+			// Add horizontal padding if the button is as wide as the title rect
 			contentSize.width += 44
 		}
+		// Fixed height
 		contentSize.height = 44
 		return contentSize
 	}
