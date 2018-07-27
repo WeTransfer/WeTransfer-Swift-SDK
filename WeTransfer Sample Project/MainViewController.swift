@@ -9,9 +9,12 @@
 import UIKit
 import WeTransfer
 
+/// Single ViewController where whole transfer progress takes place.
+/// Logic for handling WeTransfer is found the first extension marked 'WeTransfer Logic'
 final class MainViewController: UIViewController {
 	
-	enum ViewState {
+	/// Used to decide which views should be shown and what the labels text of the labels should be
+	private enum ViewState {
 		case ready
 		case selectedMedia
 		case startedTransfer
@@ -37,6 +40,7 @@ final class MainViewController: UIViewController {
 	@IBOutlet private var mainButtonsStackView: UIStackView!
 	@IBOutlet private var contentStackView: UIStackView!
 	
+	/// Handles presentation of UIImagePickerController
 	let picker = MediaPicker()
 	
 	private var viewState: ViewState = .ready {
@@ -49,6 +53,7 @@ final class MainViewController: UIViewController {
 	
 	private var selectedMedia = [MediaPicker.Media]() {
 		didSet {
+			// Update image views whenever media is selected
 			imageView.image = selectedMedia.last?.previewImage
 			if selectedMedia.count > 1 {
 				let image = selectedMedia[selectedMedia.count - 2].previewImage
@@ -59,6 +64,7 @@ final class MainViewController: UIViewController {
 		}
 	}
 	
+	/// Holds completed transfer's URL
 	private var transferURL: URL?
 	
 	override func viewDidLoad() {
@@ -66,11 +72,63 @@ final class MainViewController: UIViewController {
 		newTransferButton.style = .alternative
 		addMoreButton.style = .alternative
 		
+		rotateSecondImage()
+		updateInterface()
+		configureWeTransfer()
+	}
+}
+
+// MARK: - WeTransfer Logic
+extension MainViewController {
+	
+	private func configureWeTransfer() {
+		// Configures the WeTransfer client with the required API key
+		// Get an API key at https://developers.wetransfer.com
+		WeTransfer.configure(with: WeTransfer.Configuration(apiKey: "{YOUR_API_KEY_HERE}"))
+	}
+	
+	private func sendTransfer() {
+		guard !selectedMedia.isEmpty else {
+			return
+		}
+		viewState = .startedTransfer
+		let files = selectedMedia.map({ $0.url })
+		
+		// Creates a transfer and uploads all provided files
+		WeTransfer.uploadTransfer(named: "Sample Transfer", containing: files) { [weak self] state in
+			switch state {
+			case .uploading(let progress):
+				self?.viewState = .transferInProgress
+				self?.observeUploadProgress(progress)
+			case .failed(let error):
+				self?.viewState = .failed(error: error)
+			case .completed(let transfer):
+				if let url = transfer.shortURL {
+					self?.transferURL = url
+					self?.viewState = .transferCompleted(shortURL: url)
+				}
+			default:
+				break
+			}
+		}
+	}
+	
+	private func observeUploadProgress(_ progress: Progress) {
+		progressView.observedProgress = progress
+		progressObservation = progress.observe(\.fractionCompleted) { [weak self] (progress, _) in
+			DispatchQueue.main.async {
+				self?.bodyLabel.text = "\(Int(progress.fractionCompleted * 100))% completed"
+			}
+		}
+	}
+}
+
+// MARK: - UI Logic
+extension MainViewController {
+	
+	private func rotateSecondImage() {
 		let rotation = 2 * (CGFloat.pi / 180)
 		secondImageView.transform = CGAffineTransform(rotationAngle: rotation)
-		
-		updateInterface()
-		WeTransfer.configure(with: WeTransfer.Configuration(apiKey: "miKoFL1pcG3NGp8eQxdbw2IaNDGU8ueP3rM23q1v"))
 	}
 	
 	private func resetInterface() {
@@ -134,15 +192,10 @@ final class MainViewController: UIViewController {
 			mainButtonsStackView.addArrangedSubview(newTransferButton)
 		}
 	}
-	
-	private func observeUploadProgress(_ progress: Progress) {
-		progressView.observedProgress = progress
-		progressObservation = progress.observe(\.fractionCompleted) { [weak self] (progress, _) in
-			DispatchQueue.main.async {
-				self?.bodyLabel.text = "\(Int(progress.fractionCompleted * 100))% completed"
-			}
-		}
-	}
+}
+
+// MARK: - Button handlers
+extension MainViewController {
 	
 	@IBAction private func didPressSelectButton(_ button: UIButton) {
 		picker.show(from: self) { [weak self] (media) in
@@ -154,27 +207,7 @@ final class MainViewController: UIViewController {
 	}
 	
 	@IBAction private func didPressTransferButton(_ button: UIButton) {
-		guard !selectedMedia.isEmpty else {
-			return
-		}
-		viewState = .startedTransfer
-		let files = selectedMedia.map({ $0.url })
-		WeTransfer.uploadTransfer(named: "Sample Transfer", containing: files) { [weak self] state in
-			switch state {
-			case .uploading(let progress):
-				self?.viewState = .transferInProgress
-				self?.observeUploadProgress(progress)
-			case .failed(let error):
-				self?.viewState = .failed(error: error)
-			case .completed(let transfer):
-				if let url = transfer.shortURL {
-					self?.transferURL = url
-					self?.viewState = .transferCompleted(shortURL: url)
-				}
-			default:
-				break
-			}
-		}
+		sendTransfer()
 	}
 	
 	@IBAction private func didPressShareButton(_ button: UIButton) {
