@@ -9,11 +9,12 @@
 import UIKit
 import WeTransfer
 
-/// Single ViewController where whole transfer progress takes place.
-/// Logic for handling WeTransfer is found the first extension marked 'WeTransfer Logic'
+/// Single ViewController where the whole transfer progress takes place.
+/// Actual logic for configuration the WeTransfer client and performing the transfer is found in the first extension marked 'WeTransfer Logic'
+/// To authenticate with the client make sure you've created an API key at https://developers.wetransfer.com
 final class MainViewController: UIViewController {
 	
-	/// Used to decide which views should be shown and what the labels text of the labels should be
+	/// Used to decide which views should be shown and what the content of the labels should be
 	private enum ViewState {
 		case ready
 		case selectedMedia
