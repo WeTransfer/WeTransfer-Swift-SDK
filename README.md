@@ -48,6 +48,30 @@ github "WeTransfer/WeTransfer-Swift-SDK" ~> 1.0
 
 Run `carthage update` to build the framework and drag the built `WeTransfer.framework` into your Xcode project.
 
+### Swift Package Manager
+
+The [Swift Package Manager](https://swift.org/package-manager/) is a tool for automating the distribution of Swift code and is integrated into the `swift` compiler.
+
+Once you have your Swift package set up, adding the WeTransfer SDK as a dependency is as easy as adding it to the `dependencies` value of your `Package.swift`.
+
+#### Swift 3
+
+```swift
+dependencies: [
+    .Package(url: "https://github.com/WeTransfer/WeTransfer-Swift-SDK.git", majorVersion: 1)
+]
+```
+
+#### Swift 4
+
+```swift
+dependencies: [
+    .package(url: "https://github.com/Alamofire/WeTransfer-Swift-SDK.git", from: "1.0   ")
+]
+```
+
+**Note:** Running `swift test` doesn't work currently as Swift packages can't have resources in their test targets. 
+
 ### Cocoapods
 
 [CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects.
