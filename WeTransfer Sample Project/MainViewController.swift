@@ -10,8 +10,8 @@ import UIKit
 import WeTransfer
 
 /// Single ViewController where the whole transfer progress takes place.
-/// Actual logic for configuration the WeTransfer client and performing the transfer is found in the first extension marked 'WeTransfer Logic'
-/// To authenticate with the client make sure you've created an API key at https://developers.wetransfer.com
+/// Actual logic for configuring the WeTransfer client and performing the transfer is found in the first extension marked 'WeTransfer Logic'
+/// To properly authenticate with the client make sure you've created an API key at https://developers.wetransfer.com
 final class MainViewController: UIViewController {
 	
 	/// Used to decide which views should be shown and what the content of the labels should be
