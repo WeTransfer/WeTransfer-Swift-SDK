@@ -124,7 +124,10 @@ WeTransfer.uploadTransfer(named: "Transfer Name", containing: files) { state in
 ```
 
 ## Sample Application
-Included with the project is a neat little sample application that shows a possible use case for the SDK. It allows for photos and videos to be added to a transfer and shows the upload progress for the whole transfer. After which the URL can be shared.
+<p align="center">
+    <img src="https://raw.githubusercontent.com/WeTransfer/WeTransfer-Swift-SDK/Assets/SampleApplication.gif" alt="Sample Application" />
+</p>
+Included with the project is a neat little sample application that shows a possible use case for the SDK. It allows for photos and videos to be added to a transfer and shows the upload progress for the whole transfer, aAfter which the URL can be shared.
 
 ## Communication
 
