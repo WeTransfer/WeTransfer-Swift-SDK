@@ -13,7 +13,7 @@ For your API key and additional info please visit our [developer portal](https:/
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Sample Application](#sample\ application)
+- [Sample Application](#sample-application)
 - [Communication](#communication)
 - [License](#license)
 
