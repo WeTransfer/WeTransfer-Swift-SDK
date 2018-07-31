@@ -13,6 +13,7 @@ For your API key and additional info please visit our [developer portal](https:/
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Sample Application](#sample\ application)
 - [Communication](#communication)
 - [License](#license)
 
@@ -121,6 +122,9 @@ WeTransfer.uploadTransfer(named: "Transfer Name", containing: files) { state in
     }
 }
 ```
+
+## Sample Application
+Included with the project is a neat little sample application that shows a possible use case for the SDK. It allows for photos and videos to be added to a transfer and shows the upload progress for the whole transfer. After which the URL can be shared.
 
 ## Communication
 
