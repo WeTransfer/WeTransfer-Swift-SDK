@@ -7,11 +7,6 @@
 //
 
 import Foundation
-#if canImport(UIKit)
-import UIKit
-#elseif canImport(Cocoa)
-import Cocoa
-#endif
 
 /// Desribes a single transfer to be created, updated and sent. Used as an identifier between each request to be made and a local representation of the server-side transfer.
 /// Can be initialized with files or these can be added later through the add files function

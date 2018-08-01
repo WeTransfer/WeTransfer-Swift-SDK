@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3EE259622091CF8800DC5A97"
+               BlueprintIdentifier = "3E7116DB20FC85D400115E55"
                BuildableName = "WeTransfer.framework"
-               BlueprintName = "WeTransfer"
+               BlueprintName = "WeTransfer iOS"
                ReferencedContainer = "container:WeTransfer.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,9 +32,9 @@
       <CodeCoverageTargets>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3EE259622091CF8800DC5A97"
+            BlueprintIdentifier = "3E7116DB20FC85D400115E55"
             BuildableName = "WeTransfer.framework"
-            BlueprintName = "WeTransfer"
+            BlueprintName = "WeTransfer iOS"
             ReferencedContainer = "container:WeTransfer.xcodeproj">
          </BuildableReference>
       </CodeCoverageTargets>
@@ -43,9 +43,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3EE2596B2091CF8800DC5A97"
-               BuildableName = "WeTransferTests.xctest"
-               BlueprintName = "WeTransferTests"
+               BlueprintIdentifier = "3E7116E320FC85D400115E55"
+               BuildableName = "WeTransfer iOSTests.xctest"
+               BlueprintName = "WeTransfer iOSTests"
                ReferencedContainer = "container:WeTransfer.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -53,9 +53,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3EE259622091CF8800DC5A97"
+            BlueprintIdentifier = "3E7116DB20FC85D400115E55"
             BuildableName = "WeTransfer.framework"
-            BlueprintName = "WeTransfer"
+            BlueprintName = "WeTransfer iOS"
             ReferencedContainer = "container:WeTransfer.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -75,19 +75,12 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3EE259622091CF8800DC5A97"
+            BlueprintIdentifier = "3E7116DB20FC85D400115E55"
             BuildableName = "WeTransfer.framework"
-            BlueprintName = "WeTransfer"
+            BlueprintName = "WeTransfer iOS"
             ReferencedContainer = "container:WeTransfer.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
-      <EnvironmentVariables>
-         <EnvironmentVariable
-            key = "OS_ACTIVITY_MODE"
-            value = "disable"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-      </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -100,9 +93,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3EE259622091CF8800DC5A97"
+            BlueprintIdentifier = "3E7116DB20FC85D400115E55"
             BuildableName = "WeTransfer.framework"
-            BlueprintName = "WeTransfer"
+            BlueprintName = "WeTransfer iOS"
             ReferencedContainer = "container:WeTransfer.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
