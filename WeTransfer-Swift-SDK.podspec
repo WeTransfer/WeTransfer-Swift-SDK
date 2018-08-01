@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/WeTransfer/WeTransfer-Swift-SDK"
   s.license      = "MIT"
   s.author       = { "Pim Coumans" => "pim@pixelrock.nl" }
-  s.source       = { :git => "https://github.com/WeTransfer/WeTransfer-Swift-SDK.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/WeTransfer/WeTransfer-Swift-SDK.git", :tag => "v#{s.version}" }
 
   s.swift_version = "4.1"
   s.ios.deployment_target = "9.0"
