@@ -9,7 +9,7 @@
 import Foundation
 
 // An asynchronous operation which is dependent on a parent operation for its input.
-open class ChainedAsynchronousResultOperation<Input, Output>: AsynchronousResultOperation<Output> {
+class ChainedAsynchronousResultOperation<Input, Output>: AsynchronousResultOperation<Output> {
 
 	public enum Error: Swift.Error {
 		case invalidInput
@@ -67,7 +67,7 @@ open class ChainedAsynchronousResultOperation<Input, Output>: AsynchronousResult
 		}
 	}
 	
-	open func execute(_ input: Input) {
+	func execute(_ input: Input) {
 		fatalError("Subclasses must implement `execute` without overriding super.")
 	}
 	
@@ -80,7 +80,7 @@ open class ChainedAsynchronousResultOperation<Input, Output>: AsynchronousResult
 	/// - Parameter input: The input to validate.
 	/// - Returns: `true` if valid, otherwise `false`.
 	/// - Throws: An error if validation failed. Can be used to throw a custom error as failure.
-	open func validate(_ input: Input) throws -> Bool {
+	func validate(_ input: Input) throws -> Bool {
 		return true
 	}
 }

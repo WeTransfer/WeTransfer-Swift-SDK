@@ -9,7 +9,7 @@
 import Foundation
 
 /// An asynchronous operation which will always have a result after completion.
-open class AsynchronousResultOperation<T>: AsynchronousOperation {
+class AsynchronousResultOperation<T>: AsynchronousOperation {
 	
 	typealias ResultHandler<T> = ((_ result: Result<T>) -> Void)
 
