@@ -101,7 +101,7 @@ Before the SDK can do anything with the WeTransfer API, it needs to be authentic
 1. Configure the client
 Create a configuration with your API key
 ```swift
-let configuration = WeTransfer.Configuration(apiKey: "YOUR_API_KEY")`
+let configuration = WeTransfer.Configuration(apiKey: "YOUR_API_KEY")
 WeTransfer.configure(with: configuration)
 ```
 2. Uploading files with a new transfer
