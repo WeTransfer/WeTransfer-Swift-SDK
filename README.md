@@ -71,7 +71,7 @@ dependencies: [
 ]
 ```
 
-**Note:** Running `swift test` doesn't work currently as Swift packages can't have resources in their test targets. 
+**Note:** Running `swift test` doesn’t work currently as Swift packages can’t have resources in their test targets. 
 
 ### Cocoapods
 
@@ -106,7 +106,7 @@ WeTransfer.configure(with: configuration)
 ```
 2. Uploading files with a new transfer
 Creating a transfer and uploading files to it can be done with one method call, `WeTransfer.uploadTransfer`. Files in the SDK are represented by `File` objects, but this convenience methods expects an array of `URL`s pointing to files on your device.
-In the `stateChanged` closure you're updated about things like the upload progress or whether is has completed or failed
+In the `stateChanged` closure you’re updated about things like the upload progress or whether is has completed or failed
 ```swift
 let files = [...]
 WeTransfer.uploadTransfer(named: "Transfer Name", containing: files) { state in
@@ -137,4 +137,8 @@ Included with the project is a neat little sample application that shows a possi
 
 ## License
 
-The WeTransfer Swift SDK is available under the MIT license. See the [LICENSE](https://github.com/WeTransfer/WeTransfer-Swift-SDK/blob/develop/LICENSE) file for more info.
+The WeTransfer Swift SDK is available under the MIT license. See the [LICENSE](https://github.com/WeTransfer/WeTransfer-Swift-SDK/blob/LICENSE) file for more info.
+
+## Code of Conduct
+
+Everyone interacting in the WeTransfer Swift SDK project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/WeTransfer/WeTransfer-Swift-SDK/blob/master/.github/CODE_OF_CONDUCT.md)
