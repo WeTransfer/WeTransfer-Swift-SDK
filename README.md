@@ -67,7 +67,7 @@ dependencies: [
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/Alamofire/WeTransfer-Swift-SDK.git", from: "1.0   ")
+    .package(url: "https://github.com/Alamofire/WeTransfer-Swift-SDK.git", from: "1.0")
 ]
 ```
 
