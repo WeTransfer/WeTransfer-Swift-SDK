@@ -597,7 +597,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "filename=\"Secrets.plist\"\nfile=\"${PROJECT_DIR}/${PRODUCT_NAME}/$filename\"\nif [ -f \"$file\" ]; then\n    cp -r \"$file\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.xctest/$filename\"\nfi";
+			shellScript = "filename=\"Secrets.plist\"\nfile=\"${PROJECT_DIR}/${PROJECT_NAME}Tests/$filename\"\nif [ -f \"$file\" ]; then\ncp -r \"$file\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.xctest/$filename\"\nfi";
 		};
 		3E71177320FC956C00115E55 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -625,7 +625,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "filename=\"Secrets.plist\"\nfile=\"${PROJECT_DIR}/${PRODUCT_NAME}/$filename\"\nif [ -f \"$file\" ]; then\n    cp -r \"$file\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.xctest/$filename\"\nfi";
+			shellScript = "filename=\"Secrets.plist\"\nfile=\"${PROJECT_DIR}/${PROJECT_NAME}Tests/$filename\"\nif [ -f \"$file\" ]; then\n    cp -r \"$file\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.xctest/Contents/Resources/$filename\"\nfi";
 		};
 		3E71177620FC9A3200115E55 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
