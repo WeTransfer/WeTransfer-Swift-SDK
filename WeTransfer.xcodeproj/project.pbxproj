@@ -16,21 +16,10 @@
 		3E0EEBBC20C19004009E6B2D /* UploadChunkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEBBB20C19004009E6B2D /* UploadChunkOperation.swift */; };
 		3E0EEBBE20C19037009E6B2D /* CompleteUploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEBBD20C19037009E6B2D /* CompleteUploadOperation.swift */; };
 		3E0EEBC020C19074009E6B2D /* UploadFileOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEBBF20C19074009E6B2D /* UploadFileOperation.swift */; };
-		3E3B9D2820F60F7B0064915C /* smallImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3E3B9D2720F60F7B0064915C /* smallImage.jpg */; };
 		3E3B9D3C20F7ADDC0064915C /* MediaPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3B9D3B20F7ADDC0064915C /* MediaPicker.swift */; };
-		3E579B212092194F008DFFD2 /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3E579B202092194F008DFFD2 /* image.jpg */; };
 		3E5E514F20EA816600485FA3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5E514720EA816600485FA3 /* MainViewController.swift */; };
-		3E5E515020EA816600485FA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E5E514820EA816600485FA3 /* Assets.xcassets */; };
-		3E5E515120EA816600485FA3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E5E514920EA816600485FA3 /* LaunchScreen.storyboard */; };
-		3E5E515220EA816600485FA3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E5E514B20EA816600485FA3 /* Main.storyboard */; };
 		3E5E515320EA816600485FA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5E514D20EA816600485FA3 /* AppDelegate.swift */; };
-		3E71177720FC9C2E00115E55 /* WeTransfer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE259632091CF8800DC5A97 /* WeTransfer.framework */; };
-		3E71177820FC9C2E00115E55 /* WeTransfer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE259632091CF8800DC5A97 /* WeTransfer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3E7348BE20B4040D009B41D0 /* TestConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348BD20B4040D009B41D0 /* TestConfiguration.swift */; };
-		3E7348C020B41895009B41D0 /* InitializationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348BF20B41895009B41D0 /* InitializationTests.swift */; };
-		3E7348C220B41936009B41D0 /* SimpleTransferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348C120B41936009B41D0 /* SimpleTransferTests.swift */; };
-		3E7348C420B41DBA009B41D0 /* AuthorizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348C320B41DBA009B41D0 /* AuthorizationTests.swift */; };
-		3E7348C620B41EC0009B41D0 /* RequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348C520B41EC0009B41D0 /* RequestTests.swift */; };
+		3E71177720FC9C2E00115E55 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		3E80E0A72091D0E700114711 /* WeTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E80E0A62091D0E700114711 /* WeTransfer.swift */; };
 		3E80E0AA2091D12B00114711 /* Transfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E80E0A92091D12B00114711 /* Transfer.swift */; };
 		3E80E0AE2091D16E00114711 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E80E0AD2091D16E00114711 /* Result.swift */; };
@@ -44,21 +33,62 @@
 		3E9413CA2099DB05003A42D1 /* Upload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413C92099DB05003A42D1 /* Upload.swift */; };
 		3E9413CC2099E390003A42D1 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413CB2099E390003A42D1 /* File.swift */; };
 		3E9413CE2099E3F5003A42D1 /* Chunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413CD2099E3F5003A42D1 /* Chunk.swift */; };
+		3E9915AA2111B0C50071FDF7 /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3E579B202092194F008DFFD2 /* image.jpg */; };
+		3E9915AB2111B0C50071FDF7 /* smallImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3E3B9D2720F60F7B0064915C /* smallImage.jpg */; };
+		3E9915AC2111B0C50071FDF7 /* SimpleTransferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348C120B41936009B41D0 /* SimpleTransferTests.swift */; };
+		3E9915AD2111B0C50071FDF7 /* CreateTransferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED1C0A220B43E980045D8B3 /* CreateTransferTests.swift */; };
+		3E9915AE2111B0C50071FDF7 /* AddFilesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED1C0A420B442F70045D8B3 /* AddFilesTests.swift */; };
+		3E9915AF2111B0C50071FDF7 /* ChunksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E90734620BBEF3700AE3605 /* ChunksTests.swift */; };
+		3E9915B02111B0C50071FDF7 /* UploadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E90734820BBFE5600AE3605 /* UploadTests.swift */; };
+		3E9915B12111B0C50071FDF7 /* TestConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348BD20B4040D009B41D0 /* TestConfiguration.swift */; };
+		3E9915B22111B0C50071FDF7 /* InitializationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348BF20B41895009B41D0 /* InitializationTests.swift */; };
+		3E9915B32111B0C50071FDF7 /* RequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348C520B41EC0009B41D0 /* RequestTests.swift */; };
+		3E9915B42111B0C50071FDF7 /* AuthorizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348C320B41DBA009B41D0 /* AuthorizationTests.swift */; };
+		3E9915B52111B0C50071FDF7 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED6ED3920EA2AD100130261 /* Secrets.swift */; };
+		3E9915B62111B0C60071FDF7 /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3E579B202092194F008DFFD2 /* image.jpg */; };
+		3E9915B72111B0C60071FDF7 /* smallImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3E3B9D2720F60F7B0064915C /* smallImage.jpg */; };
+		3E9915B82111B0C60071FDF7 /* SimpleTransferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348C120B41936009B41D0 /* SimpleTransferTests.swift */; };
+		3E9915B92111B0C60071FDF7 /* CreateTransferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED1C0A220B43E980045D8B3 /* CreateTransferTests.swift */; };
+		3E9915BA2111B0C60071FDF7 /* AddFilesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED1C0A420B442F70045D8B3 /* AddFilesTests.swift */; };
+		3E9915BB2111B0C60071FDF7 /* ChunksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E90734620BBEF3700AE3605 /* ChunksTests.swift */; };
+		3E9915BC2111B0C60071FDF7 /* UploadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E90734820BBFE5600AE3605 /* UploadTests.swift */; };
+		3E9915BD2111B0C60071FDF7 /* TestConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348BD20B4040D009B41D0 /* TestConfiguration.swift */; };
+		3E9915BE2111B0C60071FDF7 /* InitializationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348BF20B41895009B41D0 /* InitializationTests.swift */; };
+		3E9915BF2111B0C60071FDF7 /* RequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348C520B41EC0009B41D0 /* RequestTests.swift */; };
+		3E9915C02111B0C60071FDF7 /* AuthorizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348C320B41DBA009B41D0 /* AuthorizationTests.swift */; };
+		3E9915C12111B0C60071FDF7 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED6ED3920EA2AD100130261 /* Secrets.swift */; };
+		3E9915C22111B1A30071FDF7 /* WeTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E80E0A62091D0E700114711 /* WeTransfer.swift */; };
+		3E9915C32111B1A30071FDF7 /* Transfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E80E0A92091D12B00114711 /* Transfer.swift */; };
+		3E9915C42111B1A30071FDF7 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413CB2099E390003A42D1 /* File.swift */; };
+		3E9915C52111B1A30071FDF7 /* Chunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413CD2099E3F5003A42D1 /* Chunk.swift */; };
+		3E9915C62111B1A30071FDF7 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413C32099D78A003A42D1 /* Request.swift */; };
+		3E9915C72111B1A30071FDF7 /* Authorize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413C12098C132003A42D1 /* Authorize.swift */; };
+		3E9915C82111B1A30071FDF7 /* CreateTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413C52099D823003A42D1 /* CreateTransfer.swift */; };
+		3E9915C92111B1A30071FDF7 /* AddFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413C72099D89E003A42D1 /* AddFiles.swift */; };
+		3E9915CA2111B1A30071FDF7 /* Upload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413C92099DB05003A42D1 /* Upload.swift */; };
+		3E9915CB2111B1A30071FDF7 /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED6ED3F20EA505800130261 /* APIEndpoint.swift */; };
+		3E9915CC2111B1A30071FDF7 /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413BE2098BF5A003A42D1 /* Endpoints.swift */; };
+		3E9915CD2111B1A30071FDF7 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E80E0AD2091D16E00114711 /* Result.swift */; };
+		3E9915CE2111B1A30071FDF7 /* AsynchronousOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA0EFB920BD4D90009E4BB1 /* AsynchronousOperation.swift */; };
+		3E9915CF2111B1A30071FDF7 /* AsynchronousResultOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA0EFCD20BD7743009E4BB1 /* AsynchronousResultOperation.swift */; };
+		3E9915D02111B1A30071FDF7 /* ChainedAsynchronousResultOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEBAF20C1444C009E6B2D /* ChainedAsynchronousResultOperation.swift */; };
+		3E9915D12111B1A30071FDF7 /* AsynchronousDependencyResultOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEBA720BEE918009E6B2D /* AsynchronousDependencyResultOperation.swift */; };
+		3E9915D22111B1A30071FDF7 /* CreateTransferOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEBB120C17264009E6B2D /* CreateTransferOperation.swift */; };
+		3E9915D32111B1A30071FDF7 /* AddFilesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEBB320C175D0009E6B2D /* AddFilesOperation.swift */; };
+		3E9915D42111B1A30071FDF7 /* UploadFilesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEBB920C18FA5009E6B2D /* UploadFilesOperation.swift */; };
+		3E9915D52111B1A30071FDF7 /* UploadFileOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEBBF20C19074009E6B2D /* UploadFileOperation.swift */; };
+		3E9915D62111B1A30071FDF7 /* CreateChunkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEBB520C177FE009E6B2D /* CreateChunkOperation.swift */; };
+		3E9915D72111B1A30071FDF7 /* UploadChunkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEBBB20C19004009E6B2D /* UploadChunkOperation.swift */; };
+		3E9915D82111B1A30071FDF7 /* CompleteUploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEBBD20C19037009E6B2D /* CompleteUploadOperation.swift */; };
+		3E9915D92111B1A30071FDF7 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413BC2098BC25003A42D1 /* APIClient.swift */; };
+		3E9915DA2111B1A30071FDF7 /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8EB08B20E503E2002EB5AB /* Authenticator.swift */; };
 		3EA0EFBA20BD4D90009E4BB1 /* AsynchronousOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA0EFB920BD4D90009E4BB1 /* AsynchronousOperation.swift */; };
 		3EA0EFCE20BD7743009E4BB1 /* AsynchronousResultOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA0EFCD20BD7743009E4BB1 /* AsynchronousResultOperation.swift */; };
 		3ED6ED4020EA505800130261 /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED6ED3F20EA505800130261 /* APIEndpoint.swift */; };
-		3EE259742091CF8800DC5A97 /* WeTransfer_Swift.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE259662091CF8800DC5A97 /* WeTransfer_Swift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3EFDC98021012FD70091CF85 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFDC97F21012FD70091CF85 /* RoundedButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		3E7116E620FC85D400115E55 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3EE2595A2091CF8800DC5A97 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3E7116DB20FC85D400115E55;
-			remoteInfo = "WeTransfer iOS";
-		};
 		3E71170220FC85F100115E55 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3EE2595A2091CF8800DC5A97 /* Project object */;
@@ -74,20 +104,6 @@
 			remoteInfo = "WeTransfer iOS";
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		3E71177B20FC9C2E00115E55 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				3E71177820FC9C2E00115E55 /* WeTransfer.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		3E0EEBA720BEE918009E6B2D /* AsynchronousDependencyResultOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsynchronousDependencyResultOperation.swift; sourceTree = "<group>"; };
@@ -108,7 +124,6 @@
 		3E5E514A20EA816600485FA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3E5E514C20EA816600485FA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3E5E514D20EA816600485FA3 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3E5E514E20EA816600485FA3 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3E7116DC20FC85D400115E55 /* WeTransfer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WeTransfer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E7116E420FC85D400115E55 /* WeTransfer iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "WeTransfer iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E7116F820FC85F100115E55 /* WeTransfer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WeTransfer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -151,7 +166,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E71177720FC9C2E00115E55 /* WeTransfer.framework in Frameworks */,
+				3E71177720FC9C2E00115E55 /* (null) in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,7 +407,6 @@
 				3E5E513020EA813D00485FA3 /* Sources */,
 				3E5E513120EA813D00485FA3 /* Frameworks */,
 				3E5E513220EA813D00485FA3 /* Resources */,
-				3E71176F20FC889300115E55 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -435,7 +449,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				3E7116E720FC85D400115E55 /* PBXTargetDependency */,
 			);
 			name = "WeTransfer iOSTests";
 			productName = "WeTransfer iOSTests";
@@ -548,8 +561,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3EFDC98D210886040091CF85 /* image.jpg in Resources */,
-				3EFDC98E210886040091CF85 /* smallImage.jpg in Resources */,
+				3E9915AA2111B0C50071FDF7 /* image.jpg in Resources */,
+				3E9915AB2111B0C50071FDF7 /* smallImage.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -564,8 +577,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3EFDC981210886020091CF85 /* image.jpg in Resources */,
-				3EFDC982210886020091CF85 /* smallImage.jpg in Resources */,
+				3E9915B62111B0C60071FDF7 /* image.jpg in Resources */,
+				3E9915B72111B0C60071FDF7 /* smallImage.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -678,16 +691,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3EFDC990210886040091CF85 /* CreateTransferTests.swift in Sources */,
-				3EFDC998210886040091CF85 /* Secrets.swift in Sources */,
-				3EFDC997210886040091CF85 /* AuthorizationTests.swift in Sources */,
-				3EFDC996210886040091CF85 /* RequestTests.swift in Sources */,
-				3EFDC98F210886040091CF85 /* SimpleTransferTests.swift in Sources */,
-				3EFDC993210886040091CF85 /* UploadTests.swift in Sources */,
-				3EFDC991210886040091CF85 /* AddFilesTests.swift in Sources */,
-				3EFDC994210886040091CF85 /* TestConfiguration.swift in Sources */,
-				3EFDC992210886040091CF85 /* ChunksTests.swift in Sources */,
-				3EFDC995210886040091CF85 /* InitializationTests.swift in Sources */,
+				3E9915AD2111B0C50071FDF7 /* CreateTransferTests.swift in Sources */,
+				3E9915B52111B0C50071FDF7 /* Secrets.swift in Sources */,
+				3E9915B42111B0C50071FDF7 /* AuthorizationTests.swift in Sources */,
+				3E9915B32111B0C50071FDF7 /* RequestTests.swift in Sources */,
+				3E9915AC2111B0C50071FDF7 /* SimpleTransferTests.swift in Sources */,
+				3E9915B02111B0C50071FDF7 /* UploadTests.swift in Sources */,
+				3E9915AE2111B0C50071FDF7 /* AddFilesTests.swift in Sources */,
+				3E9915B12111B0C50071FDF7 /* TestConfiguration.swift in Sources */,
+				3E9915AF2111B0C50071FDF7 /* ChunksTests.swift in Sources */,
+				3E9915B22111B0C50071FDF7 /* InitializationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -695,31 +708,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3EFDC9A7210887640091CF85 /* ChainedAsynchronousResultOperation.swift in Sources */,
-				3EFDC9A8210887640091CF85 /* AsynchronousDependencyResultOperation.swift in Sources */,
-				3EFDC9A5210887640091CF85 /* AsynchronousOperation.swift in Sources */,
-				3EFDC9A1210887640091CF85 /* Upload.swift in Sources */,
-				3EFDC9AE210887640091CF85 /* UploadChunkOperation.swift in Sources */,
-				3EFDC99A210887640091CF85 /* Transfer.swift in Sources */,
-				3EFDC99B210887640091CF85 /* File.swift in Sources */,
-				3EFDC99D210887640091CF85 /* Request.swift in Sources */,
-				3EFDC99E210887640091CF85 /* Authorize.swift in Sources */,
-				3EFDC9AB210887640091CF85 /* UploadFilesOperation.swift in Sources */,
-				3EFDC9A9210887640091CF85 /* CreateTransferOperation.swift in Sources */,
-				3EFDC9B0210887640091CF85 /* APIClient.swift in Sources */,
-				3EFDC9AF210887640091CF85 /* CompleteUploadOperation.swift in Sources */,
-				3EFDC9AC210887640091CF85 /* UploadFileOperation.swift in Sources */,
-				3EFDC99F210887640091CF85 /* CreateTransfer.swift in Sources */,
-				3EFDC9B1210887640091CF85 /* Authenticator.swift in Sources */,
-				3EFDC9A4210887640091CF85 /* Result.swift in Sources */,
-				3EFDC9AA210887640091CF85 /* AddFilesOperation.swift in Sources */,
-				3EFDC9AD210887640091CF85 /* CreateChunkOperation.swift in Sources */,
-				3EFDC9A0210887640091CF85 /* AddFiles.swift in Sources */,
-				3EFDC999210887640091CF85 /* WeTransfer.swift in Sources */,
-				3EFDC9A6210887640091CF85 /* AsynchronousResultOperation.swift in Sources */,
-				3EFDC99C210887640091CF85 /* Chunk.swift in Sources */,
-				3EFDC9A2210887640091CF85 /* APIEndpoint.swift in Sources */,
-				3EFDC9A3210887640091CF85 /* Endpoints.swift in Sources */,
+				3E9915D02111B1A30071FDF7 /* ChainedAsynchronousResultOperation.swift in Sources */,
+				3E9915D12111B1A30071FDF7 /* AsynchronousDependencyResultOperation.swift in Sources */,
+				3E9915CE2111B1A30071FDF7 /* AsynchronousOperation.swift in Sources */,
+				3E9915CA2111B1A30071FDF7 /* Upload.swift in Sources */,
+				3E9915D72111B1A30071FDF7 /* UploadChunkOperation.swift in Sources */,
+				3E9915C32111B1A30071FDF7 /* Transfer.swift in Sources */,
+				3E9915C42111B1A30071FDF7 /* File.swift in Sources */,
+				3E9915C62111B1A30071FDF7 /* Request.swift in Sources */,
+				3E9915C72111B1A30071FDF7 /* Authorize.swift in Sources */,
+				3E9915D42111B1A30071FDF7 /* UploadFilesOperation.swift in Sources */,
+				3E9915D22111B1A30071FDF7 /* CreateTransferOperation.swift in Sources */,
+				3E9915D92111B1A30071FDF7 /* APIClient.swift in Sources */,
+				3E9915D82111B1A30071FDF7 /* CompleteUploadOperation.swift in Sources */,
+				3E9915D52111B1A30071FDF7 /* UploadFileOperation.swift in Sources */,
+				3E9915C82111B1A30071FDF7 /* CreateTransfer.swift in Sources */,
+				3E9915DA2111B1A30071FDF7 /* Authenticator.swift in Sources */,
+				3E9915CD2111B1A30071FDF7 /* Result.swift in Sources */,
+				3E9915D32111B1A30071FDF7 /* AddFilesOperation.swift in Sources */,
+				3E9915D62111B1A30071FDF7 /* CreateChunkOperation.swift in Sources */,
+				3E9915C92111B1A30071FDF7 /* AddFiles.swift in Sources */,
+				3E9915C22111B1A30071FDF7 /* WeTransfer.swift in Sources */,
+				3E9915CF2111B1A30071FDF7 /* AsynchronousResultOperation.swift in Sources */,
+				3E9915C52111B1A30071FDF7 /* Chunk.swift in Sources */,
+				3E9915CB2111B1A30071FDF7 /* APIEndpoint.swift in Sources */,
+				3E9915CC2111B1A30071FDF7 /* Endpoints.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -727,32 +740,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3EFDC984210886020091CF85 /* CreateTransferTests.swift in Sources */,
-				3EFDC98C210886020091CF85 /* Secrets.swift in Sources */,
-				3EFDC98B210886020091CF85 /* AuthorizationTests.swift in Sources */,
-				3EFDC98A210886020091CF85 /* RequestTests.swift in Sources */,
-				3EFDC983210886020091CF85 /* SimpleTransferTests.swift in Sources */,
-				3EFDC987210886020091CF85 /* UploadTests.swift in Sources */,
-				3EFDC985210886020091CF85 /* AddFilesTests.swift in Sources */,
-				3EFDC988210886020091CF85 /* TestConfiguration.swift in Sources */,
-				3EFDC986210886020091CF85 /* ChunksTests.swift in Sources */,
-				3EFDC989210886020091CF85 /* InitializationTests.swift in Sources */,
+				3E9915B92111B0C60071FDF7 /* CreateTransferTests.swift in Sources */,
+				3E9915C12111B0C60071FDF7 /* Secrets.swift in Sources */,
+				3E9915C02111B0C60071FDF7 /* AuthorizationTests.swift in Sources */,
+				3E9915BF2111B0C60071FDF7 /* RequestTests.swift in Sources */,
+				3E9915B82111B0C60071FDF7 /* SimpleTransferTests.swift in Sources */,
+				3E9915BC2111B0C60071FDF7 /* UploadTests.swift in Sources */,
+				3E9915BA2111B0C60071FDF7 /* AddFilesTests.swift in Sources */,
+				3E9915BD2111B0C60071FDF7 /* TestConfiguration.swift in Sources */,
+				3E9915BB2111B0C60071FDF7 /* ChunksTests.swift in Sources */,
+				3E9915BE2111B0C60071FDF7 /* InitializationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		3E71177A20FC9C2E00115E55 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 3EE259622091CF8800DC5A97 /* WeTransfer */;
-			targetProxy = 3E71177920FC9C2E00115E55 /* PBXContainerItemProxy */;
-		};
-		3E8EB08020D7F1AC002EB5AB /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 3E7116DB20FC85D400115E55 /* WeTransfer iOS */;
-			targetProxy = 3E7116E620FC85D400115E55 /* PBXContainerItemProxy */;
-		};
 		3E71170320FC85F100115E55 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 3E7116F720FC85F100115E55 /* WeTransfer macOS */;
