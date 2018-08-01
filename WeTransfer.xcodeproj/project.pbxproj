@@ -82,6 +82,7 @@
 		3E9915D82111B1A30071FDF7 /* CompleteUploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEBBD20C19037009E6B2D /* CompleteUploadOperation.swift */; };
 		3E9915D92111B1A30071FDF7 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413BC2098BC25003A42D1 /* APIClient.swift */; };
 		3E9915DA2111B1A30071FDF7 /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8EB08B20E503E2002EB5AB /* Authenticator.swift */; };
+		3E9915DE211201150071FDF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E5E514820EA816600485FA3 /* Assets.xcassets */; };
 		3EA0EFBA20BD4D90009E4BB1 /* AsynchronousOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA0EFB920BD4D90009E4BB1 /* AsynchronousOperation.swift */; };
 		3EA0EFCE20BD7743009E4BB1 /* AsynchronousResultOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA0EFCD20BD7743009E4BB1 /* AsynchronousResultOperation.swift */; };
 		3ED6ED4020EA505800130261 /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED6ED3F20EA505800130261 /* APIEndpoint.swift */; };
@@ -325,8 +326,8 @@
 			isa = PBXGroup;
 			children = (
 				3EE259652091CF8800DC5A97 /* WeTransfer */,
-				3EE259702091CF8800DC5A97 /* WeTransferTests */,
 				3E5E514620EA816600485FA3 /* WeTransfer Sample Project */,
+				3EE259702091CF8800DC5A97 /* WeTransferTests */,
 				3EE259642091CF8800DC5A97 /* Products */,
 				3E8EB08120D7F1B9002EB5AB /* Frameworks */,
 			);
@@ -550,6 +551,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F5E8A722111F80600F750EC /* Main.storyboard in Resources */,
+				3E9915DE211201150071FDF7 /* Assets.xcassets in Resources */,
 				3F5E8A732111F80A00F750EC /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
