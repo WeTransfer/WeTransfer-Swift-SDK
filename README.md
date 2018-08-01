@@ -1,7 +1,7 @@
 # WeTransfer-Swift-SDK
 A Swift SDK for WeTransfer’s public API
 
-[![Build Status](https://travis-ci.com/WeTransfer/WeTransfer-Swift-SDK.svg?token=Ur5V2zzKmBJLmMYHKJTF&branch=master)](https://travis-ci.com/WeTransfer/WeTransfer)
+[![Build Status](https://travis-ci.com/WeTransfer/WeTransfer-Swift-SDK.svg?token=Ur5V2zzKmBJLmMYHKJTF&branch=master)](https://travis-ci.com/WeTransfer/WeTransfer-Swift-SDK)
 ![License](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/WeTransfer-Swift-SDK.svg)](https://cocoapods.org/pod/WeTransfer-Swift-SDK)
