@@ -71,7 +71,7 @@ dependencies: [
 ]
 ```
 
-**Note:** Running `swift test` doesn’t work currently as Swift packages can’t have resources in their test targets. 
+**Note:** Running `swift test` doesn’t work currently as Swift packages can’t have resources in their test targets.
 
 ### Cocoapods
 
@@ -130,6 +130,8 @@ WeTransfer.uploadTransfer(named: "Transfer Name", containing: files) { state in
 Included with the project is a neat little sample application that shows a possible use case for the SDK. It allows for photos and videos to be added to a transfer and shows the upload progress for the whole transfer, aAfter which the URL can be shared.
 
 ## Communication
+
+We recommend checking out the [contribution guide](https://github.com/WeTransfer/WeTransfer-Swift-SDK/blob/master/.github/CONTRIBUTING.md) for a full run-through of how to get started, but in short:
 
 - If you **found a bug**, open an [issue](https://github.com/WeTransfer/WeTransfer-Swift-SDK/issues).
 - If you **have a feature request**, open an [issue](https://github.com/WeTransfer/WeTransfer-Swift-SDK/issues).
