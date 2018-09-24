@@ -9,7 +9,7 @@
 import XCTest
 @testable import WeTransfer
 
-class ChunksTests: XCTestCase {
+final class ChunksTests: XCTestCase {
 
 	override func setUp() {
 		super.setUp()
@@ -41,7 +41,7 @@ class ChunksTests: XCTestCase {
 				return
 			}
 
-			WeTransfer.addFiles([file], to: transfer, completion: { (result) in
+			WeTransfer.add([file], to: transfer, completion: { (result) in
 				if case .failure(let error) = result {
 					XCTFail("Adding files failed: \(error)")
 					createdChunksExpectation.fulfill()
@@ -51,6 +51,7 @@ class ChunksTests: XCTestCase {
 				updatedFile = transfer.files.first
 				guard let file = updatedFile else {
 					XCTFail("File not added to transfer")
+					createdChunksExpectation.fulfill()
 					return
 				}
 				let operation = CreateChunkOperation(file: file, chunkIndex: 0)

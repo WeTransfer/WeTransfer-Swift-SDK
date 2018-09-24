@@ -16,41 +16,95 @@
 		3E0EEBBC20C19004009E6B2D /* UploadChunkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEBBB20C19004009E6B2D /* UploadChunkOperation.swift */; };
 		3E0EEBBE20C19037009E6B2D /* CompleteUploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEBBD20C19037009E6B2D /* CompleteUploadOperation.swift */; };
 		3E0EEBC020C19074009E6B2D /* UploadFileOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEBBF20C19074009E6B2D /* UploadFileOperation.swift */; };
-		3E579B212092194F008DFFD2 /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3E579B202092194F008DFFD2 /* image.jpg */; };
-		3E7348BE20B4040D009B41D0 /* TestConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348BD20B4040D009B41D0 /* TestConfiguration.swift */; };
-		3E7348C020B41895009B41D0 /* InitializationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348BF20B41895009B41D0 /* InitializationTests.swift */; };
-		3E7348C220B41936009B41D0 /* SimpleTransferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348C120B41936009B41D0 /* SimpleTransferTests.swift */; };
-		3E7348C420B41DBA009B41D0 /* AuthorizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348C320B41DBA009B41D0 /* AuthorizationTests.swift */; };
-		3E7348C620B41EC0009B41D0 /* RequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348C520B41EC0009B41D0 /* RequestTests.swift */; };
+		3E3B9D3C20F7ADDC0064915C /* MediaPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3B9D3B20F7ADDC0064915C /* MediaPicker.swift */; };
+		3E5E514F20EA816600485FA3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5E514720EA816600485FA3 /* MainViewController.swift */; };
+		3E5E515320EA816600485FA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5E514D20EA816600485FA3 /* AppDelegate.swift */; };
+		3E71177720FC9C2E00115E55 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		3E80E0A72091D0E700114711 /* WeTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E80E0A62091D0E700114711 /* WeTransfer.swift */; };
 		3E80E0AA2091D12B00114711 /* Transfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E80E0A92091D12B00114711 /* Transfer.swift */; };
 		3E80E0AE2091D16E00114711 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E80E0AD2091D16E00114711 /* Result.swift */; };
-		3E90734720BBEF3700AE3605 /* ChunksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E90734620BBEF3700AE3605 /* ChunksTests.swift */; };
-		3E90734920BBFE5600AE3605 /* UploadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E90734820BBFE5600AE3605 /* UploadTests.swift */; };
+		3E8EB08C20E503E2002EB5AB /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8EB08B20E503E2002EB5AB /* Authenticator.swift */; };
 		3E9413BD2098BC25003A42D1 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413BC2098BC25003A42D1 /* APIClient.swift */; };
-		3E9413BF2098BF5A003A42D1 /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413BE2098BF5A003A42D1 /* APIEndpoints.swift */; };
+		3E9413BF2098BF5A003A42D1 /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413BE2098BF5A003A42D1 /* Endpoints.swift */; };
 		3E9413C22098C132003A42D1 /* Authorize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413C12098C132003A42D1 /* Authorize.swift */; };
 		3E9413C42099D78A003A42D1 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413C32099D78A003A42D1 /* Request.swift */; };
 		3E9413C62099D823003A42D1 /* CreateTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413C52099D823003A42D1 /* CreateTransfer.swift */; };
 		3E9413C82099D89E003A42D1 /* AddFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413C72099D89E003A42D1 /* AddFiles.swift */; };
-		3E9413CA2099DB05003A42D1 /* Send.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413C92099DB05003A42D1 /* Send.swift */; };
+		3E9413CA2099DB05003A42D1 /* Upload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413C92099DB05003A42D1 /* Upload.swift */; };
 		3E9413CC2099E390003A42D1 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413CB2099E390003A42D1 /* File.swift */; };
 		3E9413CE2099E3F5003A42D1 /* Chunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413CD2099E3F5003A42D1 /* Chunk.swift */; };
+		3E9915AA2111B0C50071FDF7 /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3E579B202092194F008DFFD2 /* image.jpg */; };
+		3E9915AB2111B0C50071FDF7 /* smallImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3E3B9D2720F60F7B0064915C /* smallImage.jpg */; };
+		3E9915AC2111B0C50071FDF7 /* SimpleTransferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348C120B41936009B41D0 /* SimpleTransferTests.swift */; };
+		3E9915AD2111B0C50071FDF7 /* CreateTransferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED1C0A220B43E980045D8B3 /* CreateTransferTests.swift */; };
+		3E9915AE2111B0C50071FDF7 /* AddFilesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED1C0A420B442F70045D8B3 /* AddFilesTests.swift */; };
+		3E9915AF2111B0C50071FDF7 /* ChunksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E90734620BBEF3700AE3605 /* ChunksTests.swift */; };
+		3E9915B02111B0C50071FDF7 /* UploadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E90734820BBFE5600AE3605 /* UploadTests.swift */; };
+		3E9915B12111B0C50071FDF7 /* TestConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348BD20B4040D009B41D0 /* TestConfiguration.swift */; };
+		3E9915B22111B0C50071FDF7 /* InitializationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348BF20B41895009B41D0 /* InitializationTests.swift */; };
+		3E9915B32111B0C50071FDF7 /* RequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348C520B41EC0009B41D0 /* RequestTests.swift */; };
+		3E9915B42111B0C50071FDF7 /* AuthorizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348C320B41DBA009B41D0 /* AuthorizationTests.swift */; };
+		3E9915B52111B0C50071FDF7 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED6ED3920EA2AD100130261 /* Secrets.swift */; };
+		3E9915B62111B0C60071FDF7 /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3E579B202092194F008DFFD2 /* image.jpg */; };
+		3E9915B72111B0C60071FDF7 /* smallImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3E3B9D2720F60F7B0064915C /* smallImage.jpg */; };
+		3E9915B82111B0C60071FDF7 /* SimpleTransferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348C120B41936009B41D0 /* SimpleTransferTests.swift */; };
+		3E9915B92111B0C60071FDF7 /* CreateTransferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED1C0A220B43E980045D8B3 /* CreateTransferTests.swift */; };
+		3E9915BA2111B0C60071FDF7 /* AddFilesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED1C0A420B442F70045D8B3 /* AddFilesTests.swift */; };
+		3E9915BB2111B0C60071FDF7 /* ChunksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E90734620BBEF3700AE3605 /* ChunksTests.swift */; };
+		3E9915BC2111B0C60071FDF7 /* UploadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E90734820BBFE5600AE3605 /* UploadTests.swift */; };
+		3E9915BD2111B0C60071FDF7 /* TestConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348BD20B4040D009B41D0 /* TestConfiguration.swift */; };
+		3E9915BE2111B0C60071FDF7 /* InitializationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348BF20B41895009B41D0 /* InitializationTests.swift */; };
+		3E9915BF2111B0C60071FDF7 /* RequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348C520B41EC0009B41D0 /* RequestTests.swift */; };
+		3E9915C02111B0C60071FDF7 /* AuthorizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348C320B41DBA009B41D0 /* AuthorizationTests.swift */; };
+		3E9915C12111B0C60071FDF7 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED6ED3920EA2AD100130261 /* Secrets.swift */; };
+		3E9915C22111B1A30071FDF7 /* WeTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E80E0A62091D0E700114711 /* WeTransfer.swift */; };
+		3E9915C32111B1A30071FDF7 /* Transfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E80E0A92091D12B00114711 /* Transfer.swift */; };
+		3E9915C42111B1A30071FDF7 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413CB2099E390003A42D1 /* File.swift */; };
+		3E9915C52111B1A30071FDF7 /* Chunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413CD2099E3F5003A42D1 /* Chunk.swift */; };
+		3E9915C62111B1A30071FDF7 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413C32099D78A003A42D1 /* Request.swift */; };
+		3E9915C72111B1A30071FDF7 /* Authorize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413C12098C132003A42D1 /* Authorize.swift */; };
+		3E9915C82111B1A30071FDF7 /* CreateTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413C52099D823003A42D1 /* CreateTransfer.swift */; };
+		3E9915C92111B1A30071FDF7 /* AddFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413C72099D89E003A42D1 /* AddFiles.swift */; };
+		3E9915CA2111B1A30071FDF7 /* Upload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413C92099DB05003A42D1 /* Upload.swift */; };
+		3E9915CB2111B1A30071FDF7 /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED6ED3F20EA505800130261 /* APIEndpoint.swift */; };
+		3E9915CC2111B1A30071FDF7 /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413BE2098BF5A003A42D1 /* Endpoints.swift */; };
+		3E9915CD2111B1A30071FDF7 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E80E0AD2091D16E00114711 /* Result.swift */; };
+		3E9915CE2111B1A30071FDF7 /* AsynchronousOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA0EFB920BD4D90009E4BB1 /* AsynchronousOperation.swift */; };
+		3E9915CF2111B1A30071FDF7 /* AsynchronousResultOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA0EFCD20BD7743009E4BB1 /* AsynchronousResultOperation.swift */; };
+		3E9915D02111B1A30071FDF7 /* ChainedAsynchronousResultOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEBAF20C1444C009E6B2D /* ChainedAsynchronousResultOperation.swift */; };
+		3E9915D12111B1A30071FDF7 /* AsynchronousDependencyResultOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEBA720BEE918009E6B2D /* AsynchronousDependencyResultOperation.swift */; };
+		3E9915D22111B1A30071FDF7 /* CreateTransferOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEBB120C17264009E6B2D /* CreateTransferOperation.swift */; };
+		3E9915D32111B1A30071FDF7 /* AddFilesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEBB320C175D0009E6B2D /* AddFilesOperation.swift */; };
+		3E9915D42111B1A30071FDF7 /* UploadFilesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEBB920C18FA5009E6B2D /* UploadFilesOperation.swift */; };
+		3E9915D52111B1A30071FDF7 /* UploadFileOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEBBF20C19074009E6B2D /* UploadFileOperation.swift */; };
+		3E9915D62111B1A30071FDF7 /* CreateChunkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEBB520C177FE009E6B2D /* CreateChunkOperation.swift */; };
+		3E9915D72111B1A30071FDF7 /* UploadChunkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEBBB20C19004009E6B2D /* UploadChunkOperation.swift */; };
+		3E9915D82111B1A30071FDF7 /* CompleteUploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEBBD20C19037009E6B2D /* CompleteUploadOperation.swift */; };
+		3E9915D92111B1A30071FDF7 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413BC2098BC25003A42D1 /* APIClient.swift */; };
+		3E9915DA2111B1A30071FDF7 /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8EB08B20E503E2002EB5AB /* Authenticator.swift */; };
+		3E9915DE211201150071FDF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E5E514820EA816600485FA3 /* Assets.xcassets */; };
 		3EA0EFBA20BD4D90009E4BB1 /* AsynchronousOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA0EFB920BD4D90009E4BB1 /* AsynchronousOperation.swift */; };
 		3EA0EFCE20BD7743009E4BB1 /* AsynchronousResultOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA0EFCD20BD7743009E4BB1 /* AsynchronousResultOperation.swift */; };
-		3ED1C0A320B43E980045D8B3 /* CreateTransferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED1C0A220B43E980045D8B3 /* CreateTransferTests.swift */; };
-		3ED1C0A520B442F70045D8B3 /* AddFilesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED1C0A420B442F70045D8B3 /* AddFilesTests.swift */; };
-		3EE2596D2091CF8800DC5A97 /* WeTransfer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EE259632091CF8800DC5A97 /* WeTransfer.framework */; };
-		3EE259742091CF8800DC5A97 /* WeTransfer_Swift.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE259662091CF8800DC5A97 /* WeTransfer_Swift.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3ED6ED4020EA505800130261 /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED6ED3F20EA505800130261 /* APIEndpoint.swift */; };
+		3EFDC98021012FD70091CF85 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFDC97F21012FD70091CF85 /* RoundedButton.swift */; };
+		3F5E8A722111F80600F750EC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E5E514B20EA816600485FA3 /* Main.storyboard */; };
+		3F5E8A732111F80A00F750EC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E5E514920EA816600485FA3 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		3EE2596E2091CF8800DC5A97 /* PBXContainerItemProxy */ = {
+		3E71170220FC85F100115E55 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3EE2595A2091CF8800DC5A97 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 3EE259622091CF8800DC5A97;
-			remoteInfo = "WeTransfer Swift";
+			remoteGlobalIDString = 3E7116F720FC85F100115E55;
+			remoteInfo = "WeTransfer macOS";
+		};
+		3E71176D20FC889300115E55 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3EE2595A2091CF8800DC5A97 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3E7116DB20FC85D400115E55;
+			remoteInfo = "WeTransfer iOS";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -64,7 +118,19 @@
 		3E0EEBBB20C19004009E6B2D /* UploadChunkOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadChunkOperation.swift; sourceTree = "<group>"; };
 		3E0EEBBD20C19037009E6B2D /* CompleteUploadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteUploadOperation.swift; sourceTree = "<group>"; };
 		3E0EEBBF20C19074009E6B2D /* UploadFileOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadFileOperation.swift; sourceTree = "<group>"; };
+		3E3B9D2720F60F7B0064915C /* smallImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = smallImage.jpg; sourceTree = "<group>"; };
+		3E3B9D3B20F7ADDC0064915C /* MediaPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPicker.swift; sourceTree = "<group>"; };
 		3E579B202092194F008DFFD2 /* image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image.jpg; sourceTree = "<group>"; };
+		3E5E513420EA813D00485FA3 /* WeTransfer Sample Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WeTransfer Sample Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E5E514720EA816600485FA3 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		3E5E514820EA816600485FA3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3E5E514A20EA816600485FA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		3E5E514C20EA816600485FA3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3E5E514D20EA816600485FA3 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		3E7116DC20FC85D400115E55 /* WeTransfer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WeTransfer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E7116E420FC85D400115E55 /* WeTransfer iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "WeTransfer iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E7116F820FC85F100115E55 /* WeTransfer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WeTransfer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E71170020FC85F100115E55 /* WeTransfer macOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "WeTransfer macOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E7348BD20B4040D009B41D0 /* TestConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestConfiguration.swift; sourceTree = "<group>"; };
 		3E7348BF20B41895009B41D0 /* InitializationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitializationTests.swift; sourceTree = "<group>"; };
 		3E7348C120B41936009B41D0 /* SimpleTransferTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTransferTests.swift; sourceTree = "<group>"; };
@@ -73,42 +139,65 @@
 		3E80E0A62091D0E700114711 /* WeTransfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeTransfer.swift; sourceTree = "<group>"; };
 		3E80E0A92091D12B00114711 /* Transfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transfer.swift; sourceTree = "<group>"; };
 		3E80E0AD2091D16E00114711 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		3E8EB08B20E503E2002EB5AB /* Authenticator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authenticator.swift; sourceTree = "<group>"; };
 		3E90734620BBEF3700AE3605 /* ChunksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChunksTests.swift; sourceTree = "<group>"; };
 		3E90734820BBFE5600AE3605 /* UploadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadTests.swift; sourceTree = "<group>"; };
 		3E9413BC2098BC25003A42D1 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
-		3E9413BE2098BF5A003A42D1 /* APIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
+		3E9413BE2098BF5A003A42D1 /* Endpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
 		3E9413C12098C132003A42D1 /* Authorize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authorize.swift; sourceTree = "<group>"; };
 		3E9413C32099D78A003A42D1 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		3E9413C52099D823003A42D1 /* CreateTransfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTransfer.swift; sourceTree = "<group>"; };
 		3E9413C72099D89E003A42D1 /* AddFiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFiles.swift; sourceTree = "<group>"; };
-		3E9413C92099DB05003A42D1 /* Send.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Send.swift; sourceTree = "<group>"; };
+		3E9413C92099DB05003A42D1 /* Upload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Upload.swift; sourceTree = "<group>"; };
 		3E9413CB2099E390003A42D1 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		3E9413CD2099E3F5003A42D1 /* Chunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chunk.swift; sourceTree = "<group>"; };
 		3EA0EFB920BD4D90009E4BB1 /* AsynchronousOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsynchronousOperation.swift; sourceTree = "<group>"; };
 		3EA0EFCD20BD7743009E4BB1 /* AsynchronousResultOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsynchronousResultOperation.swift; sourceTree = "<group>"; };
-		3ECCF25620C5355C00F2B59B /* zelda.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = zelda.jpg; sourceTree = "<group>"; };
 		3ED1C0A220B43E980045D8B3 /* CreateTransferTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTransferTests.swift; sourceTree = "<group>"; };
 		3ED1C0A420B442F70045D8B3 /* AddFilesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFilesTests.swift; sourceTree = "<group>"; };
-		3EE259632091CF8800DC5A97 /* WeTransfer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WeTransfer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3ED6ED3920EA2AD100130261 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
+		3ED6ED3F20EA505800130261 /* APIEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoint.swift; sourceTree = "<group>"; };
 		3EE259662091CF8800DC5A97 /* WeTransfer_Swift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeTransfer_Swift.h; sourceTree = "<group>"; };
 		3EE259672091CF8800DC5A97 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3EE2596C2091CF8800DC5A97 /* WeTransferTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeTransferTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EE259732091CF8800DC5A97 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3EFDC97F21012FD70091CF85 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
+		3EFDC9B4210891220091CF85 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		3EE2595F2091CF8800DC5A97 /* Frameworks */ = {
+		3E5E513120EA813D00485FA3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E71177720FC9C2E00115E55 /* (null) in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3E7116D820FC85D400115E55 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3EE259692091CF8800DC5A97 /* Frameworks */ = {
+		3E7116E120FC85D400115E55 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3EE2596D2091CF8800DC5A97 /* WeTransfer.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3E7116F420FC85F100115E55 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3E7116FD20FC85F100115E55 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,6 +215,27 @@
 			path = Abstract;
 			sourceTree = "<group>";
 		};
+		3E3B9D2C20F7644D0064915C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3E579B202092194F008DFFD2 /* image.jpg */,
+				3E3B9D2720F60F7B0064915C /* smallImage.jpg */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		3E5E514620EA816600485FA3 /* WeTransfer Sample Project */ = {
+			isa = PBXGroup;
+			children = (
+				3E5E514720EA816600485FA3 /* MainViewController.swift */,
+				3E3B9D3B20F7ADDC0064915C /* MediaPicker.swift */,
+				3EFDC97F21012FD70091CF85 /* RoundedButton.swift */,
+				3EFDC9B3210890A30091CF85 /* Supporting Files */,
+				3EFDC9B4210891220091CF85 /* Info.plist */,
+			);
+			path = "WeTransfer Sample Project";
+			sourceTree = "<group>";
+		};
 		3E80E0A82091D11300114711 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -140,11 +250,19 @@
 			isa = PBXGroup;
 			children = (
 				3E9413C02098C121003A42D1 /* Methods */,
+				3ED6ED3E20EA504700130261 /* Endpoints */,
 				3EA0EFC720BD503D009E4BB1 /* Operations */,
 				3E9413BC2098BC25003A42D1 /* APIClient.swift */,
-				3E9413BE2098BF5A003A42D1 /* APIEndpoints.swift */,
+				3E8EB08B20E503E2002EB5AB /* Authenticator.swift */,
 			);
 			path = Server;
+			sourceTree = "<group>";
+		};
+		3E8EB08120D7F1B9002EB5AB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		3E9413C02098C121003A42D1 /* Methods */ = {
@@ -154,7 +272,7 @@
 				3E9413C12098C132003A42D1 /* Authorize.swift */,
 				3E9413C52099D823003A42D1 /* CreateTransfer.swift */,
 				3E9413C72099D89E003A42D1 /* AddFiles.swift */,
-				3E9413C92099DB05003A42D1 /* Send.swift */,
+				3E9413C92099DB05003A42D1 /* Upload.swift */,
 			);
 			path = Methods;
 			sourceTree = "<group>";
@@ -167,8 +285,8 @@
 				3E0EEBB120C17264009E6B2D /* CreateTransferOperation.swift */,
 				3E0EEBB320C175D0009E6B2D /* AddFilesOperation.swift */,
 				3E0EEBB920C18FA5009E6B2D /* UploadFilesOperation.swift */,
-				3E0EEBB520C177FE009E6B2D /* CreateChunkOperation.swift */,
 				3E0EEBBF20C19074009E6B2D /* UploadFileOperation.swift */,
+				3E0EEBB520C177FE009E6B2D /* CreateChunkOperation.swift */,
 				3E0EEBBB20C19004009E6B2D /* UploadChunkOperation.swift */,
 				3E0EEBBD20C19037009E6B2D /* CompleteUploadOperation.swift */,
 			);
@@ -195,20 +313,34 @@
 			path = Transfer;
 			sourceTree = "<group>";
 		};
+		3ED6ED3E20EA504700130261 /* Endpoints */ = {
+			isa = PBXGroup;
+			children = (
+				3ED6ED3F20EA505800130261 /* APIEndpoint.swift */,
+				3E9413BE2098BF5A003A42D1 /* Endpoints.swift */,
+			);
+			path = Endpoints;
+			sourceTree = "<group>";
+		};
 		3EE259592091CF8800DC5A97 = {
 			isa = PBXGroup;
 			children = (
 				3EE259652091CF8800DC5A97 /* WeTransfer */,
+				3E5E514620EA816600485FA3 /* WeTransfer Sample Project */,
 				3EE259702091CF8800DC5A97 /* WeTransferTests */,
 				3EE259642091CF8800DC5A97 /* Products */,
+				3E8EB08120D7F1B9002EB5AB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		3EE259642091CF8800DC5A97 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3EE259632091CF8800DC5A97 /* WeTransfer.framework */,
-				3EE2596C2091CF8800DC5A97 /* WeTransferTests.xctest */,
+				3E5E513420EA813D00485FA3 /* WeTransfer Sample Project.app */,
+				3E7116DC20FC85D400115E55 /* WeTransfer.framework */,
+				3E7116E420FC85D400115E55 /* WeTransfer iOSTests.xctest */,
+				3E7116F820FC85F100115E55 /* WeTransfer.framework */,
+				3E71170020FC85F100115E55 /* WeTransfer macOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -228,67 +360,140 @@
 		3EE259702091CF8800DC5A97 /* WeTransferTests */ = {
 			isa = PBXGroup;
 			children = (
+				3E3B9D2C20F7644D0064915C /* Resources */,
+				3ED1C0A120B43E780045D8B3 /* Transfer */,
 				3E7348BD20B4040D009B41D0 /* TestConfiguration.swift */,
-				3ECCF25620C5355C00F2B59B /* zelda.jpg */,
-				3E579B202092194F008DFFD2 /* image.jpg */,
 				3E7348BF20B41895009B41D0 /* InitializationTests.swift */,
 				3E7348C520B41EC0009B41D0 /* RequestTests.swift */,
 				3E7348C320B41DBA009B41D0 /* AuthorizationTests.swift */,
-				3ED1C0A120B43E780045D8B3 /* Transfer */,
 				3EE259732091CF8800DC5A97 /* Info.plist */,
+				3ED6ED3920EA2AD100130261 /* Secrets.swift */,
 			);
 			path = WeTransferTests;
+			sourceTree = "<group>";
+		};
+		3EFDC9B3210890A30091CF85 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3E5E514820EA816600485FA3 /* Assets.xcassets */,
+				3E5E514920EA816600485FA3 /* LaunchScreen.storyboard */,
+				3E5E514B20EA816600485FA3 /* Main.storyboard */,
+				3E5E514D20EA816600485FA3 /* AppDelegate.swift */,
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		3EE259602091CF8800DC5A97 /* Headers */ = {
+		3E7116D920FC85D400115E55 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3EE259742091CF8800DC5A97 /* WeTransfer_Swift.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3E7116F520FC85F100115E55 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		3EE259622091CF8800DC5A97 /* WeTransfer */ = {
+		3E5E513320EA813D00485FA3 /* WeTransfer Sample Project */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3EE259772091CF8800DC5A97 /* Build configuration list for PBXNativeTarget "WeTransfer" */;
+			buildConfigurationList = 3E5E514520EA813E00485FA3 /* Build configuration list for PBXNativeTarget "WeTransfer Sample Project" */;
 			buildPhases = (
-				3EE2595E2091CF8800DC5A97 /* Sources */,
-				3EE2595F2091CF8800DC5A97 /* Frameworks */,
-				3EE259602091CF8800DC5A97 /* Headers */,
-				3EE259612091CF8800DC5A97 /* Resources */,
-				3EC0690320BC6088006D131B /* SwiftLint */,
+				3E5E513020EA813D00485FA3 /* Sources */,
+				3E5E513120EA813D00485FA3 /* Frameworks */,
+				3E5E513220EA813D00485FA3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3E71176E20FC889300115E55 /* PBXTargetDependency */,
+			);
+			name = "WeTransfer Sample Project";
+			productName = "WeTransfer Sample Project";
+			productReference = 3E5E513420EA813D00485FA3 /* WeTransfer Sample Project.app */;
+			productType = "com.apple.product-type.application";
+		};
+		3E7116DB20FC85D400115E55 /* WeTransfer iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3E7116ED20FC85D400115E55 /* Build configuration list for PBXNativeTarget "WeTransfer iOS" */;
+			buildPhases = (
+				3E7116D720FC85D400115E55 /* Sources */,
+				3E7116D820FC85D400115E55 /* Frameworks */,
+				3E7116D920FC85D400115E55 /* Headers */,
+				3E7116DA20FC85D400115E55 /* Resources */,
+				3E71177320FC956C00115E55 /* SwiftLint */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = WeTransfer;
-			productName = "WeTransfer Swift";
-			productReference = 3EE259632091CF8800DC5A97 /* WeTransfer.framework */;
+			name = "WeTransfer iOS";
+			productName = "WeTransfer iOS";
+			productReference = 3E7116DC20FC85D400115E55 /* WeTransfer.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		3EE2596B2091CF8800DC5A97 /* WeTransferTests */ = {
+		3E7116E320FC85D400115E55 /* WeTransfer iOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3EE2597A2091CF8800DC5A97 /* Build configuration list for PBXNativeTarget "WeTransferTests" */;
+			buildConfigurationList = 3E7116F020FC85D400115E55 /* Build configuration list for PBXNativeTarget "WeTransfer iOSTests" */;
 			buildPhases = (
-				3EE259682091CF8800DC5A97 /* Sources */,
-				3EE259692091CF8800DC5A97 /* Frameworks */,
-				3EE2596A2091CF8800DC5A97 /* Resources */,
+				3E7116E020FC85D400115E55 /* Sources */,
+				3E7116E120FC85D400115E55 /* Frameworks */,
+				3E7116E220FC85D400115E55 /* Resources */,
+				3E71177120FC94D600115E55 /* Include Secrets.plist */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				3EE2596F2091CF8800DC5A97 /* PBXTargetDependency */,
 			);
-			name = WeTransferTests;
-			productName = "WeTransfer SwiftTests";
-			productReference = 3EE2596C2091CF8800DC5A97 /* WeTransferTests.xctest */;
+			name = "WeTransfer iOSTests";
+			productName = "WeTransfer iOSTests";
+			productReference = 3E7116E420FC85D400115E55 /* WeTransfer iOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		3E7116F720FC85F100115E55 /* WeTransfer macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3E71170920FC85F100115E55 /* Build configuration list for PBXNativeTarget "WeTransfer macOS" */;
+			buildPhases = (
+				3E7116F320FC85F100115E55 /* Sources */,
+				3E7116F420FC85F100115E55 /* Frameworks */,
+				3E7116F520FC85F100115E55 /* Headers */,
+				3E7116F620FC85F100115E55 /* Resources */,
+				3E71177620FC9A3200115E55 /* SwiftLint */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "WeTransfer macOS";
+			productName = "WeTransfer macOS";
+			productReference = 3E7116F820FC85F100115E55 /* WeTransfer.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		3E7116FF20FC85F100115E55 /* WeTransfer macOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3E71170C20FC85F100115E55 /* Build configuration list for PBXNativeTarget "WeTransfer macOSTests" */;
+			buildPhases = (
+				3E7116FC20FC85F100115E55 /* Sources */,
+				3E7116FD20FC85F100115E55 /* Frameworks */,
+				3E7116FE20FC85F100115E55 /* Resources */,
+				3E71177420FC95AC00115E55 /* Include Secrets.plist */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3E71170320FC85F100115E55 /* PBXTargetDependency */,
+			);
+			name = "WeTransfer macOSTests";
+			productName = "WeTransfer macOSTests";
+			productReference = 3E71170020FC85F100115E55 /* WeTransfer macOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -297,16 +502,24 @@
 		3EE2595A2091CF8800DC5A97 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0930;
-				LastUpgradeCheck = 0930;
+				LastSwiftUpdateCheck = 0940;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = WeTransfer;
 				TargetAttributes = {
-					3EE259622091CF8800DC5A97 = {
-						CreatedOnToolsVersion = 9.3;
-						LastSwiftMigration = 0930;
+					3E5E513320EA813D00485FA3 = {
+						CreatedOnToolsVersion = 9.4;
 					};
-					3EE2596B2091CF8800DC5A97 = {
-						CreatedOnToolsVersion = 9.3;
+					3E7116DB20FC85D400115E55 = {
+						CreatedOnToolsVersion = 9.4.1;
+					};
+					3E7116E320FC85D400115E55 = {
+						CreatedOnToolsVersion = 9.4.1;
+					};
+					3E7116F720FC85F100115E55 = {
+						CreatedOnToolsVersion = 9.4.1;
+					};
+					3E7116FF20FC85F100115E55 = {
+						CreatedOnToolsVersion = 9.4.1;
 					};
 				};
 			};
@@ -316,38 +529,83 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 3EE259592091CF8800DC5A97;
 			productRefGroup = 3EE259642091CF8800DC5A97 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3EE259622091CF8800DC5A97 /* WeTransfer */,
-				3EE2596B2091CF8800DC5A97 /* WeTransferTests */,
+				3E5E513320EA813D00485FA3 /* WeTransfer Sample Project */,
+				3E7116DB20FC85D400115E55 /* WeTransfer iOS */,
+				3E7116E320FC85D400115E55 /* WeTransfer iOSTests */,
+				3E7116F720FC85F100115E55 /* WeTransfer macOS */,
+				3E7116FF20FC85F100115E55 /* WeTransfer macOSTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		3EE259612091CF8800DC5A97 /* Resources */ = {
+		3E5E513220EA813D00485FA3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F5E8A722111F80600F750EC /* Main.storyboard in Resources */,
+				3E9915DE211201150071FDF7 /* Assets.xcassets in Resources */,
+				3F5E8A732111F80A00F750EC /* LaunchScreen.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3E7116DA20FC85D400115E55 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3EE2596A2091CF8800DC5A97 /* Resources */ = {
+		3E7116E220FC85D400115E55 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E579B212092194F008DFFD2 /* image.jpg in Resources */,
+				3E9915AA2111B0C50071FDF7 /* image.jpg in Resources */,
+				3E9915AB2111B0C50071FDF7 /* smallImage.jpg in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3E7116F620FC85F100115E55 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3E7116FE20FC85F100115E55 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E9915B62111B0C60071FDF7 /* image.jpg in Resources */,
+				3E9915B72111B0C60071FDF7 /* smallImage.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3EC0690320BC6088006D131B /* SwiftLint */ = {
+		3E71177120FC94D600115E55 /* Include Secrets.plist */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Include Secrets.plist";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "filename=\"Secrets.plist\"\nfile=\"${PROJECT_DIR}/${PROJECT_NAME}Tests/$filename\"\nif [ -f \"$file\" ]; then\ncp -r \"$file\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.xctest/$filename\"\nfi";
+		};
+		3E71177320FC956C00115E55 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -359,12 +617,51 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ -z \"$CI\" ]; then\n    if which swiftlint >/dev/null; then\n        swiftlint --config \"${SRCROOT}/Submodules/WeTransfer-iOS-CI/SwiftLint/.swiftlint-source.yml\"\n        swiftlint --config \"${SRCROOT}/Submodules/WeTransfer-iOS-CI/SwiftLint/.swiftlint-tests.yml\"\n    else\n        echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n    fi\nfi";
+			shellScript = "if [ -d \"${SRCROOT}/Submodules/WeTransfer-iOS-CI/SwiftLint\" ] && [ -z \"$CI\" ]; then\n    if which swiftlint >/dev/null; then\n        swiftlint --config \"${SRCROOT}/Submodules/WeTransfer-iOS-CI/SwiftLint/.swiftlint-source.yml\"\n        swiftlint --config \"${SRCROOT}/Submodules/WeTransfer-iOS-CI/SwiftLint/.swiftlint-tests.yml\"\n    else\n        echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n    fi\nfi";
+		};
+		3E71177420FC95AC00115E55 /* Include Secrets.plist */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Include Secrets.plist";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "filename=\"Secrets.plist\"\nfile=\"${PROJECT_DIR}/${PROJECT_NAME}Tests/$filename\"\nif [ -f \"$file\" ]; then\n    cp -r \"$file\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.xctest/Contents/Resources/$filename\"\nfi";
+		};
+		3E71177620FC9A3200115E55 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ -d \"${SRCROOT}/Submodules/WeTransfer-iOS-CI/SwiftLint\" ] && [ -z \"$CI\" ]; then\n    if which swiftlint >/dev/null; then\n        swiftlint --config \"${SRCROOT}/Submodules/WeTransfer-iOS-CI/SwiftLint/.swiftlint-source.yml\"\n        swiftlint --config \"${SRCROOT}/Submodules/WeTransfer-iOS-CI/SwiftLint/.swiftlint-tests.yml\"\n    else\n        echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n    fi\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		3EE2595E2091CF8800DC5A97 /* Sources */ = {
+		3E5E513020EA813D00485FA3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E5E515320EA816600485FA3 /* AppDelegate.swift in Sources */,
+				3E3B9D3C20F7ADDC0064915C /* MediaPicker.swift in Sources */,
+				3E5E514F20EA816600485FA3 /* MainViewController.swift in Sources */,
+				3EFDC98021012FD70091CF85 /* RoundedButton.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3E7116D720FC85D400115E55 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -372,11 +669,11 @@
 				3E80E0AA2091D12B00114711 /* Transfer.swift in Sources */,
 				3E0EEBB220C17264009E6B2D /* CreateTransferOperation.swift in Sources */,
 				3E0EEBBC20C19004009E6B2D /* UploadChunkOperation.swift in Sources */,
-				3E9413BF2098BF5A003A42D1 /* APIEndpoints.swift in Sources */,
+				3E9413BF2098BF5A003A42D1 /* Endpoints.swift in Sources */,
 				3E0EEBB420C175D0009E6B2D /* AddFilesOperation.swift in Sources */,
 				3E80E0A72091D0E700114711 /* WeTransfer.swift in Sources */,
 				3E80E0AE2091D16E00114711 /* Result.swift in Sources */,
-				3E9413CA2099DB05003A42D1 /* Send.swift in Sources */,
+				3E9413CA2099DB05003A42D1 /* Upload.swift in Sources */,
 				3E0EEBC020C19074009E6B2D /* UploadFileOperation.swift in Sources */,
 				3E0EEBB620C177FE009E6B2D /* CreateChunkOperation.swift in Sources */,
 				3E9413C82099D89E003A42D1 /* AddFiles.swift in Sources */,
@@ -385,42 +682,356 @@
 				3E0EEBBA20C18FA5009E6B2D /* UploadFilesOperation.swift in Sources */,
 				3E9413CE2099E3F5003A42D1 /* Chunk.swift in Sources */,
 				3E9413C22098C132003A42D1 /* Authorize.swift in Sources */,
+				3E8EB08C20E503E2002EB5AB /* Authenticator.swift in Sources */,
 				3E9413C42099D78A003A42D1 /* Request.swift in Sources */,
 				3E0EEBBE20C19037009E6B2D /* CompleteUploadOperation.swift in Sources */,
 				3E0EEBB020C1444C009E6B2D /* ChainedAsynchronousResultOperation.swift in Sources */,
 				3EA0EFBA20BD4D90009E4BB1 /* AsynchronousOperation.swift in Sources */,
 				3E9413BD2098BC25003A42D1 /* APIClient.swift in Sources */,
 				3E9413CC2099E390003A42D1 /* File.swift in Sources */,
+				3ED6ED4020EA505800130261 /* APIEndpoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3EE259682091CF8800DC5A97 /* Sources */ = {
+		3E7116E020FC85D400115E55 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E90734720BBEF3700AE3605 /* ChunksTests.swift in Sources */,
-				3E7348BE20B4040D009B41D0 /* TestConfiguration.swift in Sources */,
-				3E7348C420B41DBA009B41D0 /* AuthorizationTests.swift in Sources */,
-				3E7348C020B41895009B41D0 /* InitializationTests.swift in Sources */,
-				3E7348C220B41936009B41D0 /* SimpleTransferTests.swift in Sources */,
-				3E7348C620B41EC0009B41D0 /* RequestTests.swift in Sources */,
-				3ED1C0A520B442F70045D8B3 /* AddFilesTests.swift in Sources */,
-				3E90734920BBFE5600AE3605 /* UploadTests.swift in Sources */,
-				3ED1C0A320B43E980045D8B3 /* CreateTransferTests.swift in Sources */,
+				3E9915AD2111B0C50071FDF7 /* CreateTransferTests.swift in Sources */,
+				3E9915B52111B0C50071FDF7 /* Secrets.swift in Sources */,
+				3E9915B42111B0C50071FDF7 /* AuthorizationTests.swift in Sources */,
+				3E9915B32111B0C50071FDF7 /* RequestTests.swift in Sources */,
+				3E9915AC2111B0C50071FDF7 /* SimpleTransferTests.swift in Sources */,
+				3E9915B02111B0C50071FDF7 /* UploadTests.swift in Sources */,
+				3E9915AE2111B0C50071FDF7 /* AddFilesTests.swift in Sources */,
+				3E9915B12111B0C50071FDF7 /* TestConfiguration.swift in Sources */,
+				3E9915AF2111B0C50071FDF7 /* ChunksTests.swift in Sources */,
+				3E9915B22111B0C50071FDF7 /* InitializationTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3E7116F320FC85F100115E55 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E9915D02111B1A30071FDF7 /* ChainedAsynchronousResultOperation.swift in Sources */,
+				3E9915D12111B1A30071FDF7 /* AsynchronousDependencyResultOperation.swift in Sources */,
+				3E9915CE2111B1A30071FDF7 /* AsynchronousOperation.swift in Sources */,
+				3E9915CA2111B1A30071FDF7 /* Upload.swift in Sources */,
+				3E9915D72111B1A30071FDF7 /* UploadChunkOperation.swift in Sources */,
+				3E9915C32111B1A30071FDF7 /* Transfer.swift in Sources */,
+				3E9915C42111B1A30071FDF7 /* File.swift in Sources */,
+				3E9915C62111B1A30071FDF7 /* Request.swift in Sources */,
+				3E9915C72111B1A30071FDF7 /* Authorize.swift in Sources */,
+				3E9915D42111B1A30071FDF7 /* UploadFilesOperation.swift in Sources */,
+				3E9915D22111B1A30071FDF7 /* CreateTransferOperation.swift in Sources */,
+				3E9915D92111B1A30071FDF7 /* APIClient.swift in Sources */,
+				3E9915D82111B1A30071FDF7 /* CompleteUploadOperation.swift in Sources */,
+				3E9915D52111B1A30071FDF7 /* UploadFileOperation.swift in Sources */,
+				3E9915C82111B1A30071FDF7 /* CreateTransfer.swift in Sources */,
+				3E9915DA2111B1A30071FDF7 /* Authenticator.swift in Sources */,
+				3E9915CD2111B1A30071FDF7 /* Result.swift in Sources */,
+				3E9915D32111B1A30071FDF7 /* AddFilesOperation.swift in Sources */,
+				3E9915D62111B1A30071FDF7 /* CreateChunkOperation.swift in Sources */,
+				3E9915C92111B1A30071FDF7 /* AddFiles.swift in Sources */,
+				3E9915C22111B1A30071FDF7 /* WeTransfer.swift in Sources */,
+				3E9915CF2111B1A30071FDF7 /* AsynchronousResultOperation.swift in Sources */,
+				3E9915C52111B1A30071FDF7 /* Chunk.swift in Sources */,
+				3E9915CB2111B1A30071FDF7 /* APIEndpoint.swift in Sources */,
+				3E9915CC2111B1A30071FDF7 /* Endpoints.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3E7116FC20FC85F100115E55 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E9915B92111B0C60071FDF7 /* CreateTransferTests.swift in Sources */,
+				3E9915C12111B0C60071FDF7 /* Secrets.swift in Sources */,
+				3E9915C02111B0C60071FDF7 /* AuthorizationTests.swift in Sources */,
+				3E9915BF2111B0C60071FDF7 /* RequestTests.swift in Sources */,
+				3E9915B82111B0C60071FDF7 /* SimpleTransferTests.swift in Sources */,
+				3E9915BC2111B0C60071FDF7 /* UploadTests.swift in Sources */,
+				3E9915BA2111B0C60071FDF7 /* AddFilesTests.swift in Sources */,
+				3E9915BD2111B0C60071FDF7 /* TestConfiguration.swift in Sources */,
+				3E9915BB2111B0C60071FDF7 /* ChunksTests.swift in Sources */,
+				3E9915BE2111B0C60071FDF7 /* InitializationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		3EE2596F2091CF8800DC5A97 /* PBXTargetDependency */ = {
+		3E71170320FC85F100115E55 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 3EE259622091CF8800DC5A97 /* WeTransfer */;
-			targetProxy = 3EE2596E2091CF8800DC5A97 /* PBXContainerItemProxy */;
+			target = 3E7116F720FC85F100115E55 /* WeTransfer macOS */;
+			targetProxy = 3E71170220FC85F100115E55 /* PBXContainerItemProxy */;
+		};
+		3E71176E20FC889300115E55 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3E7116DB20FC85D400115E55 /* WeTransfer iOS */;
+			targetProxy = 3E71176D20FC889300115E55 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		3E5E514920EA816600485FA3 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3E5E514A20EA816600485FA3 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		3E5E514B20EA816600485FA3 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3E5E514C20EA816600485FA3 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		3E5E514320EA813E00485FA3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = "WeTransfer Sample Project/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wetransfer.WeTransfer-Sample-Project";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 armv7 armv7s";
+			};
+			name = Debug;
+		};
+		3E5E514420EA813E00485FA3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = "WeTransfer Sample Project/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wetransfer.WeTransfer-Sample-Project";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 armv7 armv7s";
+			};
+			name = Release;
+		};
+		3E7116EE20FC85D400115E55 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = WeTransfer/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wetransfer.WeTransfer-iOS";
+				PRODUCT_NAME = WeTransfer;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3E7116EF20FC85D400115E55 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = WeTransfer/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wetransfer.WeTransfer-iOS";
+				PRODUCT_NAME = WeTransfer;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		3E7116F120FC85D400115E55 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = WeTransferTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wetransfer.WeTransfer-iOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3E7116F220FC85D400115E55 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = WeTransferTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wetransfer.WeTransfer-iOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		3E71170A20FC85F100115E55 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = WeTransfer/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wetransfer.WeTransfer-macOS";
+				PRODUCT_NAME = WeTransfer;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		3E71170B20FC85F100115E55 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = WeTransfer/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wetransfer.WeTransfer-macOS";
+				PRODUCT_NAME = WeTransfer;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
+		3E71170D20FC85F100115E55 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = WeTransferTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wetransfer.WeTransfer-macOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		3E71170E20FC85F100115E55 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = WeTransferTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wetransfer.WeTransfer-macOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
 		3EE259752091CF8800DC5A97 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -475,7 +1086,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -530,7 +1140,6 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
@@ -539,133 +1148,59 @@
 			};
 			name = Release;
 		};
-		3EE259782091CF8800DC5A97 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/WeTransfer/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.wetransfer.WeTransfer-Swift-SDK";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = "";
-				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator appletvos appletvsimulator";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "i386 x86_64 arm64 armv7 armv7s";
-			};
-			name = Debug;
-		};
-		3EE259792091CF8800DC5A97 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/WeTransfer/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.wetransfer.WeTransfer-Swift-SDK";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = "";
-				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator appletvos appletvsimulator";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "i386 x86_64 arm64 armv7 armv7s";
-			};
-			name = Release;
-		};
-		3EE2597B2091CF8800DC5A97 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = GLJTT4T544;
-				INFOPLIST_FILE = WeTransferTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.wetransfer.WeTransfer-Swift-SDK-Tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		3EE2597C2091CF8800DC5A97 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = GLJTT4T544;
-				INFOPLIST_FILE = WeTransferTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.wetransfer.WeTransfer-Swift-SDK-Tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		3E5E514520EA813E00485FA3 /* Build configuration list for PBXNativeTarget "WeTransfer Sample Project" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3E5E514320EA813E00485FA3 /* Debug */,
+				3E5E514420EA813E00485FA3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3E7116ED20FC85D400115E55 /* Build configuration list for PBXNativeTarget "WeTransfer iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3E7116EE20FC85D400115E55 /* Debug */,
+				3E7116EF20FC85D400115E55 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3E7116F020FC85D400115E55 /* Build configuration list for PBXNativeTarget "WeTransfer iOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3E7116F120FC85D400115E55 /* Debug */,
+				3E7116F220FC85D400115E55 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3E71170920FC85F100115E55 /* Build configuration list for PBXNativeTarget "WeTransfer macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3E71170A20FC85F100115E55 /* Debug */,
+				3E71170B20FC85F100115E55 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3E71170C20FC85F100115E55 /* Build configuration list for PBXNativeTarget "WeTransfer macOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3E71170D20FC85F100115E55 /* Debug */,
+				3E71170E20FC85F100115E55 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		3EE2595D2091CF8800DC5A97 /* Build configuration list for PBXProject "WeTransfer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3EE259752091CF8800DC5A97 /* Debug */,
 				3EE259762091CF8800DC5A97 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		3EE259772091CF8800DC5A97 /* Build configuration list for PBXNativeTarget "WeTransfer" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3EE259782091CF8800DC5A97 /* Debug */,
-				3EE259792091CF8800DC5A97 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		3EE2597A2091CF8800DC5A97 /* Build configuration list for PBXNativeTarget "WeTransferTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3EE2597B2091CF8800DC5A97 /* Debug */,
-				3EE2597C2091CF8800DC5A97 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

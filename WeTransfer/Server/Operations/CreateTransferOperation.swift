@@ -8,25 +8,15 @@
 
 import Foundation
 
-struct CreateTransferParameters: Encodable {
-	let name: String
-	let description: String?
+/// Operation responsible for creating the transfer on the server and providing the given transfer object with an identifier and URL when succeeded.
+/// This operation does not handle the requests necessary to add files to the server side transfer, which `AddFilesOperation` is responsible for
+final class CreateTransferOperation: AsynchronousResultOperation<Transfer> {
 	
-	init(with transfer: Transfer) {
-		name = transfer.name
-		description = transfer.description
-	}
-}
-
-struct CreateTransferResponse: Decodable {
-	let id: String // swiftlint:disable:this identifier_name
-	let shortenedUrl: URL
-}
-
-class CreateTransferOperation: AsynchronousResultOperation<Transfer> {
+	private let transfer: Transfer
 	
-	let transfer: Transfer
-	
+	/// Initalized the operation with a transfer object
+	///
+	/// - Parameter transfer: Transfer object with optionally some files already added
 	required init(transfer: Transfer) {
 		self.transfer = transfer
 		super.init()
@@ -39,13 +29,16 @@ class CreateTransferOperation: AsynchronousResultOperation<Transfer> {
 		}
 		
 		let parameters = CreateTransferParameters(with: transfer)
-		WeTransfer.request(.createTransfer(), parameters: parameters) { (result: Result<CreateTransferResponse>) in
+		WeTransfer.request(.createTransfer(), parameters: parameters) { [weak self] result in
+			guard let strongSelf = self else {
+				return
+			}
 			switch result {
 			case .success(let response):
-				self.transfer.update(with: response)
-				self.finish(with: .success(self.transfer))
+				strongSelf.transfer.update(with: response.id, shortURL: response.shortenedUrl)
+				strongSelf.finish(with: .success(strongSelf.transfer))
 			case .failure(let error):
-				self.finish(with: .failure(error))
+				strongSelf.finish(with: .failure(error))
 			}
 		}
 	}

@@ -9,22 +9,12 @@
 import Foundation
 
 extension WeTransfer {
-
-	private struct AuthorizeParameters: Encodable {
-		let user_agent: String?
-		let user_identifier: String?
-	}
-	
-	private struct AuthorizeResponse: Decodable {
-		let success: Bool
-		let token: String?
-	}
 	
 	/// Authorizes the current user with the configured API key
 	///
 	/// - Parameter completion: Executes when either succeeded or failed
 	/// - Parameter result: Result with empty value when succeeded, or error when failed
-	public static func authorize(completion: @escaping (_ result: Result<Void>) -> Void) {
+	static func authorize(completion: @escaping (_ result: Result<Void>) -> Void) {
 		
 		let callCompletion = { result in
 			DispatchQueue.main.async {
@@ -32,7 +22,7 @@ extension WeTransfer {
 			}
 		}
 		
-		guard client.authenticationBearer == nil else {
+		guard !client.authenticator.isAuthenticated else {
 			callCompletion(.success(()))
 			return
 		}
@@ -42,10 +32,14 @@ extension WeTransfer {
 		WeTransfer.request(.authorize(), parameters: parameters) { (result: Result<AuthorizeResponse>) in
 			switch result {
 			case .failure(let error):
-				callCompletion(.failure(error))
+				guard case RequestError.serverError(_, _) = error else {
+					callCompletion(.failure(error))
+					return
+				}
+				callCompletion(.failure(WeTransfer.RequestError.authorizationFailed))
 			case .success(let response):
 				if let token = response.token, response.success {
-					client.authenticationBearer = token
+					client.authenticator.updateBearer(token)
 					callCompletion(.success(()))
 				} else {
 					callCompletion(.failure(RequestError.authorizationFailed))

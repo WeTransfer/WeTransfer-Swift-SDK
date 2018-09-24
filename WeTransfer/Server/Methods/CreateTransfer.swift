@@ -10,8 +10,8 @@ import Foundation
 
 extension WeTransfer {
 
-	/// Creates a transfer on the server and provides the given transfer object with a identifier and URL when succceeded.
-	/// If the transfer object was initialized with files, the files will be added on the server as well and updated with the appropriate datas
+	/// Creates a transfer on the server and provides the given transfer object with an identifier and URL when succceeded.
+	/// If the transfer object was initialized with files, the files will be added on the server as well and updated with the appropriate data
 	///
 	/// - Parameters:
 	///   - transfer: Transfer object that should be created on the server as well

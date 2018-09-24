@@ -22,19 +22,27 @@ extension WeTransfer {
 		case serverError(errorMessage: String, httpCode: Int?)
 		
 		public var errorDescription: String? {
-			if case .serverError(let message, let httpCode) = self {
+			switch self {
+			case .invalidResponseData:
+				return "Invalid response data: Server returned unrecognized response"
+			case .authorizationFailed:
+				return "Authorization failed: Invalid API key used for request"
+			case .serverError(let message, let httpCode):
 				return "Server error \(httpCode ?? 0): \(message)"
 			}
-			return "\(self)"
 		}
 	}
 
 	/// Response returned by server when request could not be completed
 	struct ErrorResponse: Decodable {
+		/// Whether the request has succeeded (typically `false`)
 		let success: Bool?
+		/// Message describing the error returned from the API
 		let message: String?
+		/// Actual error message from the server
 		let error: String?
 		
+		/// String using either the message or the error property
 		var errorString: String {
 			return (message ?? error) ?? ""
 		}
@@ -62,7 +70,7 @@ extension WeTransfer {
 	///   - parameters: Decodable parameters to send along with the request
 	///   - completion: Closure called when either request has failed, or succeeded with the decoded Response type
 	///   - result: Result with either the decoded Response or and error describing where the request went wrong
-	static func request<Parameters: Encodable, Response: Decodable>(_ endpoint: APIEndpoint, parameters: Parameters, completion: @escaping (_ result: Result<Response>) -> Void) {
+	static func request<Parameters: Encodable, Response>(_ endpoint: APIEndpoint<Response>, parameters: Parameters, completion: @escaping (_ result: Result<Response>) -> Void) {
 		do {
 			let encodedData = try client.encoder.encode(parameters)
 			request(endpoint, data: encodedData, completion: completion)
@@ -79,9 +87,9 @@ extension WeTransfer {
 	///   - data: The encoded data to be sent as parameters along with the request
 	///   - completion: Closure called when either request has failed, or succeeded with the decoded Response type
 	///   - result: Result with either the decoded Response or and error describing where the request went wrong
-	static func request<Response: Decodable>(_ endpoint: APIEndpoint, data: Data? = nil, completion: @escaping (_ result: Result<Response>) -> Void) {
+	static func request<Response>(_ endpoint: APIEndpoint<Response>, data: Data? = nil, completion: @escaping (_ result: Result<Response>) -> Void) {
 		
-		guard !endpoint.requiresAuthentication || client.authenticationBearer != nil else {
+		guard !endpoint.requiresAuthentication || client.authenticator.isAuthenticated else {
 			// Try to authenticate once, after which the authenticationBearer *should* be set
 			authorize { result in
 				if case .failure(let error) = result {
@@ -89,7 +97,7 @@ extension WeTransfer {
 					return
 				}
 				// Just in case the authenticationBearer isn't set, make sure the authorize request doesn't happen endlessly
-				if client.authenticationBearer == nil {
+				if !client.authenticator.isAuthenticated {
 					completion(.failure(Error.notAuthorized))
 					return
 				}
@@ -116,7 +124,7 @@ extension WeTransfer {
 				guard let data = data else {
 					throw RequestError.invalidResponseData
 				}
-				let response = try client.decoder.decode(Response.self, from: data)
+				let response = try client.decoder.decode(endpoint.responseType, from: data)
 				completion(.success(response))
 			} catch {
 				let serverError = parseErrorResponse(data, urlResponse: urlResponse as? HTTPURLResponse) ?? error

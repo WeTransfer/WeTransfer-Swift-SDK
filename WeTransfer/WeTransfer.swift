@@ -23,7 +23,7 @@ public struct WeTransfer {
 extension WeTransfer {
 
 	/// Possible errors thrown from multiple points in the transfer progress
-	public enum Error: Swift.Error {
+	public enum Error: Swift.Error, LocalizedError {
 		/// WeTransfer client not configured yet, make sure to call `WeTransfer.configure(with configuration:)`
 		case notConfigured
 		/// Authorization failed when performing request
@@ -34,6 +34,21 @@ extension WeTransfer {
 		case transferNotYetCreated
 		/// Transfer has no files to share as no files are added yet or all files are already uploaded
 		case noFilesAvailable
+		
+		public var errorDescription: String? {
+			switch self {
+			case .notConfigured:
+				return "Framework should configured with at least an API key"
+			case .notAuthorized:
+				return "Not authorized: invalid API key used for request"
+			case .transferAlreadyCreated:
+				return "Transfer already created: create transfer request should not be called multiple times for the same transfer"
+			case .noFilesAvailable:
+				return "No files available or all files have already been uploaded: add files to the transfer to upload"
+			default:
+				return "\(self)"
+			}
+		}
 	}
 
 	/// Configuration of the API client
@@ -46,10 +61,8 @@ extension WeTransfer {
 		public let clientIdentifier: String?
 		/// Unique identifier of the current user
 		public let userIdentifier: String?
-
-		let transfer = WeTransfer()
 		
-		/// Initializes the configuration struct with a request API key and optionally a baseURL for when you're pointing to a different server
+		/// Initializes the configuration struct with an API key and optionally a baseURL for when you're pointing to a different server
 		///
 		/// - Parameters:
 		///   - apiKey: Key required to make use of the API. Visit https://developers.wetransfer.com to create a key
@@ -70,21 +83,23 @@ extension WeTransfer {
 	/// - Parameter configuration: Configuration struct to configure the API client with
 	public static func configure(with configuration: Configuration) {
 		client.configuration = configuration
+		client.apiKey = configuration.apiKey
+		client.baseURL = configuration.baseURL
 	}
 }
 
 extension WeTransfer {
 
-	/// Immediately sends a transfer with the provided file URLs. Returns the transfer object used to handle the transfer proces.
+	/// Immediately uploads files to a transfer with the provided name and file URLs
 	///
 	/// - Parameters:
 	///   - name: Name of the transfer, shown when user opens the resulting link
-	///   - urls: Array of URLs pointing to files to be added to the transfer
+	///   - fileURLS: Array of URLs pointing to files to be added to the transfer
 	///   - stateChanged: Closure that will be called for state updates.
 	///   - state: Enum describing the current transfer's state. See the `State` enum description for more details for each state
 	/// - Returns: Transfer object used to handle the transfer process.
 	@discardableResult
-	public static func sendTransfer(named name: String, files urls: [URL], stateChanged: @escaping (_ state: State) -> Void) -> Transfer {
+	public static func uploadTransfer(named name: String, containing fileURLS: [URL], stateChanged: @escaping (_ state: State) -> Void) -> Transfer? {
 		
 		// Make sure stateChanges closure is called on the main thread
 		let changeState = { state in
@@ -94,8 +109,13 @@ extension WeTransfer {
 		}
 		
 		// Create the transfer model
-		let files = urls.compactMap { url in File(url: url) }
-		
+		let files: [File]
+		do {
+			files = try fileURLS.compactMap { url in try File(url: url) }
+		} catch {
+			changeState(.failed(error))
+			return nil
+		}
 		let transfer = Transfer(name: name, description: nil, files: files)
 		
 		// Create transfer on server
@@ -117,7 +137,7 @@ extension WeTransfer {
 		// When all files are ready for upload
 		addFilesOperation.onResult = { result in
 			if case .success = result {
-				changeState(.started(uploadFilesOperation.progress))
+				changeState(.uploading(uploadFilesOperation.progress))
 			}
 		}
 		

@@ -7,20 +7,21 @@
 //
 
 import Foundation
-#if os(iOS)
-import UIKit
-#elseif os(macOS)
-import Cocoa
-#endif
 
-public class Transfer: Encodable {
+/// Desribes a single transfer to be created, updated and sent. Used as an identifier between each request to be made and a local representation of the server-side transfer.
+/// Can be initialized with files or these can be added later through the add files function
+public final class Transfer {
 	public private(set) var identifier: String?
 
+	/// The name of the transfer. This name will be shown when viewing the transfer on wetransfer.com
 	public let name: String
+	/// Optional description of the transfer. This will be shown when viewing the transfer on wetransfer.com
 	public let description: String?
 
+	/// References to all the files added to the transfer. Add other files with the public method on the WeTransfer struct or add them directly when initializing the transfer object
 	public private(set) var files: [File] = []
 
+	/// Available when the transfer is created on the server
 	public private(set) var shortURL: URL?
 
 	public init(name: String, description: String?, files: [File] = []) {
@@ -30,33 +31,25 @@ public class Transfer: Encodable {
 	}
 }
 
+// MARK: - Private updating methods
 extension Transfer {
-	func update(with response: CreateTransferResponse) {
-		identifier = "\(response.id)"
-		shortURL = response.shortenedUrl
+	
+	/// Updates the transfer with server-side information
+	///
+	/// - Parameters:
+	///   - identifier: Identifier to point to global transfer
+	///   - shortURL: URL of where the transfer can be found online
+	func update(with identifier: String, shortURL: URL) {
+		self.identifier = identifier
+		self.shortURL = shortURL
 	}
 
-	func addFiles(_ files: [File]) {
-		for file in files {
-			if !self.files.contains(file) {
-				self.files.append(file)
-			}
+	/// Adds provided files to the transfer locally
+	///
+	/// - Parameter files: Files to be added to the transfer
+	func add(_ files: [File]) {
+		for file in files where !self.files.contains(file) {
+			self.files.append(file)
 		}
-	}
-
-	func updateFiles(with responseFiles: [AddFilesResponse]) {
-		files = files.map { file in
-			guard let responseFile = responseFiles.first(where: { $0.localIdentifier == file.localIdentifier }) else {
-				return file
-			}
-			return file.updated(with: responseFile)
-		}
-	}
-
-	func setFileUploaded(_ file: File) {
-		guard let index = files.index(of: file) else {
-			return
-		}
-		files[index].uploaded = true
 	}
 }

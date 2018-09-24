@@ -8,29 +8,34 @@
 
 import Foundation
 
-class APIClient {
+/// Holds the local state for communicating with the API.
+/// Handles the creation of the appropriate requests, and holds any request-associated classes like the decoder and encoder
+final class APIClient {
+	/// The API key used for each request
+	var apiKey: String?
+	/// URL to point to the server to. Each endpoint appends its path to the base URL
+	var baseURL: URL?
 	
-	/// The current configuration for parameters like the API key and base URL
+	/// Further configuration settings
 	var configuration: WeTransfer.Configuration?
 	
-	var authenticationBearer: String?
+	/// Handles the storage of the authentication bearer and adds authentication headers to requests
+	let authenticator = Authenticator()
 	
-	let urlSession: URLSession = {
-		let session = URLSession(configuration: .default, delegate: nil, delegateQueue: nil)
-		return session
-	}()
+	/// Main URL session used by for all requests
+	let urlSession: URLSession = URLSession(configuration: .default, delegate: nil, delegateQueue: nil)
 	
-	let operationQueue: OperationQueue = {
-		let queue = OperationQueue()
-		return queue
-	}()
+	/// Main operation queue handling all operations concurrently
+	let operationQueue: OperationQueue = OperationQueue()
 	
+	/// Used to decode all json repsonses
 	let decoder: JSONDecoder = {
 		let decoder = JSONDecoder()
 		decoder.keyDecodingStrategy = .convertFromSnakeCase
 		return decoder
 	}()
 	
+	/// Used to encode all parameters to json
 	let encoder: JSONEncoder = {
 		let encoder = JSONEncoder()
 		encoder.keyEncodingStrategy = .convertToSnakeCase
@@ -47,30 +52,33 @@ extension APIClient {
 	///   - data: Optional data to add to the request body
 	/// - Returns: URLRequest pointing to URL with appropriate HTTP method set
 	/// - Throws: `WeTransfer.Error` when not configured or not authorized
-	func createRequest(_ endpoint: APIEndpoint, data: Data? = nil) throws -> URLRequest {
-		// Check auth
-		guard let apiKey = configuration?.apiKey else {
-			throw WeTransfer.Error.notConfigured
-		}
-		guard !endpoint.requiresAuthentication || authenticationBearer != nil else {
-			throw WeTransfer.Error.notAuthorized
-		}
-		guard let url = endpoint.url(with: configuration?.baseURL) else {
+	func createRequest<Response>(_ endpoint: APIEndpoint<Response>, data: Data? = nil) throws -> URLRequest {
+		guard let apiKey = apiKey, let baseURL = baseURL else {
 			throw WeTransfer.Error.notConfigured
 		}
 		
-		var request = URLRequest(url: url)
-		request.httpMethod = endpoint.method.rawValue
+		var request = URLRequest(endpoint: endpoint, baseURL: baseURL, apiKey: apiKey)
+		request = authenticator.authenticatedRequest(from: request)
 		request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 		request.setValue("application/json", forHTTPHeaderField: "Accept")
-		request.addValue(apiKey, forHTTPHeaderField: "x-api-key")
 		
-		if let token = authenticationBearer {
-			request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-		}
 		if let data = data {
 			request.httpBody = data
 		}
 		return request
+	}
+}
+
+fileprivate extension URLRequest {
+	/// Initializes a URLRequest instance from and endpoint
+	///
+	/// - Parameters:
+	///   - endpoint: Endpoint describing the url and HTTP method
+	///   - baseURL: URL to append the endpoint's path to
+	///   - apiKey: API key to add to the headers
+	init<Response>(endpoint: APIEndpoint<Response>, baseURL: URL, apiKey: String) {
+		self.init(url: endpoint.url(with: baseURL))
+		httpMethod = endpoint.method.rawValue
+		addValue(apiKey, forHTTPHeaderField: "x-api-key")
 	}
 }

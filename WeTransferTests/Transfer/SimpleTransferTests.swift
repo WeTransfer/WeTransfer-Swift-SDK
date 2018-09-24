@@ -9,7 +9,7 @@
 import XCTest
 @testable import WeTransfer
 
-class SimpleTransferTests: XCTestCase {
+final class SimpleTransferTests: XCTestCase {
 
 	override func setUp() {
 		super.setUp()
@@ -31,12 +31,12 @@ class SimpleTransferTests: XCTestCase {
 		let simpleTransferExpectation = expectation(description: "Transfer has been sent")
 		var updatedTransfer: Transfer?
 		var timer: Timer?
-
-		WeTransfer.sendTransfer(named: "Test Transfer", files: [fileURL]) { state in
+		
+		WeTransfer.uploadTransfer(named: "Test Transfer", containing: [fileURL]) { state in
 			switch state {
 			case .created(let transfer):
 				print("Transfer created: \(transfer)")
-			case .started(let progress):
+			case .uploading(let progress):
 				print("Transfer started...")
 				timer = Timer(timeInterval: 1 / 30, repeats: true, block: { _ in
 					print("Progress: \(progress.fractionCompleted)")

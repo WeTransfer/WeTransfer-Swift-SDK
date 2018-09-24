@@ -8,66 +8,48 @@
 
 import Foundation
 
-struct AddFilesParameters: Encodable {
+/// Operation responsible for adding files to the provided transfer object and on the server as well. When succeeded the files will be updated with the appropriate data like identifiers and information about the chunks.
+/// - Note: The files will be added to the provided transfer object when the operation has started executing
+final class AddFilesOperation: ChainedAsynchronousResultOperation<Transfer, Transfer> {
 	
-	struct Item: Encodable {
-		let filename: String
-		let filesize: UInt64
-		let contentIdentifier: String
-		let localIdentifier: String
-		
-		init(with file: File) {
-			filename = file.filename
-			filesize = file.filesize
-			contentIdentifier = "file"
-			localIdentifier = file.localIdentifier
-		}
+	/// The files to be added to the transfer if added during the initialization
+	private var filesToAdd: [File]?
+	
+	/// Initializes the operation with a transfer object and array of files to add. When initalized as part of a chain after `CreateTransferOperation`, this operation can be initialized without any arguments
+	///
+	/// - Parameters:
+	///   - transfer: Transfer object to add the files to
+	///   - files: Files to be added to the transfer
+	convenience init(transfer: Transfer, files: [File]) {
+		self.init(input: transfer)
+		filesToAdd = files
 	}
-	
-	let items: [Item]
-	
-	init(with files: [File]) {
-		items = files.map { file in
-			return Item(with: file)
-		}
-	}
-}
-
-struct AddFilesResponse: Decodable {
-	
-	struct Meta: Decodable {
-		let multipartParts: Int
-		let multipartUploadId: String
-	}
-	
-	let id: String
-	let contentIdentifier: String
-	let localIdentifier: String
-	let meta: Meta
-	let name: String
-	let size: UInt64
-	let uploadId: String
-	let uploadExpiresAt: TimeInterval
-}
-
-class AddFilesOperation: ChainedAsynchronousResultOperation<Transfer, Transfer> {
 	
 	override func execute(_ transfer: Transfer) {
+		if let newFiles = filesToAdd {
+			transfer.add(newFiles)
+		}
 		let files = transfer.files.filter({ $0.identifier == nil })
 		let parameters = AddFilesParameters(with: files)
 		
 		guard let identifier = transfer.identifier else {
-			self.finish(with: .failure(WeTransfer.Error.transferNotYetCreated))
+			finish(with: .failure(WeTransfer.Error.transferNotYetCreated))
 			return
 		}
 		
-		WeTransfer.request(.addItems(transferIdentifier: identifier), parameters: parameters) { (result: Result<[AddFilesResponse]>) in
+		WeTransfer.request(.addItems(transferIdentifier: identifier), parameters: parameters) { [weak self] result in
 			switch result {
 			case .success(let response):
-				transfer.updateFiles(with: response)
-				self.finish(with: .success(transfer))
+				transfer.files.forEach({ file in
+					guard let responseFile = response.first(where: {$0.localIdentifier == file.localIdentifier}) else {
+						return
+					}
+					
+					file.update(with: responseFile.id, numberOfChunks: responseFile.meta.multipartParts, multipartUploadIdentifier: responseFile.meta.multipartUploadId)
+				})
+				self?.finish(with: .success(transfer))
 			case .failure(let error):
-				self.finish(with: .failure(error))
+				self?.finish(with: .failure(error))
 			}
 		}
 	}
