@@ -30,5 +30,6 @@ final class InitializationTests: XCTestCase {
 		XCTAssertNotNil(WeTransfer.client.configuration?.apiKey, "APIKey needs to be set")
 		XCTAssertNotNil(WeTransfer.client.configuration?.baseURL, "Base URL needs to be set")
 		XCTAssertNotNil(WeTransfer.client.configuration?.clientIdentifier, "Client identifier is expected to be set")
+		XCTAssertNotNil(WeTransfer.client.configuration?.userIdentifier, "User identifier is expected to be set")
 	}
 }
