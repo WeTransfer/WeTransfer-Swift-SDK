@@ -19,7 +19,6 @@
 		3E3B9D3C20F7ADDC0064915C /* MediaPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3B9D3B20F7ADDC0064915C /* MediaPicker.swift */; };
 		3E5E514F20EA816600485FA3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5E514720EA816600485FA3 /* MainViewController.swift */; };
 		3E5E515320EA816600485FA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5E514D20EA816600485FA3 /* AppDelegate.swift */; };
-		3E71177720FC9C2E00115E55 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		3E80E0A72091D0E700114711 /* WeTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E80E0A62091D0E700114711 /* WeTransfer.swift */; };
 		3E80E0AA2091D12B00114711 /* Transfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E80E0A92091D12B00114711 /* Transfer.swift */; };
 		3E80E0AE2091D16E00114711 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E80E0AD2091D16E00114711 /* Result.swift */; };
@@ -85,6 +84,10 @@
 		3E9915DE211201150071FDF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E5E514820EA816600485FA3 /* Assets.xcassets */; };
 		3EA0EFBA20BD4D90009E4BB1 /* AsynchronousOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA0EFB920BD4D90009E4BB1 /* AsynchronousOperation.swift */; };
 		3EA0EFCE20BD7743009E4BB1 /* AsynchronousResultOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA0EFCD20BD7743009E4BB1 /* AsynchronousResultOperation.swift */; };
+		3EB1E1872158F72900E1E4EE /* WeTransfer_Swift.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE259662091CF8800DC5A97 /* WeTransfer_Swift.h */; };
+		3EB1E1882158F72A00E1E4EE /* WeTransfer_Swift.h in Headers */ = {isa = PBXBuildFile; fileRef = 3EE259662091CF8800DC5A97 /* WeTransfer_Swift.h */; };
+		3EB1E18C2158F9D000E1E4EE /* WeTransfer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7116DC20FC85D400115E55 /* WeTransfer.framework */; };
+		3EB1E18D2158F9D000E1E4EE /* WeTransfer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7116DC20FC85D400115E55 /* WeTransfer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3ED6ED4020EA505800130261 /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED6ED3F20EA505800130261 /* APIEndpoint.swift */; };
 		3EFDC98021012FD70091CF85 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFDC97F21012FD70091CF85 /* RoundedButton.swift */; };
 		3F5E8A722111F80600F750EC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E5E514B20EA816600485FA3 /* Main.storyboard */; };
@@ -106,7 +109,28 @@
 			remoteGlobalIDString = 3E7116DB20FC85D400115E55;
 			remoteInfo = "WeTransfer iOS";
 		};
+		3EB1E1892158F76E00E1E4EE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3EE2595A2091CF8800DC5A97 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3E7116DB20FC85D400115E55;
+			remoteInfo = "WeTransfer iOS";
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3EB1E18E2158F9D000E1E4EE /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3EB1E18D2158F9D000E1E4EE /* WeTransfer.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		3E0EEBA720BEE918009E6B2D /* AsynchronousDependencyResultOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsynchronousDependencyResultOperation.swift; sourceTree = "<group>"; };
@@ -169,7 +193,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E71177720FC9C2E00115E55 /* (null) in Frameworks */,
+				3EB1E18C2158F9D000E1E4EE /* WeTransfer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,6 +414,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EB1E1872158F72900E1E4EE /* WeTransfer_Swift.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,6 +422,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EB1E1882158F72A00E1E4EE /* WeTransfer_Swift.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,6 +436,7 @@
 				3E5E513020EA813D00485FA3 /* Sources */,
 				3E5E513120EA813D00485FA3 /* Frameworks */,
 				3E5E513220EA813D00485FA3 /* Resources */,
+				3EB1E18E2158F9D000E1E4EE /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -452,6 +479,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				3EB1E18A2158F76E00E1E4EE /* PBXTargetDependency */,
 			);
 			name = "WeTransfer iOSTests";
 			productName = "WeTransfer iOSTests";
@@ -508,12 +536,15 @@
 				TargetAttributes = {
 					3E5E513320EA813D00485FA3 = {
 						CreatedOnToolsVersion = 9.4;
+						LastSwiftMigration = 1000;
 					};
 					3E7116DB20FC85D400115E55 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 					};
 					3E7116E320FC85D400115E55 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 					};
 					3E7116F720FC85F100115E55 = {
 						CreatedOnToolsVersion = 9.4.1;
@@ -603,7 +634,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "filename=\"Secrets.plist\"\nfile=\"${PROJECT_DIR}/${PROJECT_NAME}Tests/$filename\"\nif [ -f \"$file\" ]; then\ncp -r \"$file\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.xctest/$filename\"\nfi";
+			shellScript = "filename=\"Secrets.plist\"\nfile=\"${PROJECT_DIR}/${PROJECT_NAME}Tests/$filename\"\nif [ -f \"$file\" ]; then\ncp -r \"$file\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.xctest/$filename\"\nfi\n";
 		};
 		3E71177320FC956C00115E55 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -772,6 +803,11 @@
 			target = 3E7116DB20FC85D400115E55 /* WeTransfer iOS */;
 			targetProxy = 3E71176D20FC889300115E55 /* PBXContainerItemProxy */;
 		};
+		3EB1E18A2158F76E00E1E4EE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3E7116DB20FC85D400115E55 /* WeTransfer iOS */;
+			targetProxy = 3EB1E1892158F76E00E1E4EE /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -810,10 +846,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wetransfer.WeTransfer-Sample-Project";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -833,10 +867,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wetransfer.WeTransfer-Sample-Project";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Release;
 		};
@@ -862,7 +894,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -889,7 +921,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -909,7 +941,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wetransfer.WeTransfer-iOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -929,7 +961,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wetransfer.WeTransfer-iOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
