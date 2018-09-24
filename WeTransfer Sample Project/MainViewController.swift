@@ -184,7 +184,7 @@ extension MainViewController {
 		case .transferCompleted(let shortURL):
 			titleLabel.text = "Transfer completed"
 			bodyLabel.text = nil
-			let attributes: [NSAttributedStringKey: Any] = [.underlineStyle: NSUnderlineStyle.styleSingle.rawValue,
+			let attributes: [NSAttributedString.Key: Any] = [.underlineStyle: NSUnderlineStyle.single.rawValue,
 															.foregroundColor: urlButton.currentTitleColor]
 			let attributedURLText = NSAttributedString(string: shortURL.absoluteString, attributes: attributes)
 			urlButton.setAttributedTitle(attributedURLText, for: .normal)
