@@ -21,8 +21,9 @@ final class AddFilesTests: XCTestCase {
 		TestConfiguration.resetConfiguration()
     }
 
-	func testAddingFilesToTransferModel() {
-		let transfer = Transfer(name: "Test Transfer", description: nil)
+	func testAddingFilesToBoardModel() {
+		
+		let transfer = Board(name: "Test Transfer", description: nil)
 		guard let file = TestConfiguration.fileModel else {
 			XCTFail("Could not create file model")
 			return
@@ -55,7 +56,7 @@ final class AddFilesTests: XCTestCase {
 	}
 
 	func testAddFilesRequest() {
-		let transfer = Transfer(name: "Test Transfer", description: nil)
+		let board = Board(name: "Test Transfer", description: nil)
 
 		guard let file = TestConfiguration.fileModel else {
 			XCTFail("File not available")
@@ -63,25 +64,18 @@ final class AddFilesTests: XCTestCase {
 		}
 
 		let addedFilesExpectation = expectation(description: "Files are added")
-
-		WeTransfer.createTransfer(with: transfer, completion: { (result) in
+		
+		WeTransfer.add([file], to: board, completion: { (result) in
 			if case .failure(let error) = result {
-				XCTFail("Create transfer failed: \(error)")
+				XCTFail("Add files to transfer failed: \(error)")
 				return
 			}
-
-			WeTransfer.add([file], to: transfer, completion: { (result) in
-				if case .failure(let error) = result {
-					XCTFail("Add files to transfer failed: \(error)")
-					return
-				}
-				addedFilesExpectation.fulfill()
-			})
+			addedFilesExpectation.fulfill()
 		})
 
 		waitForExpectations(timeout: 10) { _ in
-			XCTAssertFalse(transfer.files.isEmpty)
-			for file in transfer.files {
+			XCTAssertFalse(board.files.isEmpty)
+			for file in board.files {
 				XCTAssertNotNil(file.identifier)
 				XCTAssertFalse(file.isUploaded)
 			}
@@ -89,7 +83,7 @@ final class AddFilesTests: XCTestCase {
 	}
 	
 	func testMulitpleFileRequests() {
-		let transfer = Transfer(name: "Test Transfer", description: nil)
+		let board = Board(name: "Test Transfer", description: nil)
 		
 		guard let file = TestConfiguration.fileModel, let smallFile = TestConfiguration.smallFileModel else {
 			XCTFail("File not available")
@@ -99,7 +93,7 @@ final class AddFilesTests: XCTestCase {
 		let addedFirstFileExpectation = expectation(description: "First file was added")
 		let addedSecondFileExpectation = expectation(description: "Second file was added")
 		
-		WeTransfer.createTransfer(with: transfer, completion: { (result) in
+		WeTransfer.createExternalBoard(board) { result in
 			if case .failure(let error) = result {
 				XCTFail("Create transfer failed: \(error)")
 				return
@@ -107,7 +101,7 @@ final class AddFilesTests: XCTestCase {
 			
 			var firstFileCompleted = false
 			
-			WeTransfer.add([file], to: transfer, completion: { (result) in
+			WeTransfer.add([file], to: board, completion: { (result) in
 				if case .failure(let error) = result {
 					XCTFail("Add files to transfer failed: \(error)")
 					return
@@ -117,20 +111,20 @@ final class AddFilesTests: XCTestCase {
 			})
 			
 			// Do the small file second and expect it to be completed after the first file completes
-			WeTransfer.add([smallFile], to: transfer, completion: { (result) in
+			WeTransfer.add([smallFile], to: board, completion: { (result) in
 				if case .failure(let error) = result {
 					XCTFail("Add files to transfer failed: \(error)")
 					return
 				}
-				XCTAssertEqual(transfer.files.count, 2)
+				XCTAssertEqual(board.files.count, 2)
 				XCTAssertTrue(firstFileCompleted)
 				addedSecondFileExpectation.fulfill()
 			})
-		})
+		}
 		
 		waitForExpectations(timeout: 10) { _ in
-			XCTAssertFalse(transfer.files.isEmpty)
-			for file in transfer.files {
+			XCTAssertFalse(board.files.isEmpty)
+			for file in board.files {
 				XCTAssertNotNil(file.identifier)
 				XCTAssertFalse(file.isUploaded)
 			}

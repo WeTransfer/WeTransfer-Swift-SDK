@@ -23,6 +23,13 @@ extension APIEndpoint {
 		return APIEndpoint<CreateTransferResponse>(method: .post, path: "transfers")
 	}
 	
+	/// Creates a new transfer
+	///
+	/// - Returns: APIEndpoint with `POST` to `/transfer`, expecting a `CreateTransferResponse` as response
+	static func createBoard() -> APIEndpoint<CreateBoardResponse> {
+		return APIEndpoint<CreateBoardResponse>(method: .post, path: "boards")
+	}
+	
 	/// Adds files to an existing transfer
 	///
 	/// - Parameter transferIdentifier: Identifier of the transfer to add the files to
@@ -66,6 +73,64 @@ struct AuthorizeResponse: Decodable {
 
 /// Parameters used for the create transfer request
 struct CreateTransferParameters: Encodable {
+	
+	struct FileParameters: Encodable {
+		let name: String
+		let size: UInt64
+	}
+	
+	/// Message to go with the transfer
+	let message: String
+	/// Description of all the files to add
+	let files: [FileParameters]
+	
+	/// Initializes the parameters with a local transfer object
+	///
+	/// - Parameter transfer: Transfer object to create on the server
+	init(message: String, files: [File]) {
+		self.message = message
+		
+		self.files = files.map({ file in
+			return FileParameters(name: file.filename, size: file.filesize)
+		})
+	}
+}
+
+/// Response from create transfer request
+struct CreateTransferResponse: Decodable {
+	struct FileResponse: Decodable {
+		// swiftlint:disable nesting
+		/// Multipart upload information about each chunk
+		struct Multipart: Decodable {
+			/// Amount of chunks to be created
+			let partNumbers: Int
+			/// Default size for each chunk
+			let chunkSize: Bytes
+		}
+		
+		let id: String // swiftlint:disable:this identifier_name
+		/// Full name of file (e.g. "photo.jpg")
+		let name: String
+		/// Mulitpart information about each chunk
+		let multipart: Multipart
+	}
+	
+	/// Server side identifier of the transfer
+	let id: String // swiftlint:disable:this identifier_name
+	
+	/// Server side information about the files
+	let files: [FileResponse]
+}
+
+// MARK: - Create board
+
+/// Parameters used for the create transfer request
+struct CreateBoardParameters: Encodable {
+	
+	struct FileParameters: Encodable {
+		let name: String
+		let size: UInt64
+	}
 	/// Name of the transfer to create
 	let name: String
 	/// Description of the transfer to create
@@ -74,18 +139,18 @@ struct CreateTransferParameters: Encodable {
 	/// Initializes the parameters with a local transfer object
 	///
 	/// - Parameter transfer: Transfer object to create on the server
-	init(with transfer: Transfer) {
-		name = transfer.name
-		description = transfer.description
+	init(with board: Board) {
+		name = board.name
+		description = board.description
 	}
 }
 
 /// Response from create transfer request
-struct CreateTransferResponse: Decodable {
+struct CreateBoardResponse: Decodable {
 	/// Server side identifier of the transfer
 	let id: String // swiftlint:disable:this identifier_name
 	/// The URL to where the transfer can be found online
-	let shortenedUrl: URL
+	let url: URL
 }
 
 // MARK: - Add files
@@ -100,8 +165,6 @@ struct AddFilesParameters: Encodable {
 		let filesize: UInt64
 		/// Type of content, currently always "file"
 		let contentIdentifier: String = "file"
-		/// Identifier to uniquely identify file locally
-		let localIdentifier: String
 		
 		/// Initializes Item struct with a File struct
 		///
@@ -109,7 +172,6 @@ struct AddFilesParameters: Encodable {
 		init(with file: File) {
 			filename = file.filename
 			filesize = file.filesize
-			localIdentifier = file.localIdentifier
 		}
 	}
 	

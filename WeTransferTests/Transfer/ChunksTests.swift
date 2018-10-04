@@ -22,9 +22,7 @@ final class ChunksTests: XCTestCase {
 	}
 
 	func testChunkCreationRequest() {
-		let transfer = Transfer(name: "Test Transfer", description: nil)
-
-		guard let file = TestConfiguration.fileModel else {
+		guard let fileURL = TestConfiguration.imageFileURL else {
 			XCTFail("File not available")
 			return
 		}
@@ -34,14 +32,13 @@ final class ChunksTests: XCTestCase {
 
 		let createdChunksExpectation = expectation(description: "Chunks are created")
 
-		WeTransfer.createTransfer(with: transfer, completion: { (result) in
-			if case .failure(let error) = result {
+		WeTransfer.createTransfer(saying: "Test Transfer", fileURLs: [fileURL]) { result in
+			switch result {
+			case .failure(let error):
 				XCTFail("Creating transfer failed: \(error)")
 				createdChunksExpectation.fulfill()
 				return
-			}
-
-			WeTransfer.add([file], to: transfer, completion: { (result) in
+			case .success(let transfer):
 				if case .failure(let error) = result {
 					XCTFail("Adding files failed: \(error)")
 					createdChunksExpectation.fulfill()
@@ -65,8 +62,8 @@ final class ChunksTests: XCTestCase {
 					createdChunksExpectation.fulfill()
 				}
 				WeTransfer.client.operationQueue.addOperation(operation)
-			})
-		})
+			}
+		}
 
 		waitForExpectations(timeout: 10) { _ in
 			guard let file = updatedFile else {
