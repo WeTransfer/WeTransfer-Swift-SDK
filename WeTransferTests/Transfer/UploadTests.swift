@@ -31,38 +31,45 @@ final class UploadTests: XCTestCase {
 		}
 
 		let transferSentExpectation = expectation(description: "Transfer is sent")
-		let transfer = Transfer(name: "Test transfer", description: nil, files: [file])
+		var resultTransfer: Transfer?
 		
-		WeTransfer.createTransfer(with: transfer, completion: { (result) in
-			if case .failure(let error) = result {
+		WeTransfer.createTransfer(saying: "TestTransfer", fileURLs: [file.url]) { result in
+			switch result {
+			case .failure(let error):
 				XCTFail("Transfer creation failed: \(error)")
 				transferSentExpectation.fulfill()
 				return
+			case .success(let transfer):
+				resultTransfer = transfer
+				WeTransfer.upload(transfer, stateChanged: { (state) in
+					switch state {
+					case .created(let transfer):
+						print("Transfer created: \(String(describing: transfer.identifier))")
+					case .uploading(let progress):
+						print("Upload started")
+						var percentage = 0.0
+						self.observation = progress.observe(\.fractionCompleted, changeHandler: { (progress, _) in
+							let newPercentage = (progress.fractionCompleted * 100).rounded(FloatingPointRoundingRule.up)
+							if newPercentage != percentage {
+								percentage = newPercentage
+								print("PROGRESS: \(newPercentage)% (\(progress.completedUnitCount) bytes)")
+							}
+						})
+					case .failed(let error):
+						XCTFail("Sending transfer failed: \(error)")
+						transferSentExpectation.fulfill()
+					case .completed:
+						transferSentExpectation.fulfill()
+					}
+				})
 			}
-			WeTransfer.upload(transfer, stateChanged: { (state) in
-				switch state {
-				case .created(let transfer):
-					print("Transfer created: \(String(describing: transfer.identifier))")
-				case .uploading(let progress):
-					print("Upload started")
-					var percentage = 0.0
-					self.observation = progress.observe(\.fractionCompleted, changeHandler: { (progress, _) in
-						let newPercentage = (progress.fractionCompleted * 100).rounded(FloatingPointRoundingRule.up)
-						if newPercentage != percentage {
-							percentage = newPercentage
-							print("PROGRESS: \(newPercentage)% (\(progress.completedUnitCount) bytes)")
-						}
-					})
-				case .failed(let error):
-					XCTFail("Sending transfer failed: \(error)")
-					transferSentExpectation.fulfill()
-				case .completed:
-					transferSentExpectation.fulfill()
-				}
-			})
-		})
+		}
 
 		waitForExpectations(timeout: 60) { _ in
+			guard let transfer = resultTransfer else {
+				XCTFail("No transfer created")
+				return
+			}
 			self.observation = nil
 			if let url = transfer.shortURL {
 				print("Transfer uploaded: \(url)")

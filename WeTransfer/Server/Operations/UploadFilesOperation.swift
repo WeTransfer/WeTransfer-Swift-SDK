@@ -27,10 +27,6 @@ final class UploadFilesOperation: ChainedAsynchronousResultOperation<Transfer, T
 	}
 	
 	override func execute(_ transfer: Transfer) {
-		guard transfer.identifier != nil else {
-			self.finish(with: .failure(WeTransfer.Error.transferNotYetCreated))
-			return
-		}
 		
 		let files = transfer.files.filter({ $0.isUploaded == false })
 		

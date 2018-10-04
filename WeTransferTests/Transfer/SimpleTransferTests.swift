@@ -32,7 +32,7 @@ final class SimpleTransferTests: XCTestCase {
 		var updatedTransfer: Transfer?
 		var timer: Timer?
 		
-		WeTransfer.uploadTransfer(named: "Test Transfer", containing: [fileURL]) { state in
+		WeTransfer.uploadTransfer(saying: "Test transfer", containing: [fileURL]) { state in
 			switch state {
 			case .created(let transfer):
 				print("Transfer created: \(transfer)")
@@ -41,7 +41,7 @@ final class SimpleTransferTests: XCTestCase {
 				timer = Timer(timeInterval: 1 / 30, repeats: true, block: { _ in
 					print("Progress: \(progress.fractionCompleted)")
 				})
-				RunLoop.main.add(timer!, forMode: RunLoop.Mode.common)
+				RunLoop.main.add(timer!, forMode: RunLoopMode.commonModes)
 			case .completed(let transfer):
 				timer?.invalidate()
 				timer = nil

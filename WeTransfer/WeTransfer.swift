@@ -63,7 +63,7 @@ extension WeTransfer {
 		///   - baseURL: Defaults to the standard API, but can be used to point to a different server
 		public init(apiKey: String, baseURL: URL? = nil) {
 			// swiftlint:disable force_unwrapping
-			self.baseURL = baseURL ?? URL(string: "https://dev.wetransfer.com/v1/")!
+			self.baseURL = baseURL ?? URL(string: "https://dev.wetransfer.com/v2/")!
 			self.apiKey = apiKey
 		}
 	}
@@ -87,8 +87,7 @@ extension WeTransfer {
 	///   - stateChanged: Closure that will be called for state updates.
 	///   - state: Enum describing the current transfer's state. See the `State` enum description for more details for each state
 	/// - Returns: Transfer object used to handle the transfer process.
-	@discardableResult
-	public static func uploadTransfer(named name: String, containing fileURLS: [URL], stateChanged: @escaping (_ state: State) -> Void) -> Transfer? {
+	public static func uploadTransfer(saying message: String, containing fileURLS: [URL], stateChanged: @escaping (_ state: State) -> Void) {
 		
 		// Make sure stateChanges closure is called on the main thread
 		let changeState = { state in
@@ -97,21 +96,8 @@ extension WeTransfer {
 			}
 		}
 		
-		// Create the transfer model
-		let files: [File]
-		do {
-			files = try fileURLS.compactMap { url in try File(url: url) }
-		} catch {
-			changeState(.failed(error))
-			return nil
-		}
-		let transfer = Transfer(name: name, description: nil, files: files)
-		
 		// Create transfer on server
-		let creationOperation = CreateTransferOperation(transfer: transfer)
-		
-		// Add files to the transfer
-		let addFilesOperation = AddFilesOperation()
+		let creationOperation = CreateTransferOperation(message: message, fileURLs: fileURLS)
 		
 		// Upload all files from the chunks
 		let uploadFilesOperation = UploadFilesOperation()
@@ -123,15 +109,8 @@ extension WeTransfer {
 			}
 		}
 		
-		// When all files are ready for upload
-		addFilesOperation.onResult = { result in
-			if case .success = result {
-				changeState(.uploading(uploadFilesOperation.progress))
-			}
-		}
-		
 		// Perform all operations in a chain
-		let operations = [creationOperation, addFilesOperation, uploadFilesOperation].chained()
+		let operations = [creationOperation, uploadFilesOperation].chained()
 		client.operationQueue.addOperations(operations, waitUntilFinished: false)
 		
 		// Handle the result of the very last operation that's executed
@@ -143,7 +122,5 @@ extension WeTransfer {
 				changeState(.completed(transfer))
 			}
 		}
-		
-		return transfer
 	}
 }
