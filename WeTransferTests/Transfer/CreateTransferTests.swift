@@ -38,6 +38,7 @@ final class CreateTransferTests: XCTestCase {
 			}
 			createdTransferExpectation.fulfill()
 		}
+		
 		waitForExpectations(timeout: 10) { _ in
 			XCTAssertNotNil(transferResult)
 			if let transfer = transferResult {
