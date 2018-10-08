@@ -37,15 +37,15 @@ final class AddFilesOperation: ChainedAsynchronousResultOperation<Board, Board> 
 			return
 		}
 		
-		WeTransfer.request(.addItems(transferIdentifier: identifier), parameters: parameters) { [weak self] result in
+		WeTransfer.request(.addFiles(boardIdentifier: identifier), parameters: parameters.files) { [weak self] result in
 			switch result {
-			case .success(let response):
-				board.files.forEach({ file in
-					guard let responseFile = response.first(where: {$0.id == file.identifier}) else {
-						return
-					}
-					
-					file.update(with: responseFile.id, numberOfChunks: responseFile.meta.multipartParts, multipartUploadIdentifier: responseFile.meta.multipartUploadId)
+			case .success(let responseFiles):
+				zip(files, responseFiles).forEach({
+					let (file, responseFile) = $0
+					file.update(with: responseFile.id,
+								numberOfChunks: responseFile.multipart.partNumbers,
+								chunkSize: responseFile.multipart.chunkSize,
+								multipartUploadIdentifier: responseFile.multipart.id)
 				})
 				self?.finish(with: .success(board))
 			case .failure(let error):
