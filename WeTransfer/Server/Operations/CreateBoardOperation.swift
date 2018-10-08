@@ -12,11 +12,20 @@ import Foundation
 /// This operation does not handle the requests necessary to add files to the server side transfer, which `AddFilesOperation` is responsible for
 final class CreateBoardOperation: AsynchronousResultOperation<Board> {
 	
-	let board: Board
+	private let board: Board
 	
-	/// Initalized the operation with the necessary parameters for a transfer
+	/// Initializes the operation with the necessary properties for a new board
 	///
-	/// - Parameter transfer: Transfer object with optionally some files already added
+	/// - Parameters:
+	///   - name: Name of the board to be created
+	///   - description: Optional description of the board to be created
+	convenience init(name: String, description: String?) {
+		self.init(board: Board(name: name, description: description))
+	}
+	
+	/// Initalizes the operation with a board to be created on the server
+	///
+	/// - Parameter board: Board object
 	required init(board: Board) {
 		self.board = board
 		super.init()
