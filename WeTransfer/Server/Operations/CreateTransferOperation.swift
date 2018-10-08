@@ -43,7 +43,7 @@ final class CreateTransferOperation: AsynchronousResultOperation<Transfer> {
 			case .success(let response):
 				let updatedFiles: [File] = zip(response.files, files).map({ (files) in
 					let (responseFile, file) = files
-					file.update(with: response.id, numberOfChunks: responseFile.multipart.partNumbers, multipartUploadIdentifier: nil)
+					file.update(with: responseFile.id, numberOfChunks: responseFile.multipart.partNumbers, chunkSize: responseFile.multipart.chunkSize, multipartUploadIdentifier: nil)
 					return file
 				})
 				let transfer = Transfer(identifier: response.id, message: parameters.message, files: updatedFiles)

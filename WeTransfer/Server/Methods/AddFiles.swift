@@ -25,8 +25,16 @@ extension WeTransfer {
 				completion(result)
 			}
 		}
+		
+		// Externally create the board if not already in the queue
+		if board.identifier == nil && client.operationQueue.operations.first(where: { $0 is CreateBoardOperation }) == nil {
+			let createBoardOperation = CreateBoardOperation(board: board)
+			operation.addDependency(createBoardOperation)
+			client.operationQueue.addOperation(createBoardOperation)
+		}
+		
 		// Add the latest AddFilesOperation in the queue as a dependency so all files are added in the correct order
-		if let queuedAddFilesOperation = client.operationQueue.operations.reversed().first(where: { $0 is AddFilesOperation}) {
+		if let queuedAddFilesOperation = client.operationQueue.operations.last(where: { $0 is AddFilesOperation}) {
 			operation.addDependency(queuedAddFilesOperation)
 		}
 		client.operationQueue.addOperation(operation)

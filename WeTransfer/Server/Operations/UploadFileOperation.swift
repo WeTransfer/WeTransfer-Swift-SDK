@@ -23,6 +23,8 @@ final class UploadFileOperation: AsynchronousResultOperation<File> {
 		}
 	}
 	
+	/// Transfer or Board containing file
+	private let container: Transferrable
 	/// File to upload
 	private let file: File
 	/// Queue to add the created operations to
@@ -36,7 +38,8 @@ final class UploadFileOperation: AsynchronousResultOperation<File> {
 	///   - file: The file from which to create and upload the chunks
 	///   - operationQueue: Operation queue to add the operations to
 	///   - session: URLSession that should handle the actual uploading
-	required init(file: File, operationQueue: OperationQueue, session: URLSession) {
+	required init(container: Transferrable, file: File, operationQueue: OperationQueue, session: URLSession) {
+		self.container = container
 		self.file = file
 		self.operationQueue = operationQueue
 		self.session = session
@@ -53,7 +56,7 @@ final class UploadFileOperation: AsynchronousResultOperation<File> {
 		}
 		var operations = [Operation]()
 		for chunkIndex in 0..<numberOfChunks {
-			let createOperation = CreateChunkOperation(file: file, chunkIndex: chunkIndex)
+			let createOperation = CreateChunkOperation(container: container, file: file, chunkIndex: chunkIndex)
 			let uploadOperation = UploadChunkOperation(session: session)
 			operations.append(contentsOf: [createOperation, uploadOperation].chained())
 			
@@ -68,7 +71,7 @@ final class UploadFileOperation: AsynchronousResultOperation<File> {
 			return
 		}
 		
-		let completeOperation = CompleteUploadOperation(file: file)
+		let completeOperation = CompleteUploadOperation(container: container, file: file)
 
 		let chunkOperations = chainedChunkOperations(with: completeOperation)
 		
