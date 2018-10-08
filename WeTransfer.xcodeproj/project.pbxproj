@@ -84,6 +84,8 @@
 		3E9915D92111B1A30071FDF7 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413BC2098BC25003A42D1 /* APIClient.swift */; };
 		3E9915DA2111B1A30071FDF7 /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8EB08B20E503E2002EB5AB /* Authenticator.swift */; };
 		3E9915DE211201150071FDF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E5E514820EA816600485FA3 /* Assets.xcassets */; };
+		3E9D48D021663EE400499760 /* Transferrable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9D48CF21663EE400499760 /* Transferrable.swift */; };
+		3E9D48D121663EE400499760 /* Transferrable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9D48CF21663EE400499760 /* Transferrable.swift */; };
 		3E9D48D32166535D00499760 /* SimpleBoardUploadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9D48D22166535D00499760 /* SimpleBoardUploadTests.swift */; };
 		3E9D48D42166535D00499760 /* SimpleBoardUploadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9D48D22166535D00499760 /* SimpleBoardUploadTests.swift */; };
 		3E9D48D62166537D00499760 /* BoardUploadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9D48D52166537C00499760 /* BoardUploadTests.swift */; };
@@ -185,6 +187,7 @@
 		3E9413C92099DB05003A42D1 /* Upload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Upload.swift; sourceTree = "<group>"; };
 		3E9413CB2099E390003A42D1 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		3E9413CD2099E3F5003A42D1 /* Chunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chunk.swift; sourceTree = "<group>"; };
+		3E9D48CF21663EE400499760 /* Transferrable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transferrable.swift; sourceTree = "<group>"; };
 		3E9D48D22166535D00499760 /* SimpleBoardUploadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleBoardUploadTests.swift; sourceTree = "<group>"; };
 		3E9D48D52166537C00499760 /* BoardUploadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardUploadTests.swift; sourceTree = "<group>"; };
 		3E9D48E0216B89CB00499760 /* BoardChunksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardChunksTests.swift; sourceTree = "<group>"; };
@@ -294,6 +297,7 @@
 				3EB1E191215916AF00E1E4EE /* Board.swift */,
 				3E9413CB2099E390003A42D1 /* File.swift */,
 				3E9413CD2099E3F5003A42D1 /* Chunk.swift */,
+				3E9D48CF21663EE400499760 /* Transferrable.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -732,6 +736,7 @@
 				3E0EEBB420C175D0009E6B2D /* AddFilesOperation.swift in Sources */,
 				3E80E0A72091D0E700114711 /* WeTransfer.swift in Sources */,
 				3E80E0AE2091D16E00114711 /* Result.swift in Sources */,
+				3E9D48D021663EE400499760 /* Transferrable.swift in Sources */,
 				3E9413CA2099DB05003A42D1 /* Upload.swift in Sources */,
 				3EB1E1982159283600E1E4EE /* CreateBoard.swift in Sources */,
 				3E0EEBC020C19074009E6B2D /* UploadFileOperation.swift in Sources */,
@@ -788,6 +793,7 @@
 				3E9915C32111B1A30071FDF7 /* Transfer.swift in Sources */,
 				3E9915C42111B1A30071FDF7 /* File.swift in Sources */,
 				3E9915C62111B1A30071FDF7 /* Request.swift in Sources */,
+				3E9D48D121663EE400499760 /* Transferrable.swift in Sources */,
 				3E9915C72111B1A30071FDF7 /* Authorize.swift in Sources */,
 				3EB1E1992159283600E1E4EE /* CreateBoard.swift in Sources */,
 				3E9915D42111B1A30071FDF7 /* UploadFilesOperation.swift in Sources */,

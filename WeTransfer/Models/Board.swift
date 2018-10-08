@@ -8,20 +8,20 @@
 
 import Foundation
 
-/// Desribes a single board to be created, updated and sent. Used as an identifier between each request to be made and a local representation of the server-side transfer.
-/// Can be initialized with files or these can be added later through the add files function
-public final class Board {
+/// Desribes a single board to be created, adding files to and uploading files from. Used as an identifier between each request to be made and a local representation of the server-side board.
+/// Files should be added through the approapriate addFiles method
+public final class Board: Transferrable {
 	public private(set) var identifier: String?
 
-	/// The name of the transfer. This name will be shown when viewing the transfer on wetransfer.com
+	/// The name of the board. This name will be shown when viewing the transfer on wetransfer.com
 	public let name: String
-	/// Optional description of the transfer. This will be shown when viewing the transfer on wetransfer.com
+	/// Optional description of the board. This will be shown when viewing the transfer on wetransfer.com
 	public let description: String?
 
-	/// References to all the files added to the transfer. Add other files with the public method on the WeTransfer struct or add them directly when initializing the transfer object
+	/// References to all the files added to the board. Files can be added with the public method on the WeTransfer struct
 	public private(set) var files: [File] = []
 
-	/// Available when the transfer is created on the server
+	/// Available when the board is created on the server
 	public private(set) var shortURL: URL?
 
 	init(name: String, description: String?) {
@@ -33,19 +33,19 @@ public final class Board {
 // MARK: - Private updating methods
 extension Board {
 	
-	/// Updates the transfer with server-side information
+	/// Updates the board with server-side information
 	///
 	/// - Parameters:
-	///   - identifier: Identifier to point to global transfer
-	///   - shortURL: URL of where the transfer can be found online
+	///   - identifier: Identifier to point to global board
+	///   - shortURL: URL of where the board can be found online
 	func update(with identifier: String, shortURL: URL) {
 		self.identifier = identifier
 		self.shortURL = shortURL
 	}
 
-	/// Adds provided files to the transfer locally
+	/// Adds provided files to the board locally
 	///
-	/// - Parameter files: Files to be added to the transfer
+	/// - Parameter files: Files to be added to the board
 	func add(_ files: [File]) {
 		for file in files where !self.files.contains(file) {
 			self.files.append(file)

@@ -8,10 +8,9 @@
 
 import Foundation
 
-/// Desribes a single transfer to be created, updated and sent. Used as an identifier between each request to be made and a local representation of the server-side transfer.
-/// Can only be initialized from the create transfer request
-public final class Transfer {
-	public let identifier: String
+/// Desribes a single transfer to be created and uploaded. Used as an identifier between each request to be made and a local representation of the server-side transfer.
+public final class Transfer: Transferrable {
+	public let identifier: String?
 
 	/// The name of the transfer. This name will be shown when viewing the transfer on wetransfer.com
 	public let message: String
