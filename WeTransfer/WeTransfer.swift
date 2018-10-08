@@ -34,6 +34,8 @@ extension WeTransfer {
 		case transferNotYetCreated
 		/// Transfer has no files to share as no files are added yet or all files are already uploaded
 		case noFilesAvailable
+		/// Transfer already finalized, not need to call finalize again
+		case transferAlreadyFinalized
 		
 		public var errorDescription: String? {
 			switch self {
@@ -45,6 +47,8 @@ extension WeTransfer {
 				return "Transfer already created: create transfer request should not be called multiple times for the same transfer"
 			case .noFilesAvailable:
 				return "No files available or all files have already been uploaded: add files to the transfer to upload"
+			case .transferAlreadyFinalized:
+				return "Transfer already finalized"
 			default:
 				return "\(self)"
 			}
@@ -86,8 +90,7 @@ extension WeTransfer {
 	///   - fileURLS: Array of URLs pointing to files to be added to the transfer
 	///   - stateChanged: Closure that will be called for state updates.
 	///   - state: Enum describing the current transfer's state. See the `State` enum description for more details for each state
-	/// - Returns: Transfer object used to handle the transfer process.
-	public static func uploadTransfer(saying message: String, containing fileURLS: [URL], stateChanged: @escaping (_ state: State) -> Void) {
+	public static func uploadTransfer(saying message: String, containing fileURLS: [URL], stateChanged: @escaping (_ state: State<Transfer>) -> Void) {
 		
 		// Make sure stateChanges closure is called on the main thread
 		let changeState = { state in
@@ -100,12 +103,16 @@ extension WeTransfer {
 		let creationOperation = CreateTransferOperation(message: message, fileURLs: fileURLS)
 		
 		// Upload all files from the chunks
-		let uploadFilesOperation = UploadFilesOperation()
+		let uploadFilesOperation = UploadFilesOperation<Transfer>()
 		
 		// Handle transfer created result
-		creationOperation.onResult = { result in
+		creationOperation.onResult = { [weak uploadFilesOperation] result in
 			if case .success(let transfer) = result {
 				changeState(.created(transfer))
+				
+				if let operation = uploadFilesOperation {
+					stateChanged(.uploading(operation.progress))
+				}
 			}
 		}
 		
