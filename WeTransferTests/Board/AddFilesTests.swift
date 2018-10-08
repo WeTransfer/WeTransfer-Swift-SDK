@@ -68,7 +68,6 @@ final class AddFilesTests: XCTestCase {
 		WeTransfer.add([file], to: board, completion: { (result) in
 			if case .failure(let error) = result {
 				XCTFail("Add files to transfer failed: \(error)")
-				return
 			}
 			addedFilesExpectation.fulfill()
 		})
