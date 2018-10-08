@@ -1,5 +1,5 @@
 //
-//  ChunksTests.swift
+//  TransferChunksTests
 //  WeTransferTests
 //
 //  Created by Pim Coumans on 28/05/2018.
@@ -9,7 +9,7 @@
 import XCTest
 @testable import WeTransfer
 
-final class ChunksTests: XCTestCase {
+final class TransferChunksTests: XCTestCase {
 
 	override func setUp() {
 		super.setUp()
@@ -39,19 +39,13 @@ final class ChunksTests: XCTestCase {
 				createdChunksExpectation.fulfill()
 				return
 			case .success(let transfer):
-				if case .failure(let error) = result {
-					XCTFail("Adding files failed: \(error)")
-					createdChunksExpectation.fulfill()
-					return
-				}
-				
 				updatedFile = transfer.files.first
 				guard let file = updatedFile else {
 					XCTFail("File not added to transfer")
 					createdChunksExpectation.fulfill()
 					return
 				}
-				let operation = CreateChunkOperation(file: file, chunkIndex: 0)
+				let operation = CreateChunkOperation(container: transfer, file: file, chunkIndex: 0)
 				operation.onResult = { result in
 					switch result {
 					case .failure(let error):
@@ -71,8 +65,10 @@ final class ChunksTests: XCTestCase {
 				return
 			}
 			XCTAssertNotNil(file.numberOfChunks, "File object doesn't have numberOfChunks")
-			XCTAssertNotNil(file.multipartUploadIdentifier, "File object doesn't have numberOfChunks")
-			XCTAssertEqual(file.numberOfChunks, Int(ceil(Double(file.filesize) / Double(Chunk.defaultChunkSize))), "File doesn't have correct number of chunks")
+			XCTAssertNotNil(file.chunkSize, "File object must have a chunkSize")
+			if let chunkSize = file.chunkSize {
+				XCTAssertEqual(file.numberOfChunks, Int(ceil(Double(file.filesize) / Double(chunkSize))), "File doesn't have correct number of chunks")
+			}
 			XCTAssertNotNil(createdChunk, "Chunk not created")
 		}
 	}
