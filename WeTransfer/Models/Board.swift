@@ -2,7 +2,7 @@
 //  Transfer.swift
 //  WeTransfer Swift SDK
 //
-//  Created by Pim Coumans on 26/04/2018.
+//  Created by Pim Coumans on 01/10/2018.
 //  Copyright © 2018 WeTransfer. All rights reserved.
 //
 

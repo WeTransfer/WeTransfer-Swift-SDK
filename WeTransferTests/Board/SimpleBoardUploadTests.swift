@@ -2,7 +2,7 @@
 //  SimpleTransferTests.swift
 //  WeTransferTests
 //
-//  Created by Pim Coumans on 22/05/2018.
+//  Created by Pim Coumans on 01/10/2018.
 //  Copyright © 2018 WeTransfer. All rights reserved.
 //
 
