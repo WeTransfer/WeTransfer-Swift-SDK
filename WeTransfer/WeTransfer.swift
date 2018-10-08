@@ -116,8 +116,71 @@ extension WeTransfer {
 			}
 		}
 		
+		// Finalize transfer to get the url
+		let finalizeTransferOperation = FinalizeTransferOperation()
+		
 		// Perform all operations in a chain
-		let operations = [creationOperation, uploadFilesOperation].chained()
+		let operations = [creationOperation, uploadFilesOperation, finalizeTransferOperation].chained()
+		client.operationQueue.addOperations(operations, waitUntilFinished: false)
+		
+		// Handle the result of the very last operation that's executed
+		finalizeTransferOperation.onResult = { result in
+			switch result {
+			case .failure(let error):
+				changeState(.failed(error))
+			case .success(let transfer):
+				changeState(.completed(transfer))
+			}
+		}
+	}
+	
+	/// Immediately uploads files to a board with the provided name and file URLs
+	///
+	/// - Parameters:
+	///   - name: Name of the board, shown when user opens the resulting link
+	///	  - description: Optional description of the board
+	///   - fileURLS: Array of URLs pointing to files to be added to the board
+	///   - stateChanged: Closure that will be called for state updates.
+	///   - state: Enum describing the current board's state. See the `State` enum description for more details for each state
+	/// - Returns: Board object used to handle the transfer process.
+	public static func uploadBoard(named name: String, description: String?, containing fileURLS: [URL], stateChanged: @escaping (_ state: State<Board>) -> Void) {
+		
+		// Make sure stateChanges closure is called on the main thread
+		let changeState = { state in
+			DispatchQueue.main.async {
+				stateChanged(state)
+			}
+		}
+		
+		let board = Board(name: name, description: description)
+		
+		// Add files to board (also creates board on the server)
+		let files: [File]
+		do {
+			files = try fileURLS.map({ try File(url: $0) })
+		} catch {
+			stateChanged(.failed(error))
+			return
+		}
+		
+		let addFilesOperation = AddFilesOperation(board: board, files: files)
+		
+		// Upload all files from the chunks
+		let uploadFilesOperation = UploadFilesOperation<Board>()
+		
+		// Handle transfer created result
+		addFilesOperation.onResult = { [weak uploadFilesOperation] result in
+			if case .success(let transfer) = result {
+				changeState(.created(transfer))
+				
+				if let operation = uploadFilesOperation {
+					stateChanged(.uploading(operation.progress))
+				}
+			}
+		}
+		
+		// Perform all operations in a chain
+		let operations = [addFilesOperation, uploadFilesOperation].chained()
 		client.operationQueue.addOperations(operations, waitUntilFinished: false)
 		
 		// Handle the result of the very last operation that's executed

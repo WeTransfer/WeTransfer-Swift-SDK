@@ -58,6 +58,7 @@ final class SimpleTransferTests: XCTestCase {
 
 		waitForExpectations(timeout: 60) { _ in
 			XCTAssertNotNil(updatedTransfer, "Transfer was not completed")
+			XCTAssertNotNil(updatedTransfer?.shortURL, "Transfer should have a URL when uploaded")
 		}
 	}
 
