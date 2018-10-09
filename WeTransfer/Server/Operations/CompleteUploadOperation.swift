@@ -57,10 +57,6 @@ final class CompleteUploadOperation: AsynchronousResultOperation<File> {
 			return
 		}
 		
-		guard container is Transfer || container is Board else {
-			fatalError("Container type '\(type(of: container))' is not supported")
-		}
-		
 		if container is Transfer {
 			let request: APIEndpoint = .completeTransferFileUpload(transferIdentifier: containerIdentifier, fileIdentifier: fileIdentifier)
 			let parameters = CompleteTransferFileUploadParameters(partNumbers: numberOfChunks)
@@ -91,6 +87,8 @@ final class CompleteUploadOperation: AsynchronousResultOperation<File> {
 					self.finish(with: .success(self.file))
 				}
 			}
+		} else {
+			fatalError("Container type '\(type(of: container))' is not supported")
 		}
 	}
 	
