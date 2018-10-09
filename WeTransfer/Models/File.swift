@@ -63,7 +63,7 @@ public final class File: Encodable {
 
 extension File: Equatable {
 	/// Only compares the url and optional identifier of the file
-	// Note: Disregards any state, so the `uploaded` property is ignored
+	/// Note: Disregards any state, so the `uploaded` property is ignored
 	public static func == (lhs: File, rhs: File) -> Bool {
 		return lhs.url == rhs.url && lhs.identifier == rhs.identifier
 	}

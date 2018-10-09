@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// Desribes a single transfer to be created and uploaded. Used as an identifier between each request to be made and a local representation of the server-side transfer.
+/// Describes a single transfer to be created and uploaded. Used as an identifier between each request to be made and a local representation of the server-side transfer.
 public final class Transfer: Transferrable {
 	public let identifier: String?
 
@@ -21,6 +21,7 @@ public final class Transfer: Transferrable {
 	/// Available when the transfer is created on the server
 	public private(set) var shortURL: URL?
 
+	/// Internal initializer with required properties
 	init(identifier: String, message: String, files: [File] = []) {
 		self.identifier = identifier
 		self.message = message

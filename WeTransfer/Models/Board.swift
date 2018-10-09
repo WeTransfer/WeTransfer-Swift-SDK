@@ -8,8 +8,8 @@
 
 import Foundation
 
-/// Desribes a single board to be created, adding files to and uploading files from. Used as an identifier between each request to be made and a local representation of the server-side board.
-/// Files should be added through the approapriate addFiles method
+/// Describes a single board to be created, adding files to and uploading files from. Used as an identifier between each request to be made and a local representation of the server-side board.
+/// Files should be added through the appropriate addFiles method
 public final class Board: Transferrable {
 	public private(set) var identifier: String?
 
@@ -23,7 +23,8 @@ public final class Board: Transferrable {
 
 	/// Available when the board is created on the server
 	public private(set) var shortURL: URL?
-
+	
+	/// Internal initializer with required properties
 	init(name: String, description: String?) {
 		self.name = name
 		self.description = description
