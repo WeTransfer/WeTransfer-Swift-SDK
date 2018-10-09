@@ -69,8 +69,8 @@ extension APIEndpoint {
 	///   - transferIdentifier: Identifier for the containing transfer
 	///   - fileIdentifier: Identifier of the file
 	/// - Returns: APIEndpoint with `POST` to `/files/{file-id}/uploads/complete`
-	static func completeTransferFileUpload(transferIdentifier: String, fileIdentifier: String) -> APIEndpoint<CompleteTransferFileUploadResponse> {
-		return APIEndpoint<CompleteTransferFileUploadResponse>(method: .put, path: "transfers/\(transferIdentifier)/files/\(fileIdentifier)/uploads/complete")
+	static func completeTransferFileUpload(transferIdentifier: String, fileIdentifier: String) -> APIEndpoint<EmptyResponse> {
+		return APIEndpoint<EmptyResponse>(method: .put, path: "transfers/\(transferIdentifier)/files/\(fileIdentifier)/uploads/complete")
 	}
 	
 	/// Completes the upload of file, assuming all chunks have finished uploading
@@ -90,6 +90,12 @@ extension APIEndpoint {
 	static func finalizeTransfer(transferIdentifier: String) -> APIEndpoint<FinalizeTransferResponse> {
 		return APIEndpoint<FinalizeTransferResponse>(method: .put, path: "transfers/\(transferIdentifier)/finalize")
 	}
+}
+
+// MARK: - Request parameters and responses
+
+/// Generic empty response when no response data is expected or needed
+struct EmptyResponse: Decodable {
 }
 
 // MARK: - Authorize
@@ -248,10 +254,6 @@ struct AddUploadURLResponse: Decodable {
 struct CompleteTransferFileUploadParameters: Encodable {
 	/// Number of chunks used for the file
 	let partNumbers: Int
-}
-
-/// Response from complete upload request
-struct CompleteTransferFileUploadResponse: Decodable {
 }
 
 /// Response from complete upload request
