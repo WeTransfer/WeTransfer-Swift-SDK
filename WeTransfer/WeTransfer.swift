@@ -152,9 +152,16 @@ extension WeTransfer {
 			}
 		}
 		
+		// Create the board locally and on the server
 		let board = Board(name: name, description: description)
+		let createOperation = CreateBoardOperation(board: board)
+		createOperation.onResult = { result in
+			if case .success(let board) = result {
+				changeState(.created(board))
+			}
+		}
 		
-		// Add files to board (also creates board on the server)
+		// Add files to board
 		let files: [File]
 		do {
 			files = try fileURLS.map({ try File(url: $0) })
@@ -162,26 +169,17 @@ extension WeTransfer {
 			stateChanged(.failed(error))
 			return
 		}
-		
 		let addFilesOperation = AddFilesOperation(board: board, files: files)
 		
 		// Upload all files from the chunks
 		let uploadFilesOperation = UploadFilesOperation<Board>()
 		
-		// Handle transfer created result
+		// Set state to uploading when uploadFilesOperation is about to begin
 		addFilesOperation.onResult = { [weak uploadFilesOperation] result in
-			if case .success(let transfer) = result {
-				changeState(.created(transfer))
-				
-				if let operation = uploadFilesOperation {
-					stateChanged(.uploading(operation.progress))
-				}
+			if case .success = result, let operation = uploadFilesOperation {
+				stateChanged(.uploading(operation.progress))
 			}
 		}
-		
-		// Perform all operations in a chain
-		let operations = [addFilesOperation, uploadFilesOperation].chained()
-		client.operationQueue.addOperations(operations, waitUntilFinished: false)
 		
 		// Handle the result of the very last operation that's executed
 		uploadFilesOperation.onResult = { result in
@@ -192,5 +190,9 @@ extension WeTransfer {
 				changeState(.completed(transfer))
 			}
 		}
+		
+		// Perform all operations in a chain
+		let operations = [createOperation, addFilesOperation, uploadFilesOperation].chained()
+		client.operationQueue.addOperations(operations, waitUntilFinished: false)
 	}
 }
