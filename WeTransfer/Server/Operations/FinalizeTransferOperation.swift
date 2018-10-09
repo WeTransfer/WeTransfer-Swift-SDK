@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Finalizes the provided Transfer after all files have been uploaded. The Transfer object will be updated with a URL as a result.
 final class FinalizeTransferOperation: ChainedAsynchronousResultOperation<Transfer, Transfer> {
 	
 	/// Initializes the operation with a transfer. When initalized as part of a chain this operation can be initialized without any arguments
