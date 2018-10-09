@@ -41,7 +41,7 @@ final class SimpleTransferTests: XCTestCase {
 				timer = Timer(timeInterval: 1 / 30, repeats: true, block: { _ in
 					print("Progress: \(progress.fractionCompleted)")
 				})
-				RunLoop.main.add(timer!, forMode: RunLoopMode.commonModes)
+				RunLoop.main.add(timer!, forMode: RunLoop.Mode.common)
 			case .completed(let transfer):
 				timer?.invalidate()
 				timer = nil
