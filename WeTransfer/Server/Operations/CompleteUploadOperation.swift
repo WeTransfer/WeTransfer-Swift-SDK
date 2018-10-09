@@ -27,14 +27,14 @@ final class CompleteUploadOperation: AsynchronousResultOperation<File> {
 	private let file: File
 	
 	/// Transfer or Board containing file
-	private let container: Transferrable
+	private let container: Transferable
 	
 	/// Initializes the operation with a file to complete the upload for
 	///
 	/// - Parameters:
-	///   - container: Transferrable object containing the file
+	///   - container: Transferable object containing the file
 	///   - file: File struct for which to complete the upload for
-	required init(container: Transferrable, file: File) {
+	required init(container: Transferable, file: File) {
 		self.container = container
 		self.file = file
 		super.init()

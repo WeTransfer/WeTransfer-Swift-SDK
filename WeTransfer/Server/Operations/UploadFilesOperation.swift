@@ -9,7 +9,7 @@
 import Foundation
 
 /// Handles the uploading of all files -- that are not uploaded yet -- in the provided transfer. Creates an operation queue with an `UploadFileOperation` for each file to be uploaded.
-final class UploadFilesOperation<Container>: ChainedAsynchronousResultOperation<Container, Container>, URLSessionDataDelegate where Container: Transferrable {
+final class UploadFilesOperation<Container>: ChainedAsynchronousResultOperation<Container, Container>, URLSessionDataDelegate where Container: Transferable {
 	
 	/// Amount of bytes already sent
 	private var bytesSent: Bytes = 0

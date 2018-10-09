@@ -1,5 +1,5 @@
 //
-//  Transferrable.swift
+//  Transferable.swift
 //  WeTransfer
 //
 //  Created by Pim Coumans on 04/10/2018.
@@ -9,7 +9,7 @@
 import Foundation
 
 /// Shared properties for both transfers and boards
-public protocol Transferrable {
+public protocol Transferable {
 	var identifier: String? { get }
 	var files: [File] { get }
 	var shortURL: URL? { get }

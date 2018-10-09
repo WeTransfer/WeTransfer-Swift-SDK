@@ -9,7 +9,7 @@
 import Foundation
 
 /// Describes a single transfer to be created and uploaded. Used as an identifier between each request to be made and a local representation of the server-side transfer.
-public final class Transfer: Transferrable {
+public final class Transfer: Transferable {
 	public let identifier: String?
 
 	/// The name of the transfer. This name will be shown when viewing the transfer on wetransfer.com

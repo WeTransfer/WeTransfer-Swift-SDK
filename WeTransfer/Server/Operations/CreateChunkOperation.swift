@@ -23,7 +23,7 @@ final class CreateChunkOperation: AsynchronousResultOperation<Chunk> {
 		}
 	}
 	
-	private let container: Transferrable
+	private let container: Transferable
 	
 	/// File to create chunk from
 	private let file: File
@@ -35,7 +35,7 @@ final class CreateChunkOperation: AsynchronousResultOperation<Chunk> {
 	/// - Parameters:
 	///   - file: File struct of the file to create the chunk from
 	///   - chunkIndex: Index of the chunk to be created
-	required init(container: Transferrable, file: File, chunkIndex: Int) {
+	required init(container: Transferable, file: File, chunkIndex: Int) {
 		self.container = container
 		self.file = file
 		self.chunkIndex = chunkIndex

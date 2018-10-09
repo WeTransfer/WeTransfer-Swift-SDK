@@ -10,7 +10,7 @@ import Foundation
 
 /// Describes a single board to be created, adding files to and uploading files from. Used as an identifier between each request to be made and a local representation of the server-side board.
 /// Files should be added through the appropriate addFiles method
-public final class Board: Transferrable {
+public final class Board: Transferable {
 	public private(set) var identifier: String?
 
 	/// The name of the board. This name will be shown when viewing the transfer on wetransfer.com
