@@ -9,7 +9,7 @@
 import XCTest
 @testable import WeTransfer
 
-class BaseTestCase: XCTestCase {
+open class BaseTestCase: XCTestCase {
 
     override func setUp() {
 		super.setUp()
