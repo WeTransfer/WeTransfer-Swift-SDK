@@ -228,7 +228,7 @@ struct AddFilesParameters: Encodable {
 /// Response from the add files request
 struct AddFilesResponse: Decodable {
 	/// Contains information about the chunks and the upload identifier
-	struct Multipart: Decodable {
+	struct UploadInfo: Decodable {
 		let id: String
 		let partNumbers: Int
 		let chunkSize: UInt64
@@ -236,8 +236,8 @@ struct AddFilesResponse: Decodable {
 	
 	/// Identifier of the File on the server
 	let id: String
-	/// Number of multiparts (chunks) and upload identifier for uploading
-	let multipart: Multipart
+	/// Upload info for the file
+	let multipart: UploadInfo
 }
 
 // MARK: - Request upload URL
