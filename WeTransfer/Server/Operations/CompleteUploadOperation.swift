@@ -58,38 +58,45 @@ final class CompleteUploadOperation: AsynchronousResultOperation<File> {
 		}
 		
 		if container is Transfer {
-			let request: APIEndpoint = .completeTransferFileUpload(transferIdentifier: containerIdentifier, fileIdentifier: fileIdentifier)
-			let parameters = CompleteTransferFileUploadParameters(partNumbers: numberOfChunks)
-			WeTransfer.request(request, parameters: parameters) { [weak self] result in
-				guard let self = self else {
-					return
-				}
-				switch result {
-				case .failure(let error):
-					self.finish(with: .failure(error))
-				case .success:
-					self.finish(with: .success(self.file))
-				}
-			}
+			performTransferRequest(transferIdentifier: containerIdentifier, fileIdentifier: fileIdentifier, numberOfChunks: numberOfChunks)
 		} else if container is Board {
-			WeTransfer.request(.completeBoardFileUpload(boardIdentifier: containerIdentifier, fileIdentifier: fileIdentifier)) { [weak self] result in
-				guard let self = self else {
-					return
-				}
-				switch result {
-				case .failure(let error):
-					self.finish(with: .failure(error))
-				case .success(let response):
-					guard response.success else {
-						self.finish(with: .failure(WeTransfer.RequestError.serverError(errorMessage: response.message, httpCode: nil)))
-						return
-					}
-					self.finish(with: .success(self.file))
-				}
-			}
+			performBoardRequest(boardIdentifier: containerIdentifier, fileIdentifier: fileIdentifier)
 		} else {
 			fatalError("Container type '\(type(of: container))' is not supported")
 		}
 	}
 	
+	private func performTransferRequest(transferIdentifier: String, fileIdentifier: String, numberOfChunks: Int) {
+		let request: APIEndpoint = .completeTransferFileUpload(transferIdentifier: transferIdentifier, fileIdentifier: fileIdentifier)
+		let parameters = CompleteTransferFileUploadParameters(partNumbers: numberOfChunks)
+		WeTransfer.request(request, parameters: parameters) { [weak self] result in
+			guard let self = self else {
+				return
+			}
+			switch result {
+			case .failure(let error):
+				self.finish(with: .failure(error))
+			case .success:
+				self.finish(with: .success(self.file))
+			}
+		}
+	}
+	
+	private func performBoardRequest(boardIdentifier: String, fileIdentifier: String) {
+		WeTransfer.request(.completeBoardFileUpload(boardIdentifier: boardIdentifier, fileIdentifier: fileIdentifier)) { [weak self] result in
+			guard let self = self else {
+				return
+			}
+			switch result {
+			case .failure(let error):
+				self.finish(with: .failure(error))
+			case .success(let response):
+				guard response.success else {
+					self.finish(with: .failure(WeTransfer.RequestError.serverError(errorMessage: response.message, httpCode: nil)))
+					return
+				}
+				self.finish(with: .success(self.file))
+			}
+		}
+	}
 }
