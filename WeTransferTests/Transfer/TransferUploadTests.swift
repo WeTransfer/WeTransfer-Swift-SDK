@@ -13,46 +13,57 @@ final class TransferUploadTests: BaseTestCase {
 	
 	var observation: NSKeyValueObservation?
 
-	func testFileUpload() {
-
+	private func createTransfer(completion: @escaping (Transfer?) -> Void) {
 		guard let file = TestConfiguration.fileModel else {
 			XCTFail("File not available")
 			return
 		}
-
-		let transferSentExpectation = expectation(description: "Transfer is sent")
-		var resultTransfer: Transfer?
 		
 		WeTransfer.createTransfer(saying: "TestTransfer", fileURLs: [file.url]) { result in
 			switch result {
 			case .failure(let error):
 				XCTFail("Transfer creation failed: \(error)")
-				transferSentExpectation.fulfill()
+				completion(nil)
 				return
 			case .success(let transfer):
-				resultTransfer = transfer
-				WeTransfer.upload(transfer, stateChanged: { (state) in
-					switch state {
-					case .created(let transfer):
-						print("Transfer created: \(String(describing: transfer.identifier))")
-					case .uploading(let progress):
-						print("Upload started")
-						var percentage = 0.0
-						self.observation = progress.observe(\.fractionCompleted, changeHandler: { (progress, _) in
-							let newPercentage = (progress.fractionCompleted * 100).rounded(FloatingPointRoundingRule.up)
-							if newPercentage != percentage {
-								percentage = newPercentage
-								print("PROGRESS: \(newPercentage)% (\(progress.completedUnitCount) bytes)")
-							}
-						})
-					case .failed(let error):
-						XCTFail("Sending transfer failed: \(error)")
-						transferSentExpectation.fulfill()
-					case .completed:
-						transferSentExpectation.fulfill()
-					}
-				})
+				completion(transfer)
 			}
+		}
+		
+	}
+	
+	func testFileUpload() {
+
+		let transferSentExpectation = expectation(description: "Transfer is sent")
+		var resultTransfer: Transfer?
+		
+		createTransfer { (transfer) in
+			guard let transfer = transfer else {
+				transferSentExpectation.fulfill()
+				return
+			}
+			resultTransfer = transfer
+			WeTransfer.upload(transfer, stateChanged: { (state) in
+				switch state {
+				case .created(let transfer):
+					print("Transfer created: \(String(describing: transfer.identifier))")
+				case .uploading(let progress):
+					print("Upload started")
+					var percentage = 0.0
+					self.observation = progress.observe(\.fractionCompleted, changeHandler: { (progress, _) in
+						let newPercentage = (progress.fractionCompleted * 100).rounded(FloatingPointRoundingRule.up)
+						if newPercentage != percentage {
+							percentage = newPercentage
+							print("PROGRESS: \(newPercentage)% (\(progress.completedUnitCount) bytes)")
+						}
+					})
+				case .failed(let error):
+					XCTFail("Sending transfer failed: \(error)")
+					transferSentExpectation.fulfill()
+				case .completed:
+					transferSentExpectation.fulfill()
+				}
+			})
 		}
 
 		waitForExpectations(timeout: 60) { _ in
