@@ -12,10 +12,12 @@ import XCTest
 class BaseTestCase: XCTestCase {
 
     override func setUp() {
+		super.setUp()
 		TestConfiguration.configure(environment: .production)
     }
 
     override func tearDown() {
+		super.tearDown()
 		TestConfiguration.resetConfiguration()
     }
 
