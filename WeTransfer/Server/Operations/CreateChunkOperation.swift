@@ -43,7 +43,7 @@ final class CreateChunkOperation: AsynchronousResultOperation<Chunk> {
 	
 	override func execute() {
 		guard let containerIdentifier = container.identifier, let fileIdentifier = file.identifier else {
-			self.finish(with: .failure(Error.fileNotYetAdded))
+			finish(with: .failure(Error.fileNotYetAdded))
 			return
 		}
 	
@@ -52,7 +52,7 @@ final class CreateChunkOperation: AsynchronousResultOperation<Chunk> {
 			endpoint = .requestTransferUploadURL(transferIdentifier: containerIdentifier, fileIdentifier: fileIdentifier, chunkIndex: chunkIndex)
 		} else if container is Board {
 			guard let multipartIdentifier = file.multipartUploadIdentifier else {
-				self.finish(with: .failure(Error.fileNotYetAdded))
+				finish(with: .failure(Error.fileNotYetAdded))
 				return
 			}
 			endpoint = .requestBoardUploadURL(boardIdentifier: containerIdentifier, fileIdentifier: fileIdentifier, chunkIndex: chunkIndex, multipartIdentifier: multipartIdentifier)

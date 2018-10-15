@@ -33,7 +33,7 @@ final class CreateBoardOperation: AsynchronousResultOperation<Board> {
 	
 	override func execute() {
 		guard board.identifier == nil else {
-			self.finish(with: .success(board))
+			finish(with: .success(board))
 			return
 		}
 
