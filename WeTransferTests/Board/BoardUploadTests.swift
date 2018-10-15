@@ -9,17 +9,7 @@
 import XCTest
 @testable import WeTransfer
 
-final class BoardUploadTests: XCTestCase {
-
-	override func setUp() {
-		super.setUp()
-		TestConfiguration.configure(environment: .production)
-	}
-
-	override func tearDown() {
-		super.tearDown()
-		TestConfiguration.resetConfiguration()
-	}
+final class BoardUploadTests: BaseTestCase {
 	
 	var observation: NSKeyValueObservation?
 

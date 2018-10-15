@@ -21,6 +21,8 @@
 		3E3B9D3C20F7ADDC0064915C /* MediaPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3B9D3B20F7ADDC0064915C /* MediaPicker.swift */; };
 		3E5E514F20EA816600485FA3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5E514720EA816600485FA3 /* MainViewController.swift */; };
 		3E5E515320EA816600485FA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5E514D20EA816600485FA3 /* AppDelegate.swift */; };
+		3E7219A92174C7FC00143492 /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7219A82174C7FC00143492 /* BaseTestCase.swift */; };
+		3E7219AA2174C7FC00143492 /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7219A82174C7FC00143492 /* BaseTestCase.swift */; };
 		3E80E0A72091D0E700114711 /* WeTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E80E0A62091D0E700114711 /* WeTransfer.swift */; };
 		3E80E0AA2091D12B00114711 /* Transfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E80E0A92091D12B00114711 /* Transfer.swift */; };
 		3E80E0AE2091D16E00114711 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E80E0AD2091D16E00114711 /* Result.swift */; };
@@ -169,6 +171,7 @@
 		3E7116E420FC85D400115E55 /* WeTransfer iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "WeTransfer iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E7116F820FC85F100115E55 /* WeTransfer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WeTransfer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E71170020FC85F100115E55 /* WeTransfer macOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "WeTransfer macOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E7219A82174C7FC00143492 /* BaseTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTestCase.swift; sourceTree = "<group>"; };
 		3E7348BD20B4040D009B41D0 /* TestConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestConfiguration.swift; sourceTree = "<group>"; };
 		3E7348BF20B41895009B41D0 /* InitializationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitializationTests.swift; sourceTree = "<group>"; };
 		3E7348C120B41936009B41D0 /* SimpleTransferTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTransferTests.swift; sourceTree = "<group>"; };
@@ -425,6 +428,7 @@
 				3ED1C0A120B43E780045D8B3 /* Transfer */,
 				3E3A87612162549F00568775 /* Board */,
 				3E7348BD20B4040D009B41D0 /* TestConfiguration.swift */,
+				3E7219A82174C7FC00143492 /* BaseTestCase.swift */,
 				3E7348BF20B41895009B41D0 /* InitializationTests.swift */,
 				3E7348C520B41EC0009B41D0 /* RequestTests.swift */,
 				3E7348C320B41DBA009B41D0 /* AuthorizationTests.swift */,
@@ -778,6 +782,7 @@
 				3E9915B32111B0C50071FDF7 /* RequestTests.swift in Sources */,
 				3E9915AC2111B0C50071FDF7 /* SimpleTransferTests.swift in Sources */,
 				3E9915B02111B0C50071FDF7 /* TransferUploadTests.swift in Sources */,
+				3E7219A92174C7FC00143492 /* BaseTestCase.swift in Sources */,
 				3E9D48D32166535D00499760 /* SimpleBoardUploadTests.swift in Sources */,
 				3E3A87642162798800568775 /* CreateBoardTests.swift in Sources */,
 				3E9915AE2111B0C50071FDF7 /* AddFilesTests.swift in Sources */,
@@ -836,6 +841,7 @@
 				3E9915BF2111B0C60071FDF7 /* RequestTests.swift in Sources */,
 				3E9915B82111B0C60071FDF7 /* SimpleTransferTests.swift in Sources */,
 				3E9915BC2111B0C60071FDF7 /* TransferUploadTests.swift in Sources */,
+				3E7219AA2174C7FC00143492 /* BaseTestCase.swift in Sources */,
 				3E9D48D42166535D00499760 /* SimpleBoardUploadTests.swift in Sources */,
 				3E3A87632162798800568775 /* CreateBoardTests.swift in Sources */,
 				3E9915BA2111B0C60071FDF7 /* AddFilesTests.swift in Sources */,

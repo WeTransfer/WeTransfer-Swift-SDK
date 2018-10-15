@@ -9,17 +9,7 @@
 import XCTest
 @testable import WeTransfer
 
-final class CreateTransferTests: XCTestCase {
-    
-    override func setUp() {
-        super.setUp()
-		TestConfiguration.configure(environment: .production)
-    }
-    
-    override func tearDown() {
-        super.tearDown()
-		TestConfiguration.resetConfiguration()
-    }
+final class CreateTransferTests: BaseTestCase {
 
 	func testCreateTransferRequest() {
 		guard let fileURL = TestConfiguration.imageFileURL else {

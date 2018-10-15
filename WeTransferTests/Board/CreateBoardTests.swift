@@ -9,17 +9,7 @@
 import XCTest
 @testable import WeTransfer
 
-final class CreateBoardTests: XCTestCase {
-    
-    override func setUp() {
-        super.setUp()
-		TestConfiguration.configure(environment: .production)
-    }
-    
-    override func tearDown() {
-        super.tearDown()
-		TestConfiguration.resetConfiguration()
-    }
+final class CreateBoardTests: BaseTestCase {
 
 	func testCreateBoardRequest() {
 		let createdBoardExpectation = expectation(description: "Transfer is created")
