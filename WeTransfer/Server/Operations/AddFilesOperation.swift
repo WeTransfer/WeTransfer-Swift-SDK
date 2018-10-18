@@ -63,7 +63,7 @@ final class AddFilesOperation: ChainedAsynchronousResultOperation<Board, Board> 
 					file.update(with: responseFile.id,
 								numberOfChunks: responseFile.multipart.partNumbers,
 								chunkSize: responseFile.multipart.chunkSize,
-								multipartUploadIdentifier: nil)
+								multipartUploadIdentifier: responseFile.multipart.id)
 					return file
 				})
 				
