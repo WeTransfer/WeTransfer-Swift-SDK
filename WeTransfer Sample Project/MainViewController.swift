@@ -96,7 +96,7 @@ extension MainViewController {
 		let files = selectedMedia.map({ $0.url })
 		
 		// Creates a transfer and uploads all provided files
-		WeTransfer.uploadTransfer(named: "Sample Transfer", containing: files) { [weak self] state in
+		WeTransfer.uploadTransfer(saying: "Sample Transfer", containing: files) { [weak self] state in
 			switch state {
 			case .uploading(let progress):
 				self?.viewState = .transferInProgress
