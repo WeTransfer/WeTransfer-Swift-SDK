@@ -70,7 +70,7 @@ extension APIEndpoint {
 	///   - fileIdentifier: Identifier of the file
 	/// - Returns: APIEndpoint with `POST` to `/files/{file-id}/uploads/complete`
 	static func completeTransferFileUpload(transferIdentifier: String, fileIdentifier: String) -> APIEndpoint<EmptyResponse> {
-		return APIEndpoint<EmptyResponse>(method: .put, path: "transfers/\(transferIdentifier)/files/\(fileIdentifier)/uploads/complete")
+		return APIEndpoint<EmptyResponse>(method: .put, path: "transfers/\(transferIdentifier)/files/\(fileIdentifier)/upload-complete")
 	}
 	
 	/// Completes the upload of file, assuming all chunks have finished uploading
