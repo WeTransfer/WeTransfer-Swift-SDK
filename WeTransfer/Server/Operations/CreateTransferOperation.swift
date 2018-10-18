@@ -12,33 +12,44 @@ import Foundation
 /// This operation does not handle the requests necessary to add files to the server side transfer, which `AddFilesOperation` is responsible for
 final class CreateTransferOperation: AsynchronousResultOperation<Transfer> {
 	
-	private let transfer: Transfer
+	let message: String
+	let fileURLs: [URL]
 	
-	/// Initalized the operation with a transfer object
+	/// Initalized the operation with the necessary parameters for a transfer
 	///
 	/// - Parameter transfer: Transfer object with optionally some files already added
-	required init(transfer: Transfer) {
-		self.transfer = transfer
+	required init(message: String, fileURLs: [URL]) {
+		self.message = message
+		self.fileURLs = fileURLs
 		super.init()
 	}
 	
 	override func execute() {
-		guard transfer.identifier == nil else {
-			self.finish(with: .failure(WeTransfer.Error.transferAlreadyCreated))
+		let files: [File]
+		do {
+			files = try fileURLs.map({ try File(url: $0) })
+		} catch {
+			// Fail when any of the files failed to create
+			finish(with: .failure(error))
 			return
 		}
 		
-		let parameters = CreateTransferParameters(with: transfer)
+		let parameters = CreateTransferParameters(message: message, files: files)
 		WeTransfer.request(.createTransfer(), parameters: parameters) { [weak self] result in
-			guard let strongSelf = self else {
+			guard let self = self else {
 				return
 			}
 			switch result {
 			case .success(let response):
-				strongSelf.transfer.update(with: response.id, shortURL: response.shortenedUrl)
-				strongSelf.finish(with: .success(strongSelf.transfer))
+				let updatedFiles: [File] = zip(response.files, files).map({ (files) in
+					let (responseFile, file) = files
+					file.update(with: responseFile.id, numberOfChunks: responseFile.multipart.partNumbers, chunkSize: responseFile.multipart.chunkSize, multipartUploadIdentifier: nil)
+					return file
+				})
+				let transfer = Transfer(identifier: response.id, message: parameters.message, files: updatedFiles)
+				self.finish(with: .success(transfer))
 			case .failure(let error):
-				strongSelf.finish(with: .failure(error))
+				self.finish(with: .failure(error))
 			}
 		}
 	}

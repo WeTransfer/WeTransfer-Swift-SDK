@@ -9,17 +9,7 @@
 import XCTest
 @testable import WeTransfer
 
-final class SimpleTransferTests: XCTestCase {
-
-	override func setUp() {
-		super.setUp()
-		TestConfiguration.configure(environment: .production)
-	}
-
-	override func tearDown() {
-		super.tearDown()
-		TestConfiguration.resetConfiguration()
-	}
+final class SimpleTransferTests: BaseTestCase {
 
 	func testSimpleTransfer() {
 
@@ -32,7 +22,7 @@ final class SimpleTransferTests: XCTestCase {
 		var updatedTransfer: Transfer?
 		var timer: Timer?
 		
-		WeTransfer.uploadTransfer(named: "Test Transfer", containing: [fileURL]) { state in
+		WeTransfer.uploadTransfer(saying: "Test transfer", containing: [fileURL]) { state in
 			switch state {
 			case .created(let transfer):
 				print("Transfer created: \(transfer)")
@@ -41,7 +31,7 @@ final class SimpleTransferTests: XCTestCase {
 				timer = Timer(timeInterval: 1 / 30, repeats: true, block: { _ in
 					print("Progress: \(progress.fractionCompleted)")
 				})
-				RunLoop.main.add(timer!, forMode: .commonModes)
+				RunLoop.main.add(timer!, forMode: RunLoop.Mode.common)
 			case .completed(let transfer):
 				timer?.invalidate()
 				timer = nil
@@ -58,6 +48,7 @@ final class SimpleTransferTests: XCTestCase {
 
 		waitForExpectations(timeout: 60) { _ in
 			XCTAssertNotNil(updatedTransfer, "Transfer was not completed")
+			XCTAssertNotNil(updatedTransfer?.shortURL, "Transfer should have a URL when uploaded")
 		}
 	}
 

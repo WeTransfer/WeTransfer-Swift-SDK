@@ -23,6 +23,8 @@ final class CreateChunkOperation: AsynchronousResultOperation<Chunk> {
 		}
 	}
 	
+	private let container: Transferable
+	
 	/// File to create chunk from
 	private let file: File
 	/// Index of chunk from file
@@ -33,32 +35,42 @@ final class CreateChunkOperation: AsynchronousResultOperation<Chunk> {
 	/// - Parameters:
 	///   - file: File struct of the file to create the chunk from
 	///   - chunkIndex: Index of the chunk to be created
-	required init(file: File, chunkIndex: Int) {
+	required init(container: Transferable, file: File, chunkIndex: Int) {
+		self.container = container
 		self.file = file
 		self.chunkIndex = chunkIndex
 	}
 	
 	override func execute() {
-		guard let fileIdentifier = file.identifier, let uploadIdentifier = file.multipartUploadIdentifier else {
-			self.finish(with: .failure(Error.fileNotYetAdded))
+		guard let containerIdentifier = container.identifier, let fileIdentifier = file.identifier else {
+			finish(with: .failure(Error.fileNotYetAdded))
 			return
 		}
+	
+		let endpoint: APIEndpoint<AddUploadURLResponse>
+		if container is Transfer {
+			endpoint = .requestTransferUploadURL(transferIdentifier: containerIdentifier, fileIdentifier: fileIdentifier, chunkIndex: chunkIndex)
+		} else if container is Board {
+			guard let multipartIdentifier = file.multipartUploadIdentifier else {
+				finish(with: .failure(Error.fileNotYetAdded))
+				return
+			}
+			endpoint = .requestBoardUploadURL(boardIdentifier: containerIdentifier, fileIdentifier: fileIdentifier, chunkIndex: chunkIndex, multipartIdentifier: multipartIdentifier)
+		} else {
+			fatalError("Container type '\(type(of: container))' is not supported")
+		}
 		
-		let endpoint: APIEndpoint = .requestUploadURL(fileIdentifier: fileIdentifier,
-													  chunkIndex: chunkIndex,
-													  multipartIdentifier: uploadIdentifier)
 		WeTransfer.request(endpoint) { [weak self] result in
 			switch result {
 			case .failure(let error):
 				self?.finish(with: .failure(error))
 			case .success(let response):
-				guard let file = self?.file else {
+				guard let self = self else {
 					return
 				}
 				// Chunks are locally referenced in a zero-based index. Subtract 1 from partNumber value
-				let chunkIndex = response.partNumber - 1
-				let chunk = Chunk(file: file, chunkIndex: chunkIndex, uploadURL: response.uploadUrl)
-				self?.finish(with: .success(chunk))
+				let chunk = Chunk(file: self.file, chunkIndex: self.chunkIndex, uploadURL: response.url)
+				self.finish(with: .success(chunk))
 			}
 		}
 	}

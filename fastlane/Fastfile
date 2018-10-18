@@ -13,7 +13,7 @@ lane :test do |options|
   ENV["FASTLANE_XCODE_LIST_TIMEOUT"] = "120"
 
   scan(
-    scheme: "#{options[:project_name]} iOS",
+    scheme: "#{options[:scheme]}",
     project: "#{options[:project_name]}.xcodeproj",
     device: "iPhone 7",
     clean: true,
