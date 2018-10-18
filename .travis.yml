@@ -12,6 +12,5 @@ env:
 script:
 - "./Submodules/WeTransfer-iOS-CI/Scripts/travis.sh WeTransfer 'WeTransfer iOS'"
 before_install:
-- export SCHEME=WeTransfer-iOS
 - openssl aes-256-cbc -K $encrypted_fce2bbf28b94_key -iv $encrypted_fce2bbf28b94_iv
   -in WeTransferTests/Secrets.plist.enc -out WeTransferTests/Secrets.plist -d
