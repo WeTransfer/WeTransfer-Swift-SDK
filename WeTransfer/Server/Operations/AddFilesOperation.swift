@@ -12,6 +12,18 @@ import Foundation
 /// - Note: The files will be added to the provided board object when the operation has started executing
 final class AddFilesOperation: ChainedAsynchronousResultOperation<Board, Board> {
 	
+	enum Error: Swift.Error, LocalizedError {
+		/// Not all files or incorrect file data returned by server
+		case incompleteFileDataReceived
+		
+		var localizedDescription: String {
+			switch self {
+			case .incompleteFileDataReceived:
+				return "Server did not create the correct files"
+			}
+		}
+	}
+	
 	/// The files to be added to the transfer if added during the initialization
 	private var filesToAdd: [File]?
 	
@@ -40,13 +52,25 @@ final class AddFilesOperation: ChainedAsynchronousResultOperation<Board, Board> 
 		WeTransfer.request(.addFiles(boardIdentifier: identifier), parameters: parameters.files) { [weak self] result in
 			switch result {
 			case .success(let responseFiles):
-				zip(files, responseFiles).forEach({
-					let (file, responseFile) = $0
+				
+				var responseFilePool = Array(responseFiles)
+				
+				let updatedFiles: [File] = files.compactMap({ file in
+					guard let responseFileIndex = responseFilePool.firstIndex(where: { $0.name == file.filename && $0.size == file.filesize }) else {
+						return nil
+					}
+					let responseFile = responseFilePool.remove(at: responseFileIndex)
 					file.update(with: responseFile.id,
 								numberOfChunks: responseFile.multipart.partNumbers,
 								chunkSize: responseFile.multipart.chunkSize,
-								multipartUploadIdentifier: responseFile.multipart.id)
+								multipartUploadIdentifier: nil)
+					return file
 				})
+				
+				guard updatedFiles.count == files.count else {
+					self?.finish(with: .failure(Error.incompleteFileDataReceived))
+					return
+				}
 				self?.finish(with: .success(board))
 			case .failure(let error):
 				self?.finish(with: .failure(error))
