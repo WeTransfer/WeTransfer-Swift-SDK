@@ -150,6 +150,8 @@ struct CreateTransferResponse: Decodable {
 		let id: String // swiftlint:disable:this identifier_name
 		/// Full name of file (e.g. "photo.jpg")
 		let name: String
+		// Size of the file in bytes
+		let size: Bytes
 		/// Mulitpart information about each chunk
 		let multipart: Multipart
 	}
@@ -236,6 +238,10 @@ struct AddFilesResponse: Decodable {
 	
 	/// Identifier of the File on the server
 	let id: String
+	/// Name of the file
+	let name: String
+	/// Size of the file in bytes
+	let size: Bytes
 	/// Upload info for the file
 	let multipart: UploadInfo
 }
