@@ -299,11 +299,11 @@
 		3E80E0A82091D11300114711 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				3E9D48CF21663EE400499760 /* Transferable.swift */,
 				3E80E0A92091D12B00114711 /* Transfer.swift */,
 				3EB1E191215916AF00E1E4EE /* Board.swift */,
 				3E9413CB2099E390003A42D1 /* File.swift */,
 				3E9413CD2099E3F5003A42D1 /* Chunk.swift */,
-				3E9D48CF21663EE400499760 /* Transferable.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
