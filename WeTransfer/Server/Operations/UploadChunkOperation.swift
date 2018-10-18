@@ -40,7 +40,7 @@ final class UploadChunkOperation: ChainedAsynchronousResultOperation<Chunk, Chun
 	
 	override func execute(_ chunk: Chunk) {
 		guard let data = try? Data(from: chunk) else {
-			self.finish(with: .failure(Error.noChunkDataAvailable))
+			finish(with: .failure(Error.noChunkDataAvailable))
 			return
 		}
 
