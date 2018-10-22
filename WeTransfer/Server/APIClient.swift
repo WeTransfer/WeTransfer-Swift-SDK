@@ -56,6 +56,7 @@ extension APIClient {
 		
 		var request = URLRequest(endpoint: endpoint, baseURL: baseURL, apiKey: apiKey)
 		request = authenticator.authenticatedRequest(from: request)
+		request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 		
 		if let data = data {
 			request.httpBody = data

@@ -23,33 +23,79 @@ extension APIEndpoint {
 		return APIEndpoint<CreateTransferResponse>(method: .post, path: "transfers")
 	}
 	
-	/// Adds files to an existing transfer
+	/// Creates a new transfer
 	///
-	/// - Parameter transferIdentifier: Identifier of the transfer to add the files to
-	/// - Returns: APIEndpoint with `POST` to `/transfers/{id}/items`, expecting an array of `AddFilesResponse` structs as response
-	static func addItems(transferIdentifier: String) -> APIEndpoint<[AddFilesResponse]> {
-		return APIEndpoint<[AddFilesResponse]>(method: .post, path: "transfers/\(transferIdentifier)/items")
+	/// - Returns: APIEndpoint with `POST` to `/transfer`, expecting a `CreateTransferResponse` as response
+	static func createBoard() -> APIEndpoint<CreateBoardResponse> {
+		return APIEndpoint<CreateBoardResponse>(method: .post, path: "boards")
+	}
+	
+	/// Adds files to an existing board
+	///
+	/// - Parameter boardIdentifier: Identifier of the board to add the files to
+	/// - Returns: APIEndpoint with `POST` to `/boards/{id}/items`, expecting an array of `AddFilesResponse` structs as response
+	static func addFiles(boardIdentifier: String) -> APIEndpoint<[AddFilesResponse]> {
+		return APIEndpoint<[AddFilesResponse]>(method: .post, path: "boards/\(boardIdentifier)/files")
 	}
 	
 	/// Requests upload info of a chunk of a file to be uploaded
 	///
 	/// - Parameters:
+	///   - transferIdentifier: Identifier of the transfer containing the file
+	///   - fileIdentifier: Identifier of the file to get the chunk info of
+	///   - chunkIndex: Index of the chunk
+	/// - Returns: APIEndpoint with `GET` to `/transfers/files/{file-id}/upload-url/{part-number}/
+	static func requestTransferUploadURL(transferIdentifier: String, fileIdentifier: String, chunkIndex: Int) -> APIEndpoint<AddUploadURLResponse> {
+		let partNumber = chunkIndex + 1
+		return APIEndpoint<AddUploadURLResponse>(method: .get, path: "transfers/\(transferIdentifier)/files/\(fileIdentifier)/upload-url/\(partNumber)")
+	}
+	
+	/// Requests upload info of a chunk of a file to be uploaded
+	///
+	/// - Parameters:
+	///   - boardIndentifier: dentifier of the board containing the file
 	///   - fileIdentifier: Identifier of the file to get the chunk info of
 	///   - chunkIndex: Index of the chunk
 	///   - multipartIdentifier: Multipart identifier of the file
 	/// - Returns: APIEndpoint with `GET` to `/files/{file-id}/uploads/{chunk-number}/{multipart-id}`
-	static func requestUploadURL(fileIdentifier: String, chunkIndex: Int, multipartIdentifier: String) -> APIEndpoint<AddUploadURLResponse> {
+	static func requestBoardUploadURL(boardIdentifier: String, fileIdentifier: String, chunkIndex: Int, multipartIdentifier: String) -> APIEndpoint<AddUploadURLResponse> {
 		let partNumber = chunkIndex + 1
-		return APIEndpoint<AddUploadURLResponse>(method: .get, path: "files/\(fileIdentifier)/uploads/\(partNumber)/\(multipartIdentifier)")
+		return APIEndpoint<AddUploadURLResponse>(method: .get, path: "boards/\(boardIdentifier)/files/\(fileIdentifier)/upload-url/\(partNumber)/\(multipartIdentifier)")
 	}
 	
 	/// Completes the upload of file, assuming all chunks have finished uploading
 	///
-	/// - Parameter fileIdentifier: Identifier of the file
+	/// - Parameters:
+	///   - transferIdentifier: Identifier for the containing transfer
+	///   - fileIdentifier: Identifier of the file
 	/// - Returns: APIEndpoint with `POST` to `/files/{file-id}/uploads/complete`
-	static func completeUpload(fileIdentifier: String) -> APIEndpoint<CompleteUploadResponse> {
-		return APIEndpoint<CompleteUploadResponse>(method: .post, path: "files/\(fileIdentifier)/uploads/complete")
+	static func completeTransferFileUpload(transferIdentifier: String, fileIdentifier: String) -> APIEndpoint<EmptyResponse> {
+		return APIEndpoint<EmptyResponse>(method: .put, path: "transfers/\(transferIdentifier)/files/\(fileIdentifier)/uploads/complete")
 	}
+	
+	/// Completes the upload of file, assuming all chunks have finished uploading
+	///
+	/// - Parameters:
+	///   - boardIdentifier: Identifier for the containing board
+	///   - fileIdentifier: Identifier of the file
+	/// - Returns: APIEndpoint with `POST` to `/files/{file-id}/uploads/complete`
+	static func completeBoardFileUpload(boardIdentifier: String, fileIdentifier: String) -> APIEndpoint<CompleteBoardFileUploadResponse> {
+		return APIEndpoint<CompleteBoardFileUploadResponse>(method: .put, path: "boards/\(boardIdentifier)/files/\(fileIdentifier)/upload-complete")
+	}
+	
+	/// Finilizes the transfer, resulting in an URL to be added to the transfer
+	///
+	/// - Parameter transferIdentifier: Identifier for the transfer
+	/// - Returns: APIEndopint with `PUT` to `transfers/{transfer-id}/finalize`
+	static func finalizeTransfer(transferIdentifier: String) -> APIEndpoint<FinalizeTransferResponse> {
+		return APIEndpoint<FinalizeTransferResponse>(method: .put, path: "transfers/\(transferIdentifier)/finalize")
+	}
+}
+
+// MARK: - Request parameters and responses
+
+/// Generic empty response when no response data is expected or needed
+struct EmptyResponse: Decodable {
 }
 
 // MARK: - Authorize
@@ -66,6 +112,64 @@ struct AuthorizeResponse: Decodable {
 
 /// Parameters used for the create transfer request
 struct CreateTransferParameters: Encodable {
+	
+	struct FileParameters: Encodable {
+		let name: String
+		let size: UInt64
+	}
+	
+	/// Message to go with the transfer
+	let message: String
+	/// Description of all the files to add
+	let files: [FileParameters]
+	
+	/// Initializes the parameters with a local transfer object
+	///
+	/// - Parameter transfer: Transfer object to create on the server
+	init(message: String, files: [File]) {
+		self.message = message
+		
+		self.files = files.map({ file in
+			return FileParameters(name: file.filename, size: file.filesize)
+		})
+	}
+}
+
+/// Response from create transfer request
+struct CreateTransferResponse: Decodable {
+	struct FileResponse: Decodable {
+		// swiftlint:disable nesting
+		/// Multipart upload information about each chunk
+		struct Multipart: Decodable {
+			/// Amount of chunks to be created
+			let partNumbers: Int
+			/// Default size for each chunk
+			let chunkSize: Bytes
+		}
+		
+		let id: String // swiftlint:disable:this identifier_name
+		/// Full name of file (e.g. "photo.jpg")
+		let name: String
+		/// Mulitpart information about each chunk
+		let multipart: Multipart
+	}
+	
+	/// Server side identifier of the transfer
+	let id: String // swiftlint:disable:this identifier_name
+	
+	/// Server side information about the files
+	let files: [FileResponse]
+}
+
+// MARK: - Create board
+
+/// Parameters used for the create transfer request
+struct CreateBoardParameters: Encodable {
+	
+	struct FileParameters: Encodable {
+		let name: String
+		let size: UInt64
+	}
 	/// Name of the transfer to create
 	let name: String
 	/// Description of the transfer to create
@@ -74,54 +178,49 @@ struct CreateTransferParameters: Encodable {
 	/// Initializes the parameters with a local transfer object
 	///
 	/// - Parameter transfer: Transfer object to create on the server
-	init(with transfer: Transfer) {
-		name = transfer.name
-		description = transfer.description
+	init(with board: Board) {
+		name = board.name
+		description = board.description
 	}
 }
 
 /// Response from create transfer request
-struct CreateTransferResponse: Decodable {
+struct CreateBoardResponse: Decodable {
 	/// Server side identifier of the transfer
 	let id: String // swiftlint:disable:this identifier_name
 	/// The URL to where the transfer can be found online
-	let shortenedUrl: URL
+	let url: URL
 }
 
 // MARK: - Add files
 
 /// Parameters used for the add files request
 struct AddFilesParameters: Encodable {
-	/// Describes a file to be added to the transfer
-	struct Item: Encodable {
+	/// Describes a file to be added to a board
+	struct FileParameters: Encodable {
 		/// Full name of file (e.g. "photo.jpg")
-		let filename: String
+		let name: String
 		/// Filesize in bytes
-		let filesize: UInt64
-		/// Type of content, currently always "file"
-		let contentIdentifier: String = "file"
-		/// Identifier to uniquely identify file locally
-		let localIdentifier: String
+		let size: UInt64
 		
 		/// Initializes Item struct with a File struct
 		///
 		/// - Parameter file: File struct to initialize Item from
 		init(with file: File) {
-			filename = file.filename
-			filesize = file.filesize
-			localIdentifier = file.localIdentifier
+			name = file.filename
+			size = file.filesize
 		}
 	}
 	
 	/// All items to be added to the transfer
-	let items: [Item]
+	let files: [FileParameters]
 	
 	/// Initalizes the parameters with an array of File structs
 	///
 	/// - Parameter files: Array of File structs to be added to the transfer
 	init(with files: [File]) {
-		items = files.map { file in
-			return Item(with: file)
+		self.files = files.map { file in
+			return FileParameters(with: file)
 		}
 	}
 }
@@ -129,17 +228,16 @@ struct AddFilesParameters: Encodable {
 /// Response from the add files request
 struct AddFilesResponse: Decodable {
 	/// Contains information about the chunks and the upload identifier
-	struct Meta: Decodable {
-		let multipartParts: Int
-		let multipartUploadId: String
+	struct UploadInfo: Decodable {
+		let id: String
+		let partNumbers: Int
+		let chunkSize: UInt64
 	}
 	
 	/// Identifier of the File on the server
 	let id: String
-	/// Local identifier of the file to identify the local file with
-	let localIdentifier: String
-	/// Number of multiparts (chunks) and upload identifier for uploading
-	let meta: Meta
+	/// Upload info for the file
+	let multipart: UploadInfo
 }
 
 // MARK: - Request upload URL
@@ -147,19 +245,29 @@ struct AddFilesResponse: Decodable {
 /// Response from the add upload url request for chunks
 struct AddUploadURLResponse: Decodable {
 	/// URL to upload the chunk to
-	let uploadUrl: URL
-	/// Number of the chunk
-	let partNumber: Int
-	/// Time interval when the upload URL is no longer valid and upload URL should be requested again
-	let uploadExpiresAt: TimeInterval
+	let url: URL
 }
 
 // MARK: - Complete upload
 
+/// Parameters used for the complete file upload request
+struct CompleteTransferFileUploadParameters: Encodable {
+	/// Number of chunks used for the file
+	let partNumbers: Int
+}
+
 /// Response from complete upload request
-struct CompleteUploadResponse: Decodable {
+struct CompleteBoardFileUploadResponse: Decodable {
 	/// Whether the upload of all the chunks has succeeded
-	let ok: Bool // swiftlint:disable:this identifier_name
+	let success: Bool
 	/// Message describing either success or failure of chunk uploads
 	let message: String
+}
+
+// MARK: - Finalize transfer
+
+/// Response for the finalize transfer call
+struct FinalizeTransferResponse: Decodable {
+	/// Public URL of the finalized transfer
+	let url: URL
 }

@@ -8,10 +8,10 @@
 
 import Foundation
 
-/// Represents a chunk of data from a file in a transfer. Used only in the uploading proces
+/// Represents a chunk of data from a file in a transfer or board. Used only in the uploading proces
 struct Chunk: Encodable {
 
-	/// Size of all chunks except the last, as the last chunk holds the remaining data (filesize % defaultChunkSize)
+	/// Fallback size chunks except the last, as the last chunk holds the remaining data (filesize % defaultChunkSize)
 	static let defaultChunkSize: Bytes = (6 * 1024 * 1024)
 	
 	/// Zero-based index of chunk
@@ -37,11 +37,12 @@ extension Chunk {
 	///   - chunkIndex: The index of the chunk
 	///   - uploadURL: The URL to where the chunk should be uploaded
 	init(file: File, chunkIndex: Int, uploadURL: URL) {
-		let byteOffset = Chunk.defaultChunkSize * Bytes(chunkIndex)
+		let chunkSize = file.chunkSize ?? Chunk.defaultChunkSize
+		let byteOffset = chunkSize * Bytes(chunkIndex)
 		self.init(chunkIndex: chunkIndex,
 				  fileURL: file.url,
 				  uploadURL: uploadURL,
-				  size: min(file.filesize - byteOffset, Chunk.defaultChunkSize),
+				  size: min(file.filesize - byteOffset, chunkSize),
 				  byteOffset: byteOffset)
 	}
 }

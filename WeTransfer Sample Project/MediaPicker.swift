@@ -77,7 +77,7 @@ final class MediaPicker: NSObject {
 				// Get first frame if video
 				let imageGenerator = AVAssetImageGenerator(asset: asset)
 				imageGenerator.appliesPreferredTrackTransform = true
-				if let image = try? imageGenerator.copyCGImage(at: kCMTimeZero, actualTime: nil) {
+				if let image = try? imageGenerator.copyCGImage(at: CMTime.zero, actualTime: nil) {
 					pickedMedia = Media(url: url, previewImage: UIImage(cgImage: image))
 				}
 			} else {
@@ -104,8 +104,8 @@ extension MediaPicker: UIImagePickerControllerDelegate, UINavigationControllerDe
 		finish(with: nil)
 	}
 	
-	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
-		guard let url = info[UIImagePickerControllerImageURL] as? URL ?? info[UIImagePickerControllerMediaURL] as? URL else {
+	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+		guard let url = info[UIImagePickerController.InfoKey.imageURL] as? URL ?? info[UIImagePickerController.InfoKey.mediaURL] as? URL else {
 			finish(with: nil)
 			return
 		}
