@@ -60,9 +60,9 @@ final class CreateTransferOperation: AsynchronousResultOperation<Transfer> {
 						return nil
 					}
 					let responseFile = responseFiles.remove(at: responseFileIndex)
-					file.update(with: responseFile.id,
-								numberOfChunks: responseFile.multipart.partNumbers,
-								chunkSize: responseFile.multipart.chunkSize,
+					file.update(with: responseFile.identifier,
+								numberOfChunks: responseFile.multipartUploadInfo.partNumbers,
+								chunkSize: responseFile.multipartUploadInfo.chunkSize,
 								multipartUploadIdentifier: nil)
 					return file
 				})

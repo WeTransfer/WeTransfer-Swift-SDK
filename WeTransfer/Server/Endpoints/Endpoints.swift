@@ -140,20 +140,27 @@ struct CreateTransferResponse: Decodable {
 	struct FileResponse: Decodable {
 		// swiftlint:disable nesting
 		/// Multipart upload information about each chunk
-		struct UploadInfo: Decodable {
+		struct MultipartUploadInfo: Decodable {
 			/// Amount of chunks to be created
 			let partNumbers: Int
 			/// Default size for each chunk
 			let chunkSize: Bytes
 		}
 		
-		let id: String // swiftlint:disable:this identifier_name
+		let identifier: String
 		/// Full name of file (e.g. "photo.jpg")
 		let name: String
 		// Size of the file in bytes
 		let size: Bytes
 		/// Mulitpart information about each chunk
-		let multipart: UploadInfo
+		let multipartUploadInfo: MultipartUploadInfo
+		
+		private enum CodingKeys: String, CodingKey {
+			case identifier = "id"
+			case name
+			case size
+			case multipartUploadInfo = "multipart"
+		}
 	}
 	
 	/// Server side identifier of the transfer
