@@ -12,6 +12,18 @@ import Foundation
 /// This operation does not handle the requests necessary to add files to the server side transfer, which `AddFilesOperation` is responsible for
 final class CreateTransferOperation: AsynchronousResultOperation<Transfer> {
 	
+	enum Error: Swift.Error, LocalizedError {
+		/// Not all files or incorrect file data returned by server
+		case incompleteFileDataReceived
+		
+		var localizedDescription: String {
+			switch self {
+			case .incompleteFileDataReceived:
+				return "Server did not create the correct files"
+			}
+		}
+	}
+	
 	let message: String
 	let fileURLs: [URL]
 	
@@ -41,11 +53,24 @@ final class CreateTransferOperation: AsynchronousResultOperation<Transfer> {
 			}
 			switch result {
 			case .success(let response):
-				let updatedFiles: [File] = zip(response.files, files).map({ (files) in
-					let (responseFile, file) = files
-					file.update(with: responseFile.id, numberOfChunks: responseFile.multipart.partNumbers, chunkSize: responseFile.multipart.chunkSize, multipartUploadIdentifier: nil)
+				var responseFiles = response.files
+				
+				let updatedFiles: [File] = files.compactMap({ file in
+					guard let responseFileIndex = responseFiles.firstIndex(where: { $0.name == file.filename && $0.size == file.filesize }) else {
+						return nil
+					}
+					let responseFile = responseFiles.remove(at: responseFileIndex)
+					file.update(with: responseFile.identifier,
+								numberOfChunks: responseFile.multipartUploadInfo.partNumbers,
+								chunkSize: responseFile.multipartUploadInfo.chunkSize,
+								multipartUploadIdentifier: nil)
 					return file
 				})
+				
+				guard updatedFiles.count == files.count else {
+					self.finish(with: .failure(Error.incompleteFileDataReceived))
+					return
+				}
 				let transfer = Transfer(identifier: response.id, message: parameters.message, files: updatedFiles)
 				self.finish(with: .success(transfer))
 			case .failure(let error):

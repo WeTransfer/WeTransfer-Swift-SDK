@@ -52,7 +52,7 @@ final class RequestTests: XCTestCase {
 
 		let completeTransferFileUploadEndpoint: APIEndpoint = .completeTransferFileUpload(transferIdentifier: transferIdentifier, fileIdentifier: fileIdentifier)
 		XCTAssertEqual(completeTransferFileUploadEndpoint.method, .put)
-		XCTAssertEqual(completeTransferFileUploadEndpoint.url(with: baseURL).absoluteString, baseURLString + "transfers/\(transferIdentifier)/files/\(fileIdentifier)/uploads/complete")
+		XCTAssertEqual(completeTransferFileUploadEndpoint.url(with: baseURL).absoluteString, baseURLString + "transfers/\(transferIdentifier)/files/\(fileIdentifier)/upload-complete")
 		
 		let completeBoardFileUploadEndpoint: APIEndpoint = .completeBoardFileUpload(boardIdentifier: boardIdentifier, fileIdentifier: fileIdentifier)
 		XCTAssertEqual(completeBoardFileUploadEndpoint.method, .put)
