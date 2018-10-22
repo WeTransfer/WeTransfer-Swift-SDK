@@ -17,7 +17,7 @@ final class RequestTests: XCTestCase {
 	}
 
 	func testEndpoints() {
-		let baseURLString = "https://dev.wetransfer.com/v1/"
+		let baseURLString = "https://dev.wetransfer.com/v2/"
 		let baseURL = URL(string: baseURLString)!
 
 		let authorizeEndpoint: APIEndpoint = .authorize()
@@ -27,22 +27,40 @@ final class RequestTests: XCTestCase {
 		let createTransferEndpoint: APIEndpoint = .createTransfer()
 		XCTAssertEqual(createTransferEndpoint.method, .post)
 		XCTAssertEqual(createTransferEndpoint.url(with: baseURL).absoluteString, baseURLString + "transfers")
+		
+		let createBoardEndpoint: APIEndpoint = .createBoard()
+		XCTAssertEqual(createBoardEndpoint.method, .post)
+		XCTAssertEqual(createBoardEndpoint.url(with: baseURL).absoluteString, baseURLString + "boards")
 
-		let itemIdentifier = "1234567890"
-		let addItemsTransferEndpoint: APIEndpoint = .addItems(transferIdentifier: itemIdentifier)
-		XCTAssertEqual(addItemsTransferEndpoint.method, .post)
-		XCTAssertEqual(addItemsTransferEndpoint.url(with: baseURL).absoluteString, baseURLString + "transfers/\(itemIdentifier)/items")
-
+		let transferIdentifier = UUID().uuidString
+		let boardIdentifier = UUID().uuidString
 		let fileIdentifier = UUID().uuidString
 		let chunkIndex = 5
 		let multipartIdentifier = UUID().uuidString
-		let requestUploadURLEndpoint: APIEndpoint = .requestUploadURL(fileIdentifier: fileIdentifier, chunkIndex: chunkIndex, multipartIdentifier: multipartIdentifier)
-		XCTAssertEqual(requestUploadURLEndpoint.method, .get)
-		XCTAssertEqual(requestUploadURLEndpoint.url(with: baseURL).absoluteString, baseURLString + "files/\(fileIdentifier)/uploads/\(chunkIndex + 1)/\(multipartIdentifier)")
+		
+		let addFilesTransferEndpoint: APIEndpoint = .addFiles(boardIdentifier: boardIdentifier)
+		XCTAssertEqual(addFilesTransferEndpoint.method, .post)
+		XCTAssertEqual(addFilesTransferEndpoint.url(with: baseURL).absoluteString, baseURLString + "boards/\(boardIdentifier)/files")
+		
+		let requestTransferUploadURLEndpoint: APIEndpoint = .requestTransferUploadURL(transferIdentifier: transferIdentifier, fileIdentifier: fileIdentifier, chunkIndex: chunkIndex)
+		XCTAssertEqual(requestTransferUploadURLEndpoint.method, .get)
+		XCTAssertEqual(requestTransferUploadURLEndpoint.url(with: baseURL).absoluteString, baseURLString + "transfers/\(transferIdentifier)/files/\(fileIdentifier)/upload-url/\(chunkIndex + 1)")
+		
+		let requestBoardUploadURLEndpoint: APIEndpoint = .requestBoardUploadURL(boardIdentifier: boardIdentifier, fileIdentifier: fileIdentifier, chunkIndex: chunkIndex, multipartIdentifier: multipartIdentifier)
+		XCTAssertEqual(requestBoardUploadURLEndpoint.method, .get)
+		XCTAssertEqual(requestBoardUploadURLEndpoint.url(with: baseURL).absoluteString, baseURLString + "boards/\(boardIdentifier)/files/\(fileIdentifier)/upload-url/\(chunkIndex + 1)/\(multipartIdentifier)")
 
-		let completeUploadEndpoint: APIEndpoint = .completeUpload(fileIdentifier: fileIdentifier)
-		XCTAssertEqual(completeUploadEndpoint.method, .post)
-		XCTAssertEqual(completeUploadEndpoint.url(with: baseURL).absoluteString, baseURLString + "files/\(fileIdentifier)/uploads/complete")
+		let completeTransferFileUploadEndpoint: APIEndpoint = .completeTransferFileUpload(transferIdentifier: transferIdentifier, fileIdentifier: fileIdentifier)
+		XCTAssertEqual(completeTransferFileUploadEndpoint.method, .put)
+		XCTAssertEqual(completeTransferFileUploadEndpoint.url(with: baseURL).absoluteString, baseURLString + "transfers/\(transferIdentifier)/files/\(fileIdentifier)/upload-complete")
+		
+		let completeBoardFileUploadEndpoint: APIEndpoint = .completeBoardFileUpload(boardIdentifier: boardIdentifier, fileIdentifier: fileIdentifier)
+		XCTAssertEqual(completeBoardFileUploadEndpoint.method, .put)
+		XCTAssertEqual(completeBoardFileUploadEndpoint.url(with: baseURL).absoluteString, baseURLString + "boards/\(boardIdentifier)/files/\(fileIdentifier)/upload-complete")
+		
+		let finlizeTransferEndpoint: APIEndpoint = .finalizeTransfer(transferIdentifier: transferIdentifier)
+		XCTAssertEqual(finlizeTransferEndpoint.method, .put)
+		XCTAssertEqual(finlizeTransferEndpoint.url(with: baseURL).absoluteString, baseURLString + "transfers/\(transferIdentifier)/finalize")
 	}
 
 	func testUnconfiguredRequestCreation() {

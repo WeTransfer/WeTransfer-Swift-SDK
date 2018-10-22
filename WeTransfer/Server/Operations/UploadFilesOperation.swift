@@ -9,7 +9,7 @@
 import Foundation
 
 /// Handles the uploading of all files -- that are not uploaded yet -- in the provided transfer. Creates an operation queue with an `UploadFileOperation` for each file to be uploaded.
-final class UploadFilesOperation: ChainedAsynchronousResultOperation<Transfer, Transfer>, URLSessionDataDelegate {
+final class UploadFilesOperation<Container: Transferable>: ChainedAsynchronousResultOperation<Container, Container>, URLSessionDataDelegate {
 	
 	/// Amount of bytes already sent
 	private var bytesSent: Bytes = 0
@@ -19,23 +19,19 @@ final class UploadFilesOperation: ChainedAsynchronousResultOperation<Transfer, T
 	/// The total progress for all files to be uploaded
 	let progress = Progress(totalUnitCount: 1)
 	
-	/// Initializes the operation with a transfer. When initalized as part of a chain after `AddFilesOperation`, this operation can be initialized without any arguments
+	/// Initializes the operation with a transfer or a board. When initalized as part of a chain after `AddFilesOperation`, this operation can be initialized without any arguments
 	///
-	/// - Parameter transfer: Transfer object to upload files from
-	convenience init(transfer: Transfer) {
-		self.init(input: transfer)
+	/// - Parameter container: Transfer or Board object to upload files from
+	convenience init(container: Container) {
+		self.init(input: container)
 	}
 	
-	override func execute(_ transfer: Transfer) {
-		guard transfer.identifier != nil else {
-			self.finish(with: .failure(WeTransfer.Error.transferNotYetCreated))
-			return
-		}
+	override func execute(_ container: Container) {
 		
-		let files = transfer.files.filter({ $0.isUploaded == false })
+		let files = container.files.filter({ $0.isUploaded == false })
 		
 		guard !files.isEmpty else {
-			self.finish(with: .failure(WeTransfer.Error.noFilesAvailable))
+			finish(with: .failure(WeTransfer.Error.noFilesAvailable))
 			return
 		}
 		
@@ -63,11 +59,11 @@ final class UploadFilesOperation: ChainedAsynchronousResultOperation<Transfer, T
 		let filesResultOperation = AsynchronousDependencyResultOperation<File>()
 		
 		let fileOperations = files.compactMap { file -> UploadFileOperation? in
-			guard file.identifier != nil, file.multipartUploadIdentifier != nil else {
+			guard file.identifier != nil else {
 				// File may have been added while operations have created, fail silently
 				return nil
 			}
-			let operation = UploadFileOperation(file: file, operationQueue: chunkOperationQueue, session: uploadSession)
+			let operation = UploadFileOperation(container: container, file: file, operationQueue: chunkOperationQueue, session: uploadSession)
 			operation.onResult = { result in
 				if case .success(let file) = result {
 					file.isUploaded = true
@@ -79,7 +75,7 @@ final class UploadFilesOperation: ChainedAsynchronousResultOperation<Transfer, T
 		
 		guard !fileOperations.isEmpty else {
 			// No files to upload, fail
-			self.finish(with: .failure(WeTransfer.Error.noFilesAvailable))
+			finish(with: .failure(WeTransfer.Error.noFilesAvailable))
 			return
 		}
 		
@@ -89,7 +85,7 @@ final class UploadFilesOperation: ChainedAsynchronousResultOperation<Transfer, T
 			}
 			switch result {
 			case .success:
-				self?.finish(with: .success(transfer))
+				self?.finish(with: .success(container))
 			case .failure(let error):
 				self?.finish(with: .failure(error))
 			}

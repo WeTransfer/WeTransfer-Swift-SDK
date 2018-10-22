@@ -8,9 +8,21 @@
 
 import Foundation
 
-/// Operation responsible for adding files to the provided transfer object and on the server as well. When succeeded the files will be updated with the appropriate data like identifiers and information about the chunks.
-/// - Note: The files will be added to the provided transfer object when the operation has started executing
-final class AddFilesOperation: ChainedAsynchronousResultOperation<Transfer, Transfer> {
+/// Operation responsible for adding files to the provided board object and on the server as well. When succeeded, the files will be updated with the appropriate data like identifiers and information about the chunks.
+/// - Note: The files will be added to the provided board object when the operation has started executing
+final class AddFilesOperation: ChainedAsynchronousResultOperation<Board, Board> {
+	
+	enum Error: Swift.Error, LocalizedError {
+		/// Not all files or incorrect file data returned by server
+		case incompleteFileDataReceived
+		
+		var localizedDescription: String {
+			switch self {
+			case .incompleteFileDataReceived:
+				return "Server did not create the correct files"
+			}
+		}
+	}
 	
 	/// The files to be added to the transfer if added during the initialization
 	private var filesToAdd: [File]?
@@ -20,34 +32,46 @@ final class AddFilesOperation: ChainedAsynchronousResultOperation<Transfer, Tran
 	/// - Parameters:
 	///   - transfer: Transfer object to add the files to
 	///   - files: Files to be added to the transfer
-	convenience init(transfer: Transfer, files: [File]) {
-		self.init(input: transfer)
+	convenience init(board: Board, files: [File]) {
+		self.init(input: board)
 		filesToAdd = files
 	}
 	
-	override func execute(_ transfer: Transfer) {
+	override func execute(_ board: Board) {
 		if let newFiles = filesToAdd {
-			transfer.add(newFiles)
+			board.add(newFiles)
 		}
-		let files = transfer.files.filter({ $0.identifier == nil })
+		let files = board.files.filter({ $0.identifier == nil })
 		let parameters = AddFilesParameters(with: files)
 		
-		guard let identifier = transfer.identifier else {
+		guard let identifier = board.identifier else {
 			finish(with: .failure(WeTransfer.Error.transferNotYetCreated))
 			return
 		}
 		
-		WeTransfer.request(.addItems(transferIdentifier: identifier), parameters: parameters) { [weak self] result in
+		WeTransfer.request(.addFiles(boardIdentifier: identifier), parameters: parameters.files) { [weak self] result in
 			switch result {
-			case .success(let response):
-				transfer.files.forEach({ file in
-					guard let responseFile = response.first(where: {$0.localIdentifier == file.localIdentifier}) else {
-						return
+			case .success(let responseFiles):
+				
+				var responseFilePool = Array(responseFiles)
+				
+				let updatedFiles: [File] = files.compactMap({ file in
+					guard let responseFileIndex = responseFilePool.firstIndex(where: { $0.name == file.filename && $0.size == file.filesize }) else {
+						return nil
 					}
-					
-					file.update(with: responseFile.id, numberOfChunks: responseFile.meta.multipartParts, multipartUploadIdentifier: responseFile.meta.multipartUploadId)
+					let responseFile = responseFilePool.remove(at: responseFileIndex)
+					file.update(with: responseFile.id,
+								numberOfChunks: responseFile.multipart.partNumbers,
+								chunkSize: responseFile.multipart.chunkSize,
+								multipartUploadIdentifier: responseFile.multipart.id)
+					return file
 				})
-				self?.finish(with: .success(transfer))
+				
+				guard updatedFiles.count == files.count else {
+					self?.finish(with: .failure(Error.incompleteFileDataReceived))
+					return
+				}
+				self?.finish(with: .success(board))
 			case .failure(let error):
 				self?.finish(with: .failure(error))
 			}

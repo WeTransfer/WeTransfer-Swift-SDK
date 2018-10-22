@@ -2,24 +2,14 @@
 //  ChunksTests.swift
 //  WeTransferTests
 //
-//  Created by Pim Coumans on 28/05/2018.
+//  Created by Pim Coumans on 01/10/2018.
 //  Copyright © 2018 WeTransfer. All rights reserved.
 //
 
 import XCTest
 @testable import WeTransfer
 
-final class UploadTests: XCTestCase {
-
-	override func setUp() {
-		super.setUp()
-		TestConfiguration.configure(environment: .production)
-	}
-
-	override func tearDown() {
-		super.tearDown()
-		TestConfiguration.resetConfiguration()
-	}
+final class BoardUploadTests: BaseTestCase {
 	
 	var observation: NSKeyValueObservation?
 
@@ -30,19 +20,19 @@ final class UploadTests: XCTestCase {
 			return
 		}
 
-		let transferSentExpectation = expectation(description: "Transfer is sent")
-		let transfer = Transfer(name: "Test transfer", description: nil, files: [file])
+		let filesUploadedExpectation = expectation(description: "Files are uploaded")
 		
-		WeTransfer.createTransfer(with: transfer, completion: { (result) in
+		let board = Board(name: "Test Board", description: nil)
+		WeTransfer.add([file], to: board) { (result) in
 			if case .failure(let error) = result {
-				XCTFail("Transfer creation failed: \(error)")
-				transferSentExpectation.fulfill()
-				return
+				XCTFail("Adding files failed: \(error)")
+				filesUploadedExpectation.fulfill()
 			}
-			WeTransfer.upload(transfer, stateChanged: { (state) in
+			
+			WeTransfer.upload(board, stateChanged: { (state) in
 				switch state {
-				case .created(let transfer):
-					print("Transfer created: \(String(describing: transfer.identifier))")
+				case .created(let board):
+					print("Transfer created: \(String(describing: board.identifier))")
 				case .uploading(let progress):
 					print("Upload started")
 					var percentage = 0.0
@@ -55,23 +45,22 @@ final class UploadTests: XCTestCase {
 					})
 				case .failed(let error):
 					XCTFail("Sending transfer failed: \(error)")
-					transferSentExpectation.fulfill()
+					filesUploadedExpectation.fulfill()
 				case .completed:
-					transferSentExpectation.fulfill()
+					filesUploadedExpectation.fulfill()
 				}
 			})
-		})
+		}
 
 		waitForExpectations(timeout: 60) { _ in
 			self.observation = nil
-			if let url = transfer.shortURL {
+			if let url = board.shortURL {
 				print("Transfer uploaded: \(url)")
 			}
-			XCTAssertNotNil(transfer.shortURL)
-			for file in transfer.files {
+			XCTAssertNotNil(board.shortURL)
+			for file in board.files {
 				XCTAssertTrue(file.isUploaded)
 			}
 		}
 	}
-
 }

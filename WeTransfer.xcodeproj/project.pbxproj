@@ -16,10 +16,15 @@
 		3E0EEBBC20C19004009E6B2D /* UploadChunkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEBBB20C19004009E6B2D /* UploadChunkOperation.swift */; };
 		3E0EEBBE20C19037009E6B2D /* CompleteUploadOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEBBD20C19037009E6B2D /* CompleteUploadOperation.swift */; };
 		3E0EEBC020C19074009E6B2D /* UploadFileOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0EEBBF20C19074009E6B2D /* UploadFileOperation.swift */; };
+		3E3A87632162798800568775 /* CreateBoardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3A87622162798800568775 /* CreateBoardTests.swift */; };
+		3E3A87642162798800568775 /* CreateBoardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3A87622162798800568775 /* CreateBoardTests.swift */; };
 		3E3B9D3C20F7ADDC0064915C /* MediaPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3B9D3B20F7ADDC0064915C /* MediaPicker.swift */; };
 		3E5E514F20EA816600485FA3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5E514720EA816600485FA3 /* MainViewController.swift */; };
 		3E5E515320EA816600485FA3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5E514D20EA816600485FA3 /* AppDelegate.swift */; };
-		3E71177720FC9C2E00115E55 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		3E7219A92174C7FC00143492 /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7219A82174C7FC00143492 /* BaseTestCase.swift */; };
+		3E7219AA2174C7FC00143492 /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7219A82174C7FC00143492 /* BaseTestCase.swift */; };
+		3E7219B321789ADC00143492 /* WeTransfer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7116DC20FC85D400115E55 /* WeTransfer.framework */; };
+		3E7219B421789ADC00143492 /* WeTransfer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3E7116DC20FC85D400115E55 /* WeTransfer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3E80E0A72091D0E700114711 /* WeTransfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E80E0A62091D0E700114711 /* WeTransfer.swift */; };
 		3E80E0AA2091D12B00114711 /* Transfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E80E0A92091D12B00114711 /* Transfer.swift */; };
 		3E80E0AE2091D16E00114711 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E80E0AD2091D16E00114711 /* Result.swift */; };
@@ -38,8 +43,8 @@
 		3E9915AC2111B0C50071FDF7 /* SimpleTransferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348C120B41936009B41D0 /* SimpleTransferTests.swift */; };
 		3E9915AD2111B0C50071FDF7 /* CreateTransferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED1C0A220B43E980045D8B3 /* CreateTransferTests.swift */; };
 		3E9915AE2111B0C50071FDF7 /* AddFilesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED1C0A420B442F70045D8B3 /* AddFilesTests.swift */; };
-		3E9915AF2111B0C50071FDF7 /* ChunksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E90734620BBEF3700AE3605 /* ChunksTests.swift */; };
-		3E9915B02111B0C50071FDF7 /* UploadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E90734820BBFE5600AE3605 /* UploadTests.swift */; };
+		3E9915AF2111B0C50071FDF7 /* TransferChunksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E90734620BBEF3700AE3605 /* TransferChunksTests.swift */; };
+		3E9915B02111B0C50071FDF7 /* TransferUploadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E90734820BBFE5600AE3605 /* TransferUploadTests.swift */; };
 		3E9915B12111B0C50071FDF7 /* TestConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348BD20B4040D009B41D0 /* TestConfiguration.swift */; };
 		3E9915B22111B0C50071FDF7 /* InitializationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348BF20B41895009B41D0 /* InitializationTests.swift */; };
 		3E9915B32111B0C50071FDF7 /* RequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348C520B41EC0009B41D0 /* RequestTests.swift */; };
@@ -50,8 +55,8 @@
 		3E9915B82111B0C60071FDF7 /* SimpleTransferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348C120B41936009B41D0 /* SimpleTransferTests.swift */; };
 		3E9915B92111B0C60071FDF7 /* CreateTransferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED1C0A220B43E980045D8B3 /* CreateTransferTests.swift */; };
 		3E9915BA2111B0C60071FDF7 /* AddFilesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED1C0A420B442F70045D8B3 /* AddFilesTests.swift */; };
-		3E9915BB2111B0C60071FDF7 /* ChunksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E90734620BBEF3700AE3605 /* ChunksTests.swift */; };
-		3E9915BC2111B0C60071FDF7 /* UploadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E90734820BBFE5600AE3605 /* UploadTests.swift */; };
+		3E9915BB2111B0C60071FDF7 /* TransferChunksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E90734620BBEF3700AE3605 /* TransferChunksTests.swift */; };
+		3E9915BC2111B0C60071FDF7 /* TransferUploadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E90734820BBFE5600AE3605 /* TransferUploadTests.swift */; };
 		3E9915BD2111B0C60071FDF7 /* TestConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348BD20B4040D009B41D0 /* TestConfiguration.swift */; };
 		3E9915BE2111B0C60071FDF7 /* InitializationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348BF20B41895009B41D0 /* InitializationTests.swift */; };
 		3E9915BF2111B0C60071FDF7 /* RequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7348C520B41EC0009B41D0 /* RequestTests.swift */; };
@@ -83,8 +88,24 @@
 		3E9915D92111B1A30071FDF7 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9413BC2098BC25003A42D1 /* APIClient.swift */; };
 		3E9915DA2111B1A30071FDF7 /* Authenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8EB08B20E503E2002EB5AB /* Authenticator.swift */; };
 		3E9915DE211201150071FDF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E5E514820EA816600485FA3 /* Assets.xcassets */; };
+		3E9D48D021663EE400499760 /* Transferable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9D48CF21663EE400499760 /* Transferable.swift */; };
+		3E9D48D121663EE400499760 /* Transferable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9D48CF21663EE400499760 /* Transferable.swift */; };
+		3E9D48D32166535D00499760 /* SimpleBoardUploadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9D48D22166535D00499760 /* SimpleBoardUploadTests.swift */; };
+		3E9D48D42166535D00499760 /* SimpleBoardUploadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9D48D22166535D00499760 /* SimpleBoardUploadTests.swift */; };
+		3E9D48D62166537D00499760 /* BoardUploadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9D48D52166537C00499760 /* BoardUploadTests.swift */; };
+		3E9D48D72166537D00499760 /* BoardUploadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9D48D52166537C00499760 /* BoardUploadTests.swift */; };
+		3E9D48DE216B6FF800499760 /* FinalizeTransferOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9D48DB216B6FBC00499760 /* FinalizeTransferOperation.swift */; };
+		3E9D48DF216B6FF900499760 /* FinalizeTransferOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9D48DB216B6FBC00499760 /* FinalizeTransferOperation.swift */; };
+		3E9D48E1216B89CB00499760 /* BoardChunksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9D48E0216B89CB00499760 /* BoardChunksTests.swift */; };
+		3E9D48E2216B89CB00499760 /* BoardChunksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9D48E0216B89CB00499760 /* BoardChunksTests.swift */; };
 		3EA0EFBA20BD4D90009E4BB1 /* AsynchronousOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA0EFB920BD4D90009E4BB1 /* AsynchronousOperation.swift */; };
 		3EA0EFCE20BD7743009E4BB1 /* AsynchronousResultOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EA0EFCD20BD7743009E4BB1 /* AsynchronousResultOperation.swift */; };
+		3EB1E192215916B000E1E4EE /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB1E191215916AF00E1E4EE /* Board.swift */; };
+		3EB1E193215916B000E1E4EE /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB1E191215916AF00E1E4EE /* Board.swift */; };
+		3EB1E1982159283600E1E4EE /* CreateBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB1E1972159283600E1E4EE /* CreateBoard.swift */; };
+		3EB1E1992159283600E1E4EE /* CreateBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB1E1972159283600E1E4EE /* CreateBoard.swift */; };
+		3EB1E19B215928BF00E1E4EE /* CreateBoardOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB1E19A215928BF00E1E4EE /* CreateBoardOperation.swift */; };
+		3EB1E19C215928BF00E1E4EE /* CreateBoardOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB1E19A215928BF00E1E4EE /* CreateBoardOperation.swift */; };
 		3ED6ED4020EA505800130261 /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED6ED3F20EA505800130261 /* APIEndpoint.swift */; };
 		3EFDC98021012FD70091CF85 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFDC97F21012FD70091CF85 /* RoundedButton.swift */; };
 		3F5E8A722111F80600F750EC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E5E514B20EA816600485FA3 /* Main.storyboard */; };
@@ -106,7 +127,28 @@
 			remoteGlobalIDString = 3E7116DB20FC85D400115E55;
 			remoteInfo = "WeTransfer iOS";
 		};
+		3EB1E1892158F76E00E1E4EE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3EE2595A2091CF8800DC5A97 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3E7116DB20FC85D400115E55;
+			remoteInfo = "WeTransfer iOS";
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3EB1E18E2158F9D000E1E4EE /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3E7219B421789ADC00143492 /* WeTransfer.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		3E0EEBA720BEE918009E6B2D /* AsynchronousDependencyResultOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsynchronousDependencyResultOperation.swift; sourceTree = "<group>"; };
@@ -118,6 +160,7 @@
 		3E0EEBBB20C19004009E6B2D /* UploadChunkOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadChunkOperation.swift; sourceTree = "<group>"; };
 		3E0EEBBD20C19037009E6B2D /* CompleteUploadOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteUploadOperation.swift; sourceTree = "<group>"; };
 		3E0EEBBF20C19074009E6B2D /* UploadFileOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadFileOperation.swift; sourceTree = "<group>"; };
+		3E3A87622162798800568775 /* CreateBoardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBoardTests.swift; sourceTree = "<group>"; };
 		3E3B9D2720F60F7B0064915C /* smallImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = smallImage.jpg; sourceTree = "<group>"; };
 		3E3B9D3B20F7ADDC0064915C /* MediaPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPicker.swift; sourceTree = "<group>"; };
 		3E579B202092194F008DFFD2 /* image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image.jpg; sourceTree = "<group>"; };
@@ -131,6 +174,7 @@
 		3E7116E420FC85D400115E55 /* WeTransfer iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "WeTransfer iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E7116F820FC85F100115E55 /* WeTransfer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WeTransfer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E71170020FC85F100115E55 /* WeTransfer macOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "WeTransfer macOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E7219A82174C7FC00143492 /* BaseTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTestCase.swift; sourceTree = "<group>"; };
 		3E7348BD20B4040D009B41D0 /* TestConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestConfiguration.swift; sourceTree = "<group>"; };
 		3E7348BF20B41895009B41D0 /* InitializationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitializationTests.swift; sourceTree = "<group>"; };
 		3E7348C120B41936009B41D0 /* SimpleTransferTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleTransferTests.swift; sourceTree = "<group>"; };
@@ -140,8 +184,8 @@
 		3E80E0A92091D12B00114711 /* Transfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transfer.swift; sourceTree = "<group>"; };
 		3E80E0AD2091D16E00114711 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		3E8EB08B20E503E2002EB5AB /* Authenticator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authenticator.swift; sourceTree = "<group>"; };
-		3E90734620BBEF3700AE3605 /* ChunksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChunksTests.swift; sourceTree = "<group>"; };
-		3E90734820BBFE5600AE3605 /* UploadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadTests.swift; sourceTree = "<group>"; };
+		3E90734620BBEF3700AE3605 /* TransferChunksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferChunksTests.swift; sourceTree = "<group>"; };
+		3E90734820BBFE5600AE3605 /* TransferUploadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferUploadTests.swift; sourceTree = "<group>"; };
 		3E9413BC2098BC25003A42D1 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		3E9413BE2098BF5A003A42D1 /* Endpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
 		3E9413C12098C132003A42D1 /* Authorize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authorize.swift; sourceTree = "<group>"; };
@@ -151,8 +195,16 @@
 		3E9413C92099DB05003A42D1 /* Upload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Upload.swift; sourceTree = "<group>"; };
 		3E9413CB2099E390003A42D1 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		3E9413CD2099E3F5003A42D1 /* Chunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chunk.swift; sourceTree = "<group>"; };
+		3E9D48CF21663EE400499760 /* Transferable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transferable.swift; sourceTree = "<group>"; };
+		3E9D48D22166535D00499760 /* SimpleBoardUploadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleBoardUploadTests.swift; sourceTree = "<group>"; };
+		3E9D48D52166537C00499760 /* BoardUploadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardUploadTests.swift; sourceTree = "<group>"; };
+		3E9D48DB216B6FBC00499760 /* FinalizeTransferOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalizeTransferOperation.swift; sourceTree = "<group>"; };
+		3E9D48E0216B89CB00499760 /* BoardChunksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardChunksTests.swift; sourceTree = "<group>"; };
 		3EA0EFB920BD4D90009E4BB1 /* AsynchronousOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsynchronousOperation.swift; sourceTree = "<group>"; };
 		3EA0EFCD20BD7743009E4BB1 /* AsynchronousResultOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsynchronousResultOperation.swift; sourceTree = "<group>"; };
+		3EB1E191215916AF00E1E4EE /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
+		3EB1E1972159283600E1E4EE /* CreateBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBoard.swift; sourceTree = "<group>"; };
+		3EB1E19A215928BF00E1E4EE /* CreateBoardOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBoardOperation.swift; sourceTree = "<group>"; };
 		3ED1C0A220B43E980045D8B3 /* CreateTransferTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTransferTests.swift; sourceTree = "<group>"; };
 		3ED1C0A420B442F70045D8B3 /* AddFilesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFilesTests.swift; sourceTree = "<group>"; };
 		3ED6ED3920EA2AD100130261 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
@@ -169,7 +221,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E71177720FC9C2E00115E55 /* (null) in Frameworks */,
+				3E7219B321789ADC00143492 /* WeTransfer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,6 +267,18 @@
 			path = Abstract;
 			sourceTree = "<group>";
 		};
+		3E3A87612162549F00568775 /* Board */ = {
+			isa = PBXGroup;
+			children = (
+				3E9D48D22166535D00499760 /* SimpleBoardUploadTests.swift */,
+				3E3A87622162798800568775 /* CreateBoardTests.swift */,
+				3ED1C0A420B442F70045D8B3 /* AddFilesTests.swift */,
+				3E9D48E0216B89CB00499760 /* BoardChunksTests.swift */,
+				3E9D48D52166537C00499760 /* BoardUploadTests.swift */,
+			);
+			path = Board;
+			sourceTree = "<group>";
+		};
 		3E3B9D2C20F7644D0064915C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -239,7 +303,9 @@
 		3E80E0A82091D11300114711 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				3E9D48CF21663EE400499760 /* Transferable.swift */,
 				3E80E0A92091D12B00114711 /* Transfer.swift */,
+				3EB1E191215916AF00E1E4EE /* Board.swift */,
 				3E9413CB2099E390003A42D1 /* File.swift */,
 				3E9413CD2099E3F5003A42D1 /* Chunk.swift */,
 			);
@@ -271,6 +337,7 @@
 				3E9413C32099D78A003A42D1 /* Request.swift */,
 				3E9413C12098C132003A42D1 /* Authorize.swift */,
 				3E9413C52099D823003A42D1 /* CreateTransfer.swift */,
+				3EB1E1972159283600E1E4EE /* CreateBoard.swift */,
 				3E9413C72099D89E003A42D1 /* AddFiles.swift */,
 				3E9413C92099DB05003A42D1 /* Upload.swift */,
 			);
@@ -283,12 +350,14 @@
 				3ECCF25F20C5838C00F2B59B /* Helpers */,
 				3E0EEBAE20C13F20009E6B2D /* Abstract */,
 				3E0EEBB120C17264009E6B2D /* CreateTransferOperation.swift */,
+				3EB1E19A215928BF00E1E4EE /* CreateBoardOperation.swift */,
 				3E0EEBB320C175D0009E6B2D /* AddFilesOperation.swift */,
 				3E0EEBB920C18FA5009E6B2D /* UploadFilesOperation.swift */,
 				3E0EEBBF20C19074009E6B2D /* UploadFileOperation.swift */,
 				3E0EEBB520C177FE009E6B2D /* CreateChunkOperation.swift */,
 				3E0EEBBB20C19004009E6B2D /* UploadChunkOperation.swift */,
 				3E0EEBBD20C19037009E6B2D /* CompleteUploadOperation.swift */,
+				3E9D48DB216B6FBC00499760 /* FinalizeTransferOperation.swift */,
 			);
 			path = Operations;
 			sourceTree = "<group>";
@@ -306,9 +375,8 @@
 			children = (
 				3E7348C120B41936009B41D0 /* SimpleTransferTests.swift */,
 				3ED1C0A220B43E980045D8B3 /* CreateTransferTests.swift */,
-				3ED1C0A420B442F70045D8B3 /* AddFilesTests.swift */,
-				3E90734620BBEF3700AE3605 /* ChunksTests.swift */,
-				3E90734820BBFE5600AE3605 /* UploadTests.swift */,
+				3E90734620BBEF3700AE3605 /* TransferChunksTests.swift */,
+				3E90734820BBFE5600AE3605 /* TransferUploadTests.swift */,
 			);
 			path = Transfer;
 			sourceTree = "<group>";
@@ -362,7 +430,9 @@
 			children = (
 				3E3B9D2C20F7644D0064915C /* Resources */,
 				3ED1C0A120B43E780045D8B3 /* Transfer */,
+				3E3A87612162549F00568775 /* Board */,
 				3E7348BD20B4040D009B41D0 /* TestConfiguration.swift */,
+				3E7219A82174C7FC00143492 /* BaseTestCase.swift */,
 				3E7348BF20B41895009B41D0 /* InitializationTests.swift */,
 				3E7348C520B41EC0009B41D0 /* RequestTests.swift */,
 				3E7348C320B41DBA009B41D0 /* AuthorizationTests.swift */,
@@ -410,6 +480,7 @@
 				3E5E513020EA813D00485FA3 /* Sources */,
 				3E5E513120EA813D00485FA3 /* Frameworks */,
 				3E5E513220EA813D00485FA3 /* Resources */,
+				3EB1E18E2158F9D000E1E4EE /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -452,6 +523,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				3EB1E18A2158F76E00E1E4EE /* PBXTargetDependency */,
 			);
 			name = "WeTransfer iOSTests";
 			productName = "WeTransfer iOSTests";
@@ -508,18 +580,23 @@
 				TargetAttributes = {
 					3E5E513320EA813D00485FA3 = {
 						CreatedOnToolsVersion = 9.4;
+						LastSwiftMigration = 1000;
 					};
 					3E7116DB20FC85D400115E55 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 					};
 					3E7116E320FC85D400115E55 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 					};
 					3E7116F720FC85F100115E55 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 					};
 					3E7116FF20FC85F100115E55 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
 					};
 				};
 			};
@@ -603,7 +680,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "filename=\"Secrets.plist\"\nfile=\"${PROJECT_DIR}/${PROJECT_NAME}Tests/$filename\"\nif [ -f \"$file\" ]; then\ncp -r \"$file\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.xctest/$filename\"\nfi";
+			shellScript = "filename=\"Secrets.plist\"\nfile=\"${PROJECT_DIR}/${PROJECT_NAME}Tests/$filename\"\nif [ -f \"$file\" ]; then\ncp -r \"$file\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.xctest/$filename\"\nfi\n";
 		};
 		3E71177320FC956C00115E55 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -617,7 +694,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ -d \"${SRCROOT}/Submodules/WeTransfer-iOS-CI/SwiftLint\" ] && [ -z \"$CI\" ]; then\n    if which swiftlint >/dev/null; then\n        swiftlint --config \"${SRCROOT}/Submodules/WeTransfer-iOS-CI/SwiftLint/.swiftlint-source.yml\"\n        swiftlint --config \"${SRCROOT}/Submodules/WeTransfer-iOS-CI/SwiftLint/.swiftlint-tests.yml\"\n    else\n        echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n    fi\nfi";
+			shellScript = "if [ -d \"${SRCROOT}/Submodules/WeTransfer-iOS-CI/SwiftLint\" ] && [ -z \"$CI\" ]; then\n    if which swiftlint >/dev/null; then\n        swiftlint --config \"${SRCROOT}/Submodules/WeTransfer-iOS-CI/SwiftLint/.swiftlint-source.yml\"\n        swiftlint --config \"${SRCROOT}/Submodules/WeTransfer-iOS-CI/SwiftLint/.swiftlint-tests.yml\"\n    else\n        echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n    fi\nfi\n";
 		};
 		3E71177420FC95AC00115E55 /* Include Secrets.plist */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -673,7 +750,9 @@
 				3E0EEBB420C175D0009E6B2D /* AddFilesOperation.swift in Sources */,
 				3E80E0A72091D0E700114711 /* WeTransfer.swift in Sources */,
 				3E80E0AE2091D16E00114711 /* Result.swift in Sources */,
+				3E9D48D021663EE400499760 /* Transferable.swift in Sources */,
 				3E9413CA2099DB05003A42D1 /* Upload.swift in Sources */,
+				3EB1E1982159283600E1E4EE /* CreateBoard.swift in Sources */,
 				3E0EEBC020C19074009E6B2D /* UploadFileOperation.swift in Sources */,
 				3E0EEBB620C177FE009E6B2D /* CreateChunkOperation.swift in Sources */,
 				3E9413C82099D89E003A42D1 /* AddFiles.swift in Sources */,
@@ -684,9 +763,12 @@
 				3E9413C22098C132003A42D1 /* Authorize.swift in Sources */,
 				3E8EB08C20E503E2002EB5AB /* Authenticator.swift in Sources */,
 				3E9413C42099D78A003A42D1 /* Request.swift in Sources */,
+				3E9D48DE216B6FF800499760 /* FinalizeTransferOperation.swift in Sources */,
 				3E0EEBBE20C19037009E6B2D /* CompleteUploadOperation.swift in Sources */,
 				3E0EEBB020C1444C009E6B2D /* ChainedAsynchronousResultOperation.swift in Sources */,
+				3EB1E19B215928BF00E1E4EE /* CreateBoardOperation.swift in Sources */,
 				3EA0EFBA20BD4D90009E4BB1 /* AsynchronousOperation.swift in Sources */,
+				3EB1E192215916B000E1E4EE /* Board.swift in Sources */,
 				3E9413BD2098BC25003A42D1 /* APIClient.swift in Sources */,
 				3E9413CC2099E390003A42D1 /* File.swift in Sources */,
 				3ED6ED4020EA505800130261 /* APIEndpoint.swift in Sources */,
@@ -698,14 +780,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E9915AD2111B0C50071FDF7 /* CreateTransferTests.swift in Sources */,
+				3E9D48E1216B89CB00499760 /* BoardChunksTests.swift in Sources */,
 				3E9915B52111B0C50071FDF7 /* Secrets.swift in Sources */,
 				3E9915B42111B0C50071FDF7 /* AuthorizationTests.swift in Sources */,
 				3E9915B32111B0C50071FDF7 /* RequestTests.swift in Sources */,
 				3E9915AC2111B0C50071FDF7 /* SimpleTransferTests.swift in Sources */,
-				3E9915B02111B0C50071FDF7 /* UploadTests.swift in Sources */,
+				3E9915B02111B0C50071FDF7 /* TransferUploadTests.swift in Sources */,
+				3E7219A92174C7FC00143492 /* BaseTestCase.swift in Sources */,
+				3E9D48D32166535D00499760 /* SimpleBoardUploadTests.swift in Sources */,
+				3E3A87642162798800568775 /* CreateBoardTests.swift in Sources */,
 				3E9915AE2111B0C50071FDF7 /* AddFilesTests.swift in Sources */,
 				3E9915B12111B0C50071FDF7 /* TestConfiguration.swift in Sources */,
-				3E9915AF2111B0C50071FDF7 /* ChunksTests.swift in Sources */,
+				3E9915AF2111B0C50071FDF7 /* TransferChunksTests.swift in Sources */,
+				3E9D48D62166537D00499760 /* BoardUploadTests.swift in Sources */,
 				3E9915B22111B0C50071FDF7 /* InitializationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -722,7 +809,9 @@
 				3E9915C32111B1A30071FDF7 /* Transfer.swift in Sources */,
 				3E9915C42111B1A30071FDF7 /* File.swift in Sources */,
 				3E9915C62111B1A30071FDF7 /* Request.swift in Sources */,
+				3E9D48D121663EE400499760 /* Transferable.swift in Sources */,
 				3E9915C72111B1A30071FDF7 /* Authorize.swift in Sources */,
+				3EB1E1992159283600E1E4EE /* CreateBoard.swift in Sources */,
 				3E9915D42111B1A30071FDF7 /* UploadFilesOperation.swift in Sources */,
 				3E9915D22111B1A30071FDF7 /* CreateTransferOperation.swift in Sources */,
 				3E9915D92111B1A30071FDF7 /* APIClient.swift in Sources */,
@@ -733,9 +822,12 @@
 				3E9915CD2111B1A30071FDF7 /* Result.swift in Sources */,
 				3E9915D32111B1A30071FDF7 /* AddFilesOperation.swift in Sources */,
 				3E9915D62111B1A30071FDF7 /* CreateChunkOperation.swift in Sources */,
+				3E9D48DF216B6FF900499760 /* FinalizeTransferOperation.swift in Sources */,
 				3E9915C92111B1A30071FDF7 /* AddFiles.swift in Sources */,
 				3E9915C22111B1A30071FDF7 /* WeTransfer.swift in Sources */,
+				3EB1E19C215928BF00E1E4EE /* CreateBoardOperation.swift in Sources */,
 				3E9915CF2111B1A30071FDF7 /* AsynchronousResultOperation.swift in Sources */,
+				3EB1E193215916B000E1E4EE /* Board.swift in Sources */,
 				3E9915C52111B1A30071FDF7 /* Chunk.swift in Sources */,
 				3E9915CB2111B1A30071FDF7 /* APIEndpoint.swift in Sources */,
 				3E9915CC2111B1A30071FDF7 /* Endpoints.swift in Sources */,
@@ -747,14 +839,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E9915B92111B0C60071FDF7 /* CreateTransferTests.swift in Sources */,
+				3E9D48E2216B89CB00499760 /* BoardChunksTests.swift in Sources */,
 				3E9915C12111B0C60071FDF7 /* Secrets.swift in Sources */,
 				3E9915C02111B0C60071FDF7 /* AuthorizationTests.swift in Sources */,
 				3E9915BF2111B0C60071FDF7 /* RequestTests.swift in Sources */,
 				3E9915B82111B0C60071FDF7 /* SimpleTransferTests.swift in Sources */,
-				3E9915BC2111B0C60071FDF7 /* UploadTests.swift in Sources */,
+				3E9915BC2111B0C60071FDF7 /* TransferUploadTests.swift in Sources */,
+				3E7219AA2174C7FC00143492 /* BaseTestCase.swift in Sources */,
+				3E9D48D42166535D00499760 /* SimpleBoardUploadTests.swift in Sources */,
+				3E3A87632162798800568775 /* CreateBoardTests.swift in Sources */,
 				3E9915BA2111B0C60071FDF7 /* AddFilesTests.swift in Sources */,
 				3E9915BD2111B0C60071FDF7 /* TestConfiguration.swift in Sources */,
-				3E9915BB2111B0C60071FDF7 /* ChunksTests.swift in Sources */,
+				3E9915BB2111B0C60071FDF7 /* TransferChunksTests.swift in Sources */,
+				3E9D48D72166537D00499760 /* BoardUploadTests.swift in Sources */,
 				3E9915BE2111B0C60071FDF7 /* InitializationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -771,6 +868,11 @@
 			isa = PBXTargetDependency;
 			target = 3E7116DB20FC85D400115E55 /* WeTransfer iOS */;
 			targetProxy = 3E71176D20FC889300115E55 /* PBXContainerItemProxy */;
+		};
+		3EB1E18A2158F76E00E1E4EE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3E7116DB20FC85D400115E55 /* WeTransfer iOS */;
+			targetProxy = 3EB1E1892158F76E00E1E4EE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -810,10 +912,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wetransfer.WeTransfer-Sample-Project";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -833,10 +932,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wetransfer.WeTransfer-Sample-Project";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Release;
 		};
@@ -862,7 +958,6 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
-				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -889,7 +984,6 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
-				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -909,7 +1003,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wetransfer.WeTransfer-iOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -929,7 +1022,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wetransfer.WeTransfer-iOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -958,7 +1050,6 @@
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
-				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -986,7 +1077,6 @@
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
-				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -1007,7 +1097,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wetransfer.WeTransfer-macOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -1028,7 +1117,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wetransfer.WeTransfer-macOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -1088,6 +1176,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1142,6 +1231,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 4.2;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";

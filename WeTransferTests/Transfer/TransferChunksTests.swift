@@ -1,5 +1,5 @@
 //
-//  ChunksTests.swift
+//  TransferChunksTests
 //  WeTransferTests
 //
 //  Created by Pim Coumans on 28/05/2018.
@@ -9,22 +9,10 @@
 import XCTest
 @testable import WeTransfer
 
-final class ChunksTests: XCTestCase {
-
-	override func setUp() {
-		super.setUp()
-		TestConfiguration.configure(environment: .production)
-	}
-
-	override func tearDown() {
-		super.tearDown()
-		TestConfiguration.resetConfiguration()
-	}
+final class TransferChunksTests: BaseTestCase {
 
 	func testChunkCreationRequest() {
-		let transfer = Transfer(name: "Test Transfer", description: nil)
-
-		guard let file = TestConfiguration.fileModel else {
+		guard let fileURL = TestConfiguration.imageFileURL else {
 			XCTFail("File not available")
 			return
 		}
@@ -34,27 +22,20 @@ final class ChunksTests: XCTestCase {
 
 		let createdChunksExpectation = expectation(description: "Chunks are created")
 
-		WeTransfer.createTransfer(with: transfer, completion: { (result) in
-			if case .failure(let error) = result {
+		WeTransfer.createTransfer(saying: "Test Transfer", fileURLs: [fileURL]) { result in
+			switch result {
+			case .failure(let error):
 				XCTFail("Creating transfer failed: \(error)")
 				createdChunksExpectation.fulfill()
 				return
-			}
-
-			WeTransfer.add([file], to: transfer, completion: { (result) in
-				if case .failure(let error) = result {
-					XCTFail("Adding files failed: \(error)")
-					createdChunksExpectation.fulfill()
-					return
-				}
-				
+			case .success(let transfer):
 				updatedFile = transfer.files.first
 				guard let file = updatedFile else {
 					XCTFail("File not added to transfer")
 					createdChunksExpectation.fulfill()
 					return
 				}
-				let operation = CreateChunkOperation(file: file, chunkIndex: 0)
+				let operation = CreateChunkOperation(container: transfer, file: file, chunkIndex: 0)
 				operation.onResult = { result in
 					switch result {
 					case .failure(let error):
@@ -65,8 +46,8 @@ final class ChunksTests: XCTestCase {
 					createdChunksExpectation.fulfill()
 				}
 				WeTransfer.client.operationQueue.addOperation(operation)
-			})
-		})
+			}
+		}
 
 		waitForExpectations(timeout: 10) { _ in
 			guard let file = updatedFile else {
@@ -74,8 +55,10 @@ final class ChunksTests: XCTestCase {
 				return
 			}
 			XCTAssertNotNil(file.numberOfChunks, "File object doesn't have numberOfChunks")
-			XCTAssertNotNil(file.multipartUploadIdentifier, "File object doesn't have numberOfChunks")
-			XCTAssertEqual(file.numberOfChunks, Int(ceil(Double(file.filesize) / Double(Chunk.defaultChunkSize))), "File doesn't have correct number of chunks")
+			XCTAssertNotNil(file.chunkSize, "File object must have a chunkSize")
+			if let chunkSize = file.chunkSize {
+				XCTAssertEqual(file.numberOfChunks, Int(ceil(Double(file.filesize) / Double(chunkSize))), "File doesn't have correct number of chunks")
+			}
 			XCTAssertNotNil(createdChunk, "Chunk not created")
 		}
 	}

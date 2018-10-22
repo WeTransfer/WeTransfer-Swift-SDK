@@ -9,17 +9,7 @@
 import XCTest
 @testable import WeTransfer
 
-final class AuthorizationTests: XCTestCase {
-
-	override func setUp() {
-		super.setUp()
-		TestConfiguration.configure(environment: .production)
-	}
-
-	override func tearDown() {
-		super.tearDown()
-		TestConfiguration.resetConfiguration()
-	}
+final class AuthorizationTests: BaseTestCase {
 
 	func testUnauthorized() {
 		do {
@@ -44,8 +34,8 @@ final class AuthorizationTests: XCTestCase {
 	func testWrongJWTKey() {
 		let authFailExpectation = expectation(description: "Request should failed")
 		TestConfiguration.fakeAuthorize()
-		let transfer = Transfer(name: "Bad Transfer", description: nil)
-		WeTransfer.createTransfer(with: transfer) { result in
+		let board = Board(name: "Bad Transfer", description: nil)
+		WeTransfer.createExternalBoard(board) { result in
 			if case .success = result {
 				XCTFail("Request did not fail (like it should)")
 			}
