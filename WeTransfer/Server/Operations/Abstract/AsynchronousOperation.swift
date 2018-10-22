@@ -9,7 +9,7 @@
 import Foundation
 
 /// A base class to handle NSOperation states, because this is quite verbose due to KVO and the combined attribute states.
-class AsynchronousOperation: Operation {
+internal class AsynchronousOperation: Operation {
 	
 	// MARK: - Types
 	

@@ -9,7 +9,7 @@
 import Foundation
 
 /// An asynchronous operation which will always have a result after completion.
-class AsynchronousDependencyResultOperation<T>: AsynchronousResultOperation<T> {
+internal class AsynchronousDependencyResultOperation<T>: AsynchronousResultOperation<T> {
 	
 	override func execute() {
 		let resultDependencies = dependencies.compactMap({ $0 as? AsynchronousResultOperation<T> })

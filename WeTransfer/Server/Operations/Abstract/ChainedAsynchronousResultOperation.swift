@@ -9,7 +9,7 @@
 import Foundation
 
 // An asynchronous operation which is dependent on a parent operation for its input.
-class ChainedAsynchronousResultOperation<Input, Output>: AsynchronousResultOperation<Output> {
+internal class ChainedAsynchronousResultOperation<Input, Output>: AsynchronousResultOperation<Output> {
 
 	public enum Error: Swift.Error {
 		case invalidInput
