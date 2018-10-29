@@ -10,46 +10,46 @@ import XCTest
 @testable import WeTransfer
 
 final class SimpleTransferTests: BaseTestCase {
-
-	func testSimpleTransfer() {
-
-		guard let fileURL = TestConfiguration.imageFileURL else {
-			XCTFail("Test image not found")
-			return
-		}
-
-		let simpleTransferExpectation = expectation(description: "Transfer has been sent")
-		var updatedTransfer: Transfer?
-		var timer: Timer?
-		
-		WeTransfer.uploadTransfer(saying: "Test transfer", containing: [fileURL]) { state in
-			switch state {
-			case .created(let transfer):
-				print("Transfer created: \(transfer)")
-			case .uploading(let progress):
-				print("Transfer started...")
-				timer = Timer(timeInterval: 1 / 30, repeats: true, block: { _ in
-					print("Progress: \(progress.fractionCompleted)")
-				})
-				RunLoop.main.add(timer!, forMode: RunLoop.Mode.common)
-			case .completed(let transfer):
-				timer?.invalidate()
-				timer = nil
-				print("Transfer sent: \(String(describing: transfer.shortURL))")
-				updatedTransfer = transfer
-				simpleTransferExpectation.fulfill()
-			case .failed(let error):
-				timer?.invalidate()
-				timer = nil
-				XCTFail("Transfer failed: \(error)")
-				simpleTransferExpectation.fulfill()
-			}
-		}
-
-		waitForExpectations(timeout: 60) { _ in
-			XCTAssertNotNil(updatedTransfer, "Transfer was not completed")
-			XCTAssertNotNil(updatedTransfer?.shortURL, "Transfer should have a URL when uploaded")
-		}
-	}
-
+    
+    func testSimpleTransfer() {
+        
+        guard let fileURL = TestConfiguration.imageFileURL else {
+            XCTFail("Test image not found")
+            return
+        }
+        
+        let simpleTransferExpectation = expectation(description: "Transfer has been sent")
+        var updatedTransfer: Transfer?
+        var timer: Timer?
+        
+        WeTransfer.uploadTransfer(saying: "Test transfer", containing: [fileURL]) { state in
+            switch state {
+            case .created(let transfer):
+                print("Transfer created: \(transfer)")
+            case .uploading(let progress):
+                print("Transfer started...")
+                timer = Timer(timeInterval: 1 / 30, repeats: true, block: { _ in
+                    print("Progress: \(progress.fractionCompleted)")
+                })
+                RunLoop.main.add(timer!, forMode: RunLoop.Mode.common)
+            case .completed(let transfer):
+                timer?.invalidate()
+                timer = nil
+                print("Transfer sent: \(String(describing: transfer.shortURL))")
+                updatedTransfer = transfer
+                simpleTransferExpectation.fulfill()
+            case .failed(let error):
+                timer?.invalidate()
+                timer = nil
+                XCTFail("Transfer failed: \(error)")
+                simpleTransferExpectation.fulfill()
+            }
+        }
+        
+        waitForExpectations(timeout: 60) { _ in
+            XCTAssertNotNil(updatedTransfer, "Transfer was not completed")
+            XCTAssertNotNil(updatedTransfer?.shortURL, "Transfer should have a URL when uploaded")
+        }
+    }
+    
 }

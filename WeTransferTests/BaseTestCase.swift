@@ -10,15 +10,15 @@ import XCTest
 @testable import WeTransfer
 
 open class BaseTestCase: XCTestCase {
-
+    
     override open func setUp() {
-		super.setUp()
-		TestConfiguration.configure(environment: .production)
+        super.setUp()
+        TestConfiguration.configure(environment: .production)
     }
-
+    
     override open func tearDown() {
-		super.tearDown()
-		TestConfiguration.resetConfiguration()
+        super.tearDown()
+        TestConfiguration.resetConfiguration()
     }
-
+    
 }
