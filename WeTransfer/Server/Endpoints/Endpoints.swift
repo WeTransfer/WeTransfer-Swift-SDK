@@ -154,7 +154,7 @@ struct CreateTransferResponse: Decodable {
 		/// Mulitpart information about each chunk
 		let multipartUploadInfo: MultipartUploadInfo
 		
-		private enum CodingKeys: String, CodingKey {
+		private enum CodingKeys: String, CodingKey { // swiftlint:disable:this nesting
 			case identifier = "id"
 			case name
 			case size
