@@ -67,7 +67,7 @@ final class UploadFileOperation: AsynchronousResultOperation<File> {
 	
 	override func execute() {
 		guard file.numberOfChunks != nil else {
-			self.finish(with: .failure(Error.noChunksAvailable))
+			finish(with: .failure(Error.noChunksAvailable))
 			return
 		}
 		

@@ -26,7 +26,7 @@ For your API key and additional info please visit our [developer portal](https:/
 ## Requirements
 - iOS 9.0+ / macOS 10.10+
 - Xcode 9.4+
-- Swift 4.1+
+- Swift 4.2+
 
 ## Installation
 
@@ -44,7 +44,7 @@ $ brew install carthage
 To integrate WeTransfer into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```ogdl
-github "WeTransfer/WeTransfer-Swift-SDK" ~> 1.0
+github "WeTransfer/WeTransfer-Swift-SDK" ~> 2.0
 ```
 
 Run `carthage update` to build the framework and drag the built `WeTransfer.framework` into your Xcode project.
@@ -55,19 +55,11 @@ The [Swift Package Manager](https://swift.org/package-manager/) is a tool for au
 
 Once you have your Swift package set up, adding the WeTransfer SDK as a dependency is as easy as adding it to the `dependencies` value of your `Package.swift`.
 
-#### Swift 3
-
-```swift
-dependencies: [
-    .Package(url: "https://github.com/WeTransfer/WeTransfer-Swift-SDK.git", majorVersion: 1)
-]
-```
-
 #### Swift 4
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/Alamofire/WeTransfer-Swift-SDK.git", from: "1.0")
+    .package(url: "https://github.com/Alamofire/WeTransfer-Swift-SDK.git", from: "2.0")
 ]
 ```
 
@@ -85,7 +77,7 @@ platform :ios, '10.0'
 use_frameworks!
 
 target '<Your Target Name>' do
-    pod 'WeTransfer-Swift-SDK', '>= 1.0'
+    pod 'WeTransfer-Swift-SDK', '>= 2.0'
 end
 ```
 
@@ -109,7 +101,7 @@ Creating a transfer and uploading files to it can be done with one method call, 
 In the `stateChanged` closure you’re updated about things like the upload progress or whether is has completed or failed
 ```swift
 let files = [...]
-WeTransfer.uploadTransfer(named: "Transfer Name", containing: files) { state in
+WeTransfer.uploadTransfer(saying: "Transfer Name", containing: files) { state in
     switch state {
     case .created(let transfer):
         print("Transfer created")

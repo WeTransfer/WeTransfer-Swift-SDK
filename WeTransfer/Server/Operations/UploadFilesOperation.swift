@@ -31,7 +31,7 @@ final class UploadFilesOperation<Container: Transferable>: ChainedAsynchronousRe
 		let files = container.files.filter({ $0.isUploaded == false })
 		
 		guard !files.isEmpty else {
-			self.finish(with: .failure(WeTransfer.Error.noFilesAvailable))
+			finish(with: .failure(WeTransfer.Error.noFilesAvailable))
 			return
 		}
 		
@@ -75,7 +75,7 @@ final class UploadFilesOperation<Container: Transferable>: ChainedAsynchronousRe
 		
 		guard !fileOperations.isEmpty else {
 			// No files to upload, fail
-			self.finish(with: .failure(WeTransfer.Error.noFilesAvailable))
+			finish(with: .failure(WeTransfer.Error.noFilesAvailable))
 			return
 		}
 		
