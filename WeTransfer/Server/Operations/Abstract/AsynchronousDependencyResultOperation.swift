@@ -9,7 +9,7 @@
 import Foundation
 
 /// An asynchronous operation which will always have a result after completion.
-internal class AsynchronousDependencyResultOperation<T>: AsynchronousResultOperation<T> {
+class AsynchronousDependencyResultOperation<T>: AsynchronousResultOperation<T> { // swiftlint:disable:next final_class
 	
 	override func execute() {
 		let resultDependencies = dependencies.compactMap({ $0 as? AsynchronousResultOperation<T> })
