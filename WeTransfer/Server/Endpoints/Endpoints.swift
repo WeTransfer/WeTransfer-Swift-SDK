@@ -138,9 +138,8 @@ struct CreateTransferParameters: Encodable {
 /// Response from create transfer request
 struct CreateTransferResponse: Decodable {
 	struct FileResponse: Decodable {
-		// swiftlint:disable nesting
 		/// Multipart upload information about each chunk
-		struct Multipart: Decodable {
+		struct Multipart: Decodable { // swiftlint:disable:this nesting
 			/// Amount of chunks to be created
 			let partNumbers: Int
 			/// Default size for each chunk
