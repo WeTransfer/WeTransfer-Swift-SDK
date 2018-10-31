@@ -33,6 +33,8 @@ final class MainViewController: UIViewController {
 	@IBOutlet private var imageView: UIImageView!
 	@IBOutlet private var secondImageView: UIImageView!
 	
+    @IBOutlet private var methodSegmentedControl: UISegmentedControl!
+    
 	@IBOutlet private var transferButton: UIButton!
 	@IBOutlet private var addMoreButton: RoundedButton!
 	@IBOutlet private var shareButton: UIButton!
@@ -230,4 +232,8 @@ extension MainViewController {
 		}
 		UIApplication.shared.open(url)
 	}
+    
+    @IBAction private func didChangeControl( _ segmentedControl: UISegmentedControl) {
+        
+    }
 }
