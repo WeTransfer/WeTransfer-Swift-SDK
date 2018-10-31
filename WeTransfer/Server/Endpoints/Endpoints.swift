@@ -137,36 +137,37 @@ struct CreateTransferParameters: Encodable {
 
 /// Response from create transfer request
 struct CreateTransferResponse: Decodable {
-	struct FileResponse: Decodable {
-		/// Multipart upload information about each chunk
-		struct MultipartUploadInfo: Decodable { // swiftlint:disable:this nesting
-			/// Amount of chunks to be created
-			let partNumbers: Int
-			/// Default size for each chunk
-			let chunkSize: Bytes
-		}
-		
-		let identifier: String
-		/// Full name of file (e.g. "photo.jpg")
-		let name: String
-		// Size of the file in bytes
-		let size: Bytes
-		/// Mulitpart information about each chunk
-		let multipartUploadInfo: MultipartUploadInfo
-		
-		private enum CodingKeys: String, CodingKey { // swiftlint:disable:this nesting
-			case identifier = "id"
-			case name
-			case size
-			case multipartUploadInfo = "multipart"
-		}
-	}
-	
 	/// Server side identifier of the transfer
 	let id: String // swiftlint:disable:this identifier_name
 	
 	/// Server side information about the files
-	let files: [FileResponse]
+	let files: [CreateTransferResponseFile]
+}
+
+/// Files used in the CreateTransferResponse
+struct CreateTransferResponseFile: Decodable {
+    /// Multipart upload information about each chunk
+    struct MultipartUploadInfo: Decodable {
+        /// Amount of chunks to be created
+        let partNumbers: Int
+        /// Default size for each chunk
+        let chunkSize: Bytes
+    }
+    
+    let identifier: String
+    /// Full name of file (e.g. "photo.jpg")
+    let name: String
+    // Size of the file in bytes
+    let size: Bytes
+    /// Mulitpart information about each chunk
+    let multipartUploadInfo: MultipartUploadInfo
+    
+    private enum CodingKeys: String, CodingKey {
+        case identifier = "id"
+        case name
+        case size
+        case multipartUploadInfo = "multipart"
+    }
 }
 
 // MARK: - Create board
