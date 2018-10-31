@@ -5,11 +5,12 @@
 //  Created by Pim Coumans on 29/05/2018.
 //  Copyright © 2018 WeTransfer. All rights reserved.
 //
+// danger:disable final_class
 
 import Foundation
 
 /// A base class to handle NSOperation states, because this is quite verbose due to KVO and the combined attribute states.
-class AsynchronousOperation: Operation {  // swiftlint:disable:this final_class
+class AsynchronousOperation: Operation {
 	
 	// MARK: - Types
 	

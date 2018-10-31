@@ -5,11 +5,12 @@
 //  Created by Pim Coumans on 01/06/2018.
 //  Copyright © 2018 WeTransfer. All rights reserved.
 //
+// danger:disable final_class
 
 import Foundation
 
 // An asynchronous operation which is dependent on a parent operation for its input.
-class ChainedAsynchronousResultOperation<Input, Output>: AsynchronousResultOperation<Output> { // swiftlint:disable:this final_class
+class ChainedAsynchronousResultOperation<Input, Output>: AsynchronousResultOperation<Output> {
 
 	public enum Error: Swift.Error {
 		case invalidInput
