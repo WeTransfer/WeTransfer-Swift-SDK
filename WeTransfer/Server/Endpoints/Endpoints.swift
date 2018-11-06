@@ -174,11 +174,6 @@ struct TransferFile: Decodable {
 
 /// Parameters used for the create transfer request
 struct CreateBoardParameters: Encodable {
-    
-    struct FileParameters: Encodable {
-        let name: String
-        let size: UInt64
-    }
     /// Name of the transfer to create
     let name: String
     /// Description of the transfer to create
