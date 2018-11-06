@@ -18,8 +18,18 @@ public final class Board: Transferable {
     /// Optional description of the board. This will be shown when viewing the transfer on wetransfer.com
     public let description: String?
     
+    /// All items added to the board. Add files and urls seperately with their respective methods on the WeTransfer struct
+    public private(set) var items: [Item] = []
+    
     /// References to all the files added to the board. Files can be added with the public method on the WeTransfer struct
-    public private(set) var files: [File] = []
+    public var files: [File] {
+        return items.compactMap { $0 as? File }
+    }
+    
+    /// References to all the URL items added to the board. URL items can be added with the public method on the WeTransfer struct
+    public var urls: [URLItem] {
+        return items.compactMap { $0 as? URLItem }
+    }
     
     /// Available when the board is created on the server
     public private(set) var shortURL: URL?
@@ -49,7 +59,7 @@ extension Board {
     /// - Parameter files: Files to be added to the board
     func add(_ files: [File]) {
         for file in files where !self.files.contains(file) {
-            self.files.append(file)
+            self.items.append(file)
         }
     }
 }
