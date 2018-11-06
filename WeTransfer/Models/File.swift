@@ -27,8 +27,8 @@ public final class File: Encodable {
         }
     }
     
-    /// Location of the file on disk
-    public let url: URL
+    /// Location of the file on disk. Files from remote boards no longer point to local files
+    public let url: URL?
     
     /// Server-side identifier when file is added to the transfer or board on the server
     public private(set) var identifier: String?
@@ -37,9 +37,7 @@ public final class File: Encodable {
     public internal(set) var isUploaded: Bool = false
     
     /// Name of the file. Should be the last path component of the url
-    public var filename: String {
-        return url.lastPathComponent
-    }
+    public let filename: String
     
     /// Size of the file in Bytes
     public let filesize: Bytes
@@ -51,6 +49,7 @@ public final class File: Encodable {
     private(set) var multipartUploadIdentifier: String?
     
     public init(url: URL) throws {
+        filename = url.lastPathComponent
         self.url = url
         
         let fileAttributes = try FileManager.default.attributesOfItem(atPath: url.path)
