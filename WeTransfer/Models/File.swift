@@ -13,7 +13,7 @@ public typealias Bytes = UInt64
 
 /// A file used in a Transfer or a Board. Should be initialized with a URL pointing only to a local file
 /// As files should be readily available for uploading, only local files accessible by NSFileManager should be used
-public final class File: Encodable {
+public final class File: Item, Encodable {
     
     public enum Error: Swift.Error, LocalizedError {
         /// Provided file URL could not be used to get file size information
