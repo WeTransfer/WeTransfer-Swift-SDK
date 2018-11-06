@@ -5,11 +5,12 @@
 //  Created by Pim Coumans on 29/05/2018.
 //  Copyright © 2018 WeTransfer. All rights reserved.
 //
+// danger:disable final_class
 
 import Foundation
 
 /// A base class to handle NSOperation states, because this is quite verbose due to KVO and the combined attribute states.
-open class AsynchronousOperation: Operation {
+class AsynchronousOperation: Operation {
 	
 	// MARK: - Types
 	
@@ -124,7 +125,7 @@ open class AsynchronousOperation: Operation {
 	}
 	
 	/// Overridden method from NSOperation. Starts executing the operation work. This is final, because subclasses should use the execute() method instead.
-	open override func start() {
+	override func start() {
 		super.start()
 		
 		guard !isCancelled else {
@@ -138,18 +139,18 @@ open class AsynchronousOperation: Operation {
 	}
 	
 	/// Subclasses must implement this to perform their work and they must not call `super`. The default implementation of this function throws an exception.
-	open func execute() {
+	func execute() {
 		fatalError("Subclasses must implement `execute` without overriding super.")
 	}
 	
 	/// Call this function after any work is done to move the operation into a completed state.
-	open func finish() {
+	func finish() {
 		isExecuting = false
 		isFinished = true
 	}
 	
 	/// Overridden cancel method from NSOperation. Cancels the current execution, if possible.
-	open override func cancel() {
+	override func cancel() {
 		super.cancel()
 		isCancelled = true
 		

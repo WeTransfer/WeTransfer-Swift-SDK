@@ -66,7 +66,7 @@ extension WeTransfer {
 		///   - APIKey: Key required to make use of the API. Visit https://developers.wetransfer.com to get a key
 		///   - baseURL: Defaults to the standard API, but can be used to point to a different server
 		public init(apiKey: String, baseURL: URL? = nil) {
-			// swiftlint:disable force_unwrapping
+			// swiftlint:disable:next force_unwrapping
 			self.baseURL = baseURL ?? URL(string: "https://dev.wetransfer.com/v2/")!
 			self.apiKey = apiKey
 		}

@@ -5,13 +5,14 @@
 //  Created by Pim Coumans on 29/05/2018.
 //  Copyright © 2018 WeTransfer. All rights reserved.
 //
+// danger:disable final_class
 
 import Foundation
 
 /// An asynchronous operation which will always have a result after completion.
-open class AsynchronousDependencyResultOperation<T>: AsynchronousResultOperation<T> {
+class AsynchronousDependencyResultOperation<T>: AsynchronousResultOperation<T> {
 	
-	open override func execute() {
+	override func execute() {
 		let resultDependencies = dependencies.compactMap({ $0 as? AsynchronousResultOperation<T> })
 		
 		let errors = resultDependencies.compactMap({ $0.result?.error })

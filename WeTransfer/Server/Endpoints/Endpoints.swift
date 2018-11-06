@@ -137,48 +137,43 @@ struct CreateTransferParameters: Encodable {
 
 /// Response from create transfer request
 struct CreateTransferResponse: Decodable {
-	struct FileResponse: Decodable {
-		// swiftlint:disable nesting
-		/// Multipart upload information about each chunk
-		struct MultipartUploadInfo: Decodable {
-			/// Amount of chunks to be created
-			let partNumbers: Int
-			/// Default size for each chunk
-			let chunkSize: Bytes
-		}
-		
-		let identifier: String
-		/// Full name of file (e.g. "photo.jpg")
-		let name: String
-		// Size of the file in bytes
-		let size: Bytes
-		/// Mulitpart information about each chunk
-		let multipartUploadInfo: MultipartUploadInfo
-		
-		private enum CodingKeys: String, CodingKey {
-			case identifier = "id"
-			case name
-			case size
-			case multipartUploadInfo = "multipart"
-		}
-	}
-	
 	/// Server side identifier of the transfer
 	let id: String // swiftlint:disable:this identifier_name
 	
 	/// Server side information about the files
-	let files: [FileResponse]
+	let files: [TransferFile]
+}
+
+/// Files used in the CreateTransferResponse
+struct TransferFile: Decodable {
+	/// Multipart upload information about each chunk
+	struct MultipartUploadInfo: Decodable {
+		/// Amount of chunks to be created
+		let partNumbers: Int
+		/// Default size for each chunk
+		let chunkSize: Bytes
+	}
+	
+	let identifier: String
+	/// Full name of file (e.g. "photo.jpg")
+	let name: String
+	// Size of the file in bytes
+	let size: Bytes
+	/// Mulitpart information about each chunk
+	let multipartUploadInfo: MultipartUploadInfo
+	
+	private enum CodingKeys: String, CodingKey {
+		case identifier = "id"
+		case name
+		case size
+		case multipartUploadInfo = "multipart"
+	}
 }
 
 // MARK: - Create board
 
 /// Parameters used for the create transfer request
 struct CreateBoardParameters: Encodable {
-	
-	struct FileParameters: Encodable {
-		let name: String
-		let size: UInt64
-	}
 	/// Name of the transfer to create
 	let name: String
 	/// Description of the transfer to create
