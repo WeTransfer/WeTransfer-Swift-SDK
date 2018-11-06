@@ -5,11 +5,12 @@
 //  Created by Pim Coumans on 29/05/2018.
 //  Copyright © 2018 WeTransfer. All rights reserved.
 //
+// danger:disable final_class
 
 import Foundation
 
 /// An asynchronous operation which will always have a result after completion.
-class AsynchronousDependencyResultOperation<T>: AsynchronousResultOperation<T> { // swiftlint:disable:next final_class
+class AsynchronousDependencyResultOperation<T>: AsynchronousResultOperation<T> {
     
     override func execute() {
         let resultDependencies = dependencies.compactMap({ $0 as? AsynchronousResultOperation<T> })

@@ -5,11 +5,12 @@
 //  Created by Pim Coumans on 29/05/2018.
 //  Copyright © 2018 WeTransfer. All rights reserved.
 //
+// danger:disable final_class
 
 import Foundation
 
 /// An asynchronous operation which will always have a result after completion.
-class AsynchronousResultOperation<T>: AsynchronousOperation { // swiftlint:disable:next final_class
+class AsynchronousResultOperation<T>: AsynchronousOperation {
     
     typealias ResultHandler<T> = ((_ result: Result<T>) -> Void)
     
