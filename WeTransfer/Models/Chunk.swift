@@ -11,6 +11,18 @@ import Foundation
 /// Represents a chunk of data from a file in a transfer or board. Used only in the uploading proces
 struct Chunk: Encodable {
     
+    enum Error: Swift.Error, LocalizedError {
+        /// Chunk cannot be initialized without a local file
+        case noFileDataAvailable
+        
+        var localizedDescription: String {
+            switch self {
+            case .noFileDataAvailable:
+                return "Provided file is not pointing to a local file"
+            }
+        }
+    }
+    
     /// Fallback size chunks except the last, as the last chunk holds the remaining data (filesize % defaultChunkSize)
     static let defaultChunkSize: Bytes = (6 * 1024 * 1024)
     
@@ -36,11 +48,14 @@ extension Chunk {
     ///   - file: The file for which the chunk should be created
     ///   - chunkIndex: The index of the chunk
     ///   - uploadURL: The URL to where the chunk should be uploaded
-    init(file: File, chunkIndex: Int, uploadURL: URL) {
+    init(file: File, chunkIndex: Int, uploadURL: URL) throws {
+        guard let fileURL = file.url else {
+            throw Error.noFileDataAvailable
+        }
         let chunkSize = file.chunkSize ?? Chunk.defaultChunkSize
         let byteOffset = chunkSize * Bytes(chunkIndex)
         self.init(chunkIndex: chunkIndex,
-                  fileURL: file.url,
+                  fileURL: fileURL,
                   uploadURL: uploadURL,
                   size: min(file.filesize - byteOffset, chunkSize),
                   byteOffset: byteOffset)

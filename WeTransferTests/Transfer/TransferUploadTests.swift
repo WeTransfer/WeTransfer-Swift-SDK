@@ -14,12 +14,12 @@ final class TransferUploadTests: BaseTestCase {
     var observation: NSKeyValueObservation?
     
     private func createTransfer(completion: @escaping (Transfer?) -> Void) {
-        guard let file = TestConfiguration.fileModel else {
+        guard let fileURL = TestConfiguration.imageFileURL else {
             XCTFail("File not available")
             return
         }
         
-        WeTransfer.createTransfer(saying: "TestTransfer", fileURLs: [file.url]) { result in
+        WeTransfer.createTransfer(saying: "TestTransfer", fileURLs: [fileURL]) { result in
             switch result {
             case .failure(let error):
                 XCTFail("Transfer creation failed: \(error)")
