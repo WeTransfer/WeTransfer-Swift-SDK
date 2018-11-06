@@ -108,6 +108,8 @@
 		3EB1E19C215928BF00E1E4EE /* CreateBoardOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB1E19A215928BF00E1E4EE /* CreateBoardOperation.swift */; };
 		3EC28A7A2191D3A6001F5B4A /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC28A792191D3A6001F5B4A /* Item.swift */; };
 		3EC28A7B2191D3A6001F5B4A /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC28A792191D3A6001F5B4A /* Item.swift */; };
+		3EC28A7D2191D637001F5B4A /* URLItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC28A7C2191D637001F5B4A /* URLItem.swift */; };
+		3EC28A7E2191D637001F5B4A /* URLItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC28A7C2191D637001F5B4A /* URLItem.swift */; };
 		3ED6ED4020EA505800130261 /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED6ED3F20EA505800130261 /* APIEndpoint.swift */; };
 		3EFDC98021012FD70091CF85 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFDC97F21012FD70091CF85 /* RoundedButton.swift */; };
 		3F5E8A722111F80600F750EC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E5E514B20EA816600485FA3 /* Main.storyboard */; };
@@ -208,6 +210,7 @@
 		3EB1E1972159283600E1E4EE /* CreateBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBoard.swift; sourceTree = "<group>"; usesTabs = 0; };
 		3EB1E19A215928BF00E1E4EE /* CreateBoardOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateBoardOperation.swift; sourceTree = "<group>"; usesTabs = 0; };
 		3EC28A792191D3A6001F5B4A /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		3EC28A7C2191D637001F5B4A /* URLItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLItem.swift; sourceTree = "<group>"; };
 		3ED1C0A220B43E980045D8B3 /* CreateTransferTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTransferTests.swift; sourceTree = "<group>"; usesTabs = 0; };
 		3ED1C0A420B442F70045D8B3 /* AddFilesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFilesTests.swift; sourceTree = "<group>"; usesTabs = 0; };
 		3ED6ED3920EA2AD100130261 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; usesTabs = 0; };
@@ -310,6 +313,7 @@
 				3E80E0A92091D12B00114711 /* Transfer.swift */,
 				3EB1E191215916AF00E1E4EE /* Board.swift */,
 				3EC28A792191D3A6001F5B4A /* Item.swift */,
+				3EC28A7C2191D637001F5B4A /* URLItem.swift */,
 				3E9413CB2099E390003A42D1 /* File.swift */,
 				3E9413CD2099E3F5003A42D1 /* Chunk.swift */,
 			);
@@ -756,6 +760,7 @@
 				3E80E0A72091D0E700114711 /* WeTransfer.swift in Sources */,
 				3E80E0AE2091D16E00114711 /* Result.swift in Sources */,
 				3E9D48D021663EE400499760 /* Transferable.swift in Sources */,
+				3EC28A7D2191D637001F5B4A /* URLItem.swift in Sources */,
 				3E9413CA2099DB05003A42D1 /* Upload.swift in Sources */,
 				3EB1E1982159283600E1E4EE /* CreateBoard.swift in Sources */,
 				3E0EEBC020C19074009E6B2D /* UploadFileOperation.swift in Sources */,
@@ -816,6 +821,7 @@
 				3E9915C42111B1A30071FDF7 /* File.swift in Sources */,
 				3E9915C62111B1A30071FDF7 /* Request.swift in Sources */,
 				3E9D48D121663EE400499760 /* Transferable.swift in Sources */,
+				3EC28A7E2191D637001F5B4A /* URLItem.swift in Sources */,
 				3E9915C72111B1A30071FDF7 /* Authorize.swift in Sources */,
 				3EB1E1992159283600E1E4EE /* CreateBoard.swift in Sources */,
 				3E9915D42111B1A30071FDF7 /* UploadFilesOperation.swift in Sources */,
