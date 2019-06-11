@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import WeTransfer
+@testable import WeTransfer
 
 /// Single ViewController where the whole transfer progress takes place.
 /// Actual logic for configuring the WeTransfer client and performing the transfer is found in the first extension marked 'WeTransfer Logic'
@@ -64,6 +64,16 @@ final class MainViewController: UIViewController {
 			}
 		}
 	}
+    
+    private let apiKeyKey = "API_KEY"
+    private var apiKey: String? {
+        get {
+            return UserDefaults.standard.string(forKey: apiKeyKey)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: apiKeyKey)
+        }
+    }
 	
 	/// Holds completed transfer's URL
 	private var transferURL: URL?
@@ -75,17 +85,45 @@ final class MainViewController: UIViewController {
 		
 		rotateSecondImage()
 		updateInterface()
-		configureWeTransfer()
+        
+        if let key = apiKey {
+            configureWeTransfer(with: key)
+        } else {
+            let inputController = UIAlertController(title: "API KEY", message: "Do you have an API key? No? Get one at developers.wetransfer.com", preferredStyle: .alert)
+            inputController.addTextField { (textField) in
+                textField.placeholder = "YOUR API KEY HERE"
+                textField.autocorrectionType = .no
+            }
+            inputController.addAction(UIAlertAction(title: "Continue", style: .default, handler: { [weak inputController, weak self] _ in
+                guard let key = inputController?.textFields?.first?.text else {
+                    return
+                }
+                self?.configureWeTransfer(with: key)
+            }))
+            inputController.preferredAction = inputController.actions.first
+            CFRunLoopPerformBlock(CFRunLoopGetCurrent(), CFRunLoopMode.commonModes.rawValue) {
+                self.present(inputController, animated: true)
+            }
+        }
+        
 	}
 }
 
 // MARK: - WeTransfer Logic
 extension MainViewController {
 	
-	private func configureWeTransfer() {
+    private func configureWeTransfer(with key: String) {
 		// Configures the WeTransfer client with the required API key
 		// Get an API key at https://developers.wetransfer.com
-		WeTransfer.configure(with: WeTransfer.Configuration(apiKey: "{YOUR_API_KEY_HERE}"))
+		WeTransfer.configure(with: WeTransfer.Configuration(apiKey: key))
+        WeTransfer.authorize { (result) in
+            switch result {
+            case .success(let value):
+                print("Autorized! \(value)")
+            case .failure(let error):
+                print("Error! \(error.localizedDescription)")
+            }
+        }
 	}
 	
 	private func sendTransfer() {
