@@ -1,3 +1,5 @@
+This project is now archived as the Public WeTransfer API is no longer maintained.
+
 # WeTransfer-Swift-SDK
 A Swift SDK for WeTransfer’s public API
 
